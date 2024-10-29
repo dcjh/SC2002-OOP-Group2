@@ -1,18 +1,20 @@
 package doctor;
-import user.User; 
+import user.User;
+// import patient.Patient;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Doctor extends User{
     
-    private String name;
-    private String role;
-    private String gender;
-    private int age;
+    private List<String> appointments;
+    private List<Long> availDate ;
+    private List<String> patientView;
 
-    public Doctor(String staffID, String password, String role, String gender, int age) {
-        super(staffID, password);
-        this.role = role;
-        this.gender = gender;
-        this.age = age;
+    public Doctor(String staffID, String password, String role, String name, String gender, int age) {
+        super(staffID, password, role, name, gender, age);
+        this.appointments = new ArrayList<>();
+        this.availDate = new ArrayList<>();
+        this.patientView = new ArrayList<>();
     }
 
     public void viewMenu() {
@@ -24,55 +26,30 @@ public class Doctor extends User{
         System.out.println("4. Logout");
     }
 
-    public String getStaffID() {
-        return this.getUserID();  // Return the userID from User class as staffID
+    public void getAllAppointment() {
+        System.out.println("Appointment List:");
+        for (int i = 0; i < appointments.size(); i++) {
+            System.out.println("-----------------------------");
+            System.out.println("Patient"  + (i + 1) + ":"); 
+            System.out.println(appointments.get(i));
+        }
     }
 
-    public String getName() {
-        return name;
+    public void getAppointment(String patientID) {
+        for (int i = 0; i < appointments.size(); i++) {
+            if (appointments.get(i).patientID == patientID) {
+                System.out.println("Appointment:");
+                System.out.println("-----------------------------");
+                System.out.println(appointments.get(i));
+                System.out.println("-----------------------------");
+                break;
+            }
+        }
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void getAvailability() {
+        
     }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public void viewSchedule() {
-
-    }
-
-    public void viewPersonalSchedule() {
-
-    }
-
-
-    public void patientRecords() {
-
-    }
-
 
 
 }
