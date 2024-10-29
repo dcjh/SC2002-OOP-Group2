@@ -6,10 +6,10 @@ public abstract class User {
     private String role;
     private String name;
     private String gender;
-    private String age;
+    private int age;
 
     // Constructor
-    public User(String hosID, String password, String role, String name, String gender, String age) {
+    public User(String hosID, String password, String role, String name, String gender, int age) {
         this.hosID = hosID;
         this.password = password;
         this.role = role;
