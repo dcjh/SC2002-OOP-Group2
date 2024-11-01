@@ -47,8 +47,17 @@ public class Doctor extends User{
         }
     }
 
-    public void getAvailability() {
+    public void setAppointment() {
         
+    }
+
+    public void getAvailability() {
+        System.out.println("Appointment List:");
+        for (int i = 0; i < appointments.size(); i++) {
+            System.out.println("-----------------------------");
+            System.out.println("Patient"  + (i + 1) + ":"); 
+            System.out.println(appointments.get(i));
+        }
     }
 
 
