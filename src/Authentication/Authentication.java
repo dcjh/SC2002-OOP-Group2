@@ -1,10 +1,10 @@
 package Authentication;
 
-import User.User;
-import Patient.Patient;
-import Doctor.Doctor;
-import Pharmacist.Pharmacist;
-import Administrator.Administrator;
+import user.User;
+import patient.Patient;
+import doctor.Doctor;
+import pharmacist.Pharmacist;
+import administrator.Administrator;
 
 import java.io.*;
 import java.util.*;
