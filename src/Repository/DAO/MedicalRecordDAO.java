@@ -1,5 +1,5 @@
 package Repository.DAO;
 
-public class MedicalRecordDAO {
+public class MedicalRecordDAO implements DataAccessObject{
     
 }

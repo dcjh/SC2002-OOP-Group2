@@ -1,5 +1,5 @@
 package Repository.DAO;
 
-public class AppointmentOutcomeDAO {
+public class AppointmentOutcomeDAO implements DataAccessObject{
     
 }

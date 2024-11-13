@@ -1,26 +1,20 @@
 package Doctor;
-import Authentication.Authentication;
-import Doctor.*;
+
+import Repository.DoctorRepository;
+import Repository.DataClasses.Appointment;
+import Repository.DataClasses.MedicalRecord;
+import Repository.DataClasses.Availability;
+import java.util.List;
 
 public class DoctorController {
     private Doctor doctor;
     private DoctorView view;
-    private Authentication auth;
+    private DoctorRepository repository;
 
     public DoctorController(Doctor doctor, DoctorView view) {
         this.doctor = doctor;
         this.view = view;
-        this.auth = auth;
-    }
-
-    public boolean login(String hosID, String password) {
-        if (auth.authenticate(hosID, password) != null) {
-            view.displayLoginSuccess();
-            return true;
-        } else {
-            view.displayLoginFailure();
-            return false;
-        }
+        this.repository = repository;
     }
 
     public void setAvailability() {

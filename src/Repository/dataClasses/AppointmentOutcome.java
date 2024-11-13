@@ -1,4 +1,4 @@
-package Repository.dataClasses;
+package Repository.DataClasses;
 
 public class AppointmentOutcome {
     

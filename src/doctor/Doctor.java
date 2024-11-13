@@ -3,7 +3,7 @@ package Doctor;
 import java.util.ArrayList;
 import java.util.List;
 
-import Repository.dataClasses.*;
+import Repository.DataClasses.*;
 import User.User;
 
 public class Doctor extends User{
