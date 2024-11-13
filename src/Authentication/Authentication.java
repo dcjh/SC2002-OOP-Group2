@@ -1,13 +1,14 @@
 package Authentication;
 
-import user.User;
 import patient.Patient;
-import doctor.Doctor;
 import pharmacist.Pharmacist;
 import administrator.Administrator;
 
 import java.io.*;
 import java.util.*;
+
+import Doctor.Doctor;
+import User.User;
 
 public class Authentication {
     private static final String USER_LOGIN = "SC2002-OOP-Group2/userlogin.csv";
