@@ -1,4 +1,4 @@
-package user;
+package User;
 //this is here for temp/ref usage, more time will be spend to make this better
 public abstract class User {
     protected String hosID;

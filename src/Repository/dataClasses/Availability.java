@@ -1,4 +1,4 @@
-package doctor;
+package Repository.dataClasses;
 
 public class Availability {
     

@@ -1,9 +1,9 @@
-package doctor;
+package Doctor;
 
 public class DoctorView {
     
     public void MainMenu() {
-        
+
     }
 
 }

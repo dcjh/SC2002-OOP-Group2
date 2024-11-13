@@ -1,10 +1,10 @@
-package doctor;
+package Doctor;
 
-import user.User;
-import doctor.*;
 import java.util.ArrayList;
 import java.util.List;
-import dataClasses.*;
+
+import Repository.dataClasses.*;
+import User.User;
 
 public class Doctor extends User{
     
@@ -12,7 +12,6 @@ public class Doctor extends User{
     private List<Appointment> confirmedAppointments;
     private List<Availability> availabilityDates ;
     private List<MedicalRecord> patients;
-
 
     public Doctor(String staffID, String password, String role, String name, String gender, int age) {
         super(staffID, password, role, name, gender, age);
@@ -23,80 +22,47 @@ public class Doctor extends User{
     }
    
     // data mgmt for appointment requests
-    public List<Appointment> getAppointmentRequests() { /*change this to type appointment once implemented*/
+    public List<Appointment> getAppointmentRequests() {
         return appointmentRequests;
     }
-    public void addAppointmentRequests() { /*change this to type appointment once implemented*/
-        appointmentRequests.remove();
+    public void addAppointmentRequests(Appointment request) {
+        appointmentRequests.add(request);
     }
-    
+    public void removeAppointmentRequests(Appointment request) {
+        appointmentRequests.remove(request);
+    }
 
-
-
-    public List<Appointment> getAppointments() { /*change this to type appointment once implemented*/
+    //data mgmt for confirmed appointments
+    public List<Appointment> getAppointments() {
         return confirmedAppointments;
     }
-    public void Appointments() { /*change this to type appointment once implemented*/
-        
+    public void addAppointment(Appointment appointment) {
+        confirmedAppointments.add(appointment);
+    }
+    public void removeAppointment(Appointment appointment) {
+        confirmedAppointments.remove(appointment);
     }
 
-    public List<String /*type medicalRecord */> getPatients() {
+    //data mgmt for patients
+    public List<MedicalRecord> getPatients() {
         return patients;
     }
-    public void addPatients(String medicalRecord) {
+    public void addPatient(MedicalRecord medicalRecord) {
         patients.add(medicalRecord);
     }
+    public void removePatient(MedicalRecord medicalRecord) {
+        patients.remove(medicalRecord);
+    }
 
-    public List<Long> getAvailabilityDates() {
+    //data mgmt for availability
+    public List<Availability> getAvailabilityDates() {
         return availabilityDates;
+    }
+    public void addAvailabilityDate(Availability availability) {
+        availabilityDates.add(availability);
+    }
+    public void removeAvailabilityDate(Availability availability) {
+        availabilityDates.remove(availability);
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-    // public void viewMenu() {
-    //     System.out.println();
-    //     System.out.println("Doctor Menu:");
-    //     System.out.println("1. View Schedule");
-    //     System.out.println("2. View Appointment Requests");
-    //     System.out.println("3. Patient Records");
-    //     System.out.println("4. Logout");
-    // }
-
-    // public void getAllAppointment() {
-    //     System.out.println("Appointment List:");
-    //     for (int i = 0; i < appointments.size(); i++) {
-    //         System.out.println("-----------------------------");
-    //         System.out.println("Patient"  + (i + 1) + ":"); 
-    //         System.out.println(appointments.get(i));
-    //     }
-    // }
-
-    // public void getAppointment(String patientID) {
-    //     for (int i = 0; i < appointments.size(); i++) {
-    //         if (appointments.get(i).patientID == patientID) {
-    //             System.out.println("Appointment:");
-    //             System.out.println("-----------------------------");
-    //             System.out.println(appointments.get(i));
-    //             System.out.println("-----------------------------");
-    //             break;
-    //         }
-    //     }
-    // }
-
-    // public void getAvailability() {
-    //     System.out.println("Appointment List:");
-    //     for (int i = 0; i < appointments.size(); i++) {
-    //         System.out.println("-----------------------------");
-    //         System.out.println("Patient"  + (i + 1) + ":"); 
-    //         System.out.println(appointments.get(i));
-    //     }
-    // }
