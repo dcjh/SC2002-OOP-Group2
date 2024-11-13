@@ -1,6 +1,6 @@
-package doctor;
-import doctor.*;
+package Doctor;
 import Authentication.Authentication;
+import Doctor.*;
 
 public class DoctorController {
     private Doctor doctor;
