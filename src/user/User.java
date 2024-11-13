@@ -23,9 +23,6 @@ public abstract class User {
         return this.password.equals(inputPassword);
     }
 
-    // Abstract methods to be implemented by subclasses
-    public abstract void viewMenu(); // Each user will have a different menu
-
     // Getters and Setters
     public String gethosID() {
         return hosID;
