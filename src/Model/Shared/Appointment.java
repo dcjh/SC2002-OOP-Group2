@@ -1,4 +1,4 @@
-package Repository.dataClasses;
+package Model.Shared;
 
 public class Appointment {
     

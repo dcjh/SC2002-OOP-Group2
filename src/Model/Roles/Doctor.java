@@ -1,10 +1,13 @@
-package Doctor;
+package Model.Roles;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Repository.dataClasses.*;
-import User.User;
+import Data.DataClasses.*;
+import Model.Shared.Appointment;
+import Model.Shared.Availability;
+import Model.Shared.MedicalRecord;
+import Model.Shared.User;
 
 public class Doctor extends User{
     
