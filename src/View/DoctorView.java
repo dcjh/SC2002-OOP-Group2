@@ -1,4 +1,4 @@
-package Doctor;
+package View;
 
 public class DoctorView {
     

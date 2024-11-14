@@ -1,26 +1,24 @@
-package Doctor;
-import Authentication.Authentication;
-import Doctor.*;
+package Controller;
+
+import Model.Roles.Doctor;
+import Model.Shared.Appointment;
+import Model.Shared.Availability;
+import Model.Shared.MedicalRecord;
+import View.DoctorView;
+
+import java.util.List;
+
+import Data.Repository.DoctorRepository;
 
 public class DoctorController {
     private Doctor doctor;
     private DoctorView view;
-    private Authentication auth;
+    private DoctorRepository repository;
 
     public DoctorController(Doctor doctor, DoctorView view) {
         this.doctor = doctor;
         this.view = view;
-        this.auth = auth;
-    }
-
-    public boolean login(String hosID, String password) {
-        if (auth.authenticate(hosID, password) != null) {
-            view.displayLoginSuccess();
-            return true;
-        } else {
-            view.displayLoginFailure();
-            return false;
-        }
+        this.repository = repository;
     }
 
     public void setAvailability() {
