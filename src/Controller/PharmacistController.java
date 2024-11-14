@@ -7,13 +7,41 @@ uses Pharmacist, InventoryController, ResotckRequestController, AppointmentOutco
 used by PharmacistView
 */
 
-package Pharmacist;
-
-
-import Pharmacist.*;
+package Controller;
+import Authentication.Authentication;
 
 public class PharmacistController{
     private Pharmacist pharmacist;
     private PharmacistView view;
+    private Authentication auth;
+
+    public PharmacistController(Pharmacist pharmacist, PharmacistView view, Authentication auth){
+        this.pharmacist = pharmacist;
+        this.view = view;
+        this.auth = auth;
+    }
+
+    public boolean logic(String hosID, String password){
+        if(auth.authenticate(hosID, password) != null){
+            view.displayLoginSuccess();
+            return true;
+        } else {
+            view.displayLoginFailure();
+            return false;
+        }
+    }
+    
+    public void requestRestock(){
+
+    }
+
+    public void updateStatus(){
+
+    }
+
+    public void updatePrescriptionstatus(){
+        
+    }
 }
+
 

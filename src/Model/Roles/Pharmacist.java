@@ -7,7 +7,7 @@ contains
 extends from <<abstract>>user, related to PharmacistRepository 
 used by PharmacistController
 */
-package Pharmacist;
+package Model.Roles;
 
 import java.util.ArrayList;
 import java.util.List;
