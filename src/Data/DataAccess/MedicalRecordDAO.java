@@ -8,7 +8,7 @@ import java.util.List;
 
 public class MedicalRecordDAO implements DataAccessObject<MedicalRecord, String> {
     
-    private static final String FILE_PATH = "src/DataFiles/MedicalRecords.csv";
+    private static final String FILE_PATH = "src/Assets/MedicalRecords.csv";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
     // Load all medical records for a specific patient ID with inline AppointmentOutcomeRecords
