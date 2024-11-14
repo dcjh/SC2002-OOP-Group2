@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="844311ee-eec4-407d-8c5a-fec0e0d40514" name="Changes" comment="update the authentication class">
-      <change afterPath="$PROJECT_DIR$/src/Controller/AdministratorController.java" afterDir="false" />
-    </list>
+    <list default="true" id="844311ee-eec4-407d-8c5a-fec0e0d40514" name="Changes" comment="update the authentication class" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -98,7 +96,7 @@
       <workItem from="1731508208430" duration="133000" />
       <workItem from="1731508351764" duration="3923000" />
       <workItem from="1731570140923" duration="1317000" />
-      <workItem from="1731587186863" duration="2426000" />
+      <workItem from="1731587186863" duration="2055000" />
     </task>
     <task id="LOCAL-00001" summary="add Administrator package and class">
       <option name="closed" value="true" />
