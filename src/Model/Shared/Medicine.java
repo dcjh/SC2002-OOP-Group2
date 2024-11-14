@@ -1,40 +1,53 @@
 package Model.Shared;
 
 import java.io.Serializable;
+import java.util.Objects;
 
-public class Medicine implements Serializable{
+public class Medicine implements Serializable {
     private String medicineName;
-    private int initialStock;
+    private int stock;
     private int lowLvlStockAlert;
 
-    public Medicine(String mn, int initS, int lLSA){
-        medicineName = mn;
-        initialStock = initS;
-        lowLvlStockAlert = lLSA;
+    public Medicine(String mn, int s, int lLSA) {
+        this.medicineName = mn;
+        this.stock = s;
+        this.lowLvlStockAlert = lLSA;
     }
 
-    public String getName(){
+    // Getters
+    public String getName() {
         return medicineName;
     }
 
-    public int getIS(){
-        return initialStock;
+    public int getStock() {
+        return stock;
     }
 
-    public int getLLSA(){
+    public int getLLSA() {
         return lowLvlStockAlert;
     }
 
-    public void setLLSA(int newLLSA){
+    // Setters
+    public void setName(String medicineName) {
+        this.medicineName = medicineName;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public void setLLSA(int newLLSA) {
         this.lowLvlStockAlert = newLLSA;
     }
 
-    public boolean equals(Object o){
-        if (o instanceof Medicine){
-            Medicine m = (Medicine)o;
-            return (getName().equals(p.getName()));
-        }
-        return false;
+    @Override //chheck if have more than one instasnce of same medication
+    public boolean equals(Object o) {
+        if (this == o) return true; // if same instance then true
+        if (o == null || getClass() != o.getClass()) return false; //if differnet class, false
+        Medicine medicine = (Medicine) o; //can case o to medicine since alrdy checked
+        //checks if rest of fields are equal
+        return stock == medicine.stock && 
+                lowLvlStockAlert == medicine.lowLvlStockAlert &&
+                Objects.equals(medicineName, medicine.medicineName);
     }
-
 }
