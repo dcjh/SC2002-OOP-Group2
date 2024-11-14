@@ -1,4 +1,4 @@
-package Repository.DataClasses;
+package Model.Shared;
 
 import java.util.ArrayList;
 import java.util.Arrays;

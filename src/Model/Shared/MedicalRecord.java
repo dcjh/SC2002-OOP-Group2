@@ -1,4 +1,4 @@
-package Repository.DataClasses;
+package Model.Shared;
 
 public class MedicalRecord {
     

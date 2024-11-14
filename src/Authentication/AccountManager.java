@@ -7,10 +7,10 @@ import Administrator.Administrator;
 import java.io.*;
 import java.util.*;
 
-import Doctor.Doctor;
-import User.User;
+import Model.Roles.Doctor;
+import Model.Shared.User;
 
-public class Authentication {
+public class AccountManager {
     private static final String USER_LOGIN = "SC2002-OOP-Group2/userlogin.csv";
 
     public User authenticate(String hospID, String password) {

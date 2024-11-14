@@ -5,7 +5,7 @@ public class App {
     public static void main(String args[]){
         Scanner scanner = new Scanner(System.in);
         int option = 0;
-        Authentication auth = new Authentication();
+        AccountManager auth = new AccountManager();
 
         while (option != 3) {
             System.out.print("Welcome to Hospital Management System\n");
@@ -39,7 +39,7 @@ public class App {
                     System.out.print("Enter your new password: ");
                     String newPassword = scanner.nextLine();
 
-                    Authentication.changePassword(hosIDChangePassword, newPassword);
+                    AccountManager.changePassword(hosIDChangePassword, newPassword);
                     System.out.println("Password changed successfully.");
                     break;
 
