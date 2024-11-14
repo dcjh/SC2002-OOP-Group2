@@ -3,8 +3,10 @@ import java.util.ArrayList;
 
 import Model.Shared.Appointment;
 import Model.Shared.AppointmentOutcome;
+import Model.Shared.PrescribedMedication;
 import View.AppointmentOutcomeView;
 import View.AppointmentView;
+import java.awt.image.PackedColorModel;
 
 public class AppointmentOutcomeController {
     private AppointmentOutcome model;
@@ -29,7 +31,7 @@ public class AppointmentOutcomeController {
         return this.model.getTypeOfService();
     }
 
-    public ArrayList<String> getPrescribedMedications(){
+    public ArrayList<PrescribedMedication> getPrescribedMedications(){
         return this.model.getPrescribedMedications();
     }
 
@@ -37,8 +39,12 @@ public class AppointmentOutcomeController {
         return this.model.getConsultationNotes();
     }
 
-    // no setter methods bcs no one can modify the records
+    // setter method to change the status of the medicine
 
+    public void setStatusDispensed(String medicineName){
+        this.model.setStatusDispensed(medicineName);
+    }
+    
     // printing Appointment Outcome record 
 
     public void printAppointmentOutcome(){
