@@ -1,40 +1,53 @@
 package Controller;
 
-import Model.Roles.Doctor;
-import Model.Shared.Appointment;
-import Model.Shared.Availability;
-import Model.Shared.MedicalRecord;
-import View.DoctorView;
-
+import Service.DoctorService;
+import java.time.LocalDate;
 import java.util.List;
 
-import Data.Repository.DoctorRepository;
-
 public class DoctorController {
-    private Doctor doctor;
-    private DoctorView view;
-    private DoctorRepository repository;
 
-    public DoctorController(Doctor doctor, DoctorView view) {
-        this.doctor = doctor;
-        this.view = view;
-        this.repository = repository;
+    private DoctorService doctorService;
+
+    public DoctorController(DoctorService doctorService) {
+        this.doctorService = doctorService;
     }
 
-    public void setAvailability() {
-
+    public void viewPersonalSchedule(String doctorId) {
+        doctorService.viewPersonalSchedule(doctorId);
     }
 
-    public void viewUpcomingAppointment() {
-
+    public void setAvailability(String doctorId, LocalDate date, int slotIndex, boolean isAvailable) {
+        boolean success = doctorService.setAvailability(doctorId, date, slotIndex, isAvailable);
+        if (success) {
+            System.out.println("Availability updated successfully.");
+        } else {
+            System.out.println("Failed to update availability.");
+        }
     }
 
-    public void viewPatientHistory() {
-
+    public void viewAvailableSlots(String doctorId, LocalDate date) {
+        List<String> availableSlots = doctorService.getAvailableSlots(doctorId, date);
+        if (availableSlots.isEmpty()) {
+            System.out.println("No slots available on " + date);
+        } else {
+            System.out.println("Available slots on " + date + ": " + availableSlots);
+        }
     }
 
-    public void updatePatientRecord() {
-        
+    // Placeholder methods for the upcoming features
+    public void viewPatientMedicalRecords() {
+        System.out.println("Feature in development...");
     }
 
+    public void updatePatientMedicalRecords() {
+        System.out.println("Feature in development...");
+    }
+
+    public void acceptOrDeclineAppointmentRequests() {
+        System.out.println("Feature in development...");
+    }
+
+    public void recordAppointmentOutcome() {
+        System.out.println("Feature in development...");
+    }
 }

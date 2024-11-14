@@ -1,107 +1,71 @@
 package Model.Shared;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Availability {
-
-    private String date;
-    private boolean fullyBooked;
+    private String doctorId;
+    private LocalDate date;
+    private String day;
     private List<Boolean> slotAvailability;
 
+    // Constants for slot indices and times
     public static final int SLOT_10AM_INDEX = 0;
     public static final int SLOT_1PM_INDEX = 1;
     public static final int SLOT_3PM_INDEX = 2;
     public static final List<String> SLOT_TIMES = Arrays.asList("10:00 AM", "1:00 PM", "3:00 PM");
 
-    //constructor
-    public Availability(String date) {
+    // Constructor: Initializes all slots as available by default
+    public Availability(String doctorId, LocalDate date, String day) {
+        this.doctorId = doctorId;
         this.date = date;
-        this.fullyBooked = false;
-        this.slotAvailability = new ArrayList<>(Arrays.asList(true, true, true));
+        this.day = day;
+        this.slotAvailability = new ArrayList<>(Arrays.asList(true, true, true)); // All slots available by default
     }
 
-    public Availability(String date, boolean fullyBooked, List<Boolean> slotAvailability) {
+    // Constructor: Allows explicit setting of slot availability
+    public Availability(String doctorId, LocalDate date, String day, List<Boolean> slotAvailability) {
+        this.doctorId = doctorId;
         this.date = date;
-        this.fullyBooked = fullyBooked;
+        this.day = day;
         this.slotAvailability = new ArrayList<>(slotAvailability);
     }
 
-    //getter
-    public String getDate() {
+    // Getters
+    public String getDoctorId() {
+        return doctorId;
+    }
+    public LocalDate getDate() {
         return date;
     }
-    public boolean isFullyBooked() {
-        return fullyBooked;
+    public String getDay() {
+        return day;
     }
     public List<Boolean> getSlotAvailability() {
         return new ArrayList<>(slotAvailability);
     }
-    public List<String> getAvailableSlots() {
-        List<String> availableSlots = new ArrayList<>();
-        for (int i = 0; i < slotAvailability.size(); i++) {
-            if (slotAvailability.get(i)) {
-                availableSlots.add(SLOT_TIMES.get(i));
-            }
-        }
-        return availableSlots;
-    }
-
-    //slot booking
-    public boolean bookSlot(int slotIndex) {
-        if (fullyBooked) {
-            System.out.println("The day is already fully booked.");
-            return false;
-        }
-        if (slotIndex < 0 || slotIndex >= slotAvailability.size()) {
-            System.out.println("Invalid slot index.");
-            return false;
-        }
-        if (!slotAvailability.get(slotIndex)) {
-            System.out.println("This slot is already booked.");
-            return false;
-        }
-        // mark slot as booked
-        slotAvailability.set(slotIndex, false);
-        updateFullyBookedStatus();
-        return true;
-    }
-
-    //setting availability
-    public boolean makeSlotAvailable(int slotIndex) {
-        if (slotIndex < 0 || slotIndex >= slotAvailability.size()) {
-            System.out.println("Invalid slot index.");
-            return false;
-        }
-        if (slotAvailability.get(slotIndex)) {
-            System.out.println("This slot is already available.");
-            return false;
-        }
-
-        // Mark the slot as available
-        slotAvailability.set(slotIndex, true);
-        updateFullyBookedStatus();
-        return true;
-    }
-
-    // Check if a specific slot is available
-    public boolean isSlotAvailable(int slotIndex) {
-        if (slotIndex < 0 || slotIndex >= slotAvailability.size()) {
-            System.out.println("Invalid slot index.");
-            return false;
-        }
-        return slotAvailability.get(slotIndex);
-    }
-
-    // Private helper to update fullyBooked status based on slot availability
-    private void updateFullyBookedStatus() {
-        fullyBooked = !slotAvailability.contains(true); // Set fullyBooked if no slots are available
-    }
-
-    @Override
-    public String toString() {
-        return "Date: " + date + ", Fully Booked: " + fullyBooked + ", Slot Availability: " + slotAvailability;
+    public void updateSlotAvailability(List<Boolean> slotAvailability) {
+        this.slotAvailability = slotAvailability;
     }
     
+    // Check if all slots are booked
+    public boolean isFullyBooked() {
+        return !slotAvailability.contains(true);
+    }
+
+    // Custom toString for debugging or logging
+    @Override
+    public String toString() {
+        StringBuilder availabilityString = new StringBuilder("Date: " + date + ", Day: " + day + ", Doctor ID: " + doctorId + ", Slots: ");
+        for (int i = 0; i < slotAvailability.size(); i++) {
+            availabilityString.append(SLOT_TIMES.get(i)).append(": ")
+                    .append(slotAvailability.get(i) ? "Available" : "Booked");
+            if (i < slotAvailability.size() - 1) {
+                availabilityString.append(", ");
+            }
+        }
+        return availabilityString.toString();
+    }
 }
