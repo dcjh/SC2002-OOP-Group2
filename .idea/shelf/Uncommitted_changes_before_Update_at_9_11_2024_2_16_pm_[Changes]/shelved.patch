@@ -1,0 +1,93 @@
+Index: src/patient/MedicalRecord.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/patient/MedicalRecord.java b/src/patient/MedicalRecord.java
+new file mode 100644
+--- /dev/null	(date 1731132481996)
++++ b/src/patient/MedicalRecord.java	(date 1731132481996)
+@@ -0,0 +1,66 @@
++package patient;
++//packge for med
++
++import java.util.ArrayList;
++import java.time.LocalDateTime;
++
++public class MedicalRecord {
++
++    private String patientID;
++    private String dob;
++    private String gender;
++    private String phoneNumber;
++    private String email;
++    private String bloodType;
++    private ArrayList<String> diagnoses;
++    private ArrayList<String> treatments;
++    private ArrayList<Medication> prescribedMedications;
++    private ArrayList<String> consultationNotes;
++    private String allergies;
++    private ArrayList<LocalDateTime> updateTimestamps;
++
++    public MedicalRecord(String patientID, String dob, String gender, String phoneNumber, String email, String bloodType, String allergies) {
++        this.patientID = patientID;
++        this.dob = dob;
++        this.gender = gender;
++        this.phoneNumber = phoneNumber;
++        this.email = email;
++        this.bloodType = bloodType;
++        this.allergies = allergies;
++        this.diagnoses = new ArrayList<>();
++        this.treatments = new ArrayList<>();
++        this.prescribedMedications = new ArrayList<>();
++        this.consultationNotes = new ArrayList<>();
++        this.updateTimestamps = new ArrayList<>();
++    }
++
++    public void updateMedicalRecord(String diagnosis, String treatment, Medication medication, String consultationNote) {
++        diagnoses.add(diagnosis);
++        treatments.add(treatment);
++        prescribedMedications.add(medication);
++        consultationNotes.add(consultationNote);
++        updateTimestamps.add(LocalDateTime.now());
++    }
++    public ArrayList<LocalDateTime> getUpdateTimestamps() {
++        return updateTimestamps;
++    }
++    public String getPatientID() {
++        return patientID;
++    }
++
++    public ArrayList<String> getDiagnoses() {
++        return diagnoses;
++    }
++
++    public ArrayList<String> getTreatments() {
++        return treatments;
++    }
++
++    public ArrayList<Medication> getPrescribedMedications() {
++        return prescribedMedications;
++    }
++
++    public ArrayList<String> getConsultationNotes() {
++        return consultationNotes;
++    }
++}
+Index: src/patient/Patient.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/patient/Patient.java b/src/patient/Patient.java
+new file mode 100644
+--- /dev/null	(date 1729063666766)
++++ b/src/patient/Patient.java	(date 1729063666766)
+@@ -0,0 +1,7 @@
++package patient;
++
++public class Patient {
++    public void viewMenu(){
++        
++    }
++}
