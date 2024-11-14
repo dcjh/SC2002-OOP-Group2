@@ -1,4 +1,7 @@
 package App;
+import java.util.Scanner;
+import Authentication.AccountManager;
+import Model.Shared.User;
 
 public class App {
 
