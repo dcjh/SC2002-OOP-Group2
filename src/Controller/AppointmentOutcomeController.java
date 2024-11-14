@@ -8,9 +8,9 @@ public class AppointmentOutcomeController {
     private AppointmentOutcome model;
     private AppointmentOutcomeView view;
 
-    public AppointmentOutcomeController(AppointmentOutcome model, AppointmentOutcomeView view){
+    public AppointmentOutcomeController(AppointmentOutcome model){
         this.model = model;
-        this.view = view;
+        this.view = new AppointmentOutcomeView();
     }
 
     // getter
