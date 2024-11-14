@@ -2,11 +2,19 @@ package Data.DataAccess;
 
 import java.util.List;
 
-public interface DataAccessObject <Type, ID> {
-    
-    List<Type> loadAll(ID hosID);
-    void saveAll(List<Type> items, ID id);
-    Type find(ID hosID, String searchKey);
-    void delete(Type item, ID hosID);
+public interface DataAccessObject<Type, ID> {
+
+    // Load all records associated with a specific ID
+    List<Type> loadAll();
+
+    // Save a specific record associated with a specific ID (supports create or update)
+    void save(Type item);
+
+    // Find a specific record by ID and an additional search key
+    Type find(ID id, String searchKey);
+
+    // Delete a specific record associated with a given ID
+    void delete(ID id, String searchKey);
 
 }
+
