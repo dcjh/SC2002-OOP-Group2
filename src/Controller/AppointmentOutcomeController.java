@@ -1,12 +1,8 @@
 package Controller;
-import java.util.ArrayList;
-
-import Model.Shared.Appointment;
 import Model.Shared.AppointmentOutcome;
 import Model.Shared.PrescribedMedication;
 import View.AppointmentOutcomeView;
-import View.AppointmentView;
-import java.awt.image.PackedColorModel;
+import java.util.ArrayList;
 
 public class AppointmentOutcomeController {
     private AppointmentOutcome model;
