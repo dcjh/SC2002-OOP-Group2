@@ -1,4 +1,4 @@
-package Model;
+package Model.Roles;
 
 public enum UserType {
     ADMINISTRATOR,
