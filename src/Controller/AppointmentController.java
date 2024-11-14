@@ -6,9 +6,9 @@ public class AppointmentController {
     private Appointment model;
     private AppointmentView view;
     
-    public AppointmentController(Appointment model, AppointmentView view){
+    public AppointmentController(Appointment model){
         this.model = model;
-        this.view = view;
+        this.view = new AppointmentView();
     }
 
     // getter functions
