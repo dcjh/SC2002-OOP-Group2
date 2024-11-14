@@ -1,10 +1,14 @@
-package Doctor;
+package Controller;
 
-import Repository.DoctorRepository;
-import Repository.DataClasses.Appointment;
-import Repository.DataClasses.MedicalRecord;
-import Repository.DataClasses.Availability;
+import Model.Roles.Doctor;
+import Model.Shared.Appointment;
+import Model.Shared.Availability;
+import Model.Shared.MedicalRecord;
+import View.DoctorView;
+
 import java.util.List;
+
+import Data.Repository.DoctorRepository;
 
 public class DoctorController {
     private Doctor doctor;

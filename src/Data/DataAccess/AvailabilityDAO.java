@@ -1,9 +1,10 @@
-package Repository.DAO;
+package Data.DataAccess;
 
-import Repository.DataClasses.Availability;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import Model.Shared.Availability;
 
 public class AvailabilityDAO implements DataAccessObject<Availability, String>{
     
