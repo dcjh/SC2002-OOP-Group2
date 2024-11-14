@@ -6,33 +6,59 @@ contains
 uses PharmacistController
 */
 package View;
-
-import Model.Medicine;
-import Data.DataAccess.MedicineDAO;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
+import Data.Repository.MedicineRepository;
+import Controller.PharmacistController;
+import java.util.Scanner;
 
 public class PharmacistView {
 
-    public void MainMenu() {
-        // Display main menu options
-    }
+    private PharmacistController pharmacistController;
 
-    public void viewAppointmentOutcome() {
-        // Pharmacist views appointment outcome records to process prescriptions
-    }
 
-    public void viewPrescription() {
-        // Pharmacist views prescription details
-    }
+    public void PharmacistViewMenu(String pharmacistID){
+        Scanner scanner = new Scanner(System.in);
+        while (true){
+            System.out.printf("\n Pharmacist Menu:");
+            System.out.printf("1. View Pending Prescriptions\n");
+            System.out.printf("2. View Inventory\n");
+            System.out.printf("Choose an option");
 
-    public void viewInventory() {
-        String filename = "Medicine_List.csv";
-        ArrayList<Medicine> medicines = MedicineDAO.readMedicineList(filename);
-        for (Medicine med : medicines) {
-            System.out.println("Name: " + med.getName());
-            System.out.println("Stock: " + med.getStock());
-            System.out.println("Low Level Stock Alert: " + med.getLLSA());
+            int choice = scanner.nextInt();
+            scanner.nextLine(); //consume newline
+
+            switch (choice){
+                case 1: 
+                    viewPendingPrescriptions();
+                    break;
+                case 2:
+                    displayMedicine();
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    
+            }
         }
     }
+
+    public void viewPendingPrescriptions() {
+        // Pharmacist views prescription details
+        //not sure how to do this
+    }
+
+	public static void displayMedicine() {
+        MedicineRepository medicineRepository = new MedicineRepository();
+        List<Map<String, String>> medicineDatabase = medicineRepository.load();
+
+        System.out.println("\nDisplay Current Medicine");
+        System.out.printf("%-20s %-15s %-20s%n", "Medicine Name", "Initial Stock", "Low Stock Level Alert");
+        System.out.println("---------------------------------------------------------------");
+        for (Map<String, String> medicine : medicineDatabase) {
+            System.out.printf("%-20s %-15s %-20s%n",
+                    medicine.get("Medicine Name"),
+                    medicine.get("Initial Stock"),
+                    medicine.get("Low Stock Level Alert"));
+        }
+        
+	}
 }

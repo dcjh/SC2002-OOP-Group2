@@ -1,46 +1,45 @@
 /*in main uml and controller uml
 contains: 
 + requestRestock() 
-+ updateStatus() 
 + updatePrescriptionstatus() 
 uses Pharmacist, InventoryController, ResotckRequestController, AppointmentOutcomeRecordeController
 used by PharmacistView
 */
 
 package Controller;
-import Authentication.Authentication;
+import Model.Roles.Pharmacist;
+import Model.Shared.Medicine;
+import Model.Shared.AppointmentOutcome;
+import View.PharmacistView;
+import Data.Repository.PharmacistRepository;
 
 public class PharmacistController{
     private Pharmacist pharmacist;
     private PharmacistView view;
-    private Authentication auth;
+    private PharmacistRepository repository;
 
-    public PharmacistController(Pharmacist pharmacist, PharmacistView view, Authentication auth){
+    public PharmacistController(Pharmacist pharmacist, PharmacistView view, PharmacistRepository repository){
         this.pharmacist = pharmacist;
         this.view = view;
-        this.auth = auth;
-    }
-
-    public boolean logic(String hosID, String password){
-        if(auth.authenticate(hosID, password) != null){
-            view.displayLoginSuccess();
-            return true;
-        } else {
-            view.displayLoginFailure();
-            return false;
-        }
+        this.repository = repository;
     }
     
     public void requestRestock(){
+			Scanner scanner = new Scanner(System.in);
+			System.out.print("Enter Medicine Name to Reqeust Restock:\n ");    	
+			String newMedicinename = scanner.nextLine();   
 
-    }
-
-    public void updateStatus(){
+		    System.out.println("Request Sent Succesfully.");
+	   }
 
     }
 
     public void updatePrescriptionstatus(){
-        
+
+        //change status
+
+        //chage stock level
+
     }
 }
 
