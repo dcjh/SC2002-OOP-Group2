@@ -2,6 +2,7 @@
 contains
 + viewAppointmentoutcome()
 + viewPrescription() 
++ viewInventory
 uses PharmacistController
 */
 package View;
@@ -27,17 +28,11 @@ public class PharmacistView {
 
     public void viewInventory() {
         String filename = "Medicine_List.csv";
-        try {
-            // Read file containing medicine records
-            ArrayList<Medicine> medicines = MedicineDAO.readMedicineList(filename);
-            for (Medicine med : medicines) {
-                System.out.println("Name: " + med.getName());
-                System.out.println("Stock: " + med.getStock());
-                System.out.println("Low Level Stock Alert: " + med.getLLSA());
-            }
-
-        }catch (IOException e) {
-            System.out.println("IOException > " + e.getMessage());
+        ArrayList<Medicine> medicines = MedicineDAO.readMedicineList(filename);
+        for (Medicine med : medicines) {
+            System.out.println("Name: " + med.getName());
+            System.out.println("Stock: " + med.getStock());
+            System.out.println("Low Level Stock Alert: " + med.getLLSA());
         }
     }
 }
