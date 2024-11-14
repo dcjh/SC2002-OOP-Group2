@@ -1,12 +1,12 @@
 package Authentication;
 
 import Patient.Patient;
-import Pharmacist.Pharmacist;
 import Administrator.Administrator;
 
 import java.io.*;
 import java.util.*;
 
+import Model.Roles.Pharmacist;
 import Model.Roles.Doctor;
 import Model.Shared.User;
 
