@@ -1,4 +1,4 @@
-package View;
+package View.Doctor;
 
 import Controller.DoctorController;
 import java.time.LocalDate;
@@ -8,12 +8,12 @@ import java.util.Scanner;
 public class DoctorView {
 
     private DoctorController doctorController;
-    private AvailabilityView availabilityView; // Add the AvailabilityView as a dependency
+    private DoctorScheduleView availabilityView; // Add the AvailabilityView as a dependency
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public DoctorView(DoctorController doctorController) {
         this.doctorController = doctorController;
-        this.availabilityView = new AvailabilityView(doctorController); // Initialize AvailabilityView
+        this.availabilityView = new DoctorScheduleView(doctorController); // Initialize AvailabilityView
     }
 
     public void showMenu(String doctorId) {

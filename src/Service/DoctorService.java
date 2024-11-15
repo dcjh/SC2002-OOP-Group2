@@ -1,6 +1,6 @@
 package Service;
 
-import Model.Shared.Availability;
+import Model.Shared.Schedule;
 import Service.AvailabilityService;
 
 import java.time.LocalDate;
@@ -15,9 +15,9 @@ public class DoctorService {
     }
 
     public void viewPersonalSchedule(String doctorId) {
-        List<Availability> schedule = availabilityService.getAvailabilityByDoctor(doctorId);
+        List<Schedule> schedule = availabilityService.loadAllByDoctorId(doctorId);
         System.out.println("Personal Schedule for Doctor " + doctorId + ":");
-        for (Availability availability : schedule) {
+        for (Schedule availability : schedule) {
             System.out.println(availability);
         }
     }

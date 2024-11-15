@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Model.Shared.Appointment;
-import Model.Shared.Availability;
+import Model.Shared.Schedule;
 import Model.Shared.MedicalRecord;
 import Model.Shared.User;
 
@@ -12,7 +12,7 @@ public class Doctor extends User{
     
     private List<Appointment> appointmentRequests;
     private List<Appointment> confirmedAppointments;
-    private List<Availability> availabilityDates ;
+    private List<Schedule> availabilityDates ;
     private List<MedicalRecord> patients;
 
     public Doctor(String staffID, String password, String role, String name, String gender, int age) {
@@ -57,13 +57,13 @@ public class Doctor extends User{
     }
 
     //data mgmt for availability
-    public List<Availability> getAvailabilityDates() {
+    public List<Schedule> getAvailabilityDates() {
         return availabilityDates;
     }
-    public void addAvailabilityDate(Availability availability) {
+    public void addAvailabilityDate(Schedule availability) {
         availabilityDates.add(availability);
     }
-    public void removeAvailabilityDate(Availability availability) {
+    public void removeAvailabilityDate(Schedule availability) {
         availabilityDates.remove(availability);
     }
 

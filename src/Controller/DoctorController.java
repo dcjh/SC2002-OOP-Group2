@@ -1,15 +1,18 @@
 package Controller;
 
-import Service.DoctorService;
+import View.Doctor.DoctorView;
+import Model.Roles.Doctor;
 import java.time.LocalDate;
 import java.util.List;
 
 public class DoctorController {
 
-    private DoctorService doctorService;
+    private DoctorView view;
+    private Doctor model;
+    private ScheduleController scheduleController;
 
-    public DoctorController(DoctorService doctorService) {
-        this.doctorService = doctorService;
+    public DoctorController() {
+        this.scheduleController =  new scheduleController();
     }
 
     public void viewPersonalSchedule(String doctorId) {
@@ -34,20 +37,4 @@ public class DoctorController {
         }
     }
 
-    // Placeholder methods for the upcoming features
-    public void viewPatientMedicalRecords() {
-        System.out.println("Feature in development...");
-    }
-
-    public void updatePatientMedicalRecords() {
-        System.out.println("Feature in development...");
-    }
-
-    public void acceptOrDeclineAppointmentRequests() {
-        System.out.println("Feature in development...");
-    }
-
-    public void recordAppointmentOutcome() {
-        System.out.println("Feature in development...");
-    }
 }
