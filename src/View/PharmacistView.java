@@ -15,50 +15,45 @@ import java.util.Scanner;
 public class PharmacistView {
 
     private PharmacistController pharmacistController;
-
-
     public void PharmacistViewMenu(String pharmacistID){
-        Scanner scanner = new Scanner(System.in);
-        while (true){
-            System.out.printf("\n Pharmacist Menu:");
-            System.out.printf("1. View Pending Prescriptions\n");
-            System.out.printf("2. View Inventory\n");
-            System.out.printf("Choose an option");
-
-            int choice = scanner.nextInt();
-            scanner.nextLine(); //consume newline
-
-            switch (choice){
-                case 1: 
-                    viewPendingPrescriptions();
-                    break;
-                case 2:
-                    displayMedicine();
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-                    
-            }
-        }
-    }
-
-    public void viewPendingPrescriptions() {
-        // Pharmacist views prescription details
-        //not sure how to do this
-    }
-
-	public static void displayMedicine() {
-        MedicineRepository medicineRepository = new MedicineRepository();
-        List<Map<String, String>> medicineDatabase = medicineRepository.load();
-
-        System.out.println("\nDisplay Current Medicine");
-        System.out.printf("%-20s %-15s %-20s%n", "Medicine Name", "Initial Stock", "Low Stock Level Alert");
-        System.out.println("---------------------------------------------------------------");
-        for (Map<String, String> medicine : medicineDatabase) {
-            System.out.printf("%-20s %-15s %-20s%n",
-                    medicine.get("Medicine Name"),
-                    medicine.get("Initial Stock"),
-                    medicine.get("Low Stock Level Alert"));
-        }
+    private Scanner scanner = new Scanner(System.in);
+    public void displayMenu() {
+    	int option = 0;
+    	while (option!=5) {
+            System.out.println();
+            System.out.println("Pharmacist Menu:");
+            System.out.println("1. View Appointment Outcome Record ");
+            System.out.println("2. Update Prescription Status");
+            System.out.println("3. View Medication Inventory");
+            System.out.println("4. Submit Replenishment Request");
+            System.out.println("5. Logout....");
+            System.out.println();
+            System.out.println("Select an option:");
+            option = scanner.nextInt();
+            switch(option) {
+            case 1:viewAppointmentoutcome();
+            case 2:Controller.PharmacistController.updatePrescriptionstatus(null);
+            case 3:viewMedicationinventory();
+            case 4:submitReplenishmentrequest();
+            case 5: break;
+    	}
         
-	}
+}        
+    	
+    }
+    
+    private void viewAppointmentoutcome() {
+	System.out.println("Functionality in progress");
+    }   
+    
+    private void viewMedicationinventory() {
+            InventoryController inventoryController = new InventoryController();
+            InventoryView.displayInventory();
+        }
+    	
+    
+    private void submitReplenishmentrequest() {
+        System.out.println("\n--- Submit Replenishment Request ---");
+        PharmacistController.submitReplenishmentRequest(); 
+    }
 }

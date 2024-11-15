@@ -6,12 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentDAO implements DataAccessObject<Appointment, String> {
-    private final String filePath;
-
-    // Constructor to set file path
-    public AppointmentDAO(String filePath) {
-        this.filePath = filePath;
-    }
+    private final String filePath = "src/Data/Assets/Appointment.csv";
 
     // Load all appointments from the CSV file
     @Override
@@ -26,8 +21,10 @@ public class AppointmentDAO implements DataAccessObject<Appointment, String> {
                     Appointment appointment = new Appointment(
                             values[1].trim(),
                             values[2].trim(),
-                            values[3].trim(),
-                            values[4].trim()
+                            values[5].trim(),
+                            values[4].trim(),
+                            values[0].trim(),
+                            values[3].trim()
                     );
                     appointments.add(appointment);
                 }
@@ -88,6 +85,67 @@ public class AppointmentDAO implements DataAccessObject<Appointment, String> {
         }
         return null; // Return null if not found
     }
+
+    // Find appointments by doctorId
+    public List<Appointment> getAppointmentsByDocID(String doctorId) {
+        List<Appointment> appointments = loadAll();
+        List<Appointment> result = new ArrayList<>();
+        for (Appointment appointment : appointments) {
+            if (appointment.getDocID().equals(doctorId)) {
+                result.add(appointment);
+            }
+        }
+        return result; // Return the filtered list
+    }
+
+    // Find approved appointments by doctorId
+    public List<Appointment> getApprovedAppointmentsByDocID(String doctorId) {
+        List<Appointment> appointments = loadAll();
+        List<Appointment> result = new ArrayList<>();
+        for (Appointment appointment : appointments) {
+            if (appointment.getDocID().equals(doctorId) && appointment.getStatus().equals("approved")) {
+                result.add(appointment);
+            }
+        }
+        return result; // Return the filtered list
+    }
+
+    // Find pending appointments by doctorId as doctor need to quickly filter these to see which they can accept
+    public List<Appointment> getPendingAppointmentsByDocID(String doctorId) {
+        List<Appointment> appointments = loadAll();
+        List<Appointment> result = new ArrayList<>();
+        for (Appointment appointment : appointments) {
+            if (appointment.getDocID().equals(doctorId) && appointment.getStatus().equals("pending")) {
+                result.add(appointment);
+            }
+        }
+        return result; // Return the filtered list
+    }
+
+    // Find appointments by patientId
+    public List<Appointment> getAppointmentsByPatientID(String patientId) {
+        List<Appointment> appointments = loadAll();
+        List<Appointment> result = new ArrayList<>();
+        for (Appointment appointment : appointments) {
+            if (appointment.getPatientID().equals(patientId)) {
+                result.add(appointment);
+            }
+        }
+        return result; // Return the filtered list
+    }
+
+    // Find approved appointments by patientId
+    public List<Appointment> getApprovedAppointmentsByPatientID(String patientId) {
+        List<Appointment> appointments = loadAll();
+        List<Appointment> result = new ArrayList<>();
+        for (Appointment appointment : appointments) {
+            if (appointment.getPatientID().equals(patientId) && appointment.getStatus().equals("approved")) {
+                result.add(appointment);
+            }
+        }
+        return result; // Return the filtered list
+    }
+
 
     // Delete an appointment by ID and a search key
     @Override
