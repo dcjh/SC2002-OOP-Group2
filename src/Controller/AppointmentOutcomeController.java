@@ -15,6 +15,10 @@ public class AppointmentOutcomeController {
 
     // getter
 
+    public String getAppointmentOutcomeID(){
+        return this.model.getAppointmentOutcomeID();
+    }
+
     public String getDate(){
         return this.model.getDate();
     }
@@ -44,7 +48,7 @@ public class AppointmentOutcomeController {
     // printing Appointment Outcome record 
 
     public void printAppointmentOutcome(){
-        this.view.printAppointmentOutcome(getDate(), getTime(), getTypeOfService(), getPrescribedMedications(), getConsultationNotes());
+        this.view.printAppointmentOutcome(getAppointmentOutcomeID(), getDate(), getTime(), getTypeOfService(), getPrescribedMedications(), getConsultationNotes());
     }
     
 }
