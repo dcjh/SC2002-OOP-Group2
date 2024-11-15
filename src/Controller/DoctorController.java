@@ -5,6 +5,8 @@ import Model.Roles.Doctor;
 import java.time.LocalDate;
 import java.util.List;
 
+import Controller.ScheduleControllers.ScheduleController;
+
 public class DoctorController {
 
     private DoctorView view;
