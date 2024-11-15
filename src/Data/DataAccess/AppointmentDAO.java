@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppointmentDAO{
+public class AppointmentDAO {
     private final String filePath = "src/Data/Assets/Appointment.csv";
 
     // Load all appointments from the CSV file
