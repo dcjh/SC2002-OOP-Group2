@@ -13,7 +13,6 @@ public class appointmentOutcomeTest {
         prescribedMedications.add(new PrescribedMedication("h2o", 19));
 
         AppointmentOutcome aptOutcome = new AppointmentOutcome("12-10-2003", "10:30", "X-Ray", prescribedMedications, "Yoooo");
-
         AppointmentOutcomeController aptOutcomeController = new AppointmentOutcomeController(aptOutcome);
 
         System.out.println(aptOutcomeController.getDate());
@@ -27,5 +26,11 @@ public class appointmentOutcomeTest {
 
         aptOutcomeController.printAppointmentOutcome();
 
+        AppointmentOutcome aptOutcome1 = new AppointmentOutcome("21-10-2003", "11:30", "Massage", prescribedMedications, "SIUUU");
+        AppointmentOutcomeController aptOutcomeController1 = new AppointmentOutcomeController(aptOutcome1);
+
+        System.out.println(" ");
+        
+        aptOutcomeController1.printAppointmentOutcome();
     }
 }

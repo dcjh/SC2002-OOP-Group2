@@ -5,6 +5,8 @@ import java.util.ArrayList;
 // ok by the way, the logic is appointment outcome would only be created after the appointment is completed
 
 public class AppointmentOutcome {
+    private static int idCounter = 1; 
+    private String appointmentOutcomeID;  
     private String date;
     private String time;
     private String typeOfService;
@@ -17,6 +19,7 @@ public class AppointmentOutcome {
 
 
     public AppointmentOutcome(String date, String time, String typeOfService, ArrayList<PrescribedMedication> prescribedMedications, String consultationNotes){
+        this.appointmentOutcomeID = generateFormattedId();
         this.date = date;
         this.time = time;
         this.typeOfService = typeOfService;
@@ -24,7 +27,16 @@ public class AppointmentOutcome {
         this.consultationNotes = consultationNotes;
     }
 
+    // Method to generate a formatted ID with prefix and leading zeroes
+    private String generateFormattedId() {
+        return String.format("AO%04d", idCounter++); // AO + zero-padded 4-digit ID
+    }
+
     // getter
+
+    public String getAppointmentOutcomeID(){
+        return this.appointmentOutcomeID;
+    }
 
     public String getDate(){
         return this.date;
