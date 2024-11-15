@@ -13,6 +13,10 @@ public class AppointmentController {
 
     // getter functions
 
+    public String getAppointmentID(){
+        return this.model.getAppointmentID();
+    }
+
     public String getPatientID(){
         return this.model.getPatientID();
     }
@@ -55,7 +59,7 @@ public class AppointmentController {
     // view
 
     public void printAppointment(){
-        this.view.printAppointment(getDocID(), getPatientID(), getStatus(), getTime(), getDate());
+        this.view.printAppointment(getAppointmentID(), getDocID(), getPatientID(), getStatus(), getTime(), getDate());
     }
 
 }
