@@ -1,14 +1,24 @@
 package View;
 
+import Model.Appointment;
 import Model.Gender;
+import Model.User;
 import Model.UserType;
 import java.io.*;
 import java.util.*;
-import Data.Repository.StaffRepository;
-import Data.Repository.MedicineRepository;
+import Data.DataAccess.AppointmentDAO;
+import Data.DataAccess.InventoryDAO;
+import Controller.InventoryController;
+import Controller.AdministratorController;
+
 
 public class AdministratorView implements UserMainView {
     private Scanner scanner = new Scanner(System.in);
+	private User user;
+    
+    public AdministratorView(User user) {
+        this.user = user;
+    }
     
     public void displayMenu() {
         int option = 0;
@@ -28,7 +38,7 @@ public class AdministratorView implements UserMainView {
              case 1:viewandmanagerhospitalstaff(); 
              	break;
              	
-             case 2:boundary.administratorView.displayscheduledAppointmentdetails();
+             case 2:displayScheduledAppointments();
              	break;
              	
              case 3:viewandmanagemedicationinventory();
@@ -59,18 +69,18 @@ public class AdministratorView implements UserMainView {
             option = scanner.nextInt();
             switch(option) {
             case 1:
-            	Controller.administratorController.addStaffMember();
+            	Controller.AdministratorController.addStaffMember();
             	break;
             case 2:
-            	Controller.administratorController.updateStaffmember();
+            	Controller.AdministratorController.updateStaffMember();
             	break;
             	
             case 3:
-            	Controller.administratorController.removeStaffMember();
+            	Controller.AdministratorController.removeStaffMember();
             	break;
             	
             case 4:
-				displayStaff();
+            	AdministratorController.displayStaff();
 				break;
             }
     	}
@@ -95,133 +105,38 @@ public class AdministratorView implements UserMainView {
             option5 = scanner.nextInt();
             switch(option5) {
             case 1:
-            	Controller.administratorController.addMed();
+            	Controller.InventoryController.addMedicine();
             	break;
             case 2:
-            	Controller.administratorController.updateStocklevel();
+            	Controller.InventoryController.updateRestockLevel();
             	break; 
             case 3:
-            	Controller.administratorController.removeMed();
+            	Controller.InventoryController.removeMedicine();
             	break;
             case 4:
-            	displayMedicine();
+            	displayInventory();
             	break;
             }	
     	}
     
     }
     private void approvereplenishmentrequests() {
+        System.out.println("\n--- Approve/Deny Replenishment Requests ---");
+        InventoryController.processReplenishmentRequests(); 
     	
     }
 	
+    private void displayScheduledAppointments() {
+        System.out.println("\n--- Viewing Scheduled Appointments ---");
+        AdministratorController.displayscheduledAppointmentdetails();
+    }
 	
-	public static void displayStaff() {
-	    StaffRepository staffRepository = new StaffRepository();
-	    List<Map<String, String>> staffDatabase = staffRepository.load();
-	    Scanner scanner = new Scanner(System.in);
-	    List<Map<String, String>> filteredList = new ArrayList<>(staffDatabase);
-	    boolean display = true;
-
-	    while (display) {
-	        System.out.println("Select the criteria to filter:");
-	        System.out.println("1. Role");
-	        System.out.println("2. Gender");
-	        System.out.println("3. Age Range");
-	        System.out.println("4. Display");
-	        System.out.print("Enter choice: ");
-	        int choice = scanner.nextInt();
-	        scanner.nextLine();
-
-	        switch (choice) {
-	            case 1:
-	                System.out.println("Select role:");
-	                for (UserType role : UserType.values()) {
-	                    System.out.println((role.ordinal() + 1) + ". " + role);
-	                }
-	                System.out.print("Enter choice (1-" + UserType.values().length + "): ");
-	                int roleChoice = scanner.nextInt();
-	                scanner.nextLine();
-
-	                if (roleChoice >= 1 && roleChoice <= UserType.values().length) {
-	                    UserType selectedRole = UserType.values()[roleChoice - 1];
-	                    filteredList.removeIf(staff -> !staff.get("role").equalsIgnoreCase(selectedRole.name()));
-	                } else {
-	                    System.out.println("Invalid role choice.");
-	                }
-	                break;
-
-	            case 2:
-	                System.out.println("Select gender:");
-	                for (Gender gender : Gender.values()) {
-	                    System.out.println((gender.ordinal() + 1) + ". " + gender);
-	                }
-	                System.out.print("Enter choice (1-" + Gender.values().length + "): ");
-	                int genderChoice = scanner.nextInt();
-	                scanner.nextLine();
-
-	                if (genderChoice >= 1 && genderChoice <= Gender.values().length) {
-	                    Gender selectedGender = Gender.values()[genderChoice - 1];
-	                    filteredList.removeIf(staff -> !staff.get("gender").equalsIgnoreCase(selectedGender.name()));
-	                } else {
-	                    System.out.println("Invalid gender choice.");
-	                }
-	                break;
-
-	            case 3:
-	                System.out.print("Enter minimum age: ");
-	                int minAge = scanner.nextInt();
-	                System.out.print("Enter maximum age: ");
-	                int maxAge = scanner.nextInt();
-	                scanner.nextLine();
-	                filteredList.removeIf(staff -> {
-	                    int age = Integer.parseInt(staff.get("age"));
-	                    return age < minAge || age > maxAge;
-	                });
-	                break;
-
-	            case 4:
-	                display = false;
-
-	                if (filteredList.isEmpty()) {
-	                    System.out.println("No staff members found with the specified criteria.");
-	                } else {
-                        System.out.println("\nDisplay Staff List");
-                        System.out.printf("%-15s %-20s %-20s %-15s %-5s%n", "ID", "Name", "Role", "Gender", "Age");
-                        System.out.println("-------------------------------------------------------------------------------------------------------------------");
-
-                        for (Map<String, String> staff : filteredList) {
-                            System.out.printf("%-15s %-20s %-20s %-15s %-5s%n",
-                                    staff.get("staffID"), staff.get("name"), staff.get("role"),
-                                    staff.get("gender"), staff.get("age"));
-	                    }
-	                }
-	                break;
-
-	            default:
-	                System.out.println("Invalid choice. Please try again.");
-	                break;
-	        }
-	    }
-	}
 	
-	public static void displayMedicine() {
-        MedicineRepository medicineRepository = new MedicineRepository();
-        List<Map<String, String>> medicineDatabase = medicineRepository.load();
 
-        System.out.println("\nDisplay Current Medicine");
-        System.out.printf("%-20s %-15s %-20s%n", "Medicine Name", "Initial Stock", "Low Stock Level Alert");
-        System.out.println("---------------------------------------------------------------");
-        for (Map<String, String> medicine : medicineDatabase) {
-            System.out.printf("%-20s %-15s %-20s%n",
-                    medicine.get("Medicine Name"),
-                    medicine.get("Initial Stock"),
-                    medicine.get("Low Stock Level Alert"));
-        }
-        
-	}
 	
-	public static void displayscheduledAppointmentdetails() {
-    	System.out.println("viewappointmentsdetails");	
+    private void displayInventory() {
+        InventoryController inventoryController = new InventoryController();
+        InventoryView.displayInventory();
     }
 
 }
