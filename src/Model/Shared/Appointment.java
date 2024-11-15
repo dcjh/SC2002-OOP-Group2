@@ -12,17 +12,21 @@ public class Appointment {
 
     // when we initialise appointment, need to input docID, patientID, time, and date as argument
     // when it is initialised, appointment status is initially pending, it will only change to cancelled / approved after it is set by Doctor
-    public Appointment(String docID, String patientID, String time, String date) {
-        this.appointmentID = generateFormattedId();  
+    public Appointment(String docID, String patientID, String time, String date, String appointmentID, String status) {
+        this.appointmentID = appointmentID;
         this.docID = docID;
         this.patientID = patientID;
-        this.status = "pending";
         this.date = date;
         this.time = time;
+        this.status = status;
     }
 
-    // Method to generate a formatted ID with prefix and leading zeroes
-    private String generateFormattedId() {
+    public Appointment(String docID, String patientID, String time, String date) {
+        this(docID, patientID, time, date, generateFormattedId(), "pending");
+            }
+        
+            // Method to generate a formatted ID with prefix and leading zeroes
+            private static String generateFormattedId() {
         return String.format("AP%04d", idCounter++); // AP + zero-padded 4-digit ID
     }
     

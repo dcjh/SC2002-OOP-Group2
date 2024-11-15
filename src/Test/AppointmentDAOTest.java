@@ -16,16 +16,23 @@ public class AppointmentDAOTest {
             System.out.println(appointment);
         }
         
-        // 2. Add a new appointment
+        // 2. Add new appointments
         System.out.println("\nAdding a new appointment...");
         Appointment newAppointment = new Appointment("D001", "P1001", "10:30", "25-11-2024");
-        Appointment newAppointment1 = new Appointment("D002", "P1002", "11:30", "05-11-2024");
         appointmentDAO.save(newAppointment);
+
+        Appointment newAppointment1 = new Appointment("D002", "P1002", "11:30", "05-11-2024");
         appointmentDAO.save(newAppointment1);
 
+        Appointment newAppointment2 = new Appointment("D003", "P1003", "11:35", "06-11-2024");
+        appointmentDAO.save(newAppointment2);
+
+        Appointment newAppointment3 = new Appointment("D004", "P1004", "11:40", "07-11-2024");
+        appointmentDAO.save(newAppointment3);
+
         // 3. Find an appointment by Appointment ID
-        System.out.println("\nFinding an appointment with ID AP0001...");
-        Appointment foundAppointment = appointmentDAO.find("AP0001", null); // Search without a specific status
+        System.out.println("\nFinding an appointment with ID AP0002...");
+        Appointment foundAppointment = appointmentDAO.find("AP0002", null); // Search without a specific status
         if (foundAppointment != null) {
             System.out.println("Appointment found:\n" + foundAppointment);
         } else {
@@ -33,22 +40,14 @@ public class AppointmentDAOTest {
         }
 
         // 4. Update an appointment's status
-        System.out.println("\nUpdating appointment AP0003 to status 'completed'...");
+        System.out.println("\nUpdating appointment AP0001 to status 'completed'...");
         Appointment updatedAppointment = newAppointment;
-        updatedAppointment.setDate("12-12-2012");
-        updatedAppointment.setStatus("approved");
+        updatedAppointment.setStatus("completed");
         appointmentDAO.save(updatedAppointment); // Save will update if the ID exists
 
         // 5. Delete an appointment by ID
-        System.out.println("\nDeleting appointment with ID AP0001...");
-        appointmentDAO.delete("AP0001", null); // Delete without specifying a status
-
-        // 6. Load all appointments again to confirm changes
-        System.out.println("\nAll Appointments After Changes:");
-        appointments = appointmentDAO.loadAll();
-        for (Appointment appointment : appointments) {
-            System.out.println(appointment);
-        }
+        System.out.println("\nDeleting appointment with ID AP0003...");
+        appointmentDAO.delete("AP0003", null); // Delete without specifying a status
     }
 }
 
