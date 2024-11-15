@@ -1,4 +1,4 @@
 Appointment ID,Doctor ID,Patient ID,Status,Date,Time
-AP0008,D001,P1001,pending,25-11-2024,pending
-AP0009,D002,P1002,pending,05-11-2024,pending
-AP0010,D001,P1001,pending,12-12-2012,approved
+AP0001,D001,P1001,completed,25-11-2024,10:30
+AP0002,D002,P1002,pending,05-11-2024,11:30
+AP0004,D004,P1004,pending,07-11-2024,11:40
