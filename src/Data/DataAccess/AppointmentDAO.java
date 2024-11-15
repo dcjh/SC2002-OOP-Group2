@@ -26,8 +26,10 @@ public class AppointmentDAO implements DataAccessObject<Appointment, String> {
                     Appointment appointment = new Appointment(
                             values[1].trim(),
                             values[2].trim(),
-                            values[3].trim(),
-                            values[4].trim()
+                            values[5].trim(),
+                            values[4].trim(),
+                            values[0].trim(),
+                            values[3].trim()
                     );
                     appointments.add(appointment);
                 }
