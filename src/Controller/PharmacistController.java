@@ -11,17 +11,14 @@ import Model.Roles.Pharmacist;
 import Model.Shared.Medicine;
 import Model.Shared.AppointmentOutcome;
 import View.PharmacistView;
-import Data.Repository.PharmacistRepository;
 
 public class PharmacistController{
     private Pharmacist pharmacist;
     private PharmacistView view;
-    private PharmacistRepository repository;
 
-    public PharmacistController(Pharmacist pharmacist, PharmacistView view, PharmacistRepository repository){
+    public PharmacistController(Pharmacist pharmacist, PharmacistView view){
         this.pharmacist = pharmacist;
         this.view = view;
-        this.repository = repository;
     }
     
    public static void updatePrescriptionstatus() {
