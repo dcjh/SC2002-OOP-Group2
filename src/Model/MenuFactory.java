@@ -1,9 +1,9 @@
 package Model;
 import View.AdministratorView;
-import View.DoctorView;
 import View.PatientView;
 import View.PharmacistView;
 import View.UserMainView;
+import View.Doctor.DoctorView;
 
 
 public class MenuFactory {
