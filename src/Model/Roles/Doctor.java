@@ -4,67 +4,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Model.Shared.Appointment;
-import Model.Shared.Availability;
 import Model.Shared.MedicalRecord;
+import Model.Shared.Schedule;
 import Model.Shared.User;
 
 public class Doctor extends User{
     
-    private List<Appointment> appointmentRequests;
-    private List<Appointment> confirmedAppointments;
-    private List<Availability> availabilityDates ;
-    private List<MedicalRecord> patients;
+    private static UserType userType;
+    private String name;
+    private Gender gender;
+    private int age;
 
-    public Doctor(String staffID, String password, String role, String name, String gender, int age) {
-        super(staffID, password, role, name, gender, age);
-        this.appointmentRequests = new ArrayList<>();
-        this.confirmedAppointments = new ArrayList<>();
-        this.availabilityDates = new ArrayList<>();
-        this.patients = new ArrayList<>();
+    public Doctor(String hosID, String password,UserType userType, String name, Gender gender, int age) {
+        super(hosID, password,UserType.DOCTOR , name, Gender.MALE, age);
     }
    
-    // data mgmt for appointment requests
-    public List<Appointment> getAppointmentRequests() {
-        return appointmentRequests;
+    public String getDoctorId() {
+        return hosID;
     }
-    public void addAppointmentRequests(Appointment request) {
-        appointmentRequests.add(request);
-    }
-    public void removeAppointmentRequests(Appointment request) {
-        appointmentRequests.remove(request);
+    public void setDoctorId(String hosID) {
+        this.hosID = hosID;
     }
 
-    //data mgmt for confirmed appointments
-    public List<Appointment> getAppointments() {
-        return confirmedAppointments;
+    public String getPassword() {
+        return password;
+        //using auth
     }
-    public void addAppointment(Appointment appointment) {
-        confirmedAppointments.add(appointment);
-    }
-    public void removeAppointment(Appointment appointment) {
-        confirmedAppointments.remove(appointment);
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    //data mgmt for patients
-    public List<MedicalRecord> getPatients() {
-        return patients;
-    }
-    public void addPatient(MedicalRecord medicalRecord) {
-        patients.add(medicalRecord);
-    }
-    public void removePatient(MedicalRecord medicalRecord) {
-        patients.remove(medicalRecord);
+    public UserType getUserType() {
+        return userType;
     }
 
-    //data mgmt for availability
-    public List<Availability> getAvailabilityDates() {
-        return availabilityDates;
+    public String getName() {
+        return name;
     }
-    public void addAvailabilityDate(Availability availability) {
-        availabilityDates.add(availability);
+    public void setName(String name) {
+        this.name = name;
     }
-    public void removeAvailabilityDate(Availability availability) {
-        availabilityDates.remove(availability);
+
+    public Gender getGender() {
+        return gender;
     }
+
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+
 
 }
