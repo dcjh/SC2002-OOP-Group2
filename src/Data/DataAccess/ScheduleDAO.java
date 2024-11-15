@@ -11,7 +11,7 @@ import Model.Shared.Schedule;
 
 public class ScheduleDAO {
 
-    private static final String FILE_PATH = "Data/Assets/Schedule.csv";
+    private static final String FILE_PATH = "src/Data/Assets/Schedule.csv";
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public List<Schedule> fetch() {

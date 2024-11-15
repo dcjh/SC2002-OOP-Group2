@@ -12,8 +12,8 @@ public class DoctorAvailabilityView {
     private DSVController DSVController;
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public DoctorAvailabilityView(DSVController DSVController) {
-        this.DSVController = DSVController;
+    public DoctorAvailabilityView() {
+        this.DSVController = new DSVController();
     }
 
     public void menu(String doctorId) {
@@ -28,7 +28,7 @@ public class DoctorAvailabilityView {
                 break;
             case "n":
                 System.out.println("Returning to Main Menu...");
-                DSVController.doctorView();
+                DSVController.returnToDoctorView(doctorId);;
                 break;
             default:
                 System.out.println("Invalid choice. Proceeding...");
