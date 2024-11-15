@@ -1,10 +1,5 @@
 package Authentication;
 
-import Patient.Patient;
-import Administrator.Administrator;
-
-import java.io.*;
-import java.util.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -13,20 +8,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 import Model.User;
-import Model.UserType;
 import Model.UserFactory;
-
-
-import Model.Roles.Pharmacist;
-import Model.Roles.Doctor;
-import Model.Shared.User;
+import Model.UserType;
 
 public class AccountManager {
-    	public accountManager() {
-	}
-    
-    private static final String FILE_PATH = "SC2002-OOP-Group2/userlogin.csv";
+	private static final String FILE_PATH = "C:\\Users\\chuaz\\eclipse-workspace\\OOP_project\\src\\Authentication\\userlogin.csv";
 
 	public User login(String hospID, String password) {
 		List<String[]> userDatabase = new ArrayList<>();
@@ -66,8 +54,8 @@ public class AccountManager {
         return null;
     }
 
-
-   public static void changePassword(String hospID, String newPassword) {
+	
+	   public static void changePassword(String hospID, String newPassword) {
 	    	List<String[]> fileContent = new ArrayList<>();
 	        	try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))){
 	            	String header = reader.readLine();
