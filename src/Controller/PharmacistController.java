@@ -24,21 +24,35 @@ public class PharmacistController{
         this.repository = repository;
     }
     
-    public void requestRestock(){
-			Scanner scanner = new Scanner(System.in);
-			System.out.print("Enter Medicine Name to Reqeust Restock:\n ");    	
-			String newMedicinename = scanner.nextLine();   
-
-		    System.out.println("Request Sent Succesfully.");
-	   }
-
+   public static void updatePrescriptionstatus() {
+    	System.out.println("Functionality in progress");
     }
+    
+    public static void submitReplenishmentRequest() {
+        InventoryDAO inventoryDAO = new InventoryDAO();
+        ReplenishmentDAO replenishmentDAO = new ReplenishmentDAO();
+        Scanner scanner = new Scanner(System.in);
+        
+        
+        System.out.print("\nEnter Inventory ID for replenishment request: ");
+        String inventoryID = scanner.nextLine();
+        Inventory selectedItem = inventoryDAO.find(inventoryID, null);
 
-    public void updatePrescriptionstatus(){
+        if (selectedItem == null) {
+            System.out.println("Invalid Inventory ID.");
+            return;
+        }
 
-        //change status
-
-        //chage stock level
+        System.out.print("Enter requested quantity: ");
+        int requestedQuantity = scanner.nextInt();
+        scanner.nextLine(); 
+        String requestID = replenishmentDAO.generateNextRequestID();
+        ReplenishmentRequest request = new ReplenishmentRequest(
+                requestID, selectedItem.getMedicineID(), selectedItem.getName(), requestedQuantity, "Pending"
+        );
+        
+        replenishmentDAO.save(request);
+        System.out.println("Replenishment request submitted successfully with Request ID: " + requestID);
 
     }
 }
