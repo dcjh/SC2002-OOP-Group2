@@ -1,6 +1,7 @@
 package Controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import Model.Shared.Appointment;
@@ -58,7 +59,14 @@ public class DoctorController {
 
 
     public List<Appointment> getAppointmentsById(String doctorId) {
-        return appointmentController.getAllAppointment();
+        List<Appointment> allAppointments = appointmentController.getAllAppointment();
+        List<Appointment> appointmentsById = new ArrayList<>();
+        for (Appointment a : allAppointments) {
+            if (a.getDocID().equals(doctorId)) {
+                appointmentsById.add(a);
+            }
+        }
+        return appointmentsById;
     }
 
 }
