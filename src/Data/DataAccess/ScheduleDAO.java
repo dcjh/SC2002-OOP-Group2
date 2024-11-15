@@ -1,4 +1,4 @@
-package DataAccess;
+package Data.DataAccess;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -12,7 +12,7 @@ import Model.Shared.Schedule;
 public class ScheduleDAO {
 
     private static final String FILE_PATH = "src/Data/Assets/Schedule.csv";
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public List<Schedule> fetch() {
         List<Schedule> scheduleList = new ArrayList<>();
