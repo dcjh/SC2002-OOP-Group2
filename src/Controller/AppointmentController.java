@@ -6,12 +6,16 @@ public class AppointmentController {
     private Appointment model;
     private AppointmentView view;
     
-    public AppointmentController(Appointment model, AppointmentView view){
+    public AppointmentController(Appointment model){
         this.model = model;
-        this.view = view;
+        this.view = new AppointmentView();
     }
 
     // getter functions
+
+    public String getAppointmentID(){
+        return this.model.getAppointmentID();
+    }
 
     public String getPatientID(){
         return this.model.getPatientID();
@@ -55,7 +59,7 @@ public class AppointmentController {
     // view
 
     public void printAppointment(){
-        this.view.printAppointment(getDocID(), getPatientID(), getStatus(), getTime(), getDate());
+        this.view.printAppointment(getAppointmentID(), getDocID(), getPatientID(), getStatus(), getTime(), getDate());
     }
 
 }
