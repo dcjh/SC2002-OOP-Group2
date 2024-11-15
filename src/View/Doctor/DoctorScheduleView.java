@@ -1,27 +1,28 @@
 package View.Doctor;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
 
-import Controller.ScheduleControllers.DSVController;
 import Model.Shared.Schedule;
 import Model.Shared.Appointment;
 
 public class DoctorScheduleView {
     public DoctorScheduleView() {}
 
-    public void menu(Schedule schedule, List<Appointment> appointments) {
-        System.out.println("This is your schedule doctor " + schedule.getDoctorId());
+    public void menu(String doctorId, LocalDate date, Boolean isAvailable, List<Appointment> appointments) {
+        System.out.println("Doctor ID: " + doctorId);
+        System.out.println("Date: " + date + " | Availability: " + (isAvailable ? "Available" : "Not Available"));
         System.out.println("-----------------------------------------");
-        for (HashMap.Entry<LocalDate, Boolean> entry : schedule.getDateAvailability().entrySet()) {
-            for(Appointment appointment : appointments) {
-                System.out.println("| Date: " + entry.getKey() + " | Availability: " + entry.getValue() + " | PatientId: " + appointment.getPatientID() + " | Name: " + appointment.getName() +  " |" );
-                System.out.println("-----------------------------------------");
-                break;
+
+        if (appointments.isEmpty()) {
+            System.out.println("  No appointments scheduled for this date.");
+        } else {
+            for (Appointment appointment : appointments) {
+                System.out.println("  | Patient ID: " + appointment.getPatientID() +
+                                   " | Time: " + appointment.getTime() + " |");
             }
         }
+        System.out.println("-----------------------------------------");
     }
 }

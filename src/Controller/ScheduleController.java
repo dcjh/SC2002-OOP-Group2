@@ -1,55 +1,54 @@
 package Controller;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import DataAccess.ScheduleDAO;
+import Data.DataAccess.ScheduleDAO;
 import View.Doctor.DoctorScheduleView;
-import View.Doctor.DoctorScheduleView;
-import View.Patient.PatientScheduleView;
+import View.Doctor.DoctorAvailabilityView;
 import Model.Shared.Appointment;
 import Model.Shared.Schedule;
-import Test.appointmentOutcomeTest;
-
 
 public class ScheduleController{
+
     private DoctorController doctorController;
-    private PatientController patientController;
-
+    private DoctorAvailabilityView doctorAvailabilityView;
+    private DoctorScheduleView doctorScheduleView;
     private ScheduleDAO data;
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-    public ScheduleController() {
+    
+    public ScheduleController(DoctorController doctorController) {
         this.data = new ScheduleDAO();
-        this.doctorController = new DoctorController();
-        this.patientController = new PatientController();
+        this.doctorController = doctorController;
+        this.doctorScheduleView = new DoctorScheduleView();
+        this.doctorAvailabilityView = new DoctorAvailabilityView(this);
     }
 
-    public void viewDoctorSchedule(String doctorId, List<Appointment> appointments) {
-        doctorScheduleView(doctorId, data.find(doctorId), appointments);
+    public void viewDoctorSchedule(String doctorId) {
+        Schedule schedule = data.find(doctorId);
+        List<Appointment> allAppointments = doctorController.getAppointmentsById(doctorId);
+        
+        // Loop over each date in the schedule and pass filtered appointments to the view
+        schedule.getDateAvailability().forEach((date, isAvailable) -> {
+            List<Appointment> dailyAppointments = allAppointments.stream()
+                .filter(appointment -> appointment.getDate().equals(date))
+                .collect(Collectors.toList());
+
+            // Call the view to display schedule for this specific date
+            doctorScheduleView.menu(doctorId, date, isAvailable, dailyAppointments);
+        });
     }
 
     public void updateDoctorSchedule(String doctorId, LocalDate date, Boolean isAvailable) {
         data.updateIsAvailable(doctorId, date, isAvailable);
     }
 
-    //view navigation
-    public void doctorView(String doctorId) {
-       doctorController.doctorView(doctorId);
+    public void showSetAvailabilityView(String doctorId){
+        doctorAvailabilityView.menu(doctorId);
     }
-    public void patientView(String patientId) {
-        patientController.patientView(patientId);
+
+    public void returnToDoctorView(){
+
     }
-    public void patientScheduleView(String patientId) {
-        PSVController.patientScheduleView(patientId);
-    }
-    public void doctorScheduleView (String doctorId, Schedule schedule, List<Appointment> appointments) {
-        DSVController.doctorScheduleView(doctorId, schedule, appointments);
-    }
-    public void doctorAvailabilityView (String doctorId) {
-        DSVController.doctorAvailabilityView(doctorId);
-    }
-    //
+
 }

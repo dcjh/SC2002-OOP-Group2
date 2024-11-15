@@ -1,11 +1,13 @@
 package Test;
 
-import DataAccess.ScheduleDAO;
+import Data.DataAccess.ScheduleDAO;
 
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
+
 import Model.Shared.Schedule;
+
 
 public class doctortest {
     private static ScheduleDAO data = new ScheduleDAO();
