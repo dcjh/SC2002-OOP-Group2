@@ -5,11 +5,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppointmentDAO implements DataAccessObject<Appointment, String> {
+public class AppointmentDAO {
     private final String filePath = "src/Data/Assets/Appointment.csv";
 
     // Load all appointments from the CSV file
-    @Override
     public List<Appointment> loadAll() {
         List<Appointment> appointments = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -36,7 +35,6 @@ public class AppointmentDAO implements DataAccessObject<Appointment, String> {
     }
 
     // Save an appointment to the CSV file (append or update)
-    @Override
     public void save(Appointment appointment) {
         // First, load all appointments
         List<Appointment> appointments = loadAll();
@@ -74,7 +72,6 @@ public class AppointmentDAO implements DataAccessObject<Appointment, String> {
     }
 
     // Find a specific appointment by ID and a search key
-    @Override
     public Appointment find(String appointmentId, String searchKey) {
         List<Appointment> appointments = loadAll();
         for (Appointment appointment : appointments) {
@@ -148,7 +145,6 @@ public class AppointmentDAO implements DataAccessObject<Appointment, String> {
 
 
     // Delete an appointment by ID and a search key
-    @Override
     public void delete(String appointmentId, String searchKey) {
         List<Appointment> appointments = loadAll();
         appointments.removeIf(appointment -> 
