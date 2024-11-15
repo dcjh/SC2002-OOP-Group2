@@ -32,7 +32,7 @@ public class PharmacistView {
             option = scanner.nextInt();
             switch(option) {
             case 1:viewAppointmentoutcome();
-            case 2:Controller.PharmacistController.updatePrescriptionstatus();
+            case 2:Controller.PharmacistController.updatePrescriptionstatus(null);
             case 3:viewMedicationinventory();
             case 4:submitReplenishmentrequest();
             case 5: break;
