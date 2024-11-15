@@ -1,16 +1,24 @@
 package Controller;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import Data.DataAccess.ScheduleDAO;
 import View.Doctor.DoctorScheduleView;
+import View.app;
 import View.Doctor.DoctorAvailabilityView;
 import Model.Shared.Appointment;
 import Model.Shared.Schedule;
 
 public class ScheduleController{
+
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     private DoctorController doctorController;
     private DoctorAvailabilityView doctorAvailabilityView;
@@ -26,18 +34,26 @@ public class ScheduleController{
 
     public void viewDoctorSchedule(String doctorId) {
         Schedule schedule = data.find(doctorId);
+        if (schedule == null) {
+            System.out.println("No schedule found for Doctor ID: " + doctorId);
+            System.out.println("Please set your schedule~~~");
+            return;
+        }
         List<Appointment> allAppointments = doctorController.getAppointmentsById(doctorId);
-        
-        // Loop over each date in the schedule and pass filtered appointments to the view
-        schedule.getDateAvailability().forEach((date, isAvailable) -> {
-            List<Appointment> dailyAppointments = allAppointments.stream()
-                .filter(appointment -> appointment.getDate().equals(date))
-                .collect(Collectors.toList());
-
-            // Call the view to display schedule for this specific date
-            doctorScheduleView.menu(doctorId, date, isAvailable, dailyAppointments);
-        });
+        HashMap<LocalDate , Appointment> Appointments = new HashMap<>();
+        for (LocalDate date : schedule.getDateAvailability().keySet()) {
+            for (Appointment appointment : allAppointments) {
+                if (appointment.getDate().equals(date.format(DATE_FORMAT))) {
+                    Appointments.put(date, appointment);
+                    break;
+                }
+            }
+        }
+        // Pass consolidated data to the view
+        doctorScheduleView.menu(doctorId, schedule.getDateAvailability(), Appointments);
     }
+    
+    
 
     public void updateDoctorSchedule(String doctorId, LocalDate date, Boolean isAvailable) {
         data.updateIsAvailable(doctorId, date, isAvailable);

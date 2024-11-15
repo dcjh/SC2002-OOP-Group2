@@ -10,6 +10,9 @@ public class AppointmentController {
     AppointmentDAO appointmentDAO = new AppointmentDAO();
     AppointmentView view = new AppointmentView();
 
+    public AppointmentController() {
+    }
+
     public AppointmentController(DoctorController doctorController) {
         this.doctorController = doctorController;
     }
