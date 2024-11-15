@@ -3,27 +3,40 @@ package Controller;
 
 import java.time.LocalDate;
 import java.util.List;
-import Model.Shared.MedicalRecord;
+import Controller.AppointmentController;
+import Controller.MedicalRecordController;
+import Model.Roles.Patient;
 
 public class PatientController {
-    private PatientView view;
-    private MedicalRecord medicalRecord;
-    public PatientController(MedicalRecord medicalRecord, PatientView view) {
-        this.view = view;
-        this.medicalRecord=medicalRecord;
+    private Patient patient;
+    private MedicalRecordController medicalRecordController;
+    private AppointmentController appointmentController;
+
+    public PatientController(Patient patient) {
+        this.patient = patient;
+        this.medicalRecordController = new MedicalRecordController();
+        this.appointmentController = new AppointmentController();
     }
+
     public void updateContactInformation(String newPhoneNumber, String newEmail) {
-        medicalRecord.setPhoneNumber(newPhoneNumber);
-        medicalRecord.setEmail(newEmail);
-        System.out.println("Contact information updated successfully.");
+        medicalRecordController.updateContactInformation(patient.getHosID(), newPhoneNumber, newEmail);
     }
-
+    public void scheduleAppointment(AppointmentDAO appointmentDAO, String docID, String date, String time) {
+        appointmentController.createAppointment(docID, patient.getHosID(), time, date);
+    }
+    public void rescheduleAppointment(AppointmentDAO appointmentDAO, String appointmentID, String newDate, String newTime) {
+        appointmentController.updateAppointmentReschedule(appointmentID, newDate, newTime);
+    }
+    public void cancelAppointment(AppointmentDAO appointmentDAO, String appointmentID) {
+        appointmentController.updateAppointmentStatus(appointmentID, "cancelled");
+    }
+    public void viewScheduledAppointments(List<Appointment> appointments) {
+        appointmentController.viewAppointmentsByPatientID(patient.getHosID());
+    }
     public void viewMedicalRecord() {
-        view.fullDisplay(medicalRecord);
+        medicalRecordController.viewMedicalRecord(patient.getHosID());
     }
-
-    public void viewPastAppointment() {
-        view.semiDisplay(medicalRecord);
+    public void viewPastAppointments() {
+        medicalRecordController.viewPastAppointments(patient.getHosID());//need to chnage once the dao have been added for apptoutcomerecord
     }
-
 }
