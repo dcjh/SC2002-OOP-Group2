@@ -3,8 +3,8 @@ package Controller;
 
 import java.time.LocalDate;
 import java.util.List;
-import Controller.AppointmentController;
-import Controller.MedicalRecordController;
+/*import Controller.AppointmentController;
+import Controller.MedicalRecordController;*/
 import Model.Roles.Patient;
 
 public class PatientController {
@@ -21,13 +21,13 @@ public class PatientController {
     public void updateContactInformation(String newPhoneNumber, String newEmail) {
         medicalRecordController.updateContactInformation(patient.getHosID(), newPhoneNumber, newEmail);
     }
-    public void scheduleAppointment(AppointmentDAO appointmentDAO, String docID, String date, String time) {
+    public void scheduleAppointment(String docID, String date, String time) {
         appointmentController.createAppointment(docID, patient.getHosID(), time, date);
     }
-    public void rescheduleAppointment(AppointmentDAO appointmentDAO, String appointmentID, String newDate, String newTime) {
+    public void rescheduleAppointment(String appointmentID, String newDate, String newTime) {
         appointmentController.updateAppointmentReschedule(appointmentID, newDate, newTime);
     }
-    public void cancelAppointment(AppointmentDAO appointmentDAO, String appointmentID) {
+    public void cancelAppointment(String appointmentID) {
         appointmentController.updateAppointmentStatus(appointmentID, "cancelled");
     }
     public void viewScheduledAppointments(List<Appointment> appointments) {

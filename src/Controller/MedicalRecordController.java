@@ -19,6 +19,9 @@ public class MedicalRecordController {
     private DoctorMedicalRecordView doctorMedicalRecordView;
     private DoctorUpdateMedicalRecordView doctorUpdateMedicalRecordView;
     private DoctorController doctorController;
+    private AppointmentOutcomeController appointmentOutcomeController;
+    private PastDiagnosesAndTreatmentsController pastDiagnosesAndTreatmentsController;
+
 
     public MedicalRecordController(DoctorController doctorController) {
         this.medicalRecordDAO = new MedicalRecordDAO();
@@ -27,6 +30,7 @@ public class MedicalRecordController {
         this.doctorMedicalRecordView = new DoctorMedicalRecordView(this);
         this.doctorUpdateMedicalRecordView = new DoctorUpdateMedicalRecordView(this);
         this.doctorController = doctorController;
+        this.appointmentOutcomeController = new AppointmentOutcomeController();
     }
 
     //navigate to medical record View
@@ -41,6 +45,7 @@ public class MedicalRecordController {
 
     public void viewMedicalRecord(String patientID) {
         MedicalRecord medicalRecord = medicalRecordDAO.loadSingleRecord(patientID);
+        medicalRecord.setPastDiagnosesAndTreatments(pastDiagnosesAndTreatmentsController.getPastDiagnosesAndTreatments(patientID));
         if (medicalRecord != null) {
             medicalRecordView.fullDisplay(medicalRecord);
         } else {
@@ -66,13 +71,15 @@ public class MedicalRecordController {
     }
 
 
-    public void viewPastAppointments(String patientID) {//need to chnage once the dao have been added for apptoutcomerecord
-        MedicalRecord medicalRecord = medicalRecordDAO.loadSingleRecord(patientID);
-        if (medicalRecord != null) {
-            List<AppointmentOutcome> appointmentOutcomes = medicalRecord.getAppointmentOutcome();
-            pastAppointmentView.displayPastAppointments(appointmentOutcomes);
+        public void viewPastAppointments(String patientID) {
+        List<AppointmentOutcome> outcomes = appointmentOutcomeController.getAppointmentOutcomeByPatientID(patientID);
+        if (outcomes != null && !outcomes.isEmpty()) {
+            System.out.println("Displaying past appointments for Patient ID: " + patientID);
+            for (AppointmentOutcome outcome : outcomes) {
+                appointmentOutcomeController.printAppointmentOutcome(outcome);
+            }
         } else {
-            System.out.println("No past appointments found for patient ID: " + patientID);
+            System.out.println("No past appointments found for Patient ID: " + patientID);
         }
     }
 

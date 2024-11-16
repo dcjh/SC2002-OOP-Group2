@@ -11,16 +11,17 @@ public class Patient extends User {
     private MedicalRecord medicalRecord;
     private List<Appointment> appointments;
 
-    public Patient(String hosID, String password, UserType userType, String name, String gender, int age) {
+    public Patient(String hosID, String password, String role, String name, String gender, int age) {
         super(hosID, password, role, name, gender, age);
+        this.pastDiagnosesAndTreatments=null;
         this.medicalRecord=null;
         this.appointments=null
     }
 
     public patient(String hosID, String password, String role, String name, String gender, int age,
-                   String dob, String gender, String phoneNumber, String email, String bloodType, String allergies) {
+                   String dob, String phoneNumber, String email, String bloodType, String allergies) {
         super(hosID, password, role, name, gender, age);
-        this.medicalRecord = new MedicalRecord(hosID, dob, gender, phoneNumber, email, bloodType, allergies);
+        this.medicalRecord = new MedicalRecord(hosID, name, dob, gender, phoneNumber, email, bloodType, allergies);
         this.appointments = new ArrayList<>();
     }
 
@@ -46,5 +47,20 @@ public class Patient extends User {
 
     public void setPastAppointments(List<AppointmentOutcomeRecord> pastAppointments) {
         this.pastAppointments = pastAppointments;
+    }
+    public List<String> getPastDiagnoses() {
+        return pastDiagnoses;
+    }
+
+    public void setPastDiagnoses(List<String> pastDiagnoses) {
+        this.pastDiagnoses = pastDiagnoses;
+    }
+
+    public List<String> getPastTreatments() {
+        return pastTreatments;
+    }
+
+    public void setPastTreatments(List<String> pastTreatments) {
+        this.pastTreatments = pastTreatments;
     }
 }
