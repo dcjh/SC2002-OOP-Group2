@@ -17,6 +17,10 @@ public class PharmacistView implements UserMainView{
         this.user = user;
         this.pharmacistController = new PharmacistController();
     }
+
+        public PharmacistView(PharmacistController pharmacistController) {
+        this.pharmacistController = pharmacistController;
+    }
 	
     private Scanner scanner = new Scanner(System.in);
     public void displayMenu() {
