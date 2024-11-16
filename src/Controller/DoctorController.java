@@ -19,13 +19,16 @@ public class DoctorController {
         this.doctorView = new DoctorView(this);
     }
 
+    //
+    public void displayDoctorView(String doctorId) {
+        doctorView.menu(doctorId);
+    }
+
     //methods to relay data to DoctorView
     public void displayPatientMR() {
 
     }
-    public void displayDoctorView(String doctorId) {
-        doctorView.menu(doctorId);
-    }
+
 
     //methods to trigger actions
     public void viewPatientMR() {
