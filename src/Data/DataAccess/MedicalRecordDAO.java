@@ -6,15 +6,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-
 import Model.Shared.MedicalRecord;
 
 public class MedicalRecordDAO {
 
-    private static final String FILE_PATH = "src/Data/Assets/MedicalRecords.csv";
+    private static final String FILE_PATH = "src/Data/Assets/MedicalRecord.csv";
 
     // Load a single MedicalRecord by patientID
     public MedicalRecord loadSingleRecord(String patientID) {
@@ -28,14 +24,15 @@ public class MedicalRecordDAO {
                 }
                 String[] values = line.split(",");
                 if (values[0].equals(patientID)) { // Find the matching patient ID
-                    String dob = values[1];
-                    String gender = values[2];
-                    String phoneNumber = values[3];
-                    String email = values[4];
-                    String bloodType = values[5];
-                    String allergies = values[6];
+                    String name = values[1];
+                    String dob = values[2];
+                    String gender = values[3];
+                    String bloodType = values[4];
+                    String allergies = values[5];
+                    String phoneNumber = values[6];
+                    String email = values[7];
 
-                    return new MedicalRecord(patientID, dob, gender, phoneNumber, email, bloodType, allergies);
+                    return new MedicalRecord(patientID, name, dob, gender, phoneNumber, email, bloodType, allergies);
                 }
             }
         } catch (IOException e) {
@@ -97,12 +94,13 @@ public class MedicalRecordDAO {
     private String formatMedicalRecordCSVLine(MedicalRecord medicalRecord) {
         return String.join(",",
                 medicalRecord.getPatientID(),
+                medicalRecord.getName(),
                 medicalRecord.getDob(),
                 medicalRecord.getGender(),
-                medicalRecord.getPhoneNumber(),
-                medicalRecord.getEmail(),
                 medicalRecord.getBloodType(),
-                medicalRecord.getAllergies()
+                medicalRecord.getAllergies(),
+                medicalRecord.getPhoneNumber(),
+                medicalRecord.getEmail()
         );
     }
 }

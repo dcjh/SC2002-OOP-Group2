@@ -1,4 +1,4 @@
-package Model;
+package Model.Shared;
 
 public class ReplenishmentRequest {
     private String requestID;

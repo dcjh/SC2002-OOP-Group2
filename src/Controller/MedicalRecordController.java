@@ -1,19 +1,23 @@
 package Controller;
 
 import Model.Shared.MedicalRecord;
-import Model.Shared.AppointmentOutcomeRecord;
+import Model.Shared.PrescribedMedication;
+import Model.Shared.AppointmentOutcome;
 import Data.DataAccess.MedicalRecordDAO;
 import View.MedicalRecordView;
 import View.Appointments.PastAppointmentView;
 import View.Doctor.DoctorMedicalRecordView;
+import View.Doctor.DoctorUpdateMedicalRecordView;
 
 import java.util.List;
+import java.util.ArrayList;
 
 public class MedicalRecordController {
     private MedicalRecordDAO medicalRecordDAO;
     private MedicalRecordView medicalRecordView;
     private PastAppointmentView pastAppointmentView;
     private DoctorMedicalRecordView doctorMedicalRecordView;
+    private DoctorUpdateMedicalRecordView doctorUpdateMedicalRecordView;
     private DoctorController doctorController;
 
     public MedicalRecordController(DoctorController doctorController) {
@@ -21,6 +25,7 @@ public class MedicalRecordController {
         this.medicalRecordView = new MedicalRecordView();
         this.pastAppointmentView = new PastAppointmentView();
         this.doctorMedicalRecordView = new DoctorMedicalRecordView(this);
+        this.doctorUpdateMedicalRecordView = new DoctorUpdateMedicalRecordView(this);
         this.doctorController = doctorController;
     }
 
@@ -30,8 +35,8 @@ public class MedicalRecordController {
     }
 
     //navigate to update medical record view
-    public void updateMedicalRecordView(String patientId) {
-
+    public void updateMedicalRecordView(String doctorId) {
+        doctorUpdateMedicalRecordView.menu(doctorId);
     }
 
     public void viewMedicalRecord(String patientID) {
@@ -64,7 +69,7 @@ public class MedicalRecordController {
     public void viewPastAppointments(String patientID) {//need to chnage once the dao have been added for apptoutcomerecord
         MedicalRecord medicalRecord = medicalRecordDAO.loadSingleRecord(patientID);
         if (medicalRecord != null) {
-            List<AppointmentOutcomeRecord> appointmentOutcomes = medicalRecord.getAppointmentOutcome();
+            List<AppointmentOutcome> appointmentOutcomes = medicalRecord.getAppointmentOutcome();
             pastAppointmentView.displayPastAppointments(appointmentOutcomes);
         } else {
             System.out.println("No past appointments found for patient ID: " + patientID);
@@ -72,6 +77,27 @@ public class MedicalRecordController {
     }
 
     public List<MedicalRecord> getMedicalRecordsUnderDoctor(String doctorId) {
-        doctorController.getAppointmentreById(doctorId)
+        List<AppointmentOutcome> AOLists = doctorController.getAppointmentOutcomeByDoctorId(doctorId);
+        List<MedicalRecord> patientsMR = new ArrayList<>();
+        for (AppointmentOutcome ao : AOLists) {
+            if (ao.getDoctorID().equals(doctorId)) patientsMR.add(medicalRecordDAO.loadSingleRecord(ao.getPatientID()));
+        }
+        return patientsMR;
+    }
+
+    public List<String> getPatientsUnderDoctor(String doctorId) {
+        List<String> patients = new ArrayList<>();
+        for (MedicalRecord mr : getMedicalRecordsUnderDoctor(doctorId)) {
+            patients.add(mr.getPatientID());
+        }
+        return patients;
+    }
+
+    public List<AppointmentOutcome> getAppointmentOutcomeByPatientId(String patientId) {
+        return doctorController.getAppointmentOutcomeByPatientId(patientId);
+    }
+
+    public void createAppointmentOutcome(String date ,String time,String typeOfService,ArrayList<PrescribedMedication> medications, String notes, String doctorId, String patientId, String appointmentId) {
+        doctorController.createAppointmentOutcome(date, time, typeOfService, medications, notes, doctorId, patientId, appointmentId);
     }
 }

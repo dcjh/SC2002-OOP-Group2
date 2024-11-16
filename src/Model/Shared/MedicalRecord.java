@@ -7,16 +7,18 @@ import java.util.List;
 public class MedicalRecord {
 
     private String patientID;
+    private String name;
     private String dob;
     private String gender;
     private String phoneNumber;
     private String email;
     private String bloodType;
     private String allergies;
-    private List<AppointmentOutcomeRecord> appointmentOutcome;
+    private List<AppointmentOutcome> appointmentOutcome;
 
-    public MedicalRecord(String patientID, String dob, String gender, String phoneNumber, String email, String bloodType, String allergies) {
+    public MedicalRecord(String patientID, String name, String dob, String gender, String phoneNumber, String email, String bloodType, String allergies) {
         this.patientID = patientID;
+        this.name = name;
         this.dob = dob;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
@@ -33,6 +35,14 @@ public class MedicalRecord {
 
     public void setPatientID(String patientID) {
         this.patientID = patientID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDob() {
@@ -83,11 +93,11 @@ public class MedicalRecord {
         this.allergies = allergies;
     }
 
-    public List<AppointmentOutcomeRecord> getAppointmentOutcome() {
+    public List<AppointmentOutcome> getAppointmentOutcome() {
         return appointmentOutcome;
     }
 
-    public void setAppointmentOutcome(List<AppointmentOutcomeRecord> appointmentOutcome) {
+    public void setAppointmentOutcome(List<AppointmentOutcome> appointmentOutcome) {
         this.appointmentOutcome = appointmentOutcome;
     }
 

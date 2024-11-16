@@ -1,7 +1,7 @@
 package View;
 
 import Model.Shared.MedicalRecord;
-import Model.Shared.AppointmentOutcomeRecord;
+import Model.Shared.AppointmentOutcome;
 
 public class MedicalRecordView {
 
@@ -15,7 +15,7 @@ public class MedicalRecordView {
         System.out.println("Blood Type: " + medicalRecord.getBloodType());
         System.out.println("Allergies: " + medicalRecord.getAllergies());
         System.out.println("\nPast Diagnoses and Treatments:");
-        for (AppointmentOutcomeRecord outcome : medicalRecord.getAppointmentOutcome()) {
+        for (AppointmentOutcome outcome : medicalRecord.getAppointmentOutcome()) {
             System.out.println("Diagnoses: " + outcome.getDiagnoses());
             System.out.println("Treatments: " + outcome.getTreatments());
             System.out.println();

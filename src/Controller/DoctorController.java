@@ -2,7 +2,11 @@ package Controller;
 
 import java.time.LocalDate;
 import Model.Shared.Appointment;
+import Model.Shared.AppointmentOutcome;
+import Model.Shared.PrescribedMedication;
 import View.Doctor.DoctorView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class DoctorController {
@@ -17,9 +21,8 @@ public class DoctorController {
         this.scheduleController =  new ScheduleController(this);
         this.appointmentController = new AppointmentController(this);
         this.medicalRecordController = new MedicalRecordController(this);
-        this.appointmentOutcomeController = new AppointmentOutcomeController(this);
+        this.appointmentOutcomeController = new AppointmentOutcomeController(this, appointmentController);
         this.doctorView = new DoctorView(this);
-        this.appointmentOutcomeController = new AppointmentOutcomeController(this,appointmentController);
     }
 
     //navigate to DoctorView
@@ -32,8 +35,8 @@ public class DoctorController {
         medicalRecordController.doctorMedicalRecordView(doctorId);
     }
 
-    public void updatePatientMR() {
-
+    public void updatePatientMR(String doctorId) {
+        medicalRecordController.updateMedicalRecordView(doctorId);
     }
     
     public void viewDoctorSchedule(String doctorId) {
@@ -59,8 +62,6 @@ public class DoctorController {
 
     }
 
-
-
     //logic
     public List<Appointment> getAppointmentsById(String doctorId) {
         return appointmentController.getAppointmentsByDoctorID(doctorId);
@@ -69,8 +70,17 @@ public class DoctorController {
     public void updateDoctorSchedule(String doctorId, LocalDate date, Boolean isAvailable) {
         scheduleController.updateDoctorSchedule(doctorId, date, isAvailable);
     }
-    public List<AppointmentOutcomeRecord> getAppointmentOutcomeById (String doctorId) {
+    public List<AppointmentOutcome> getAppointmentOutcomeByDoctorId (String doctorId) {
         return appointmentOutcomeController.getAppointmentOutcomeByDoctorID(doctorId);
     }
+
+    public List<AppointmentOutcome> getAppointmentOutcomeByPatientId (String patientId) {
+        return appointmentOutcomeController.getAppointmentOutcomeByPatientID(patientId);
+    }
+
+    public void createAppointmentOutcome(String date ,String time,String typeOfService,ArrayList<PrescribedMedication> medications, String notes, String doctorId, String patientId, String appointmentId) {
+        appointmentOutcomeController.createAppointmentOutcome(date, time, typeOfService, medications, notes, doctorId, patientId, appointmentId);
+    }
+    
 
 }

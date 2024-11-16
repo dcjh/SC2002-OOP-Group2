@@ -27,7 +27,7 @@ public class AppointmentOutcomeController {
 
     public void createAppointmentOutcome(String date, String time, String typeOfService, ArrayList<PrescribedMedication> medications, String notes, String doctorID, String patientID, String appointmentID) {
         AppointmentOutcome outcome = new AppointmentOutcome(date, time, typeOfService, medications, notes, doctorID, patientID, appointmentID);
-        appointmentController.updateAppointmentStatus(appointmentID, "completed");
+        if(appointmentID != "-") appointmentController.updateAppointmentStatus(appointmentID, "completed");
         dao.save(outcome);
     }
 
@@ -67,6 +67,24 @@ public class AppointmentOutcomeController {
     // change the consultation notes
 
     public void setConsultationNotes(String appointmentOutcomeId, String consultationNotes){
+        AppointmentOutcome outcome = dao.find(appointmentOutcomeId);
+        outcome.setConsultationNotes(consultationNotes);
+        dao.save(outcome);
+    }
+
+    public void setTypeOfService(String appointmentOutcomeId, String consultationNotes){
+        AppointmentOutcome outcome = dao.find(appointmentOutcomeId);
+        outcome.setConsultationNotes(consultationNotes);
+        dao.save(outcome);
+    }
+
+    public void addMedication(String appointmentOutcomeId, String consultationNotes){
+        AppointmentOutcome outcome = dao.find(appointmentOutcomeId);
+        outcome.setConsultationNotes(consultationNotes);
+        dao.save(outcome);
+    }
+
+    public void removeMedication(String appointmentOutcomeId, String consultationNotes){
         AppointmentOutcome outcome = dao.find(appointmentOutcomeId);
         outcome.setConsultationNotes(consultationNotes);
         dao.save(outcome);
