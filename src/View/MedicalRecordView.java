@@ -1,7 +1,7 @@
 package View;
 
 import Model.Shared.MedicalRecord;
-import Model.Shared.AppointmentOutcomeRecord;
+import Model.Shared.AppointmentOutcome;
 
 public class MedicalRecordView {
 

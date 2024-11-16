@@ -6,15 +6,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-
 import Model.Shared.MedicalRecord;
 
 public class MedicalRecordDAO {
 
-    private static final String FILE_PATH = "src/Data/Assets/MedicalRecords.csv";
+    private static final String FILE_PATH = "src/Data/Assets/MedicalRecord.csv";
 
     // Load a single MedicalRecord by patientID
     public MedicalRecord loadSingleRecord(String patientID) {
@@ -37,8 +33,6 @@ public class MedicalRecordDAO {
                     String allergies = values.length > 7 ? values[7] : "";
 
                     return new MedicalRecord(patientID, name, dob, gender, phoneNumber, email, bloodType, allergies);
-                }
-            }
                 }
             }
         } catch (IOException e) {
@@ -103,10 +97,10 @@ public class MedicalRecordDAO {
                 medicalRecord.getName(),
                 medicalRecord.getDob(),
                 medicalRecord.getGender(),
-                medicalRecord.getPhoneNumber(),
-                medicalRecord.getEmail(),
                 medicalRecord.getBloodType(),
-                medicalRecord.getAllergies()
+                medicalRecord.getAllergies(),
+                medicalRecord.getPhoneNumber(),
+                medicalRecord.getEmail()
         );
     }
 }

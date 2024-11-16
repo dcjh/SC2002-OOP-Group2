@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.util.List;
 import Model.Shared.PastDiagnosesAndTreatments;
-import Model.Shared.AppointmentOutcomeRecord;
+
 
 public class MedicalRecord {
 
@@ -19,7 +19,7 @@ public class MedicalRecord {
     private List<AppointmentOutcome> appointmentOutcome;
     private List<PastDiagnosesAndTreatments> pastDiagnosesAndTreatments;
 
-    public MedicalRecord(String patientID,String name, String dob, String gender, String phoneNumber, String email, String bloodType, String allergies) {
+    public MedicalRecord(String patientID, String name, String dob, String gender, String phoneNumber, String email, String bloodType, String allergies) {
         this.patientID = patientID;
         this.name = name;
         this.dob = dob;
