@@ -28,7 +28,7 @@ public class ScheduleController{
         this.doctorAvailabilityView = new DoctorAvailabilityView(this);
     }
 
-    public void viewDoctorSchedule(String doctorId) {
+    public void showDoctorSchedule(String doctorId) {
         Schedule schedule = data.find(doctorId);
         if (schedule == null) {
             System.out.println("No schedule found for Doctor ID: " + doctorId);
@@ -49,16 +49,16 @@ public class ScheduleController{
         doctorScheduleView.menu(doctorId, schedule.getDateAvailability(), Appointments);
     }
 
+    public void showSetAvailabilityView(String doctorId){
+        doctorAvailabilityView.menu(doctorId);
+    }
+
     public void updateDoctorSchedule(String doctorId, LocalDate date, Boolean isAvailable) {
         if (data.find(doctorId) == null ) {
             Schedule newSchedule = new Schedule(doctorId);
             newSchedule.getDateAvailability().put(date, isAvailable);
             data.add(newSchedule);
         } else { data.updateIsAvailable(doctorId, date, isAvailable); }
-    }
-
-    public void showSetAvailabilityView(String doctorId){
-        doctorAvailabilityView.menu(doctorId);
     }
 
 }

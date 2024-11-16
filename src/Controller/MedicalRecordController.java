@@ -4,7 +4,8 @@ import Model.Shared.MedicalRecord;
 import Model.Shared.AppointmentOutcomeRecord;
 import Data.DataAccess.MedicalRecordDAO;
 import View.MedicalRecordView;
-import View.PastAppointmentView;
+import View.Appointments.PastAppointmentView;
+
 import java.util.List;
 
 public class MedicalRecordController {

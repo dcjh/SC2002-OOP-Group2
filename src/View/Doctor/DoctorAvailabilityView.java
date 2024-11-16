@@ -21,8 +21,8 @@ public class DoctorAvailabilityView {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print("\nCurrent Availability for for ");
-            scheduleController.viewDoctorSchedule(doctorId);
-            System.out.println("Edit Availability? (y/n)");
+            scheduleController.showDoctorSchedule(doctorId);
+            System.out.print("Edit Availability? (y/n): ");
             String proceed = scanner.nextLine();
             switch (proceed) {
                 case "y":
@@ -30,11 +30,11 @@ public class DoctorAvailabilityView {
                     break;
                 case "n":
                     System.out.println("Returning to Main Menu...");
-                    break;
+                    return;
                 default:
                     System.out.println("Invalid choice. Proceeding...");
             }
-            if (proceed.equals("n")) break;
+            // if (proceed.equals("n")) break;
         }
     }
 

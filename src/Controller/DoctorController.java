@@ -24,12 +24,6 @@ public class DoctorController {
         doctorView.menu(doctorId);
     }
 
-    //methods to relay data to DoctorView
-    public void displayPatientMR() {
-
-    }
-
-
     //methods to trigger actions
     public void viewPatientMR() {
 
@@ -39,21 +33,21 @@ public class DoctorController {
 
     }
     public void viewDoctorSchedule(String doctorId) {
-        scheduleController.viewDoctorSchedule(doctorId); //delegate to schedule view
+        scheduleController.showDoctorSchedule(doctorId); //delegate to schedule view
     }
 
     public void setAvailability(String doctorId) {
         scheduleController.showSetAvailabilityView(doctorId); //delegate to ability view
     }
     public void viewAppointmentRequests(String doctorId) {
-
+        appointmentController.appointmentRequestsView(doctorId); //delegate to appointment request view
     }
 
-    public void viewUpcomingAppointments() {
-
+    public void viewUpcomingAppointments(String doctorId) {
+        appointmentController.viewApprovedAppointmentsByDoctorID(doctorId);
     }
 
-    public void recordAppointmentOutcome() {
+    public void recordAppointmentOutcome(String doctorId) {
 
     }
 
@@ -63,7 +57,7 @@ public class DoctorController {
 
 
 
-
+    //logic
     public List<Appointment> getAppointmentsById(String doctorId) {
         List<Appointment> allAppointments = appointmentController.getAllAppointment();
         List<Appointment> appointmentsById = new ArrayList<>();
@@ -73,6 +67,10 @@ public class DoctorController {
             }
         }
         return appointmentsById;
+    }
+
+    public void updateDoctorSchedule(String doctorId, LocalDate date, Boolean isAvailable) {
+        scheduleController.updateDoctorSchedule(doctorId, date, isAvailable);
     }
 
 }

@@ -15,7 +15,9 @@ public class DoctorView {
     public void menu(String doctorId) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("\nDoctor Menu:");
+            System.out.println("----------------------------------------------");
+            System.out.println("Doctor Menu:");
+            System.out.println("----------------------------------------------");
             System.out.println("1. View Patient Medical Records");
             System.out.println("2. Update Patient Medical Records");
             System.out.println("3. View Personal Schedule");
@@ -24,6 +26,7 @@ public class DoctorView {
             System.out.println("6. View Upcoming Appointments");
             System.out.println("7. Record Appointment Outcome");
             System.out.println("8. Logout");
+            System.out.println("----------------------------------------------");
             System.out.print("Choose an option: ");
 
             int choice = scanner.nextInt();
@@ -45,11 +48,11 @@ public class DoctorView {
                 case 5:
                     doctorController.viewAppointmentRequests(doctorId);
                     break;
-                // case 6:
-                //     doctorController.viewUpcomingAppointments(doctorId);
-                //     break;
-                // case 7:
-                //     doctorController.recordAppointmentOutcome(doctorId);
+                case 6:
+                    doctorController.viewUpcomingAppointments(doctorId);
+                    break;
+                case 7:
+                    doctorController.recordAppointmentOutcome(doctorId);
                 case 8:
                     System.out.println("Logging out...");
                     return;

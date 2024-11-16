@@ -1,7 +1,8 @@
 package Controller;
 import Model.Shared.AppointmentOutcome;
 import Model.Shared.PrescribedMedication;
-import View.AppointmentOutcomeView;
+import View.Appointments.AppointmentOutcomeView;
+
 import java.util.ArrayList;
 
 public class AppointmentOutcomeController {

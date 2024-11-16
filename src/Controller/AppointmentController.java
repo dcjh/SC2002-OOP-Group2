@@ -1,20 +1,28 @@
 package Controller;
 import Data.DataAccess.AppointmentDAO;
 import Model.Shared.Appointment;
-import View.AppointmentView;
+import View.Appointments.AppointmentRequestsView;
+import View.Appointments.AppointmentView;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class AppointmentController { 
-    private DoctorController doctorController;
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    AppointmentDAO appointmentDAO = new AppointmentDAO();
-    AppointmentView view = new AppointmentView();
+    private DoctorController doctorController;
+    private AppointmentRequestsView appointmentRequestsView;
+    private AppointmentDAO appointmentDAO = new AppointmentDAO();
+    private AppointmentView view = new AppointmentView();
+    
 
     public AppointmentController() {
     }
 
     public AppointmentController(DoctorController doctorController) {
         this.doctorController = doctorController;
+        this.appointmentRequestsView = new AppointmentRequestsView(this);
     }
 
     // create
@@ -165,6 +173,25 @@ public class AppointmentController {
 
     public void printAppointment(Appointment apt){
         this.view.printAppointment(apt.getAppointmentID(), apt.getDocID(), apt.getPatientID(), apt.getStatus(), apt.getTime(), apt.getDate());
+    }
+
+    public void appointmentRequestsView(String doctorId) {
+        appointmentRequestsView.menu(doctorId);
+    }
+
+    public void updateAppointmentSchedule(String appointmentId, String doctorId, String date, Boolean approve) {
+        if (approve) {
+            doctorController.updateDoctorSchedule(doctorId, LocalDate.parse(date, DATE_FORMAT), false);
+            for (Appointment a : getPendingAppointmentsByDoctorID(doctorId)) {
+                updateAppointmentStatus(a.getAppointmentID(), "cancelled");
+            }
+        } else {
+            updateAppointmentStatus(appointmentId, "cancelled");
+        }
+    }
+
+    public void appointmentManagementView (String patientId) {
+
     }
     
 }
