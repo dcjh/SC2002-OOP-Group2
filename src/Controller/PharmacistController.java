@@ -11,11 +11,13 @@ public class PharmacistController {
     private AppointmentOutcomeController appointmentOutcomeController;
     private InventoryController inventoryController;
     private ReplenishmentRestockController replenishmentRestockcontroller;
+    private PharmacistView pharmacistView
     
     public PharmacistController() {
         this.appointmentOutcomeController = new AppointmentOutcomeController(this);
         this.inventoryController = new InventoryController(this);
         this.replenishmentRestockcontroller = new ReplenishmentRestockController(this);
+	this.pharmacistView = new PharmacistView(this);
     }
 		
     public static void updatePrescriptionstatus(AppointmentOutcome appointmentOutcome) {
