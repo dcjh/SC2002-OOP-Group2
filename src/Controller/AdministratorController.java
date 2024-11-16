@@ -29,6 +29,9 @@ public class AdministratorController {
         this.replenishmentRestockcontroller = new ReplenishmentRestockController(this);
 	this.administratorView = new AdministratorView(this);
     }
+	public AdministratorController(AdministratorView administratorView) {
+        this.administratorView = administratorView;
+    }
     
     public void addStaffMember() {
         Scanner scanner = new Scanner(System.in);
