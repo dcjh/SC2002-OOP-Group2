@@ -10,6 +10,8 @@ import Model.Shared.User;
 public class Patient extends User {
     private MedicalRecord medicalRecord;
     private List<Appointment> appointments;
+    private List<String> pastDiagnoses;
+    private List<String> pastTreatments;
 
     public Patient(String hosID, String password, UserType userType, String name, String gender, int age) {
         super(hosID, password, role, name, gender, age);
@@ -46,5 +48,20 @@ public class Patient extends User {
 
     public void setPastAppointments(List<AppointmentOutcomeRecord> pastAppointments) {
         this.pastAppointments = pastAppointments;
+    }
+    public List<String> getPastDiagnoses() {
+        return pastDiagnoses;
+    }
+
+    public void setPastDiagnoses(List<String> pastDiagnoses) {
+        this.pastDiagnoses = pastDiagnoses;
+    }
+
+    public List<String> getPastTreatments() {
+        return pastTreatments;
+    }
+
+    public void setPastTreatments(List<String> pastTreatments) {
+        this.pastTreatments = pastTreatments;
     }
 }

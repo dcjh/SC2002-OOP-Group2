@@ -13,7 +13,7 @@ public class MedicalRecord {
     private String email;
     private String bloodType;
     private String allergies;
-    private List<AppointmentOutcomeRecord> appointmentOutcome;
+    private List<AppointmentOutcome> appointmentOutcome;
 
     public MedicalRecord(String patientID, String dob, String gender, String phoneNumber, String email, String bloodType, String allergies) {
         this.patientID = patientID;
@@ -83,11 +83,11 @@ public class MedicalRecord {
         this.allergies = allergies;
     }
 
-    public List<AppointmentOutcomeRecord> getAppointmentOutcome() {
+    public List<AppointmentOutcome> getAppointmentOutcome() {
         return appointmentOutcome;
     }
 
-    public void setAppointmentOutcome(List<AppointmentOutcomeRecord> appointmentOutcome) {
+    public void setAppointmentOutcome(List<AppointmentOutcome> appointmentOutcome) {
         this.appointmentOutcome = appointmentOutcome;
     }
 

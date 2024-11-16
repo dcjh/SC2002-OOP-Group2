@@ -1,6 +1,8 @@
 doctorId,date,isAvailable
 D0001,20-11-2024,true
-D0002,23-11-2024,true
+D0002,13-10-2023,false
+D0002,24-11-2024,false
+D0002,23-11-2024,false
 D0002,22-11-2024,false
 D0002,21-11-2024,false
 D0002,20-11-2024,false

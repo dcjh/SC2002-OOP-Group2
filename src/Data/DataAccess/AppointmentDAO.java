@@ -107,6 +107,28 @@ public class AppointmentDAO {
         return result; // Return the filtered list
     }
 
+    // // Find patientId by appoinmentId
+    // public String getPatientID(String appointmentId) {
+    //     List<Appointment> appointments = loadAll();
+    //     for (Appointment appointment : appointments) {
+    //         if (appointment.getAppointmentID().equals(appointmentId)) {
+    //             return appointment.getPatientID();
+    //         }
+    //     }
+    //     return null; // Return null if not found
+    // }
+
+    // // Find doctorId by appoinmentId
+    // public String getDoctorID(String appointmentId) {
+    //     List<Appointment> appointments = loadAll();
+    //     for (Appointment appointment : appointments) {
+    //         if (appointment.getAppointmentID().equals(appointmentId)) {
+    //             return appointment.getDocID();
+    //         }
+    //     }
+    //     return null; // Return null if not found
+    // }
+
     // Find pending appointments by doctorId as doctor need to quickly filter these to see which they can accept
     public List<Appointment> getPendingAppointmentsByDocID(String doctorId) {
         List<Appointment> appointments = loadAll();
