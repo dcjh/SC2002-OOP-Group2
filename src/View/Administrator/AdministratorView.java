@@ -15,7 +15,7 @@ public class AdministratorView implements UserMainView {
     }
     
     
-    public void displayMenu() {
+    public void menu(String hosID) {
         int option = 0;
      	while (option!=6) {
              System.out.println();
