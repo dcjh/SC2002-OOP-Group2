@@ -1,4 +1,4 @@
-package View.Pharmacist;
+package View;
 
 import java.util.List;
 import java.util.Map;
@@ -13,17 +13,18 @@ import Model.User;
 public class PharmacistView implements UserMainView{
     private User user;
     private PharmacistController pharmacistController;
+    
 	public PharmacistView(User user) {
         this.user = user;
         this.pharmacistController = new PharmacistController();
     }
-
-        public PharmacistView(PharmacistController pharmacistController) {
+	
+    public PharmacistView(PharmacistController pharmacistController) {
         this.pharmacistController = pharmacistController;
     }
 	
-    private Scanner scanner = new Scanner(System.in);
-    public void displayMenu() {
+    Scanner scanner = new Scanner(System.in);
+    public void menu(String hosID) {
     	int option = 0;
     	while (option!=6) {
             System.out.println();
@@ -39,7 +40,11 @@ public class PharmacistView implements UserMainView{
             option = scanner.nextInt();
             switch(option) {
             case 1:pharmacistController.displayAppointmentOutcome(); break;
-            case 2:Controller.PharmacistController.updatePrescriptionstatus(null);break;
+            case 2:
+            	Scanner scanner1 = new Scanner(System.in);
+            	System.out.println("Key in the patientID to dispense medicine");
+            	String patientID = scanner1.nextLine();
+            	pharmacistController.updatePrescriptionStatus(patientID);break;
             case 3:pharmacistController.displayInventory();break;
             case 4:pharmacistController.submitReplenishmentRequests();break;
             case 5: pharmacistController.viewAllReplenishmentRequests();break;
