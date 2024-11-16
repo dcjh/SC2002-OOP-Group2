@@ -12,7 +12,7 @@ public class PastDiagnosesAndTreatmentsController {
         this.view = new PastDiagnosesAndTreatmentsView();
     }
     public List<PastDiagnosesAndTreatments> getPastDiagnosesAndTreatments(String patientID) {
-        return records = dao.getDiagnosesAndTreatmentsByPatientID(patientID);
+        return dao.getDiagnosesAndTreatmentsByPatientID(patientID);
 
     }
 

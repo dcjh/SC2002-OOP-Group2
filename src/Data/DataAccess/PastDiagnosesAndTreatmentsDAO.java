@@ -51,7 +51,7 @@ public class PastDiagnosesAndTreatmentsDAO {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true))) {
             bw.write(newLine);
             bw.newLine();
-            System.out.println("Record added successfully for Patient ID: " + patientID);
+            System.out.println("Record added successfully for Patient ID: " + treatment.getPatientID());
         } catch (IOException e) {
             System.err.println("Error writing to file: " + e.getMessage());
         }
