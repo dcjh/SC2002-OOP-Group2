@@ -1,4 +1,4 @@
-package View;
+package View.Pharmacist;
 
 import java.util.List;
 import java.util.Map;
