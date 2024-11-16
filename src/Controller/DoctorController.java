@@ -9,11 +9,13 @@ public class DoctorController {
     private DoctorView doctorView;
     private ScheduleController scheduleController;
     private AppointmentController appointmentController;
+    private AppointmentOutcomeController appointmentOutcomeController;
 
     public DoctorController() {
         this.scheduleController =  new ScheduleController(this);
         this.appointmentController = new AppointmentController(this);
         this.doctorView = new DoctorView(this);
+        this.appointmentOutcomeController = new AppointmentOutcomeController(this,appointmentController);
     }
 
     //methods to relay data to DoctorView
@@ -32,6 +34,7 @@ public class DoctorController {
     public void updatePatientMR() {
 
     }
+    
     public void viewDoctorSchedule(String doctorId) {
         scheduleController.viewDoctorSchedule(doctorId); //delegate to schedule view
     }
@@ -47,7 +50,8 @@ public class DoctorController {
         appointmentController.viewApprovedAppointmentsByDoctorID(doctorId);
     }
 
-    public void recordAppointmentOutcome() {
+    public void viewRecordAppointmentOutcome(String doctorId) {
+        appointmentOutcomeController.viewMenuDoctor(doctorId);
     }
 
     public void logout() {
