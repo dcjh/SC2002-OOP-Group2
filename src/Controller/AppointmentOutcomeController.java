@@ -26,6 +26,7 @@ public class AppointmentOutcomeController {
 
     public void createAppointmentOutcome(String date, String time, String typeOfService, ArrayList<PrescribedMedication> medications, String notes, String doctorID, String patientID, String appointmentID) {
         AppointmentOutcome outcome = new AppointmentOutcome(date, time, typeOfService, medications, notes, doctorID, patientID, appointmentID);
+        appointmentController.updateAppointmentStatus(appointmentID, "completed");
         dao.save(outcome);
     }
 
