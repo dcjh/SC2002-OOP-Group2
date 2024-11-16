@@ -7,10 +7,9 @@ import java.util.Scanner;
 
 public class DoctorView {
     private DoctorController doctorController;
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public DoctorView() {
-        this.doctorController = new DoctorController();
+    public DoctorView(DoctorController doctorController) {
+        this.doctorController = doctorController;
     }
 
     public void menu(String doctorId) {
@@ -41,16 +40,16 @@ public class DoctorView {
                     doctorController.viewDoctorSchedule(doctorId);
                     break;
                 case 4:
-                    doctorController.setAvailabilityView(doctorId);
+                    doctorController.setAvailability(doctorId);
                     break;
                 case 5:
-                    doctorController.appointmentRequestsView();
+                    doctorController.viewAppointmentRequests(doctorId);
                     break;
                 case 6:
-                    doctorController.viewUpcomingAppointments();
+                    doctorController.viewUpcomingAppointments(doctorId);
                     break;
                 case 7:
-                    doctorController.recordAppointmentOutcome();
+                    doctorController.recordAppointmentOutcome(doctorId);
                 case 8:
                     System.out.println("Logging out...");
                     return;
@@ -58,6 +57,10 @@ public class DoctorView {
                     System.out.println("Invalid input. Please try again.");
             }
         }
+    }
+
+    public void displaySchedule(){
+        
     }
 
 

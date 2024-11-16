@@ -5,8 +5,17 @@ import View.AppointmentView;
 import java.util.List;
 
 public class AppointmentController { 
+    private DoctorController doctorController;
+
     AppointmentDAO appointmentDAO = new AppointmentDAO();
     AppointmentView view = new AppointmentView();
+
+    public AppointmentController() {
+    }
+
+    public AppointmentController(DoctorController doctorController) {
+        this.doctorController = doctorController;
+    }
 
     // Create a new appointment
     public void createAppointment(String doctorId, String patientId, String time, String date) {

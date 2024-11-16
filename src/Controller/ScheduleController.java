@@ -2,54 +2,69 @@ package Controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-import DataAccess.ScheduleDAO;
+import Data.DataAccess.ScheduleDAO;
 import View.Doctor.DoctorScheduleView;
-import View.Doctor.DoctorScheduleView;
-import View.Patient.PatientScheduleView;
+import View.app;
+import View.Doctor.DoctorAvailabilityView;
 import Model.Shared.Appointment;
 import Model.Shared.Schedule;
-import Test.appointmentOutcomeTest;
-
 
 public class ScheduleController{
+
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
     private DoctorController doctorController;
-    private PatientController patientController;
-
+    private DoctorAvailabilityView doctorAvailabilityView;
+    private DoctorScheduleView doctorScheduleView;
     private ScheduleDAO data;
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-    public ScheduleController() {
+    
+    public ScheduleController(DoctorController doctorController) {
         this.data = new ScheduleDAO();
-        this.doctorController = new DoctorController();
-        this.patientController = new PatientController();
+        this.doctorController = doctorController;
+        this.doctorScheduleView = new DoctorScheduleView();
+        this.doctorAvailabilityView = new DoctorAvailabilityView(this);
     }
 
-    public void viewDoctorSchedule(String doctorId, List<Appointment> appointments) {
-        doctorScheduleView(doctorId, data.find(doctorId), appointments);
+    public void viewDoctorSchedule(String doctorId) {
+        Schedule schedule = data.find(doctorId);
+        if (schedule == null) {
+            System.out.println("No schedule found for Doctor ID: " + doctorId);
+            System.out.println("Please set your schedule~~~");
+            return;
+        }
+        List<Appointment> allAppointments = doctorController.getAppointmentsById(doctorId);
+        HashMap<LocalDate , Appointment> Appointments = new HashMap<>();
+        for (LocalDate date : schedule.getDateAvailability().keySet()) {
+            for (Appointment appointment : allAppointments) {
+                if (appointment.getDate().equals(date.format(DATE_FORMAT))) {
+                    Appointments.put(date, appointment);
+                    break;
+                }
+            }
+        }
+        // Pass consolidated data to the view
+        doctorScheduleView.menu(doctorId, schedule.getDateAvailability(), Appointments);
     }
+    
+    
 
     public void updateDoctorSchedule(String doctorId, LocalDate date, Boolean isAvailable) {
         data.updateIsAvailable(doctorId, date, isAvailable);
     }
 
-    //view navigation
-    public void doctorView(String doctorId) {
-       doctorController.doctorView(doctorId);
+    public void showSetAvailabilityView(String doctorId){
+        doctorAvailabilityView.menu(doctorId);
     }
-    public void patientView(String patientId) {
-        patientController.patientView(patientId);
+
+    public void returnToDoctorView(){
+
     }
-    public void patientScheduleView(String patientId) {
-        PSVController.patientScheduleView(patientId);
-    }
-    public void doctorScheduleView (String doctorId, Schedule schedule, List<Appointment> appointments) {
-        DSVController.doctorScheduleView(doctorId, schedule, appointments);
-    }
-    public void doctorAvailabilityView (String doctorId) {
-        DSVController.doctorAvailabilityView(doctorId);
-    }
-    //
+
 }

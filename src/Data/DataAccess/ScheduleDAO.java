@@ -1,4 +1,4 @@
-package DataAccess;
+package Data.DataAccess;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -12,7 +12,7 @@ import Model.Shared.Schedule;
 public class ScheduleDAO {
 
     private static final String FILE_PATH = "src/Data/Assets/Schedule.csv";
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public List<Schedule> fetch() {
         List<Schedule> scheduleList = new ArrayList<>();
@@ -32,9 +32,23 @@ public class ScheduleDAO {
                 String doctorId = values[0];
                 LocalDate date = LocalDate.parse(values[1], DATE_FORMAT);
                 Boolean isAvailable = Boolean.parseBoolean(values[2]);
-                HashMap<LocalDate, Boolean> dateAvailability = new HashMap<>();
-                dateAvailability.put(date, isAvailable);
-                scheduleList.add(new Schedule(doctorId, dateAvailability));
+                Schedule existingSchedule = null;
+                for (Schedule s : scheduleList) {
+                    if (s.getDoctorId().equals(doctorId)) {
+                        existingSchedule = s;
+                        break;
+                    }
+                }
+    
+                if (existingSchedule == null) {
+                    // Create a new schedule if none exists for this doctor
+                    HashMap<LocalDate, Boolean> dateAvailability = new HashMap<>();
+                    dateAvailability.put(date, isAvailable);
+                    scheduleList.add(new Schedule(doctorId, dateAvailability));
+                } else {
+                    // Add date availability to the existing schedule
+                    existingSchedule.getDateAvailability().put(date, isAvailable);
+                }
             }
         } catch (IOException e) {
             System.err.println("Error loading schedule data: " + e.getMessage());

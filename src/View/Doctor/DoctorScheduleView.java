@@ -2,26 +2,42 @@ package View.Doctor;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-import Controller.ScheduleControllers.DSVController;
 import Model.Shared.Schedule;
 import Model.Shared.Appointment;
 
 public class DoctorScheduleView {
+
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
     public DoctorScheduleView() {}
 
-    public void menu(Schedule schedule, List<Appointment> appointments) {
-        System.out.println("This is your schedule doctor " + schedule.getDoctorId());
-        System.out.println("-----------------------------------------");
-        for (HashMap.Entry<LocalDate, Boolean> entry : schedule.getDateAvailability().entrySet()) {
-            for(Appointment appointment : appointments) {
-                System.out.println("| Date: " + entry.getKey() + " | Availability: " + entry.getValue() + " | PatientId: " + appointment.getPatientID() + " | Name: " + appointment.getName() +  " |" );
-                System.out.println("-----------------------------------------");
-                break;
+    public void menu(String doctorId, Map<LocalDate, Boolean> dateAvailability, Map<LocalDate, Appointment> appointments) {
+        System.out.println("Doctor ID: " + doctorId);
+        System.out.println("Schedule:");
+        System.out.println("----------------------------------------------");
+    
+        List<LocalDate> sortedDates = new ArrayList<>(dateAvailability.keySet());
+        sortedDates.sort(Comparator.naturalOrder());
+
+        for(LocalDate date : sortedDates){
+            System.out.println("Date: " + date.format(DATE_FORMAT) +
+                               " | Availability: " + (dateAvailability.get(date) ? "Available" : "Not Available"));
+
+            if (!appointments.containsKey(date)) {
+                System.out.println("  No appointments scheduled for this date.");
+            } else {
+                System.out.println("  | Patient ID: " + appointments.get(date).getPatientID() +
+                                   " | Time: " + appointments.get(date).getTime() + " |");
             }
+            System.out.println("----------------------------------------------");
         }
     }
 }
+
