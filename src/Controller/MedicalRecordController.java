@@ -1,37 +1,24 @@
-package Controller;
+package View;
 
 import Model.Shared.MedicalRecord;
-import Model.Shared.AppointmentOutcomeRecord;
 import Data.DataAccess.MedicalRecordDAO;
 import View.MedicalRecordView;
-import View.Appointments.PastAppointmentView;
-import View.Doctor.DoctorMedicalRecordView;
-
+import Controller.AppointmentOutcomeController;
 import java.util.List;
+import View.Doctor.DoctorMedicalRecordView;
 
 public class MedicalRecordController {
     private MedicalRecordDAO medicalRecordDAO;
     private MedicalRecordView medicalRecordView;
-    private PastAppointmentView pastAppointmentView;
-    private DoctorMedicalRecordView doctorMedicalRecordView;
+    private AppointmentOutcomeController appointmentOutcomeController;
     private DoctorController doctorController;
 
-    public MedicalRecordController(DoctorController doctorController) {
+
+    public MedicalRecordController() {
         this.medicalRecordDAO = new MedicalRecordDAO();
         this.medicalRecordView = new MedicalRecordView();
-        this.pastAppointmentView = new PastAppointmentView();
-        this.doctorMedicalRecordView = new DoctorMedicalRecordView(this);
+        this.appointmentOutcomeController = new AppointmentOutcomeController();
         this.doctorController = doctorController;
-    }
-
-    //navigate to medical record View
-    public void doctorMedicalRecordView(String doctorId) {
-        doctorMedicalRecordView.menu(doctorId);
-    }
-
-    //navigate to update medical record view
-    public void updateMedicalRecordView(String patientId) {
-
     }
 
     public void viewMedicalRecord(String patientID) {
@@ -62,16 +49,11 @@ public class MedicalRecordController {
 
 
     public void viewPastAppointments(String patientID) {//need to chnage once the dao have been added for apptoutcomerecord
-        MedicalRecord medicalRecord = medicalRecordDAO.loadSingleRecord(patientID);
-        if (medicalRecord != null) {
-            List<AppointmentOutcomeRecord> appointmentOutcomes = medicalRecord.getAppointmentOutcome();
-            pastAppointmentView.displayPastAppointments(appointmentOutcomes);
+        List<AppointmentOutcomeRecord> outcomes = appointmentOutcomeController.getAppointmentOutcomeByPatientID(patientID);
+        if (outcomes != null && !outcomes.isEmpty()) {
+            pastAppointmentView.displayPastAppointments(outcomes);
         } else {
             System.out.println("No past appointments found for patient ID: " + patientID);
         }
-    }
-
-    public List<MedicalRecord> getMedicalRecordsUnderDoctor(String doctorId) {
-        doctorController.getAppointmentreById(doctorId)
     }
 }
