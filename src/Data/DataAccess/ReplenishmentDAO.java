@@ -1,31 +1,30 @@
 package Data.DataAccess;
 
-import Model.ReplenishmentRequest;
+import Model.Shared.ReplenishmentRequest;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class ReplenishmentDAO implements DataAccessObject<ReplenishmentRequest, String>{
-	private static final String FILE_PATH = "C:\\Users\\chuaz\\eclipse-workspace\\OOP_project\\src\\Administrator\\Replenishment_Restock.csv";
+	private static final String FILE_PATH = "src\Data\Assets\Replenishment_Restock.csv";
     public List<ReplenishmentRequest> loadAll() {
         List<ReplenishmentRequest> requestList = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
             String line = br.readLine(); 
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                if (values.length < 5) {
+                if (values.length < 4) {
                     System.err.println("Skipping malformed row: " + line);
                     continue;
                 }
                 try {
                     String requestID = values[0];
-                    String medicineID = values[1];
-                    String inventoryName = values[2];
-                    int requestedQuantity = Integer.parseInt(values[3]);
-                    String status = values[4];
+                    String inventoryName = values[1];
+                    int requestedQuantity = Integer.parseInt(values[2]);
+                    String status = values[3];
 
-                    requestList.add(new ReplenishmentRequest(requestID, medicineID, inventoryName, requestedQuantity, status));
+                    requestList.add(new ReplenishmentRequest(requestID, inventoryName, requestedQuantity, status));
                 } catch (NumberFormatException e) {
                     System.err.println("Error parsing numeric value in row: " + line);
                 }
@@ -57,7 +56,7 @@ public class ReplenishmentDAO implements DataAccessObject<ReplenishmentRequest, 
 
     private void saveAll(List<ReplenishmentRequest> requestList) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, false))) {
-            writer.write("Request ID,Inventory ID,Inventory Name,Requested Quantity,Status");
+            writer.write("Request ID,Inventory Name,Requested Quantity,Status");
             writer.newLine();
             for (ReplenishmentRequest request : requestList) {
                 writer.write(formatRequestCSVLine(request));
@@ -71,7 +70,6 @@ public class ReplenishmentDAO implements DataAccessObject<ReplenishmentRequest, 
     private String formatRequestCSVLine(ReplenishmentRequest request) {
         return String.join(",",
                 request.getRequestID(),
-                request.getMedicineID(),
                 request.getInventoryName(),
                 String.valueOf(request.getRequestedQuantity()),
                 request.getStatus()
