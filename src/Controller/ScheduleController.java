@@ -61,8 +61,4 @@ public class ScheduleController{
         doctorAvailabilityView.menu(doctorId);
     }
 
-    public void returnToDoctorView(String doctorId){
-        doctorController.displayDoctorView(doctorId);
-    }
-
 }
