@@ -11,12 +11,9 @@ public class AdministratorView implements UserMainView {
 	
     public AdministratorView(User user) {
         this.user = user;
-        this.administratorController = new AdministratorController(); 
+        this.administratorController = new AdministratorController(this); 
     }
     
-    public AdministratorView(AdministratorController administratorController) {
-        this.administratorController = new AdministratorController(); 
-    }
     
     public void displayMenu() {
         int option = 0;
