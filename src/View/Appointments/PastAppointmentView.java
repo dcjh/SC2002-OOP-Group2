@@ -1,4 +1,4 @@
-package View;
+package View.Appointments;
 
 import Model.Shared.AppointmentOutcomeRecord;
 

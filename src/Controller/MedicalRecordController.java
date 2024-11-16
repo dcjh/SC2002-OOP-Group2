@@ -1,21 +1,37 @@
-package View;
+package Controller;
 
 import Model.Shared.MedicalRecord;
 import Model.Shared.AppointmentOutcomeRecord;
 import Data.DataAccess.MedicalRecordDAO;
 import View.MedicalRecordView;
-import View.PastAppointmentView;
+import View.Appointments.PastAppointmentView;
+import View.Doctor.DoctorMedicalRecordView;
+
 import java.util.List;
 
 public class MedicalRecordController {
     private MedicalRecordDAO medicalRecordDAO;
     private MedicalRecordView medicalRecordView;
     private PastAppointmentView pastAppointmentView;
+    private DoctorMedicalRecordView doctorMedicalRecordView;
+    private DoctorController doctorController;
 
-    public MedicalRecordController() {
+    public MedicalRecordController(DoctorController doctorController) {
         this.medicalRecordDAO = new MedicalRecordDAO();
         this.medicalRecordView = new MedicalRecordView();
         this.pastAppointmentView = new PastAppointmentView();
+        this.doctorMedicalRecordView = new DoctorMedicalRecordView(this);
+        this.doctorController = doctorController;
+    }
+
+    //navigate to medical record View
+    public void doctorMedicalRecordView(String doctorId) {
+        doctorMedicalRecordView.menu(doctorId);
+    }
+
+    //navigate to update medical record view
+    public void updateMedicalRecordView(String patientId) {
+
     }
 
     public void viewMedicalRecord(String patientID) {
@@ -53,5 +69,9 @@ public class MedicalRecordController {
         } else {
             System.out.println("No past appointments found for patient ID: " + patientID);
         }
+    }
+
+    public List<MedicalRecord> getMedicalRecordsUnderDoctor(String doctorId) {
+        doctorController.getAppointmentreById(doctorId)
     }
 }

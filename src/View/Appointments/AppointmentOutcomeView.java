@@ -1,4 +1,4 @@
-package View;
+package View.Appointments;
 
 import Controller.AppointmentOutcomeController;
 import Model.Shared.Appointment;
