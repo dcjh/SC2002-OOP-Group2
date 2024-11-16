@@ -10,9 +10,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicalRecordDAO implements DataAccessObject<MedicalRecord, String> {
+import Model.Shared.MedicalRecord;
 
-    private static final String FILE_PATH = "src/Assets/MedicalRecords.csv";
+public class MedicalRecordDAO {
+
+    private static final String FILE_PATH = "src/Data/Assets/MedicalRecords.csv";
 
     // Load a single MedicalRecord by patientID
     public MedicalRecord loadSingleRecord(String patientID) {

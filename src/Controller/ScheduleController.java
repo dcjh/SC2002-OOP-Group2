@@ -21,13 +21,7 @@ public class ScheduleController{
     private DoctorScheduleView doctorScheduleView;
     private ScheduleDAO data;
     
-    public ScheduleController(DoctorController doctorController) {
-        this.data = new ScheduleDAO();
-        this.doctorController = doctorController;
-        this.doctorScheduleView = new DoctorScheduleView();
-        this.doctorAvailabilityView = new DoctorAvailabilityView(this);
-    }
-
+    //navigate to DoctorScheduleView
     public void showDoctorSchedule(String doctorId) {
         Schedule schedule = data.find(doctorId);
         if (schedule == null) {
@@ -49,8 +43,16 @@ public class ScheduleController{
         doctorScheduleView.menu(doctorId, schedule.getDateAvailability(), Appointments);
     }
 
+    //navigate to setAvailabilityView
     public void showSetAvailabilityView(String doctorId){
         doctorAvailabilityView.menu(doctorId);
+    }
+
+    public ScheduleController(DoctorController doctorController) {
+        this.data = new ScheduleDAO();
+        this.doctorController = doctorController;
+        this.doctorScheduleView = new DoctorScheduleView();
+        this.doctorAvailabilityView = new DoctorAvailabilityView(this);
     }
 
     public void updateDoctorSchedule(String doctorId, LocalDate date, Boolean isAvailable) {

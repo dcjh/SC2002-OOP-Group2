@@ -32,10 +32,10 @@ public class DoctorView {
 
             switch (choice) {
                 case 1:
-                    doctorController.viewPatientMR();
+                    doctorController.viewPatientMR(doctorId);
                     break;
                 case 2:
-                    doctorController.updatePatientMR();
+                    doctorController.updatePatientMR(doctorId);
                     break;
                 case 3:
                     doctorController.viewDoctorSchedule(doctorId);

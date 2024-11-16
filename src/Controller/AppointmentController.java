@@ -175,10 +175,12 @@ public class AppointmentController {
         this.view.printAppointment(apt.getAppointmentID(), apt.getDocID(), apt.getPatientID(), apt.getStatus(), apt.getTime(), apt.getDate());
     }
 
+    //navigate to apointment requests view
     public void appointmentRequestsView(String doctorId) {
         appointmentRequestsView.menu(doctorId);
     }
 
+    //to update doctor's availability
     public void updateAppointmentSchedule(String appointmentId, String doctorId, String date, Boolean approve) {
         if (approve) {
             doctorController.updateDoctorSchedule(doctorId, LocalDate.parse(date, DATE_FORMAT), false);

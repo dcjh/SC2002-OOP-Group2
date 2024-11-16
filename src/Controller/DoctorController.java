@@ -1,5 +1,6 @@
 package Controller;
 
+import java.time.LocalDate;
 import Model.Shared.Appointment;
 import View.Doctor.DoctorView;
 import java.util.List;
@@ -9,21 +10,25 @@ public class DoctorController {
     private DoctorView doctorView;
     private ScheduleController scheduleController;
     private AppointmentController appointmentController;
+    private MedicalRecordController medicalRecordController;
+    private AppointmentOutcomeController appointmentOutcomeController;
 
     public DoctorController() {
         this.scheduleController =  new ScheduleController(this);
         this.appointmentController = new AppointmentController(this);
+        this.medicalRecordController = new MedicalRecordController(this);
+        this.appointmentOutcomeController = new AppointmentOutcomeController(this);
         this.doctorView = new DoctorView(this);
     }
 
-    //
+    //navigate to DoctorView
     public void displayDoctorView(String doctorId) {
         doctorView.menu(doctorId);
     }
 
     //methods to trigger actions
-    public void viewPatientMR() {
-
+    public void viewPatientMR(String doctorId) {
+        medicalRecordController.doctorMedicalRecordView(doctorId);
     }
 
     public void updatePatientMR() {
@@ -61,6 +66,9 @@ public class DoctorController {
 
     public void updateDoctorSchedule(String doctorId, LocalDate date, Boolean isAvailable) {
         scheduleController.updateDoctorSchedule(doctorId, date, isAvailable);
+    }
+    public List<AppointmentOutcomeRecord> getAppointmentOutcomeById (String doctorId) {
+        return appointmentOutcomeController.getAppointmentOutcomeByDoctorID(doctorId);
     }
 
 }
