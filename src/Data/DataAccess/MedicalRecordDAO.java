@@ -28,14 +28,17 @@ public class MedicalRecordDAO {
                 }
                 String[] values = line.split(",");
                 if (values[0].equals(patientID)) { // Find the matching patient ID
-                    String dob = values[1];
-                    String gender = values[2];
-                    String phoneNumber = values[3];
-                    String email = values[4];
-                    String bloodType = values[5];
-                    String allergies = values[6];
+                    String name = values[1];
+                    String dob = values[2];
+                    String gender = values[3];
+                    String phoneNumber = values[4];
+                    String email = values[5];
+                    String bloodType = values[6];
+                    String allergies = values[7];
 
-                    return new MedicalRecord(patientID, dob, gender, phoneNumber, email, bloodType, allergies);
+                    return new MedicalRecord(patientID, name, dob, gender, phoneNumber, email, bloodType, allergies);
+                }
+            }
                 }
             }
         } catch (IOException e) {
@@ -97,6 +100,7 @@ public class MedicalRecordDAO {
     private String formatMedicalRecordCSVLine(MedicalRecord medicalRecord) {
         return String.join(",",
                 medicalRecord.getPatientID(),
+                medicalRecord.getName(),
                 medicalRecord.getDob(),
                 medicalRecord.getGender(),
                 medicalRecord.getPhoneNumber(),
