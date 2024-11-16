@@ -35,8 +35,6 @@ public class MedicalRecordDAO {
                     return new MedicalRecord(patientID, name, dob, gender, phoneNumber, email, bloodType, allergies);
                 }
             }
-                }
-            }
         } catch (IOException e) {
             System.err.println("Error loading medical record: " + e.getMessage());
         }

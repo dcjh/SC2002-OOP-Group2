@@ -17,6 +17,7 @@ public class MedicalRecord {
     private String bloodType;
     private String allergies;
     private List<AppointmentOutcome> appointmentOutcome;
+    private List<PastDiagnosesAndTreatments> pastDiagnosesAndTreatments;
 
     public MedicalRecord(String patientID, String name, String dob, String gender, String phoneNumber, String email, String bloodType, String allergies) {
         this.patientID = patientID;

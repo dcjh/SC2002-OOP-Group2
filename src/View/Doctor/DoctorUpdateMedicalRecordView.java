@@ -160,11 +160,12 @@ public class DoctorUpdateMedicalRecordView extends DoctorMedicalRecordView{
         System.out.printf("Patient ID   : %s%n", selectedPatientMR.getPatientID());
         System.out.printf("Diagnosis    : %s%n", newDiagnosis);
         System.out.printf("Treatment    : %s%n", newTreatment);
+
         for (int i=0; i<medications.size(); i++) {
             if(i==0) {
-                System.out.printf("Medication    : %s%n",medications.get(i));
+                System.out.printf("Medication   : %s%n",medications.get(i));
             } else {
-                System.out.printf("                %s%n",medications.get(i));
+                System.out.printf("               %s%n",medications.get(i));
             }
         }
 

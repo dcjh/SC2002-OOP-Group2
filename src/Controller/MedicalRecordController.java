@@ -10,7 +10,9 @@ import View.Doctor.DoctorMedicalRecordView;
 import View.Doctor.DoctorUpdateMedicalRecordView;
 
 import java.util.List;
+import java.util.Set;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class MedicalRecordController {
     private MedicalRecordDAO medicalRecordDAO;
@@ -86,8 +88,15 @@ public class MedicalRecordController {
     public List<MedicalRecord> getMedicalRecordsUnderDoctor(String doctorId) {
         List<AppointmentOutcome> AOLists = doctorController.getAppointmentOutcomeByDoctorId(doctorId);
         List<MedicalRecord> patientsMR = new ArrayList<>();
+        Set<String> uniquePatientIDs = new HashSet<>();
+        
         for (AppointmentOutcome ao : AOLists) {
-            if (ao.getDoctorID().equals(doctorId)) patientsMR.add(medicalRecordDAO.loadSingleRecord(ao.getPatientID()));
+            if (ao.getDoctorID().equals(doctorId) && uniquePatientIDs.add(ao.getPatientID())) {
+                MedicalRecord medicalRecord = medicalRecordDAO.loadSingleRecord(ao.getPatientID());
+                if (medicalRecord != null) { // Ensure the record exists before adding
+                    patientsMR.add(medicalRecord);
+                }
+            }
         }
         return patientsMR;
     }

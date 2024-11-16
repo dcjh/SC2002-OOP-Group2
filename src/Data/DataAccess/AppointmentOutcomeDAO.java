@@ -90,7 +90,7 @@ public class AppointmentOutcomeDAO {
     // Helper: Deserialize medications from a string
     private ArrayList<PrescribedMedication> deserializeMedications(String data) {
         ArrayList<PrescribedMedication> medications = new ArrayList<>();
-        data = data.substring(1, data.length() - 2); // Remove brackets
+        data = data.substring(2, data.length() - 2); // Remove brackets
         String[] meds = data.split("-");
         for (String med : meds) {
             String[] parts = med.split(":");
