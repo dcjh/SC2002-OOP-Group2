@@ -1,16 +1,27 @@
 package Controller;
 import Data.DataAccess.InventoryDAO;
-import Data.DataAccess.ReplenishmentDAO;
 import Model.Inventory;
-import Model.ReplenishmentRequest;
+import View.InventoryView;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class InventoryController {
     private final static InventoryDAO inventoryDAO = new InventoryDAO();
+    InventoryView view = new InventoryView();
+	private AdministratorController administratorController;
+	private PharmacistController pharmacistController;
     
-    public static void addMedicine() {
+    public InventoryController(AdministratorController administratorController) {
+    	this.administratorController = administratorController;
+    }
+    
+    public InventoryController( PharmacistController pharmacistController) {
+    	this.pharmacistController = pharmacistController;
+    }
+
+
+    public void addMedicine() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter Medicine Name: ");
@@ -27,7 +38,7 @@ public class InventoryController {
     
     }
     
-    public static void removeMedicine() {
+    public void removeMedicine() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter Medicine Name to remove: ");
@@ -37,7 +48,7 @@ public class InventoryController {
         System.out.println("Medicine removed successfully......");
     }
     
-    public static void updateRestockLevel() {
+    public void updateRestockLevel() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter Medicine name to update restock: ");
@@ -58,7 +69,7 @@ public class InventoryController {
     }
     
     
-    public static void updateDispensestockLevel() {
+    public void updateDispensestockLevel() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter Medicine name to update dispense: ");
@@ -78,62 +89,25 @@ public class InventoryController {
         }
     }
     
-    
-    public static void processReplenishmentRequests() {
-        ReplenishmentDAO replenishmentDAO = new ReplenishmentDAO();
-        InventoryDAO inventoryDAO = new InventoryDAO();
-        Scanner scanner = new Scanner(System.in);
-
-        // Load all pending requests
-        List<ReplenishmentRequest> pendingRequests = replenishmentDAO.loadAll().stream()
-                .filter(req -> req.getStatus().equalsIgnoreCase("Pending"))
-                .toList();
-
-        if (pendingRequests.isEmpty()) {
-            System.out.println("No pending replenishment requests.");
+    public void viewAllInventory() {
+        List<Inventory> inventories = inventoryDAO.loadAll();
+        if (inventories.isEmpty()) {
+            System.out.println("No inventory records available.");
             return;
         }
 
-        System.out.println("\nPending Replenishment Requests:");
-        System.out.printf("%-10s %-15s %-20s %-15s %-10s%n", "Request ID", "Inventory ID", "Inventory Name", "Requested Qty", "Status");
+        System.out.println("\nDisplaying all inventory:");
+        System.out.printf("%-20s %-20s %-20s %-20s%n", "Inventory Name", "Initial Stock", "Current Stock", "Low Stock Alert");
         System.out.println("--------------------------------------------------------------------------------");
-        for (ReplenishmentRequest request : pendingRequests) {
-            System.out.printf("%-10s %-15s %-20s %-15d %-10s%n",
-                    request.getRequestID(),
-                    request.getMedicineID(),
-                    request.getInventoryName(),
-                    request.getRequestedQuantity(),
-                    request.getStatus());
-        }
-
-        System.out.print("\nEnter Request ID to process: ");
-        String requestID = scanner.nextLine().trim();
-
-        ReplenishmentRequest selectedRequest = replenishmentDAO.find(requestID, null);
-
-        if (selectedRequest == null) {
-            System.out.println("Invalid Request ID.");
-            return;
-        }
-
-        System.out.print("Approve or Deny this request? (A/D): ");
-        String decision = scanner.nextLine();
-
-        if (decision.equalsIgnoreCase("A")) {
-            Inventory inventory = inventoryDAO.find(selectedRequest.getMedicineID(), null);
-            if (inventory != null) {
-                inventory.setCurrentStock(inventory.getCurrentStock() + selectedRequest.getRequestedQuantity());
-                inventoryDAO.save(inventory);
-            }
-            selectedRequest.setStatus("Approved");
-            replenishmentDAO.save(selectedRequest);
-            System.out.println("Request approved, and inventory updated.");
-        } else if (decision.equalsIgnoreCase("D")) {
-            selectedRequest.setStatus("Denied");
-            replenishmentDAO.save(selectedRequest);
-            System.out.println("Request denied.");
-        } else {
-            System.out.println("Invalid choice. Request not processed.");
+        for (Inventory i : inventories) {
+            printInventory(i);
+            System.out.println();
         }
     }
+    
+    public void printInventory(Inventory inv) {
+        this.view.printInventory(inv.getName(), inv.getInitialStock(), inv.getCurrentStock(), inv.getLowStockAlert());
+    }
+   
+    
 }

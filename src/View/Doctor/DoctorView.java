@@ -50,7 +50,8 @@ public class DoctorView {
                     doctorController.viewUpcomingAppointments(doctorId);
                     break;
                 case 7:
-                    doctorController.recordAppointmentOutcome(doctorId);
+                    doctorController.viewRecordAppointmentOutcome(doctorId);
+                    break;
                 case 8:
                     System.out.println("Logging out...");
                     return;

@@ -7,9 +7,8 @@ public class ReplenishmentRequest {
     private int requestedQuantity;
     private String status; //Approved, Denied
     
-    public ReplenishmentRequest(String requestID, String inventoryID, String inventoryName, int requestedQuantity, String status) {
+    public ReplenishmentRequest(String requestID, String inventoryName, int requestedQuantity, String status) {
         this.requestID = requestID;
-        this.medicineID = inventoryID;
         this.inventoryName = inventoryName;
         this.requestedQuantity = requestedQuantity;
         this.status = status;
@@ -23,15 +22,6 @@ public class ReplenishmentRequest {
     public void setRequestID(String requestID) 
     { 
     	this.requestID = requestID; 
-    	}
-
-    public String getMedicineID() 
-    	{ 
-    	return medicineID; 
-    	}
-    
-    public void setInventoryID(String medicineID) { 
-    	this.medicineID = medicineID; 
     	}
 
     public String getInventoryName() { 
