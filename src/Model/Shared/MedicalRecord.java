@@ -3,6 +3,7 @@ package Model.Shared;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.util.List;
+import Model.Shared.PastDiagnosesAndTreatments;
 
 public class MedicalRecord {
 
@@ -15,8 +16,9 @@ public class MedicalRecord {
     private String bloodType;
     private String allergies;
     private List<AppointmentOutcome> appointmentOutcome;
+    private List<PastDiagnosesAndTreatments> pastDiagnosesAndTreatments;
 
-    public MedicalRecord(String patientID,Sting name, String dob, String gender, String phoneNumber, String email, String bloodType, String allergies) {
+    public MedicalRecord(String patientID,String name, String dob, String gender, String phoneNumber, String email, String bloodType, String allergies) {
         this.patientID = patientID;
         this.name = name;
         this.dob = dob;
@@ -26,6 +28,7 @@ public class MedicalRecord {
         this.bloodType = bloodType;
         this.allergies = allergies;
         this.appointmentOutcome = new ArrayList<>();
+        this.pastDiagnosesAndTreatments = new ArrayList<>();
     }
 
     // String fields
@@ -100,5 +103,11 @@ public class MedicalRecord {
     public void setAppointmentOutcome(List<AppointmentOutcome> appointmentOutcome) {
         this.appointmentOutcome = appointmentOutcome;
     }
+    public List<PastDiagnosesAndTreatments> getPastDiagnosesAndTreatments() {
+        return pastDiagnosesAndTreatments;
+    }
 
+    public void setPastDiagnosesAndTreatments(List<PastDiagnosesAndTreatments> pastDiagnosesAndTreatments) {
+        this.pastDiagnosesAndTreatments = pastDiagnosesAndTreatments;
+    }
 }

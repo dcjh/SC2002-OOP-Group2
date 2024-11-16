@@ -62,7 +62,7 @@ public class PatientView implements UserMainView{
                     patientController.cancelAppointment(cancelID);
                     break;
                 case 7:
-                    patientController.viewPastAppointment();
+                    patientController.viewPastAppointments();
                     break;
                 case 8:
                     System.out.println("Logging out...");
