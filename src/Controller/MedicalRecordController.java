@@ -68,7 +68,7 @@ public class MedicalRecordController {
     }
 
     public void createMedicalRecord(MedicalRecord medicalRecord) {
-        medicalRecordDAO.addNewRecord(medicalRecord);
+        medicalRecordDAO.addMedicalRecord(medicalRecord);
         System.out.println("Medical record created successfully!");
     }
 
