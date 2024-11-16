@@ -1,35 +1,31 @@
 package View;
 
-import Model.Appointment;
-import Model.Gender;
 import Model.User;
-import Model.UserType;
-import java.io.*;
 import java.util.*;
-import Data.DataAccess.AppointmentDAO;
-import Data.DataAccess.InventoryDAO;
-import Controller.InventoryController;
 import Controller.AdministratorController;
-
 
 public class AdministratorView implements UserMainView {
     private Scanner scanner = new Scanner(System.in);
 	private User user;
-    
+	private AdministratorController administratorController;
+	
     public AdministratorView(User user) {
         this.user = user;
+        this.administratorController = new AdministratorController(this); 
     }
     
-    public void displayMenu() {
+    
+    public void menu(String hosID) {
         int option = 0;
-     	while (option!=5) {
+     	while (option!=6) {
              System.out.println();
              System.out.println("Administrator Menu:");
              System.out.println("1. View and Manage Hospital Staff");
              System.out.println("2. View Appointments details");
              System.out.println("3. View and Manage Medication Inventory");
              System.out.println("4. Approve Replenishment Requests");
-             System.out.println("5. Logout");
+             System.out.println("5. View Replenishment Requests");
+             System.out.println("6. Logout");
              System.out.println();
              System.out.println("Select an option:");
              option = scanner.nextInt();
@@ -38,17 +34,19 @@ public class AdministratorView implements UserMainView {
              case 1:viewandmanagerhospitalstaff(); 
              	break;
              	
-             case 2:displayScheduledAppointments();
+             case 2:administratorController.displayscheduledAppointmentdetails();
              	break;
              	
              case 3:viewandmanagemedicationinventory();
              	break;
              	
-             case 4:approvereplenishmentrequests();
+             case 4:administratorController.approveReplenishmentRequest();
              	break;
              
-             case 5:System.out.println("Logging out...");
+             case 5:administratorController.viewAllReplenishmentRequests();
                  break;
+                 
+             case 6: break;
              default:System.out.println("Invalid choice. Please try again.");
              }
 
@@ -69,18 +67,18 @@ public class AdministratorView implements UserMainView {
             option = scanner.nextInt();
             switch(option) {
             case 1:
-            	Controller.AdministratorController.addStaffMember();
+            	administratorController.addStaffMember();
             	break;
             case 2:
-            	Controller.AdministratorController.updateStaffMember();
+            	administratorController.updateStaffMember();
             	break;
             	
             case 3:
-            	Controller.AdministratorController.removeStaffMember();
+            	administratorController.removeStaffMember();
             	break;
             	
             case 4:
-            	AdministratorController.displayStaff();
+            	administratorController.displayStaff();
 				break;
             }
     	}
@@ -105,38 +103,19 @@ public class AdministratorView implements UserMainView {
             option5 = scanner.nextInt();
             switch(option5) {
             case 1:
-            	Controller.InventoryController.addMedicine();
+            	administratorController.addMed();
             	break;
             case 2:
-            	Controller.InventoryController.updateRestockLevel();
+            	administratorController.updateMed();
             	break; 
             case 3:
-            	Controller.InventoryController.removeMedicine();
+            	administratorController.removeMed();
             	break;
             case 4:
-            	displayInventory();
+            	administratorController.displayInventory();
             	break;
             }	
     	}
     
     }
-    private void approvereplenishmentrequests() {
-        System.out.println("\n--- Approve/Deny Replenishment Requests ---");
-        InventoryController.processReplenishmentRequests(); 
-    	
-    }
-	
-    private void displayScheduledAppointments() {
-        System.out.println("\n--- Viewing Scheduled Appointments ---");
-        AdministratorController.displayscheduledAppointmentdetails();
-    }
-	
-	
-
-	
-    private void displayInventory() {
-        InventoryController inventoryController = new InventoryController();
-        InventoryView.displayInventory();
-    }
-
 }
