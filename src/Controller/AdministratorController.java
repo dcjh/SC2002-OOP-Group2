@@ -23,13 +23,10 @@ public class AdministratorController {
 
 	
 
-    public AdministratorController() {
+    public AdministratorController(AdministratorView administratorView) {
         this.appointmentController = new AppointmentController(this);
         this.inventoryController = new InventoryController(this);
         this.replenishmentRestockcontroller = new ReplenishmentRestockController(this);
-	this.administratorView = new AdministratorView(this);
-    }
-	public AdministratorController(AdministratorView administratorView) {
         this.administratorView = administratorView;
     }
     
