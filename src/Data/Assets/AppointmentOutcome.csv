@@ -1,0 +1,4 @@
+AppointmentOutcomeID,DoctorID,PatientID,AppointmentID,Date,Time,TypeOfService,PrescribedMedications,ConsultationNotes
+AO0001,D0002,P1002,AP0001,20-11-2024,13:30,consultation,"[syrup:4:pending-panadol:5:pending]",i love chicken
+AO0002,D0002,P1006,AP0005,24-11-2024,16:30,x-ray,"[sugar:20:pending]",well
+AO0003,D0002,P1004,AP0003,22-11-2024,14:30,bump,"[tolak angin:34:pending-rizz:40:pending]",fsfsf

@@ -6,7 +6,10 @@ import java.util.ArrayList;
 
 public class AppointmentOutcome {
     private static int idCounter = 1; 
-    private String appointmentOutcomeID;  
+    private String appointmentOutcomeID;
+    private String doctorID;
+    private String patientID;  
+    private String appointmentID;  
     private String date;
     private String time;
     private String typeOfService;
@@ -17,9 +20,11 @@ public class AppointmentOutcome {
     // the default value for medicine status is "pending" when Appointment Outcome is first created
     // then it is changed to "dispensed" after the med is given by the pharmacist
 
-
-    public AppointmentOutcome(String date, String time, String typeOfService, ArrayList<PrescribedMedication> prescribedMedications, String consultationNotes){
-        this.appointmentOutcomeID = generateFormattedId();
+    public AppointmentOutcome(String date, String time, String typeOfService, ArrayList<PrescribedMedication> prescribedMedications, String consultationNotes, String doctorID, String patientID, String appointmentID, String appointmentOutcomeID){
+        this.appointmentOutcomeID = appointmentOutcomeID;
+        this.doctorID = doctorID;
+        this.patientID = patientID;
+        this.appointmentID = appointmentID;
         this.date = date;
         this.time = time;
         this.typeOfService = typeOfService;
@@ -27,8 +32,12 @@ public class AppointmentOutcome {
         this.consultationNotes = consultationNotes;
     }
 
-    // Method to generate a formatted ID with prefix and leading zeroes
-    private String generateFormattedId() {
+    public AppointmentOutcome(String date, String time, String typeOfService, ArrayList<PrescribedMedication> prescribedMedications, String consultationNotes, String doctorID, String patientID, String appointmentID){
+        this(date, time, typeOfService, prescribedMedications, consultationNotes, doctorID, patientID, appointmentID, generateFormattedId());
+            }
+        
+            // Method to generate a formatted ID with prefix and leading zeroes
+            private static String generateFormattedId() {
         return String.format("AO%04d", idCounter++); // AO + zero-padded 4-digit ID
     }
 
@@ -36,6 +45,18 @@ public class AppointmentOutcome {
 
     public String getAppointmentOutcomeID(){
         return this.appointmentOutcomeID;
+    }
+
+    public String getDoctorID(){
+        return this.doctorID;
+    }
+
+    public String getPatientID(){
+        return this.patientID;
+    }
+
+    public String getAppointmentID(){
+        return this.appointmentID;
     }
 
     public String getDate(){
@@ -58,7 +79,7 @@ public class AppointmentOutcome {
         return this.consultationNotes;
     }
 
-    // setter method to change the status of the medicine
+    // setter method 
 
     public void setStatusDispensed(String medicineName){
         for (PrescribedMedication medication : prescribedMedications) {
@@ -69,4 +90,7 @@ public class AppointmentOutcome {
         }
     }
 
+    public void setConsultationNotes(String newConsultationNotes){
+        this.consultationNotes = newConsultationNotes;
+    }
 }
