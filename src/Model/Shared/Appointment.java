@@ -48,7 +48,7 @@ public class Appointment {
         return this.status;
     }
 
-    public Strng getDate(){
+    public String getDate(){
         return this.date;
     }
 

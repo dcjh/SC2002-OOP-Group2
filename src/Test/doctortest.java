@@ -38,10 +38,16 @@ public class doctortest {
         //     System.out.println(s.getDoctorId() + s.getDateAvailability());
         // }
 
-        // System.out.println("testing update avail.......");
-        // data.updateIsAvailable("D0002", LocalDate.of(2024, 11, 20), false);
-        // Schedule l = data.find("D0002");
-        // System.out.println(l.getDoctorId() + l.getDateAvailability());
+        System.out.println("testing update avail.......");
+        data.updateIsAvailable("D0002", LocalDate.of(2024, 11, 23), true);
+        Schedule l = data.find("D0002");
+        System.out.println(l.getDoctorId() + l.getDateAvailability());
+
+        System.out.println("testing fetch.....");
+        List<Schedule> k = data.fetch();
+        for (Schedule s : k) {
+            System.out.println(s.getDoctorId() + s.getDateAvailability());
+        }
 
     }
 }
