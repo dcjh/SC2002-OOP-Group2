@@ -1,42 +1,24 @@
-/*in main uml and controller uml
-contains: 
-+ requestRestock() 
-+ updatePrescriptionstatus() 
-uses Pharmacist, InventoryController, ResotckRequestController, AppointmentOutcomeRecordeController
-used by PharmacistView
-*/
-
 package Controller;
-import Model.Roles.Pharmacist;
-import Model.Shared.Medicine;
-import Model.Shared.AppointmentOutcome;
-import View.PharmacistView;
+
+import java.util.Scanner;
 import Data.DataAccess.InventoryDAO;
-import Data.DataAccess.ReplenishmentDAO;
 import Model.AppointmentOutcome;
 import Model.Inventory;
 import Model.PrescribedMedication;
-import Model.ReplenishmentRequest;
 
+public class PharmacistController {
 
-public class PharmacistController{
-
-    private static InventoryDAO inventoryDAO;
-    public static void setInventoryDAO(InventoryDAO dao) {
-        inventoryDAO = dao;
-    }
-	
-    private Pharmacist pharmacist;
-    private PharmacistView view;
-    private PharmacistRepository repository;
-
-    public PharmacistController(Pharmacist pharmacist, PharmacistView view, PharmacistRepository repository){
-        this.pharmacist = pharmacist;
-        this.view = view;
-        this.repository = repository;
-    }
+    private AppointmentOutcomeController appointmentOutcomeController;
+    private InventoryController inventoryController;
+    private ReplenishmentRestockController replenishmentRestockcontroller;
     
-   public static void updatePrescriptionstatus(AppointmentOutcome appointmentOutcome) {
+    public PharmacistController() {
+        this.appointmentOutcomeController = new AppointmentOutcomeController(this);
+        this.inventoryController = new InventoryController(this);
+        this.replenishmentRestockcontroller = new ReplenishmentRestockController(this);
+    }
+		
+    public static void updatePrescriptionstatus(AppointmentOutcome appointmentOutcome) {
         if (appointmentOutcome == null) {
             System.out.println("No appointment outcome available to update.");
             return;
@@ -94,33 +76,24 @@ public class PharmacistController{
             System.out.println("Medication not found in the prescription.");
         }
     }
+   
     
-    public static void submitReplenishmentRequest() {
-        InventoryDAO inventoryDAO = new InventoryDAO();
-        ReplenishmentDAO replenishmentDAO = new ReplenishmentDAO();
-        Scanner scanner = new Scanner(System.in);
-        
-        
-        System.out.print("\nEnter Inventory ID for replenishment request: ");
-        String inventoryID = scanner.nextLine();
-        Inventory selectedItem = inventoryDAO.find(inventoryID, null);
-
-        if (selectedItem == null) {
-            System.out.println("Invalid Inventory ID.");
-            return;
-        }
-
-        System.out.print("Enter requested quantity: ");
-        int requestedQuantity = scanner.nextInt();
-        scanner.nextLine(); 
-        String requestID = replenishmentDAO.generateNextRequestID();
-        ReplenishmentRequest request = new ReplenishmentRequest(
-                requestID, selectedItem.getMedicineID(), selectedItem.getName(), requestedQuantity, "Pending"
-        );
-        
-        replenishmentDAO.save(request);
-        System.out.println("Replenishment request submitted successfully with Request ID: " + requestID);
-
+	public void displayInventory() {
+		inventoryController.viewAllInventory();
     }
+	
+	public void displayAppointmentOutcome() {
+		appointmentOutcomeController.printAppointmentOutcome();
+	}  
+    
+	public void submitReplenishmentRequests() {
+	    System.out.println("\n--- Pharmacist: Process Replenishment Requests ---");
+	    replenishmentRestockcontroller.submitReplenishmentRequest();
+	}
+	
+	public void viewAllReplenishmentRequests() {
+	    replenishmentRestockcontroller.viewAllReplenishmentRequests();
+	}
+    
+    
 }
-
