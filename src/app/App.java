@@ -33,7 +33,7 @@ public class app {
 	                    User user = accountManager.login(hosID, password);
 	                    if (user != null) {
 	                    	UserMainView mainPage = MenuFactory.getMainView(user);
-	                    	mainPage.displayMenu();
+	                    	mainPage.menu(hosID);
 	                    } else {
 	                        System.out.println("Invalid credentials. Login is denied. Try again.");
 	                    }

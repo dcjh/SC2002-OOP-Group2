@@ -1,32 +1,82 @@
-public class PatientView {
-    public void fullDisplay(MedicalRecord medicalRecord) {
-        System.out.println("Medical Record:");
-        System.out.println("Patient ID: " + medicalRecord.getPatientID());
-        System.out.println("Date of Birth: " + medicalRecord.getDob());
-        System.out.println("Gender: " + medicalRecord.getGender());
-        System.out.println("Phone Number: " + medicalRecord.getPhoneNumber());
-        System.out.println("Email: " + medicalRecord.getEmail());
-        System.out.println("Blood Type: " + medicalRecord.getBloodType());
-        System.out.println("Allergies: " + medicalRecord.getAllergies());
-        System.out.println("\nPast Diagnoses and Treatments:");
-        for (AppointmentOutcomeRecord outcome : medicalRecord.getAppointmentOutcome()) {
-            System.out.println("Diagnoses: " + outcome.getDiagnoses());
-            System.out.println("Treatments: " + outcome.getTreatments());
-            System.out.println(); // Blank line for readability between records
+package View;
+
+import Model.Shared.User;
+import Model.Roles.Patient;
+import Controller.PatientController;
+
+import java.util.Scanner;
+
+public class PatientView implements UserMainView{
+    private PatientController patientController;
+
+    public patientView(User user) {
+        if (user instanceof Patient) {
+            Patient patient = (Patient) user;
+            this.patientController = new PatientController(patient);
+        } else {
+            System.out.println("Error: The user provided is not a Patient. Returning to the main menu.");
+            this.patientController = null;
         }
     }
 
-    public void semiDisplay(MedicalRecord medicalRecord) {
-        System.out.println("Past Appointment Outcome Records:");
+    public void displayMenu() {
+        do {
+            System.out.println("\nPatient Menu:");
+            System.out.println("1. View Medical Record");
+            System.out.println("2. Update Contact Information");
+            System.out.println("3. View Scheduled Appointments");
+            System.out.println("4. Schedule Appointment");
+            System.out.println("5. Reschedule Appointment");
+            System.out.println("6. Cancel Appointment");
+            System.out.println("7. View Past Appointment Outcomes");
+            System.out.println("8. Logout");
 
-        for (AppointmentOutcomeRecord outcome : medicalRecord.getAppointmentOutcome()) {
-            System.out.println("Diagnoses: " + outcome.getDiagnoses());
-            System.out.println("Service Provided: " + outcome.getTreatments());
-            System.out.println("Prescribed Medications: " + outcome.getPrescribedMedications());
-            System.out.println("Consultation Notes: " + outcome.getConsultationNotes());
-            System.out.println("Update Timestamp: " + outcome.getUpdateTimestamps());
-            System.out.println();
-        }
+            int choice = Integer.parseInt(prompt("Enter your choice: "));
+
+            switch (choice) {
+                case 1:
+                    patientController.viewMedicalRecord();
+                    break;
+                case 2:
+                    String newPhoneNumber = prompt("Enter new phone number: ");
+                    String newEmail = prompt("Enter new email: ");
+                    patientController.updateContactInformation(newPhoneNumber, newEmail);
+                    break;
+                case 3:
+                    patientController.viewScheduledAppointments();
+                    break;
+                case 4:
+                    String docID = prompt("Enter Doctor ID: ");
+                    String date = prompt("Enter Appointment Date (YYYY-MM-DD): ");
+                    String time = prompt("Enter Appointment Time (HH:MM): ");
+                    patientController.scheduleAppointment(docID, date, time);
+                    break;
+                case 5:
+                    String rescheduleID = prompt("Enter Appointment ID to reschedule: ");
+                    String newDate = prompt("Enter new date (YYYY-MM-DD): ");
+                    String newTime = prompt("Enter new time (HH:MM): ");
+                    patientController.rescheduleAppointment(rescheduleID, newDate, newTime);
+                    break;
+                case 6:
+                    String cancelID = prompt("Enter Appointment ID to cancel: ");
+                    patientController.cancelAppointment(cancelID);
+                    break;
+                case 7:
+                    patientController.viewPastAppointment();
+                    break;
+                case 8:
+                    System.out.println("Logging out...");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please select a valid option.");
+                    break;
+            }
+        } while (choice != 8);
+    }
+    private static String prompt(String message) {
+        System.out.print(message);
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
 }

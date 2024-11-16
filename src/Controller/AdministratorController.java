@@ -7,6 +7,7 @@ import Data.DataAccess.PatientDAO;
 import Data.DataAccess.StaffDAO;
 import Data.DataAccess.UserDAO;
 import Model.Appointment;
+import Model.Inventory;
 import Model.Gender;
 import Model.UserType;
 
@@ -15,8 +16,21 @@ public class AdministratorController {
     private static final StaffDAO staffDAO = new StaffDAO();
     private static final UserDAO userDAO = new UserDAO();
     private static final PatientDAO patientDAO = new PatientDAO();
+    private AppointmentController appointmentController;
+    private InventoryController inventoryController;
+    private ReplenishmentRestockController replenishmentRestockcontroller; 
+	private AdministratorView administratorView;
 
-    public static void addStaffMember() {
+	
+
+    public AdministratorController(AdministratorView administratorView) {
+        this.appointmentController = new AppointmentController(this);
+        this.inventoryController = new InventoryController(this);
+        this.replenishmentRestockcontroller = new ReplenishmentRestockController(this);
+        this.administratorView = administratorView;
+    }
+    
+    public void addStaffMember() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter staff ID:\n ");
@@ -116,7 +130,7 @@ public class AdministratorController {
         System.out.println("Staff/User member added successfully.");
     }
 
-    public static void updateStaffMember() {
+    public void updateStaffMember() {
         Scanner scanner = new Scanner(System.in);
         List<Map<String, String>> staffList = staffDAO.loadAll();
 
@@ -192,30 +206,26 @@ public class AdministratorController {
         System.out.println("Staff member updated successfully.");
     }
 
-    public static void removeStaffMember() {
+    public void removeStaffMember() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter staff ID to remove: ");
         String staffID = scanner.nextLine();
 
-        // Attempt deletion in all DAOs
         boolean found = false;
 
-        // Check and delete in StaffDAO
         if (staffDAO.find(staffID, null) != null) {
             staffDAO.delete(staffID, null);
             System.out.println("Staff record with ID " + staffID + " removed successfully from staff records.");
             found = true;
         }
 
-        // Check and delete in UserDAO
         if (userDAO.find(staffID, null) != null) {
             userDAO.delete(staffID, null);
             System.out.println("User account with ID " + staffID + " removed successfully from user records.");
             found = true;
         }
 
-        // Check and delete in PatientDAO
         if (patientDAO.find(staffID, null) != null) {
             patientDAO.delete(staffID, null);
             System.out.println("Patient record with ID " + staffID + " removed successfully from patient records.");
@@ -227,9 +237,9 @@ public class AdministratorController {
         }
 
     }
-    public static void displayStaff() {
-        StaffDAO staffDAO = new StaffDAO(); // Use the DAO to access staff data
-        List<Map<String, String>> staffDatabase = staffDAO.loadAll(); // Load all staff from the DAO
+    public void displayStaff() {
+        StaffDAO staffDAO = new StaffDAO();
+        List<Map<String, String>> staffDatabase = staffDAO.loadAll();
         if (staffDatabase.isEmpty()) {
             System.out.println("No staff records available.");
             return;
@@ -267,7 +277,7 @@ public class AdministratorController {
         }
     }
 
-    private static void filterByRole(List<Map<String, String>> staffList, Scanner scanner) {
+    private void filterByRole(List<Map<String, String>> staffList, Scanner scanner) {
         System.out.println("\nSelect Role:");
         for (UserType role : UserType.values()) {
             System.out.println((role.ordinal() + 1) + ". " + role);
@@ -315,7 +325,7 @@ public class AdministratorController {
         System.out.println("Filtered by gender: " + selectedGender);
     }
 
-    private static void filterByAgeRange(List<Map<String, String>> staffList, Scanner scanner) {
+    private  void filterByAgeRange(List<Map<String, String>> staffList, Scanner scanner) {
         System.out.print("\nEnter Minimum Age: ");
         int minAge;
         try {
@@ -350,7 +360,7 @@ public class AdministratorController {
         System.out.println("Filtered by age range: " + minAge + " to " + maxAge);
     }
 
-    private static void displayFilteredResults(List<Map<String, String>> staffList) {
+    private  void displayFilteredResults(List<Map<String, String>> staffList) {
         if (staffList.isEmpty()) {
             System.out.println("No staff members match the current filter criteria.");
         } else {
@@ -368,28 +378,33 @@ public class AdministratorController {
         }
     }
     
-	public static void displayscheduledAppointmentdetails() {
-	    AppointmentDAO appointmentDAO = new AppointmentDAO();
-	    List<Appointment> appointments = appointmentDAO.loadAll();
-	    if (appointments.isEmpty()) {
-	        System.out.println("No scheduled appointments available.");
-	        return;
-	    }
-	    System.out.println("\n--- Viewing Scheduled Appointments ---");
-	    System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s%n",
-	            "Appointment ID", "Doctor ID", "Patient ID", "Status", "Date", "Time");
-	    System.out.println("--------------------------------------------------------------------------------");
-
-	    for (Appointment appointment : appointments) {
-	        System.out.printf("%-15s %-15s %-15s %-15s %-15s %-15s%n",
-	                appointment.getAppointmentID(),
-	                appointment.getDocID(),
-	                appointment.getPatientID(),
-	                appointment.getStatus(),
-	                appointment.getDate(),
-	                appointment.getTime());
-	    }
+    public void addMed() {
+    	inventoryController.addMedicine();
+    }
+    
+    public void updateMed() {
+    	inventoryController.updateRestockLevel();
+    }
+    
+    public void removeMed() {
+    	inventoryController.removeMedicine();
+    }
+  
+   public void displayscheduledAppointmentdetails() {
+		appointmentController.viewAllAppointment();
+    }
 	
+   public void displayInventory() {
+		inventoryController.viewAllInventory();
+    }
+	
+    public void approveReplenishmentRequest() {
+        System.out.println("\n--- Administrator: Approve Replenishment Request ---");
+        replenishmentRestockcontroller.processReplenishmentRequests();
+    }
+    
+    public void viewAllReplenishmentRequests() {
+    	replenishmentRestockcontroller.viewAllReplenishmentRequests();
     }
     
 }

@@ -5,33 +5,36 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
-import Controller.ScheduleControllers.DSVController;
+import Controller.ScheduleController;
+
 
 public class DoctorAvailabilityView {
 
-    private DSVController DSVController;
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private ScheduleController scheduleController; 
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    public DoctorAvailabilityView() {
-        this.DSVController = new DSVController();
+    public DoctorAvailabilityView(ScheduleController scheduleController) {
+        this.scheduleController = scheduleController;
     }
 
     public void menu(String doctorId) {
         Scanner scanner = new Scanner(System.in);
-
-        System.out.println("\nSetting Availability for for Doctor ID: " + doctorId);
-        System.out.println("Continue? (y/n)");
-        String proceed = scanner.nextLine();
-        switch (proceed) {
-            case "y":
-                setAvailability(scanner,doctorId);
-                break;
-            case "n":
-                System.out.println("Returning to Main Menu...");
-                DSVController.returnToDoctorView(doctorId);;
-                break;
-            default:
-                System.out.println("Invalid choice. Proceeding...");
+        while (true) {
+            System.out.print("\nCurrent Availability for for ");
+            scheduleController.showDoctorSchedule(doctorId);
+            System.out.print("Edit Availability? (y/n): ");
+            String proceed = scanner.nextLine();
+            switch (proceed) {
+                case "y":
+                    setAvailability(scanner,doctorId);
+                    break;
+                case "n":
+                    System.out.println("Returning to Main Menu...");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Proceeding...");
+            }
+            // if (proceed.equals("n")) break;
         }
     }
 
@@ -39,7 +42,7 @@ public class DoctorAvailabilityView {
     private void setAvailability(Scanner scanner, String doctorId) {
         LocalDate date = null;
         Boolean isAvailable = false;
-        System.out.print("Enter date (yyyy-MM-dd): ");
+        System.out.print("Enter date (dd-MM-yyyy): ");
         while (true) {
             try {
                 date = LocalDate.parse(scanner.nextLine(), DATE_FORMAT);
@@ -53,8 +56,9 @@ public class DoctorAvailabilityView {
                 break;
             } catch (Exception e) { System.out.println("Invalid input. Please try again."); }
         }
+        
         scanner.nextLine(); // Consume newline
-        DSVController.updateDoctorSchedule(doctorId,date,isAvailable);
+        scheduleController.updateDoctorSchedule(doctorId,date,isAvailable);
     }
 
 }

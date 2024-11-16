@@ -1,4 +1,4 @@
-package View;
+package View.Appointments;
 
 public class AppointmentView {
     public void printAppointment(String appointmentID, String docID, String patientID, String status, String time, String date){

@@ -1,87 +1,76 @@
 package Controller;
 
-import View.Doctor.DoctorView;
-import Model.Roles.Doctor;
 import java.time.LocalDate;
-import java.util.List;
-
-import Model.Shared.Schedule;
-import Test.appointmentTest;
 import Model.Shared.Appointment;
-import Model.Roles.Doctor;
-import DataAccess.StaffDAO;
+import View.Doctor.DoctorView;
+import java.util.List;
 
 public class DoctorController {
 
     private DoctorView doctorView;
     private ScheduleController scheduleController;
     private AppointmentController appointmentController;
-    private StaffDAO staffData; 
+    private MedicalRecordController medicalRecordController;
+    private AppointmentOutcomeController appointmentOutcomeController;
 
     public DoctorController() {
-        this.scheduleController =  new ScheduleController();
-        this.appointmentController = new AppointmentController();
-        this.doctorView = new DoctorView();
-        this.staffData = new StaffDAO();
+        this.scheduleController =  new ScheduleController(this);
+        this.appointmentController = new AppointmentController(this);
+        this.medicalRecordController = new MedicalRecordController(this);
+        this.appointmentOutcomeController = new AppointmentOutcomeController(this);
+        this.doctorView = new DoctorView(this);
+        this.appointmentOutcomeController = new AppointmentOutcomeController(this,appointmentController);
     }
 
-    //menu functions
-    public void viewPatientMR() {
+    //navigate to DoctorView
+    public void displayDoctorView(String doctorId) {
+        doctorView.menu(doctorId);
+    }
 
+    //methods to trigger actions
+    public void viewPatientMR(String doctorId) {
+        medicalRecordController.doctorMedicalRecordView(doctorId);
     }
 
     public void updatePatientMR() {
 
     }
-
+    
     public void viewDoctorSchedule(String doctorId) {
-        scheduleController.viewDoctorSchedule(doctorId, appointment);
+        scheduleController.showDoctorSchedule(doctorId); //delegate to schedule view
     }
 
-    public void setAvailability(String doctorId, LocalDate date, Boolean isAvailable) {
-        scheduleController.updateDoctorSchedule(doctorId, date, isAvailable);
+    public void setAvailability(String doctorId) {
+        scheduleController.showSetAvailabilityView(doctorId); //delegate to ability view
+    }
+    public void viewAppointmentRequests(String doctorId) {
+        appointmentController.appointmentRequestsView(doctorId); //delegate to appointment request view
     }
 
-    public void viewAppointmentRequests() {
-
+    public void viewUpcomingAppointments(String doctorId) {
+        appointmentController.viewApprovedAppointmentsByDoctorID(doctorId);
     }
 
-    public void viewUpcomingAppointments() {
-
-    }
-
-    public void recordAppointmentOutcome() {
-
+    public void viewRecordAppointmentOutcome(String doctorId) {
+        appointmentOutcomeController.viewMenuDoctor(doctorId);
     }
 
     public void logout() {
 
     }
 
-    //view navigation
-    public void doctorView(String doctorId) {
-        doctorView.menu(doctorId);
-    }
-    public void doctorScheduleView(String doctorId, Schedule schedule) {
-        scheduleController.doctorScheduleView(doctorId, schedule, appointmentController.getAllAppointment());
-    }
-    public void setAvailabilityView(String doctorId) {
-        scheduleController.doctorAvailabilityView(doctorId);
-    }
-    public void appointmentOutcomeView() {
 
+
+    //logic
+    public List<Appointment> getAppointmentsById(String doctorId) {
+        return appointmentController.getAppointmentsByDoctorID(doctorId);
     }
-    public void appointmentView() {
-        
+
+    public void updateDoctorSchedule(String doctorId, LocalDate date, Boolean isAvailable) {
+        scheduleController.updateDoctorSchedule(doctorId, date, isAvailable);
     }
-    public void appointmentRequestsView() {
-        
+    public List<AppointmentOutcomeRecord> getAppointmentOutcomeById (String doctorId) {
+        return appointmentOutcomeController.getAppointmentOutcomeByDoctorID(doctorId);
     }
-    public void medicalRecordsView() {
-        
-    }
-    public void setMedicalRecordsView() {
-        
-    }
-    //
+
 }

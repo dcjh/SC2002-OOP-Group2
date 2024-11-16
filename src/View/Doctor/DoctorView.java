@@ -1,22 +1,21 @@
 package View.Doctor;
 
 import Controller.DoctorController;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class DoctorView {
     private DoctorController doctorController;
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    public DoctorView() {
-        this.doctorController = new DoctorController();
+    public DoctorView(DoctorController doctorController) {
+        this.doctorController = doctorController;
     }
 
     public void menu(String doctorId) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println("\nDoctor Menu:");
+            System.out.println("----------------------------------------------");
+            System.out.println("Doctor Menu:");
+            System.out.println("----------------------------------------------");
             System.out.println("1. View Patient Medical Records");
             System.out.println("2. Update Patient Medical Records");
             System.out.println("3. View Personal Schedule");
@@ -25,6 +24,7 @@ public class DoctorView {
             System.out.println("6. View Upcoming Appointments");
             System.out.println("7. Record Appointment Outcome");
             System.out.println("8. Logout");
+            System.out.println("----------------------------------------------");
             System.out.print("Choose an option: ");
 
             int choice = scanner.nextInt();
@@ -32,25 +32,26 @@ public class DoctorView {
 
             switch (choice) {
                 case 1:
-                    doctorController.viewPatientMR();
+                    doctorController.viewPatientMR(doctorId);
                     break;
                 case 2:
-                    doctorController.updatePatientMR();
+                    doctorController.updatePatientMR(doctorId);
                     break;
                 case 3:
                     doctorController.viewDoctorSchedule(doctorId);
                     break;
                 case 4:
-                    doctorController.setAvailabilityView(doctorId);
+                    doctorController.setAvailability(doctorId);
                     break;
                 case 5:
-                    doctorController.appointmentRequestsView();
+                    doctorController.viewAppointmentRequests(doctorId);
                     break;
                 case 6:
-                    doctorController.viewUpcomingAppointments();
+                    doctorController.viewUpcomingAppointments(doctorId);
                     break;
                 case 7:
-                    doctorController.recordAppointmentOutcome();
+                    doctorController.viewRecordAppointmentOutcome(doctorId);
+                    break;
                 case 8:
                     System.out.println("Logging out...");
                     return;
@@ -58,6 +59,10 @@ public class DoctorView {
                     System.out.println("Invalid input. Please try again.");
             }
         }
+    }
+
+    public void displaySchedule(){
+        
     }
 
 

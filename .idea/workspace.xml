@@ -4,23 +4,81 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="25dbf431-c7ab-4092-8873-4d0053495ed7" name="Changes" comment="" />
+    <list default="true" id="25dbf431-c7ab-4092-8873-4d0053495ed7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/MedicalRecordController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/MedicalRecordView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/PastAppointmentView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PatientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PatientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/DataAccess/MedicalRecordDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/DataAccess/MedicalRecordDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Shared/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Shared/Appointment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/PatientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/PatientView.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;jaycelimyi&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/dcjh/SC2002-OOP-Group2.git&quot;,
+    &quot;accountId&quot;: &quot;7c513ed0-96eb-43d4-9563-f9f579be9cea&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2oqcP9TVNekAhGMfzeWB8IEEt0B" />
   <component name="ProjectViewState">
     <option name="showExcludedFiles" value="false" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "last_opened_file_path": "C:/Users/linyi/Documents/GitHub/SC2002-OOP-Group2",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/linyi/Documents/GitHub/SC2002-OOP-Group2&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.300" />
+        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.300" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="25dbf431-c7ab-4092-8873-4d0053495ed7" name="Changes" comment="" />
+      <created>1731600522072</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1731600522072</updated>
+      <workItem from="1731600526382" duration="12779000" />
+      <workItem from="1731661232903" duration="17457000" />
+    </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

@@ -1,12 +1,31 @@
 package Controller;
 import Data.DataAccess.AppointmentDAO;
 import Model.Shared.Appointment;
-import View.AppointmentView;
+import View.Appointments.AppointmentRequestsView;
+import View.Appointments.AppointmentView;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class AppointmentController { 
-    AppointmentDAO appointmentDAO = new AppointmentDAO();
-    AppointmentView view = new AppointmentView();
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+    private DoctorController doctorController;
+    private AppointmentRequestsView appointmentRequestsView;
+    private AppointmentDAO appointmentDAO = new AppointmentDAO();
+    private AppointmentView view = new AppointmentView();
+    
+
+    public AppointmentController() {
+    }
+
+    public AppointmentController(DoctorController doctorController) {
+        this.doctorController = doctorController;
+        this.appointmentRequestsView = new AppointmentRequestsView(this);
+    }
+
+    // create
 
     // Create a new appointment
     public void createAppointment(String doctorId, String patientId, String time, String date) {
@@ -14,6 +33,69 @@ public class AppointmentController {
         appointmentDAO.save(appointment);
         System.out.println("Appointment created successfully.");
     }
+
+    // getter methods
+
+    // Get an appointment by ID
+    public Appointment getAppointment(String appointmentId) {
+        return appointmentDAO.find(appointmentId, null);
+    }
+
+    // Get all appointments
+    public List<Appointment> getAllAppointment() {
+        List<Appointment> appointments = appointmentDAO.loadAll();
+        return appointments;
+    }
+
+    // Get all appointments for a particular DoctorID (completed and cancelled included)
+    public List<Appointment> getAppointmentsByDoctorID(String docId) {
+        return appointmentDAO.getAppointmentsByDocID(docId);
+    }
+
+    // Get all approved appointments for a particular DoctorID
+    public List<Appointment> getApprovedAppointmentsByDoctorID(String docId) {
+        return appointmentDAO.getApprovedAppointmentsByDocID(docId);
+    }
+
+    // Get all pending appointments for a particular DoctorID
+    public List<Appointment> getPendingAppointmentsByDoctorID(String docId) {
+        return appointmentDAO.getPendingAppointmentsByDocID(docId);
+    }
+
+    // Get all appointments for a particular PatientID (completed and cancelled included)
+    public List<Appointment> getAppointmentsByPatientID(String patientId) {
+        return appointmentDAO.getAppointmentsByPatientID(patientId);
+    }
+
+    // Get all approved appointments for a particular PatientID
+    public List<Appointment> getApprovedAppointmentsByPatientID(String patientId) {
+        return appointmentDAO.getApprovedAppointmentsByPatientID(patientId);
+    }
+
+    // setter functions
+    // for status (there are 4 status [pending, cancelled, approved, completed])
+
+    // Update an appointment's status
+    public void updateAppointmentStatus(String appointmentId, String newStatus) {
+        Appointment appointment = appointmentDAO.find(appointmentId, null);
+        appointment.setStatus(newStatus);
+        appointmentDAO.save(appointment);
+        System.out.println("Appointment status updated successfully.");
+    }
+
+    // for patient to reschedule
+    public void updateAppointmentReschedule(String appointmentId, String newDate, String newTime) {
+        Appointment appointment = appointmentDAO.find(appointmentId, null);
+        appointment.setDate(newDate);
+        appointment.setTime(newTime);
+        appointment.setStatus("pending");
+        appointmentDAO.save(appointment);
+        System.out.println("Appointment reschedule request is made successfully. Awaiting doctor's approval.");
+    }
+
+    // no setter method for patientID and doctorID because no one can not modify the patientID or doctorID
+
+    // view method
 
     // View an appointment by ID
     public void viewAppointment(String appointmentId) {
@@ -32,12 +114,6 @@ public class AppointmentController {
             printAppointment(a);
             System.out.println(" ");
         }
-    }
-
-    // Return all appointments
-    public List<Appointment> getAllAppointment() {
-        List<Appointment> appointments = appointmentDAO.loadAll();
-        return appointments;
     }
 
     // View all appointments for a particular DoctorID (completed and cancelled included)
@@ -95,33 +171,30 @@ public class AppointmentController {
         }
     }
 
-    // setter functions
-    // for status (there are 4 status [pending, cancelled, approved, completed])
-
-    // Update an appointment's status
-    public void updateAppointmentStatus(String appointmentId, String newStatus) {
-        Appointment appointment = appointmentDAO.find(appointmentId, null);
-        appointment.setStatus(newStatus);
-        appointmentDAO.save(appointment);
-        System.out.println("Appointment status updated successfully.");
-    }
-
-    // for patient to reschedule
-    public void updateAppointmentReschedule(String appointmentId, String newDate, String newTime) {
-        Appointment appointment = appointmentDAO.find(appointmentId, null);
-        appointment.setDate(newDate);
-        appointment.setTime(newTime);
-        appointment.setStatus("pending");
-        appointmentDAO.save(appointment);
-        System.out.println("Appointment reschedule request is made successfully. Awaiting doctor's approval.");
-    }
-
-    // no setter method for patientID and doctorID because no one can not modify the patientID or doctorID
-
-    // view
-
     public void printAppointment(Appointment apt){
         this.view.printAppointment(apt.getAppointmentID(), apt.getDocID(), apt.getPatientID(), apt.getStatus(), apt.getTime(), apt.getDate());
     }
 
+    //navigate to apointment requests view
+    public void appointmentRequestsView(String doctorId) {
+        appointmentRequestsView.menu(doctorId);
+    }
+
+    //to update doctor's availability
+    public void updateAppointmentSchedule(String appointmentId, String doctorId, String date, Boolean approve) {
+        if (approve) {
+            doctorController.updateDoctorSchedule(doctorId, LocalDate.parse(date, DATE_FORMAT), false);
+            for (Appointment a : getPendingAppointmentsByDoctorID(doctorId)) {
+                updateAppointmentStatus(a.getAppointmentID(), "cancelled");
+            }
+        } else {
+            updateAppointmentStatus(appointmentId, "cancelled");
+        }
+    }
+
+    public void appointmentManagementView (String patientId) {
+
+    }
+    
 }
+

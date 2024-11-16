@@ -1,0 +1,1 @@
+AppointmentOutcomeID,DoctorID,PatientID,AppointmentID,Date,Time,TypeOfService,PrescribedMedications,ConsultationNotes
