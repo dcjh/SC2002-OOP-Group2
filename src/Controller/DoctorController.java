@@ -23,6 +23,9 @@ public class DoctorController {
     public void displayPatientMR() {
 
     }
+    public void displayDoctorView(String doctorId) {
+        doctorView.menu(doctorId);
+    }
 
     //methods to trigger actions
     public void viewPatientMR() {
@@ -33,11 +36,11 @@ public class DoctorController {
 
     }
     public void viewDoctorSchedule(String doctorId) {
-        scheduleController.viewDoctorSchedule(doctorId);
+        scheduleController.viewDoctorSchedule(doctorId); //delegate to schedule view
     }
 
     public void setAvailability(String doctorId) {
-        scheduleController.showSetAvailabilityView(doctorId);
+        scheduleController.showSetAvailabilityView(doctorId); //delegate to ability view
     }
     public void viewAppointmentRequests(String doctorId) {
 

@@ -54,6 +54,7 @@ public class DoctorAvailabilityView {
                 break;
             } catch (Exception e) { System.out.println("Invalid input. Please try again."); }
         }
+        
         scanner.nextLine(); // Consume newline
         scheduleController.updateDoctorSchedule(doctorId,date,isAvailable);
     }

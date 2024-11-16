@@ -83,6 +83,7 @@ public class ScheduleDAO {
         List<Schedule> allSchedules = fetch();
         allSchedules.removeIf(existing -> existing.getDoctorId().equals(schedule.getDoctorId()));
         allSchedules.add(schedule);
+        System.out.println("New Doctor Entry Recorded!");
         writeAll(allSchedules);
     }
 
@@ -102,6 +103,7 @@ public class ScheduleDAO {
         for (Schedule schedule : allSchedules) {
             if (schedule.getDoctorId().equals(doctorId)) {
                 schedule.getDateAvailability().put(date, isAvailable);
+                System.out.println("Availability Updated Successfully!");
                 break;
             }
         }

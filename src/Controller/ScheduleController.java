@@ -48,19 +48,21 @@ public class ScheduleController{
         // Pass consolidated data to the view
         doctorScheduleView.menu(doctorId, schedule.getDateAvailability(), Appointments);
     }
-    
-    
 
     public void updateDoctorSchedule(String doctorId, LocalDate date, Boolean isAvailable) {
-        data.updateIsAvailable(doctorId, date, isAvailable);
+        if (data.find(doctorId) == null ) {
+            Schedule newSchedule = new Schedule(doctorId);
+            newSchedule.getDateAvailability().put(date, isAvailable);
+            data.add(newSchedule);
+        } else { data.updateIsAvailable(doctorId, date, isAvailable); }
     }
 
     public void showSetAvailabilityView(String doctorId){
         doctorAvailabilityView.menu(doctorId);
     }
 
-    public void returnToDoctorView(){
-
+    public void returnToDoctorView(String doctorId){
+        doctorController.displayDoctorView(doctorId);
     }
 
 }
