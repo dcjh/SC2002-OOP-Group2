@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class PatientView implements UserMainView{
     private PatientController patientController;
 
-    public patientView(User user) {
+    public PatientView(User user) {
         if (user instanceof Patient) {
             Patient patient = (Patient) user;
             this.patientController = new PatientController(patient);

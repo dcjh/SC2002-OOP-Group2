@@ -28,13 +28,13 @@ public class MedicalRecordDAO {
                 }
                 String[] values = line.split(",");
                 if (values[0].equals(patientID)) { // Find the matching patient ID
-                    String name = values[1];
-                    String dob = values[2];
-                    String gender = values[3];
-                    String phoneNumber = values[4];
-                    String email = values[5];
-                    String bloodType = values[6];
-                    String allergies = values[7];
+                    String name = values.length > 1 ? values[1] : "";
+                    String dob = values.length > 2 ? values[2] : "";
+                    String gender = values.length > 3 ? values[3] : "";
+                    String phoneNumber = values.length > 4 ? values[4] : "";
+                    String email = values.length > 5 ? values[5] : "";
+                    String bloodType = values.length > 6 ? values[6] : "";
+                    String allergies = values.length > 7 ? values[7] : "";
 
                     return new MedicalRecord(patientID, name, dob, gender, phoneNumber, email, bloodType, allergies);
                 }

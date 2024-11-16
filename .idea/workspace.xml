@@ -7,9 +7,13 @@
     <list default="true" id="25dbf431-c7ab-4092-8873-4d0053495ed7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/MedicalRecordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MedicalRecordController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/PatientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PatientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PastDiagnosesAndTreatmentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PastDiagnosesAndTreatmentsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/DataAccess/MedicalRecordDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/DataAccess/MedicalRecordDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/DataAccess/PastDiagnosesAndTreatmentsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/DataAccess/PastDiagnosesAndTreatmentsDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Roles/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Roles/Patient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Shared/MedicalRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Shared/MedicalRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Shared/PastDiagnosesAndTreatments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Shared/PastDiagnosesAndTreatments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/MedicalRecordView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/MedicalRecordView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/PatientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/PatientView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +75,7 @@
       <option name="presentableId" value="Default" />
       <updated>1731600522072</updated>
       <workItem from="1731600526382" duration="12779000" />
-      <workItem from="1731661232903" duration="38728000" />
+      <workItem from="1731661232903" duration="42958000" />
     </task>
     <servers />
   </component>

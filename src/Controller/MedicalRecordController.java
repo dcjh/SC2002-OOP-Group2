@@ -23,9 +23,9 @@ public class MedicalRecordController {
 
     public void viewMedicalRecord(String patientID) {
         MedicalRecord medicalRecord = medicalRecordDAO.loadSingleRecord(patientID);
+        medicalRecord.setPastDiagnosesAndTreatments(pastDiagnosesAndTreatmentsController.getPastDiagnosesAndTreatments(patientID));
         if (medicalRecord != null) {
             medicalRecordView.fullDisplay(medicalRecord);
-            pastDiagnosesAndTreatmentsController.viewPastDiagnosesAndTreatments(patientID);
         } else {
             System.out.println("Medical record not found for patient ID: " + patientID);
         }

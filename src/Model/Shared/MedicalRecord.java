@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.util.List;
 import Model.Shared.PastDiagnosesAndTreatments;
+import Model.Shared.AppointmentOutcomeRecord;
 
 public class MedicalRecord {
 
