@@ -4,14 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import Data.DataAccess.ScheduleDAO;
 import View.Doctor.DoctorScheduleView;
-import View.app;
 import View.Doctor.DoctorAvailabilityView;
 import Model.Shared.Appointment;
 import Model.Shared.Schedule;
@@ -43,7 +39,7 @@ public class ScheduleController{
         HashMap<LocalDate , Appointment> Appointments = new HashMap<>();
         for (LocalDate date : schedule.getDateAvailability().keySet()) {
             for (Appointment appointment : allAppointments) {
-                if (appointment.getDate().equals(date.format(DATE_FORMAT))) {
+                if (appointment.getDate().equals(date.format(DATE_FORMAT)) && appointment.getStatus().equals("approved")) {
                     Appointments.put(date, appointment);
                     break;
                 }
