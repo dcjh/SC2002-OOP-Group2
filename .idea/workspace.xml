@@ -5,15 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25dbf431-c7ab-4092-8873-4d0053495ed7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/MedicalRecordController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/View/MedicalRecordView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/View/PastAppointmentView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/PastDiagnosesAndTreatmentsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Data/DataAccess/PastDiagnosesAndTreatmentsDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Model/Shared/PastDiagnosesAndTreatments.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/PastDiagnosesAndTreatmentsView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/PatientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PatientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/DataAccess/MedicalRecordDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/DataAccess/MedicalRecordDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Shared/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Shared/Appointment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/PatientView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/PatientView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MedicalRecordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MedicalRecordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Roles/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Roles/Patient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,20 +41,20 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/linyi/Documents/GitHub/SC2002-OOP-Group2&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/linyi/Documents/GitHub/SC2002-OOP-Group2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -74,7 +72,7 @@
       <option name="presentableId" value="Default" />
       <updated>1731600522072</updated>
       <workItem from="1731600526382" duration="12779000" />
-      <workItem from="1731661232903" duration="17457000" />
+      <workItem from="1731661232903" duration="34199000" />
     </task>
     <servers />
   </component>

@@ -5,20 +5,17 @@ import Data.DataAccess.MedicalRecordDAO;
 import View.MedicalRecordView;
 import Controller.AppointmentOutcomeController;
 import java.util.List;
-import View.Doctor.DoctorMedicalRecordView;
 
 public class MedicalRecordController {
     private MedicalRecordDAO medicalRecordDAO;
     private MedicalRecordView medicalRecordView;
     private AppointmentOutcomeController appointmentOutcomeController;
-    private DoctorController doctorController;
 
 
     public MedicalRecordController() {
         this.medicalRecordDAO = new MedicalRecordDAO();
         this.medicalRecordView = new MedicalRecordView();
         this.appointmentOutcomeController = new AppointmentOutcomeController();
-        this.doctorController = doctorController;
     }
 
     public void viewMedicalRecord(String patientID) {

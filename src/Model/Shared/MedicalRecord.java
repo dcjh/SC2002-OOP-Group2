@@ -7,6 +7,7 @@ import java.util.List;
 public class MedicalRecord {
 
     private String patientID;
+    private String name;
     private String dob;
     private String gender;
     private String phoneNumber;
@@ -15,8 +16,9 @@ public class MedicalRecord {
     private String allergies;
     private List<AppointmentOutcome> appointmentOutcome;
 
-    public MedicalRecord(String patientID, String dob, String gender, String phoneNumber, String email, String bloodType, String allergies) {
+    public MedicalRecord(String patientID,Sting name, String dob, String gender, String phoneNumber, String email, String bloodType, String allergies) {
         this.patientID = patientID;
+        this.name = name;
         this.dob = dob;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
