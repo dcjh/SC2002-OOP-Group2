@@ -1,8 +1,6 @@
 package View.Doctor;
 
 import Controller.DoctorController;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class DoctorView {
@@ -45,9 +43,9 @@ public class DoctorView {
                 case 5:
                     doctorController.viewAppointmentRequests(doctorId);
                     break;
-                // case 6:
-                //     doctorController.viewUpcomingAppointments(doctorId);
-                //     break;
+                case 6:
+                    doctorController.viewUpcomingAppointments(doctorId);
+                    break;
                 // case 7:
                 //     doctorController.recordAppointmentOutcome(doctorId);
                 case 8:

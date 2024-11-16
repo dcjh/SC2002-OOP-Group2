@@ -1,11 +1,8 @@
 package Controller;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 import Model.Shared.Appointment;
 import View.Doctor.DoctorView;
+import java.util.List;
 
 public class DoctorController {
 
@@ -46,12 +43,11 @@ public class DoctorController {
 
     }
 
-    public void viewUpcomingAppointments() {
-
+    public void viewUpcomingAppointments(String doctorId) {
+        appointmentController.viewApprovedAppointmentsByDoctorID(doctorId);
     }
 
     public void recordAppointmentOutcome() {
-
     }
 
     public void logout() {
@@ -62,14 +58,7 @@ public class DoctorController {
 
 
     public List<Appointment> getAppointmentsById(String doctorId) {
-        List<Appointment> allAppointments = appointmentController.getAllAppointment();
-        List<Appointment> appointmentsById = new ArrayList<>();
-        for (Appointment a : allAppointments) {
-            if (a.getDocID().equals(doctorId)) {
-                appointmentsById.add(a);
-            }
-        }
-        return appointmentsById;
+        return appointmentController.getAppointmentsByDoctorID(doctorId);
     }
 
 }
