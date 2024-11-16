@@ -3,25 +3,29 @@ package Controller;
 import java.util.*;
 
 import Data.DataAccess.AppointmentDAO;
+import Data.DataAccess.AppointmentOutcomeDAO;
 import Data.DataAccess.PatientDAO;
 import Data.DataAccess.StaffDAO;
 import Data.DataAccess.UserDAO;
 import Model.Appointment;
+import Model.AppointmentOutcome;
 import Model.Inventory;
+import Model.PrescribedMedication;
 import Model.Gender;
 import Model.UserType;
+import View.AdministratorView;
 
 public class AdministratorController {
 
     private static final StaffDAO staffDAO = new StaffDAO();
     private static final UserDAO userDAO = new UserDAO();
     private static final PatientDAO patientDAO = new PatientDAO();
+    private static final AppointmentDAO appointmentDAO = new AppointmentDAO();
+    private static final AppointmentOutcomeDAO appointmentoutcomeDAO = new AppointmentOutcomeDAO();
     private AppointmentController appointmentController;
     private InventoryController inventoryController;
-    private ReplenishmentRestockController replenishmentRestockcontroller; 
-	private AdministratorView administratorView;
-
-	
+    private ReplenishmentRestockController replenishmentRestockcontroller;
+    private AdministratorView administratorView;
 
     public AdministratorController(AdministratorView administratorView) {
         this.appointmentController = new AppointmentController(this);
@@ -389,12 +393,56 @@ public class AdministratorController {
     public void removeMed() {
     	inventoryController.removeMedicine();
     }
+ 
   
-   public void displayscheduledAppointmentdetails() {
+	public void displayscheduledAppointmentdetails() {
 		appointmentController.viewAllAppointment();
+	    List<Appointment> appointments = appointmentDAO.loadAll();
+
+	    if (appointments.isEmpty()) {
+	        System.out.println("No appointments found.");
+	        return;
+	    }
+
+	    System.out.println("Appointments:");
+	    System.out.println("----------------------------------------------------");
+
+	    // Iterate through all appointments
+	    for (Appointment appointment : appointments) {
+	        System.out.printf("Appointment ID: %s%n", appointment.getAppointmentID());
+	        System.out.printf("Patient ID: %s%n", appointment.getPatientID());
+	        System.out.printf("Doctor ID: %s%n", appointment.getDocID());
+	        System.out.printf("Date: %s%n", appointment.getDate());
+	        System.out.printf("Time: %s%n", appointment.getTime());
+	        System.out.printf("Status: %s%n", appointment.getStatus());
+
+	        // Check for completed appointments and fetch the outcome
+	        if ("completed".equalsIgnoreCase(appointment.getStatus())) {
+	            AppointmentOutcome outcome = appointmentoutcomeDAO.find(appointment.getAppointmentID());
+	            if (outcome != null) {
+	                System.out.println("  Appointment Outcome:");
+	                System.out.printf("    Outcome ID: %s%n", outcome.getAppointmentOutcomeID());
+	                System.out.printf("    Consultation Notes: %s%n", outcome.getConsultationNotes());
+
+	                //System.out.println("    Prescribed Medications:");
+	                //for (PrescribedMedication med : outcome.getPrescribedMedications()) {
+	                    //System.out.printf("      - %s (Qty: %d, Status: %s)%n",
+	                            //med.getMedicineName(), med.getQuantity(), med.getStatus());
+	                //}
+	            } else {
+	                System.out.println("  No outcome available for this appointment.");
+	            }
+	        }
+
+	        System.out.println("----------------------------------------------------");
+	    }
+		
+		
+		
+		
     }
 	
-   public void displayInventory() {
+	public void displayInventory() {
 		inventoryController.viewAllInventory();
     }
 	
@@ -406,5 +454,7 @@ public class AdministratorController {
     public void viewAllReplenishmentRequests() {
     	replenishmentRestockcontroller.viewAllReplenishmentRequests();
     }
+	
+	
     
 }
