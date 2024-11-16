@@ -45,8 +45,11 @@ public class MedicalRecordDAO {
     public void addMedicalRecord(MedicalRecord newRecord) {
         String newRecordLine = formatMedicalRecordCSVLine(newRecord); // Format the new record
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) { // Append mode
-            writer.newLine(); // Add a newline before appending the new record
+       try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) { // Open in append mode
+            File file = new File(FILE_PATH);
+            if (file.length() > 0) {
+                writer.newLine(); // Add a newline only if the file already has content
+            }
             writer.write(newRecordLine); // Write the new record to the file
         } catch (IOException e) {
             System.err.println("Error adding new medical record: " + e.getMessage());
