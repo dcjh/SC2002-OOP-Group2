@@ -18,12 +18,16 @@ public class AdministratorController {
     private static final PatientDAO patientDAO = new PatientDAO();
     private AppointmentController appointmentController;
     private InventoryController inventoryController;
-    private ReplenishmentRestockController replenishmentRestockcontroller;
+    private ReplenishmentRestockController replenishmentRestockcontroller; 
+	private AdministratorView administratorView;
+
+	
 
     public AdministratorController() {
         this.appointmentController = new AppointmentController(this);
         this.inventoryController = new InventoryController(this);
         this.replenishmentRestockcontroller = new ReplenishmentRestockController(this);
+	this.administratorView = new AdministratorView(this);
     }
     
     public void addStaffMember() {
