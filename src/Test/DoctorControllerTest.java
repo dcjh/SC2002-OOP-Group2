@@ -12,5 +12,6 @@ public class DoctorControllerTest {
     public static void main(String args[]) {
         doctorController = new DoctorController();
         doctorController.viewDoctorSchedule("D0002");
+        doctorController.setAvailability("D0007");
     }
 }
