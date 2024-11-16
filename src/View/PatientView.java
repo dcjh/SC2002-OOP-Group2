@@ -8,8 +8,6 @@ import java.util.Scanner;
 
 public class PatientView implements UserMainView{
     private PatientController patientController;
-    private MedicalRecordController medicalRecordController;
-    private AppointmentController appointmentController;
 
     public patientView(User user) {
         if (user instanceof Patient) {
@@ -18,7 +16,6 @@ public class PatientView implements UserMainView{
         } else {
             System.out.println("Error: The user provided is not a Patient. Returning to the main menu.");
             this.patientController = null;
-            this.medicalRecordController = null;
         }
     }
 
