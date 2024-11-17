@@ -6,6 +6,7 @@ import java.util.List;
 /*import Controller.AppointmentController;
 import Controller.MedicalRecordController;*/
 import Model.Roles.Patient;
+import Model.Shared.Appointment;
 
 public class PatientController {
     private Patient patient;
@@ -30,7 +31,7 @@ public class PatientController {
     public void cancelAppointment(String appointmentID) {
         appointmentController.updateAppointmentStatus(appointmentID, "cancelled");
     }
-    public void viewScheduledAppointments(List<Appointment> appointments) {
+    public void viewScheduledAppointments() {
         appointmentController.viewAppointmentsByPatientID(patient.getHosID());
     }
     public void viewMedicalRecord() {

@@ -8,19 +8,19 @@ import Model.Roles.UserType;
 
 
 public class MenuFactory {
-    public static UserMainView getMainView(UserType userType) {
-        switch (userType) {
+    public static UserMainView getMainView(User user) {
+        switch (user.getUserType()) {
             case ADMINISTRATOR:
-                return new administratorView();
+                return new AdministratorView(user);
             case DOCTOR:
-                return new doctorView();
+                return new DoctorView(user);
             case PATIENT:
-                return new patientView();
+                return new PatientView(user);
             case PHARMACIST:
-                return new pharmacistView();    
+                return new PharmacistView(user);    
             
             default:
-                throw new IllegalArgumentException("No menu available for this user type: " + userType);
+                throw new IllegalArgumentException("No menu available for this user type: " + user);
         }
     }
 }
