@@ -1,13 +1,12 @@
 package Controller;
 
-import java.util.List;
-import java.util.Scanner;
-import Data.DataAccess.InventoryDAO;
+import Data.DataAccess.AppointmentOutcomeDAO;
 import Model.Shared.AppointmentOutcome;
 import Model.Shared.Inventory;
 import Model.Shared.PrescribedMedication;
 import View.Pharmacist.PharmacistView;
-import Data.DataAccess.AppointmentOutcomeDAO;
+import java.util.List;
+import java.util.Scanner;
 
 public class PharmacistController {
 	
@@ -72,9 +71,9 @@ public class PharmacistController {
                 continue;
             }
 
-            medication.setStatusDispensed();
+            appointmentOutcomeController.setStatusDispensed(selectedOutcome.getAppointmentOutcomeID(), medication.getMedicineName());
             inventory.setCurrentStock(remainingStock);
-            inventoryController.updateDispensestockLevel(); 
+            inventoryController.updateDispensestockLevel(medication.getMedicineName(), medication.getQuantity()); 
 
             System.out.printf("Status of %s updated to 'dispensed'. Remaining stock: %d%n",
                     medication.getMedicineName(), inventory.getCurrentStock());
