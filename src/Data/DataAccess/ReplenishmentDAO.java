@@ -8,6 +8,10 @@ import java.util.List;
 
 public class ReplenishmentDAO {
 	private static final String FILE_PATH = "src/Data/Assets/Replenishment_Restock.csv";
+    
+    /** 
+     * @return List<ReplenishmentRequest>
+     */
     public List<ReplenishmentRequest> loadAll() {
         List<ReplenishmentRequest> requestList = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
@@ -35,6 +39,10 @@ public class ReplenishmentDAO {
         return requestList;
     }
 
+    
+    /** 
+     * @param request
+     */
     public void save(ReplenishmentRequest request) {
         List<ReplenishmentRequest> requestList = loadAll();
         boolean exists = false;

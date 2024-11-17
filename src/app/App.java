@@ -6,7 +6,11 @@ import Model.MenuFactory;
 import View.UserMainView;
 
 public class App {
-	   public static void main(String args[]){
+	   
+       /** 
+        * @param args[]
+        */
+       public static void main(String args[]){
 
 		   
 	        Scanner scanner = new Scanner(System.in);

@@ -12,6 +12,11 @@ public class MedicalRecordDAO {
 
     private static final String FILE_PATH = "src/Data/Assets/MedicalRecord.csv";
 
+    
+    /** 
+     * @param patientID
+     * @return MedicalRecord
+     */
     // Load a single MedicalRecord by patientID
     public MedicalRecord loadSingleRecord(String patientID) {
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
@@ -41,6 +46,10 @@ public class MedicalRecordDAO {
         return null; // Return null if the record is not found
     }
 
+    
+    /** 
+     * @param newRecord
+     */
     // Add a new MedicalRecord to the CSV file
     public void addMedicalRecord(MedicalRecord newRecord) {
         String newRecordLine = formatMedicalRecordCSVLine(newRecord); // Format the new record

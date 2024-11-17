@@ -10,6 +10,10 @@ public class DoctorControllerTest {
     private static PatientController patientController;
     private static Patient patient;
 
+    
+    /** 
+     * @param args[]
+     */
     public static void main(String args[]) {
         Doctor d = new Doctor("D0002","hehe",null,"Dog",null,1);
         doctorController = new DoctorController(d);

@@ -20,10 +20,18 @@ public class Schedule {
         this.dateTime = dateTime;
     }
 
+    
+    /** 
+     * @return String
+     */
     //getters
     public String getDoctorId() {
         return doctorId;
     }
+    
+    /** 
+     * @return HashMap<LocalDate, Boolean>
+     */
     public HashMap<LocalDate, Boolean> getDateAvailability() {
         return dateAvailability;
     }

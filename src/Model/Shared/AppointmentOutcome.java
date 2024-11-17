@@ -36,11 +36,19 @@ public class AppointmentOutcome {
         this(date, time, typeOfService, prescribedMedications, consultationNotes, doctorID, patientID, appointmentID, generateFormattedId());
             }
         
+            
+            /** 
+             * @return String
+             */
             // Method to generate a formatted ID with prefix and leading zeroes
             private static String generateFormattedId() {
         return String.format("AO%04d", idCounter++); // AO + zero-padded 4-digit ID
     }
 
+    
+    /** 
+     * @return String
+     */
     // getter
 
     public String getAppointmentOutcomeID(){

@@ -17,6 +17,11 @@ public class PatientBookScheduleView extends PatientScheduleView{
         this.scheduleController = scheduleController;
     }
 
+    
+    /** 
+     * @param scheduleList
+     * @param patientId
+     */
     public void menu(List<Schedule> scheduleList, String patientId) {
 
         Scanner scanner = new Scanner(System.in);
@@ -38,6 +43,12 @@ public class PatientBookScheduleView extends PatientScheduleView{
 
     }
 
+    
+    /** 
+     * @param scanner
+     * @param patientId
+     * @param scheduleList
+     */
     public void bookAppointment(Scanner scanner, String patientId, List<Schedule> scheduleList) {
         String br = "----------------------------------------------";
         boolean validInput = false;

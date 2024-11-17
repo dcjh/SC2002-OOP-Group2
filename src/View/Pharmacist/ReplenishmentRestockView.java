@@ -4,6 +4,11 @@ import Model.Shared.ReplenishmentRequest;
 import java.util.List;
 
 public class ReplenishmentRestockView {
+    
+    /** 
+     * @param title
+     * @param requests
+     */
     public void printReplenishmentRequests(String title, List<ReplenishmentRequest> requests) {
         System.out.println("\n--- " + title + " ---");
         if (requests.isEmpty()) {

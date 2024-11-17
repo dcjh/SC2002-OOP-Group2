@@ -9,6 +9,10 @@ import java.util.List;
 public class AppointmentOutcomeDAO {
     private final String filePath = "src/Data/Assets/AppointmentOutcome.csv";
 
+    
+    /** 
+     * @param outcome
+     */
     // Save an appointment outcome to the CSV file (append or update)
     public void save(AppointmentOutcome outcome) {
         // First, load all appointments
@@ -49,6 +53,10 @@ public class AppointmentOutcomeDAO {
         }
     }
 
+    
+    /** 
+     * @return List<AppointmentOutcome>
+     */
     // Retrieve all AppointmentOutcomes
     public List<AppointmentOutcome> loadAll() {
         List<AppointmentOutcome> outcomes = new ArrayList<>();

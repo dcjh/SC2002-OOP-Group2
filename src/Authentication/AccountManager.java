@@ -16,7 +16,13 @@ import java.util.Scanner;
 public class AccountManager {
 	private static final String FILE_PATH = "src/Data/Assets/userlogin.csv";
 
-	public User login(String hospID, String password) {
+	
+    /** 
+     * @param hospID
+     * @param password
+     * @return User
+     */
+    public User login(String hospID, String password) {
 		List<String[]> userDatabase = new ArrayList<>();
 		try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
 	    	String header = reader.readLine();
@@ -56,7 +62,12 @@ public class AccountManager {
     }
 
 	
-	   public static void changePassword(String hospID, String newPassword) {
+	   
+       /** 
+        * @param hospID
+        * @param newPassword
+        */
+       public static void changePassword(String hospID, String newPassword) {
 	    	List<String[]> fileContent = new ArrayList<>();
 	        	try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))){
 	            	String header = reader.readLine();

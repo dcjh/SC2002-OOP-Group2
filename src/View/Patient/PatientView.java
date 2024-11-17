@@ -21,6 +21,10 @@ public class PatientView implements UserMainView{
         }
     }
 
+    
+    /** 
+     * @param staffID
+     */
     public void menu(String staffID) {
     	int choice;
         do {
@@ -73,6 +77,11 @@ public class PatientView implements UserMainView{
             }
         } while (choice != 9);
     }
+    
+    /** 
+     * @param message
+     * @return String
+     */
     private static String prompt(String message) {
         System.out.print(message);
         Scanner scanner = new Scanner(System.in);

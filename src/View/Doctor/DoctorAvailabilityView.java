@@ -17,6 +17,10 @@ public class DoctorAvailabilityView {
         this.scheduleController = scheduleController;
     }
 
+    
+    /** 
+     * @param doctorId
+     */
     public void menu(String doctorId) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -39,6 +43,11 @@ public class DoctorAvailabilityView {
         }
     }
 
+    
+    /** 
+     * @param scanner
+     * @param doctorId
+     */
     // Helper method to set availability for a specific date
     private void setAvailability(Scanner scanner, String doctorId) {
         LocalDate date = null;

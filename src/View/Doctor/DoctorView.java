@@ -15,6 +15,10 @@ public class DoctorView implements UserMainView{
         this.doctorController = new DoctorController(doctor);
     }
 
+    
+    /** 
+     * @param doctorId
+     */
     public void menu(String doctorId) {
         Scanner scanner = new Scanner(System.in);
         while (true) {

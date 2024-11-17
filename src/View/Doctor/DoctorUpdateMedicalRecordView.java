@@ -18,6 +18,10 @@ public class DoctorUpdateMedicalRecordView extends DoctorMedicalRecordView{
         this.medicalRecordController = medicalRecordController;
     }
 
+    
+    /** 
+     * @param doctorId
+     */
     public void menu(String doctorId) {
         Scanner scanner = new Scanner(System.in);
         String linebr = "----------------------------------------------";
@@ -59,6 +63,12 @@ public class DoctorUpdateMedicalRecordView extends DoctorMedicalRecordView{
         }
     }
 
+    
+    /** 
+     * @param patientsMR
+     * @param scanner
+     * @param doctorId
+     */
     protected void updatePatientMR(List<MedicalRecord> patientsMR, Scanner scanner, String doctorId) {
         String linebr = "----------------------------------------------";
         MedicalRecord selectedPatient = null;

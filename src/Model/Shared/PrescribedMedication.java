@@ -12,6 +12,10 @@ public class PrescribedMedication extends Medicine{
         this.status = "pending";
     }
 
+    
+    /** 
+     * @return String
+     */
     // Override toString() to print medication details
     @Override
     public String toString() {
@@ -19,6 +23,10 @@ public class PrescribedMedication extends Medicine{
     }
 
 
+    
+    /** 
+     * @return String
+     */
     public String getStatus(){
         return this.status;
     }

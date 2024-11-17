@@ -27,12 +27,20 @@ public class Appointment {
     
     
         
+    
+    /** 
+     * @return String
+     */
     // getter functions
 
     public String getAppointmentID(){
         return this.appointmentID;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getPatientID(){
         return this.patientID;
     }

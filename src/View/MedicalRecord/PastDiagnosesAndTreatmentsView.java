@@ -5,6 +5,11 @@ import Model.Shared.PastDiagnosesAndTreatments;
 
 public class PastDiagnosesAndTreatmentsView {
 
+    
+    /** 
+     * @param patientID
+     * @param records
+     */
     // Display all past diagnoses and treatments for a specific patient
     public void displayPastDiagnosesAndTreatments(String patientID, List<PastDiagnosesAndTreatments> records) {
         System.out.println("Past Diagnoses and Treatments for Patient ID: " + patientID);

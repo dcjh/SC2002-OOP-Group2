@@ -8,9 +8,17 @@ public class Administrator extends User{
         super(hosID, password, UserType.ADMINISTRATOR , name, gender, age);
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getAdministratorId() {
         return hosID;
     }
+    
+    /** 
+     * @param hosID
+     */
     public void setAdministratorId(String hosID) {
         this.hosID = hosID;
     }

@@ -15,6 +15,11 @@ public class PatientReScheduleView {
         this.scheduleController = scheduleController;
     }
 
+    
+    /** 
+     * @param confirmedAppointments
+     * @param patientId
+     */
     public void menu(List<Appointment> confirmedAppointments, String patientId) {
         Scanner scanner = new Scanner(System.in);
         String linebr = "----------------------------------------------";
@@ -90,6 +95,10 @@ public class PatientReScheduleView {
         }
     }
 
+    
+    /** 
+     * @param appointments
+     */
     private void printAppointments(List<Appointment> appointments) {
         String border = "+-------------+-----------+------------+----------+------------+--------+";
         String header = "| Appointment | Doctor ID | Patient ID |  Status  |    Date    |  Time  |";

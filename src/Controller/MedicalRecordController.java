@@ -44,11 +44,19 @@ public class MedicalRecordController {
         this.pastDiagnosesAndTreatmentsController = new PastDiagnosesAndTreatmentsController();
     }
 
+    
+    /** 
+     * @param doctorId
+     */
     //navigate to medical record View
     public void doctorMedicalRecordView(String doctorId) {
         doctorMedicalRecordView.menu(doctorId);
     }
 
+    
+    /** 
+     * @param doctorId
+     */
     //navigate to update medical record view
     public void updateMedicalRecordView(String doctorId) {
         doctorUpdateMedicalRecordView.menu(doctorId);

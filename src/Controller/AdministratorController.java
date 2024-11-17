@@ -281,6 +281,11 @@ public class AdministratorController {
         }
     }
 
+    
+    /** 
+     * @param staffList
+     * @param scanner
+     */
     private void filterByRole(List<Map<String, String>> staffList, Scanner scanner) {
         System.out.println("\nSelect Role:");
         for (UserType role : UserType.values()) {
@@ -305,6 +310,11 @@ public class AdministratorController {
         System.out.println("Filtered by role: " + selectedRole);
     }
 
+    
+    /** 
+     * @param staffList
+     * @param scanner
+     */
     private static void filterByGender(List<Map<String, String>> staffList, Scanner scanner) {
         System.out.println("\nSelect Gender:");
         for (Gender gender : Gender.values()) {

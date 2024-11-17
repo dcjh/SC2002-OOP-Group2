@@ -24,11 +24,19 @@ public abstract class User {
         this.age = age;
 
     }
+    
+    /** 
+     * @return String
+     */
     // Getters and Setters
     public String getName() {
         return name;
     }
 
+    
+    /** 
+     * @param newName
+     */
     public void setName(String newName) {
         this.name = newName;
     }

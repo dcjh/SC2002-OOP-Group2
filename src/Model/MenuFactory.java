@@ -8,6 +8,11 @@ import View.UserMainView;
 
 
 public class MenuFactory {
+    
+    /** 
+     * @param user
+     * @return UserMainView
+     */
     public static UserMainView getMainView(User user) {
         switch (user.getUserType()) {
             case ADMINISTRATOR:

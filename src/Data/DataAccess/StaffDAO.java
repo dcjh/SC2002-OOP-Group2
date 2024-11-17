@@ -6,6 +6,10 @@ import java.util.*;
 public class StaffDAO {
     private static final String FILE_PATH = "src/Data/Assets/Staff_List.csv";
 
+    
+    /** 
+     * @return List<Map<String, String>>
+     */
     public List<Map<String, String>> loadAll() {
         List<Map<String, String>> staffList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
@@ -36,6 +40,10 @@ public class StaffDAO {
         return staffList;
     }
 
+    
+    /** 
+     * @param staff
+     */
     public void save(Map<String, String> staff) {
         List<Map<String, String>> staffList = loadAll();
         boolean exists = false;

@@ -7,6 +7,10 @@ import Model.Shared.PastDiagnosesAndTreatments;
 
 public class MedicalRecordView {
 
+    
+    /** 
+     * @param medicalRecord
+     */
     public void fullDisplay(MedicalRecord medicalRecord) {
         System.out.println("Medical Record:");
         System.out.println("Patient ID: " + medicalRecord.getPatientID());

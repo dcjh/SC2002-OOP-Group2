@@ -9,6 +9,11 @@ import Model.Shared.PastDiagnosesAndTreatments;
 public class PastDiagnosesAndTreatmentsDAO {
     private final String filePath = "src/Data/Assets/PastDiagnosesAndTreatments.csv";
 
+    
+    /** 
+     * @param patientID
+     * @return List<PastDiagnosesAndTreatments>
+     */
     // Retrieve all diagnoses and treatments for a given patient ID
     public List<PastDiagnosesAndTreatments> getDiagnosesAndTreatmentsByPatientID(String patientID) {
         List<PastDiagnosesAndTreatments> diagnosesAndTreatments = new ArrayList<>();
@@ -35,6 +40,10 @@ public class PastDiagnosesAndTreatmentsDAO {
         return diagnosesAndTreatments;
     }
 
+    
+    /** 
+     * @param treatment
+     */
     // Add a single record for a patient
     public synchronized void addSingleRecord(PastDiagnosesAndTreatments treatment) {
         String newLine = treatment.getPatientID() + "," + treatment.getDiagnosis() + "," + treatment.getTreatment();

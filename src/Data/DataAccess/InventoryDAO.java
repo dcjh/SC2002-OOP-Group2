@@ -8,6 +8,10 @@ import Model.Shared.Inventory;
 public class InventoryDAO {
     private static final String FILE_PATH = "C:\\Users\\chuaz\\eclipse-workspace\\OOP_project\\src\\Administrator\\Medicine_List.csv";
 
+    
+    /** 
+     * @return List<Inventory>
+     */
     public List<Inventory> loadAll() {
         List<Inventory> inventoryList = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
@@ -41,6 +45,10 @@ public class InventoryDAO {
         return inventoryList;
     }
 
+    
+    /** 
+     * @param item
+     */
     public void save(Inventory item) {
         List<Inventory> inventoryList = loadAll();
         boolean exists = false;

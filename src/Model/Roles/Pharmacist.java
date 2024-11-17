@@ -13,9 +13,17 @@ public class Pharmacist extends User{
         super(hosID, password,UserType.PHARMACIST, name, gender, age);
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getPharmacistId() {
         return hosID;
     }
+    
+    /** 
+     * @param hosID
+     */
     public void setPharmacistId(String hosID) {
         this.hosID = hosID;
     }

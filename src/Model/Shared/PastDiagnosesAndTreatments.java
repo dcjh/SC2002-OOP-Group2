@@ -11,10 +11,18 @@ public class PastDiagnosesAndTreatments {
         this.treatment = treatment;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getPatientID() {
         return patientID;
     }
 
+    
+    /** 
+     * @param patientID
+     */
     public void setPatientID(String patientID) {
         this.patientID = patientID;
     }

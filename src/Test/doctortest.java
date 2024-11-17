@@ -11,6 +11,10 @@ import Model.Shared.Schedule;
 
 public class doctortest {
     private static ScheduleDAO data = new ScheduleDAO();
+    
+    /** 
+     * @param args[]
+     */
     public static void main(String args[]){
 
         System.out.println("testing add.......");

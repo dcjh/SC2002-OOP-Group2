@@ -9,10 +9,18 @@ public class Medicine {
         this.quantity = quantity;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getMedicineName(){
         return this.medicineName;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getQuantity(){
         return this.quantity;
     }

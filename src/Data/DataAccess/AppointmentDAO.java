@@ -8,6 +8,10 @@ import java.util.List;
 public class AppointmentDAO {
     private final String filePath = "src/Data/Assets/Appointment.csv";
 
+    
+    /** 
+     * @return List<Appointment>
+     */
     // Load all appointments from the CSV file
     public List<Appointment> loadAll() {
         List<Appointment> appointments = new ArrayList<>();
@@ -34,6 +38,10 @@ public class AppointmentDAO {
         return appointments;
     }
 
+    
+    /** 
+     * @param appointment
+     */
     // Save an appointment to the CSV file (append or update)
     public void save(Appointment appointment) {
         // First, load all appointments
