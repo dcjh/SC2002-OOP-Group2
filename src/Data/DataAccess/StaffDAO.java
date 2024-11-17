@@ -3,12 +3,17 @@ package Data.DataAccess;
 import java.io.*;
 import java.util.*;
 
+/**
+ * The StaffDAO class handles CRUD operations for staff data.
+ * This class manages reading, writing, and updating staff records in a CSV file.
+ */
 public class StaffDAO {
     private static final String FILE_PATH = "src/Data/Assets/Staff_List.csv";
 
-    
-    /** 
-     * @return List<Map<String, String>>
+    /**
+     * Loads all staff records from the CSV file.
+     * 
+     * @return A list of maps representing all staff records.
      */
     public List<Map<String, String>> loadAll() {
         List<Map<String, String>> staffList = new ArrayList<>();
@@ -40,9 +45,10 @@ public class StaffDAO {
         return staffList;
     }
 
-    
-    /** 
-     * @param staff
+    /**
+     * Saves or updates a staff record in the CSV file.
+     * 
+     * @param staff A map representing the staff record to be saved.
      */
     public void save(Map<String, String> staff) {
         List<Map<String, String>> staffList = loadAll();
@@ -63,6 +69,13 @@ public class StaffDAO {
         saveAll(staffList);
     }
 
+    /**
+     * Finds a staff record by its ID.
+     * 
+     * @param staffId The ID of the staff member to find.
+     * @param searchKey A search key (not used in the current implementation).
+     * @return A map representing the found staff record, or null if not found.
+     */
     public Map<String, String> find(String staffId, String searchKey) {
         List<Map<String, String>> staffList = loadAll();
         for (Map<String, String> staff : staffList) {
@@ -73,12 +86,23 @@ public class StaffDAO {
         return null;
     }
 
+    /**
+     * Deletes a staff record by its ID.
+     * 
+     * @param staffId The ID of the staff member to delete.
+     * @param searchKey A search key (not used in the current implementation).
+     */
     public void delete(String staffId, String searchKey) {
         List<Map<String, String>> staffList = loadAll();
         staffList.removeIf(staff -> staff.get("staffID").equals(staffId));
         saveAll(staffList);
     }
 
+    /**
+     * Saves all staff records to the CSV file.
+     * 
+     * @param staffList A list of maps representing the staff records to be saved.
+     */
     private void saveAll(List<Map<String, String>> staffList) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
             writer.write("Staff ID,Name,Role,Gender,Age");
@@ -92,6 +116,12 @@ public class StaffDAO {
         }
     }
 
+    /**
+     * Formats a staff record as a CSV line.
+     * 
+     * @param staff A map representing the staff record.
+     * @return A string formatted as a CSV line.
+     */
     private String formatStaffCSVLine(Map<String, String> staff) {
         return String.join(",",
                 staff.get("staffID"),

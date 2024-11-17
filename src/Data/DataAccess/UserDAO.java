@@ -3,13 +3,17 @@ package Data.DataAccess;
 import java.io.*;
 import java.util.*;
 
+/**
+ * The UserDAO class handles CRUD operations for user data.
+ * This class manages reading, writing, and updating user records in a CSV file.
+ */
 public class UserDAO {
     private static final String FILE_PATH = "C:\\Users\\chuaz\\eclipse-workspace\\OOP_project\\src\\Authentication\\userlogin.csv";
 
-    
-    
-    /** 
-     * @return List<Map<String, String>>
+    /**
+     * Loads all user records from the CSV file.
+     * 
+     * @return A list of maps representing all user records.
      */
     public List<Map<String, String>> loadAll() {
         List<Map<String, String>> userList = new ArrayList<>();
@@ -43,9 +47,10 @@ public class UserDAO {
         return userList;
     }
 
-    
-    /** 
-     * @param user
+    /**
+     * Saves or updates a user record in the CSV file.
+     * 
+     * @param user A map representing the user record to be saved.
      */
     public void save(Map<String, String> user) {
         List<Map<String, String>> userList = loadAll();
@@ -66,7 +71,13 @@ public class UserDAO {
         saveAll(userList);
     }
 
-
+    /**
+     * Finds a user record by hosID.
+     * 
+     * @param hosID The ID of the user to find.
+     * @param searchKey A search key (not used in the current implementation).
+     * @return A map representing the found user record, or null if not found.
+     */
     public Map<String, String> find(String hosID, String searchKey) {
         List<Map<String, String>> userList = loadAll();
         for (Map<String, String> user : userList) {
@@ -77,13 +88,23 @@ public class UserDAO {
         return null;
     }
 
-
+    /**
+     * Deletes a user record by hosID.
+     * 
+     * @param hosID The ID of the user to delete.
+     * @param searchKey A search key (not used in the current implementation).
+     */
     public void delete(String hosID, String searchKey) {
         List<Map<String, String>> userList = loadAll();
         userList.removeIf(user -> user.get("hosID").equals(hosID));
         saveAll(userList);
     }
 
+    /**
+     * Saves all user records to the CSV file.
+     * 
+     * @param userList A list of maps representing the user records to be saved.
+     */
     private void saveAll(List<Map<String, String>> userList) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
             writer.write("hosID,password,role,name,gender,age,initialLogin");
@@ -97,6 +118,12 @@ public class UserDAO {
         }
     }
 
+    /**
+     * Formats a user record as a CSV line.
+     * 
+     * @param user A map representing the user record.
+     * @return A string formatted as a CSV line.
+     */
     private String formatUserCSVLine(Map<String, String> user) {
         return String.join(",",
                 user.get("hosID"),

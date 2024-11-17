@@ -5,17 +5,22 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * The ReplenishmentDAO class handles the data access for replenishment requests.
+ * This includes loading, saving, and managing the data from a CSV file.
+ */
 public class ReplenishmentDAO {
-	private static final String FILE_PATH = "src/Data/Assets/Replenishment_Restock.csv";
-    
-    /** 
-     * @return List<ReplenishmentRequest>
+    private static final String FILE_PATH = "src/Data/Assets/Replenishment_Restock.csv";
+
+    /**
+     * Loads all replenishment requests from the CSV file.
+     * 
+     * @return A list of replenishment requests.
      */
     public List<ReplenishmentRequest> loadAll() {
         List<ReplenishmentRequest> requestList = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
-            String line = br.readLine(); 
+            String line = br.readLine(); // Skip the header line
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
                 if (values.length < 4) {
@@ -39,9 +44,11 @@ public class ReplenishmentDAO {
         return requestList;
     }
 
-    
-    /** 
-     * @param request
+    /**
+     * Saves a replenishment request to the CSV file.
+     * Updates an existing request if found, or adds a new one if it does not exist.
+     * 
+     * @param request The replenishment request to save.
      */
     public void save(ReplenishmentRequest request) {
         List<ReplenishmentRequest> requestList = loadAll();
@@ -62,6 +69,11 @@ public class ReplenishmentDAO {
         saveAll(requestList);
     }
 
+    /**
+     * Saves all replenishment requests to the CSV file.
+     * 
+     * @param requestList A list of replenishment requests to save.
+     */
     private void saveAll(List<ReplenishmentRequest> requestList) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, false))) {
             writer.write("Request ID,Inventory Name,Requested Quantity,Status");
@@ -75,6 +87,12 @@ public class ReplenishmentDAO {
         }
     }
 
+    /**
+     * Formats a replenishment request as a CSV line.
+     * 
+     * @param request The replenishment request to format.
+     * @return A CSV-formatted string representation of the replenishment request.
+     */
     private String formatRequestCSVLine(ReplenishmentRequest request) {
         return String.join(",",
                 request.getRequestID(),
@@ -84,6 +102,11 @@ public class ReplenishmentDAO {
         );
     }
 
+    /**
+     * Generates the next request ID in the format "R##", where ## is the next number.
+     * 
+     * @return The next available request ID.
+     */
     public String generateNextRequestID() {
         List<ReplenishmentRequest> requestList = loadAll();
         int maxID = 0;
@@ -105,19 +128,30 @@ public class ReplenishmentDAO {
         return String.format("R%02d", maxID + 1);
     }
 
-	public ReplenishmentRequest find(String id, String searchKey) {
-	    List<ReplenishmentRequest> requestList = loadAll(); 
-	    for (ReplenishmentRequest request : requestList) {
-	        if (request.getRequestID().equalsIgnoreCase(id.trim())) { 
-	            return request;
-	        }
-	    }
-	    return null;
-	}
+    /**
+     * Finds a specific replenishment request by request ID.
+     * 
+     * @param id The request ID to find.
+     * @param searchKey Optional search key (not used in the current implementation).
+     * @return The replenishment request if found, or null if not found.
+     */
+    public ReplenishmentRequest find(String id, String searchKey) {
+        List<ReplenishmentRequest> requestList = loadAll();
+        for (ReplenishmentRequest request : requestList) {
+            if (request.getRequestID().equalsIgnoreCase(id.trim())) {
+                return request;
+            }
+        }
+        return null;
+    }
 
-	public void delete(String id, String searchKey) {
-		// TODO Auto-generated method stub
-		
-	}
-}	
-
+    /**
+     * Deletes a replenishment request by request ID.
+     * 
+     * @param id The request ID to delete.
+     * @param searchKey Optional search key (not used in the current implementation).
+     */
+    public void delete(String id, String searchKey) {
+        // TODO: Implementation required to delete a request by ID.
+    }
+}

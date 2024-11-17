@@ -8,16 +8,20 @@ import java.util.List;
 
 import Model.Shared.MedicalRecord;
 
+/**
+ * The MedicalRecordDAO class handles the data access operations for medical records.
+ * This includes loading, adding, and updating medical records from/to a CSV file.
+ */
 public class MedicalRecordDAO {
 
     private static final String FILE_PATH = "src/Data/Assets/MedicalRecord.csv";
 
-    
-    /** 
-     * @param patientID
-     * @return MedicalRecord
+    /**
+     * Loads a single medical record by patient ID from the CSV file.
+     *
+     * @param patientID The ID of the patient whose medical record is to be loaded.
+     * @return The MedicalRecord object if found, otherwise null.
      */
-    // Load a single MedicalRecord by patientID
     public MedicalRecord loadSingleRecord(String patientID) {
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
@@ -46,15 +50,15 @@ public class MedicalRecordDAO {
         return null; // Return null if the record is not found
     }
 
-    
-    /** 
-     * @param newRecord
+    /**
+     * Adds a new medical record to the CSV file.
+     *
+     * @param newRecord The MedicalRecord object to add.
      */
-    // Add a new MedicalRecord to the CSV file
     public void addMedicalRecord(MedicalRecord newRecord) {
         String newRecordLine = formatMedicalRecordCSVLine(newRecord); // Format the new record
 
-       try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) { // Open in append mode
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) { // Open in append mode
             File file = new File(FILE_PATH);
             if (file.length() > 0) {
                 writer.newLine(); // Add a newline only if the file already has content
@@ -65,7 +69,11 @@ public class MedicalRecordDAO {
         }
     }
 
-    // Update a single MedicalRecord by rewriting the CSV with the modified record
+    /**
+     * Updates a single medical record by rewriting the CSV file with the modified record.
+     *
+     * @param updatedRecord The updated MedicalRecord object.
+     */
     public void updateSingleRecord(MedicalRecord updatedRecord) {
         List<String> lines = new ArrayList<>();
         String updatedLine = formatMedicalRecordCSVLine(updatedRecord); // Format the updated record as a single line
@@ -102,7 +110,12 @@ public class MedicalRecordDAO {
         }
     }
 
-    // Helper method to format a MedicalRecord object as a CSV line
+    /**
+     * Formats a MedicalRecord object as a CSV line.
+     *
+     * @param medicalRecord The MedicalRecord object to format.
+     * @return A CSV-formatted line representing the medical record.
+     */
     private String formatMedicalRecordCSVLine(MedicalRecord medicalRecord) {
         return String.join(",",
                 medicalRecord.getPatientID(),

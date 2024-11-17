@@ -9,14 +9,19 @@ import java.util.List;
 
 import Model.Shared.Schedule;
 
+/**
+ * The ScheduleDAO class handles the data access for doctor schedules.
+ * This includes loading, saving, adding, deleting, and updating schedules from a CSV file.
+ */
 public class ScheduleDAO {
 
     private static final String FILE_PATH = "src/Data/Assets/Schedule.csv";
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    
-    /** 
-     * @return List<Schedule>
+    /**
+     * Fetches all schedules from the CSV file.
+     * 
+     * @return A list of schedules.
      */
     public List<Schedule> fetch() {
         List<Schedule> scheduleList = new ArrayList<>();
@@ -44,7 +49,7 @@ public class ScheduleDAO {
                         break;
                     }
                 }
-    
+
                 if (existingSchedule == null) {
                     // Create a new schedule if none exists for this doctor
                     HashMap<LocalDate, Boolean> dateAvailability = new HashMap<>();
@@ -64,9 +69,10 @@ public class ScheduleDAO {
         return scheduleList;
     }
 
-    
-    /** 
-     * @param scheduleList
+    /**
+     * Writes all schedules to the CSV file.
+     * 
+     * @param scheduleList A list of schedules to write to the CSV file.
      */
     private void writeAll(List<Schedule> scheduleList) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, false))) {  // overwrite mode
@@ -85,6 +91,15 @@ public class ScheduleDAO {
         }
     }
 
+    /**
+     * Formats the availability details of a doctor as a CSV line.
+     * 
+     * @param doctorId The doctor's ID.
+     * @param date The date of availability.
+     * @param isAvailable The availability status.
+     * @param time The time associated with the availability.
+     * @return A formatted CSV line for the schedule.
+     */
     private String formatAvailabilityCSVLine(String doctorId, LocalDate date, Boolean isAvailable, String time) {
         return String.join(",",
                 doctorId,
@@ -94,6 +109,11 @@ public class ScheduleDAO {
         );
     }
 
+    /**
+     * Adds a new schedule or updates an existing schedule for a doctor.
+     * 
+     * @param schedule The schedule to be added or updated.
+     */
     public void add(Schedule schedule) {
         List<Schedule> allSchedules = fetch();
         allSchedules.removeIf(existing -> existing.getDoctorId().equals(schedule.getDoctorId()));
@@ -102,6 +122,12 @@ public class ScheduleDAO {
         writeAll(allSchedules);
     }
 
+    /**
+     * Deletes a specific date from a doctor's schedule.
+     * 
+     * @param doctorId The doctor's ID.
+     * @param date The date to be deleted from the schedule.
+     */
     public void deleteDate(String doctorId, LocalDate date) {
         List<Schedule> allSchedules = fetch();
         for (Schedule schedule : allSchedules) {
@@ -113,6 +139,14 @@ public class ScheduleDAO {
         writeAll(allSchedules);
     }
 
+    /**
+     * Updates the availability status and time for a specific date in a doctor's schedule.
+     * 
+     * @param doctorId The doctor's ID.
+     * @param date The date to be updated.
+     * @param isAvailable The updated availability status.
+     * @param time The updated time.
+     */
     public void updateIsAvailable(String doctorId, LocalDate date, Boolean isAvailable, String time) {
         List<Schedule> allSchedules = fetch();
         for (Schedule schedule : allSchedules) {
@@ -126,10 +160,18 @@ public class ScheduleDAO {
         writeAll(allSchedules);
     }
 
+    /**
+     * Finds a schedule for a specific doctor by their ID.
+     * 
+     * @param doctorId The doctor's ID.
+     * @return The schedule of the doctor if found, or null if not found.
+     */
     public Schedule find(String doctorId) {
         List<Schedule> scheduleList = fetch();
         for (Schedule schedule : scheduleList) {
-            if (schedule.getDoctorId().equals(doctorId)) {return schedule;}
+            if (schedule.getDoctorId().equals(doctorId)) {
+                return schedule;
+            }
         }
         return null;
     }

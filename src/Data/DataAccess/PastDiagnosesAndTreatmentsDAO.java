@@ -6,15 +6,19 @@ import java.util.List;
 
 import Model.Shared.PastDiagnosesAndTreatments;
 
+/**
+ * The PastDiagnosesAndTreatmentsDAO class is responsible for managing data access
+ * for past diagnoses and treatments. It provides methods for retrieving and adding records.
+ */
 public class PastDiagnosesAndTreatmentsDAO {
     private final String filePath = "src/Data/Assets/PastDiagnosesAndTreatments.csv";
 
-    
-    /** 
-     * @param patientID
-     * @return List<PastDiagnosesAndTreatments>
+    /**
+     * Retrieves all diagnoses and treatments for a given patient ID.
+     *
+     * @param patientID The ID of the patient whose diagnoses and treatments are to be retrieved.
+     * @return A list of PastDiagnosesAndTreatments objects representing the patient's records.
      */
-    // Retrieve all diagnoses and treatments for a given patient ID
     public List<PastDiagnosesAndTreatments> getDiagnosesAndTreatmentsByPatientID(String patientID) {
         List<PastDiagnosesAndTreatments> diagnosesAndTreatments = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -40,11 +44,12 @@ public class PastDiagnosesAndTreatmentsDAO {
         return diagnosesAndTreatments;
     }
 
-    
-    /** 
-     * @param treatment
+    /**
+     * Adds a single record of diagnosis and treatment for a patient.
+     * Checks for duplicates before adding.
+     *
+     * @param treatment The PastDiagnosesAndTreatments object to be added.
      */
-    // Add a single record for a patient
     public synchronized void addSingleRecord(PastDiagnosesAndTreatments treatment) {
         String newLine = treatment.getPatientID() + "," + treatment.getDiagnosis() + "," + treatment.getTreatment();
 
@@ -68,7 +73,12 @@ public class PastDiagnosesAndTreatmentsDAO {
         }
     }
 
-    // Retrieve all diagnoses and treatments (admin/debugging purposes)
+    /**
+     * Retrieves all diagnoses and treatments for all patients.
+     * This method is intended for administrative or debugging purposes.
+     *
+     * @return A list of PastDiagnosesAndTreatments objects representing all records.
+     */
     public List<PastDiagnosesAndTreatments> getAllDiagnosesAndTreatments() {
         List<PastDiagnosesAndTreatments> allDiagnosesAndTreatments = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
