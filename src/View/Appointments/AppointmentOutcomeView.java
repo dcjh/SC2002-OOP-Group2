@@ -55,6 +55,8 @@ public class AppointmentOutcomeView {
         Scanner sc = new Scanner(System.in);
         int choice;
 
+        while(true){
+
         System.out.println("Choose your option:");
         System.out.println("1. View all your Appointment Outcome");
         System.out.println("2. Add a new Appointment Outcome");
@@ -62,52 +64,69 @@ public class AppointmentOutcomeView {
         
         choice = sc.nextInt();
 
-        switch (choice) {
-            case 1:
-                List<AppointmentOutcome> outcomes = appointmentOutcomeController.getAppointmentOutcomeByDoctorID(doctorId);
-                System.out.println(" ");
-                System.out.println("All the appointment outcomes for the Doctor ID " + doctorId + " : ");
-                System.out.println(" ");
-                for (AppointmentOutcome o : outcomes){
-                    appointmentOutcomeController.printAppointmentOutcome(o);
+            switch (choice) {
+                case 1:
+                    List<AppointmentOutcome> outcomes = appointmentOutcomeController.getAppointmentOutcomeByDoctorID(doctorId);
                     System.out.println(" ");
-                }
-                break;
-            case 2:
-                sc.nextLine();
-                System.out.println(" ");
-                appointmentOutcomeController.viewAppointmentsByDoctorID(doctorId);
-                System.out.println("Select which appointment would you like to record? Input the AppointmentID : ");
-                String aptID = sc.nextLine();
-                Appointment appointment = appointmentOutcomeController.getAppointment(aptID);
-                String patientID = appointment.getPatientID();
-                String date = appointment.getDate();
-                String time = appointment.getTime();
-                System.out.println("Input the type of service : ");
-                String typeOfService = sc.nextLine();
-                ArrayList<PrescribedMedication> medications = new ArrayList<>();
-                System.out.println("Input the prescribed medication and its quantity ");
-                System.out.println("------------------------------------------------");
-                while (true) {
-                    System.out.println("Enter medicine name (type 'n' to stop):");
-                    String medicineName = sc.nextLine(); // Read the input
-                    if (medicineName.equalsIgnoreCase("n")) { // Check if the input is "n" (case-insensitive)
-                        break; // Exit the loop
+                    System.out.println("All the appointment outcomes for the Doctor ID " + doctorId + " : ");
+                    System.out.println(" ");
+                    for (AppointmentOutcome o : outcomes){
+                        appointmentOutcomeController.printAppointmentOutcome(o);
+                        System.out.println(" ");
                     }
-                    System.out.println("Enter quantity of "+ medicineName + " : ");
-                    int quantity = sc.nextInt();
+                    return;
+                case 2:
                     sc.nextLine();
-                    medications.add(new PrescribedMedication(medicineName, quantity));
-                }
-                System.out.println("Input consultation notes :");
-                String consultationNotes = sc.nextLine();
-                appointmentOutcomeController.createAppointmentOutcome(date, time, typeOfService, medications, consultationNotes, doctorId, patientID, aptID);
-                System.out.println("Appointment Outcome created successfully.");
-                break;
-            case 3:
-                break;
-            default:
-                System.out.println("Invalid input.");;
+                    System.out.println(" ");
+                    appointmentOutcomeController.viewAppointmentsByDoctorID(doctorId);
+                    System.out.println("Select which appointment would you like to record? Input the AppointmentID : ");
+                    String aptID = sc.nextLine();
+                    Appointment appointment = appointmentOutcomeController.getAppointment(aptID);
+                    if (appointment==null){
+                        System.out.println("Appointment with appointment id of " + aptID + " is not found.");
+                        break;
+                    }
+                    String patientID = appointment.getPatientID();
+                    String date = appointment.getDate();
+                    String time = appointment.getTime();
+                    System.out.println("Input the type of service : ");
+                    String typeOfService = sc.nextLine();
+                    ArrayList<PrescribedMedication> medications = new ArrayList<>();
+                    System.out.println("Input the prescribed medication and its quantity ");
+                    System.out.println("------------------------------------------------");
+                    while (true) {
+                        System.out.println("Enter medicine name (type 'n' to stop):");
+                        String medicineName = sc.nextLine(); // Read the input
+                        if (medicineName.equalsIgnoreCase("n")) { // Check if the input is "n" (case-insensitive)
+                            break; // Exit the loop
+                        };
+    
+                        int quantity = 0;
+    
+                        while (true) {
+                            try {
+                                System.out.println("Enter quantity of "+ medicineName + " : ");
+                                quantity = sc.nextInt();
+                                sc.nextLine();
+                                break;
+                            } catch (java.util.InputMismatchException e) {
+                                sc.nextLine();
+                                System.out.println("Invalid input. Please enter a valid number.");
+                            }
+                        }
+                        medications.add(new PrescribedMedication(medicineName, quantity));
+                    }
+                    System.out.println("Input consultation notes :");
+                    String consultationNotes = sc.nextLine();
+                    appointmentOutcomeController.createAppointmentOutcome(date, time, typeOfService, medications, consultationNotes, doctorId, patientID, aptID);
+                    System.out.println("Appointment Outcome created successfully.");
+                    return;
+                case 3:
+                    return;
+                default:
+                    System.out.println("Invalid input.");;
+            }
+
         }
     }
 
