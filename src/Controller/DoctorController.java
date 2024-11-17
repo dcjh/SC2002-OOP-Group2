@@ -18,7 +18,7 @@ public class DoctorController {
     private AppointmentOutcomeController appointmentOutcomeController;
 
     public DoctorController() {
-        this.scheduleController =  new ScheduleController(this);
+        this.scheduleController =  new ScheduleController(this, null);
         this.appointmentController = new AppointmentController(this);
         this.medicalRecordController = new MedicalRecordController(this);
         this.appointmentOutcomeController = new AppointmentOutcomeController(appointmentController);
@@ -67,8 +67,8 @@ public class DoctorController {
         return appointmentController.getAppointmentsByDoctorID(doctorId);
     }
 
-    public void updateDoctorSchedule(String doctorId, LocalDate date, Boolean isAvailable) {
-        scheduleController.updateDoctorSchedule(doctorId, date, isAvailable);
+    public void updateDoctorSchedule(String doctorId, LocalDate date, Boolean isAvailable, String time) {
+        scheduleController.updateDoctorSchedule(doctorId, date, isAvailable, time);
     }
     public List<AppointmentOutcome> getAppointmentOutcomeByDoctorId (String doctorId) {
         return appointmentOutcomeController.getAppointmentOutcomeByDoctorID(doctorId);

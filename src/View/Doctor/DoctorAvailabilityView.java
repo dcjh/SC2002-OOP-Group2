@@ -20,7 +20,8 @@ public class DoctorAvailabilityView {
     public void menu(String doctorId) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.print("\nCurrent Availability for for ");
+            System.out.println("----------------------------------------------");
+            System.out.println("Current Availability");
             scheduleController.showDoctorSchedule(doctorId);
             System.out.print("Edit Availability? (y/n): ");
             String proceed = scanner.nextLine();
@@ -42,10 +43,18 @@ public class DoctorAvailabilityView {
     private void setAvailability(Scanner scanner, String doctorId) {
         LocalDate date = null;
         Boolean isAvailable = false;
+        String time = null;
         System.out.print("Enter date (dd-MM-yyyy): ");
         while (true) {
             try {
                 date = LocalDate.parse(scanner.nextLine(), DATE_FORMAT);
+                break;
+            } catch (Exception e) { System.out.println("Invalid input. Please try again."); }
+        }
+        System.out.print("Enter time (HH:mm): ");
+        while (true) {
+            try {
+                time = scanner.nextLine();
                 break;
             } catch (Exception e) { System.out.println("Invalid input. Please try again."); }
         }
@@ -58,7 +67,7 @@ public class DoctorAvailabilityView {
         }
         
         scanner.nextLine(); // Consume newline
-        scheduleController.updateDoctorSchedule(doctorId,date,isAvailable);
+        scheduleController.updateDoctorSchedule(doctorId,date,isAvailable,time);
     }
 
 }

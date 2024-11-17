@@ -1,6 +1,7 @@
-package View;
+package View.Administrator;
 
-import Model.User;
+import Model.Shared.User;
+import View.UserMainView;
 import java.util.*;
 import Controller.AdministratorController;
 

@@ -13,13 +13,15 @@ public class doctortest {
     private static ScheduleDAO data = new ScheduleDAO();
     public static void main(String args[]){
 
-        // System.out.println("testing add.......");
-        // HashMap<LocalDate, Boolean> Avail = new HashMap<>();
-        // Avail.put(LocalDate.of(2024, 11, 20),true);
-        // Schedule test1 = new Schedule("D0001",Avail);
-        // Schedule test2 = new Schedule("D0002",Avail);
-        // data.add(test1);
-        // data.add(test2);
+        System.out.println("testing add.......");
+        HashMap<LocalDate, Boolean> Avail = new HashMap<>();
+        HashMap<LocalDate, String> dateTime = new HashMap<>();
+        Avail.put(LocalDate.of(2024, 11, 20),true);
+        dateTime.put(LocalDate.of(2024, 11, 20),"14:00");
+        Schedule test1 = new Schedule("D0001",Avail,dateTime);
+        Schedule test2 = new Schedule("D0002",Avail,dateTime);
+        data.add(test1);
+        data.add(test2);
 
         // System.out.println("testing find.......");
         // Schedule k = data.find("D0001");
@@ -28,7 +30,7 @@ public class doctortest {
         System.out.println("testing fetch.....");
         List<Schedule> scheduleList = data.fetch();
         for (Schedule s : scheduleList) {
-            System.out.println(s.getDoctorId() + s.getDateAvailability());
+            System.out.println(s.getDoctorId() + s.getDateAvailability() + s.getDateTime());
         }
 
         // System.out.println("testing delete.......");
@@ -39,14 +41,19 @@ public class doctortest {
         // }
 
         System.out.println("testing update avail.......");
-        data.updateIsAvailable("D0002", LocalDate.of(2024, 11, 23), true);
+        data.updateIsAvailable("D0002", LocalDate.of(2024, 11, 20), false,"12:00");
         Schedule l = data.find("D0002");
-        System.out.println(l.getDoctorId() + l.getDateAvailability());
+        System.out.println(l.getDoctorId() + l.getDateAvailability() + l.getDateTime());
+
+        System.out.println("testing update avail.......");
+        data.updateIsAvailable("D0002", LocalDate.of(2024, 11, 20), true,"15:00");
+        Schedule m = data.find("D0002");
+        System.out.println(m.getDoctorId() + m.getDateAvailability() + m.getDateTime());
 
         System.out.println("testing fetch.....");
         List<Schedule> k = data.fetch();
         for (Schedule s : k) {
-            System.out.println(s.getDoctorId() + s.getDateAvailability());
+            System.out.println(s.getDoctorId() + s.getDateAvailability() + s.getDateTime());
         }
 
     }

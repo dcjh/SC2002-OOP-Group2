@@ -25,13 +25,14 @@ public class ScheduleDAO {
                     continue;  // Skip header
                 }
                 String[] values = line.split(",");
-                if (values.length != 3) { // Ensure exactly 3 fields
+                if (values.length != 4) { // Ensure exactly 4 fields
                     System.err.println("Skipping malformed line: " + line);
                     continue;
                 }
                 String doctorId = values[0];
                 LocalDate date = LocalDate.parse(values[1], DATE_FORMAT);
                 Boolean isAvailable = Boolean.parseBoolean(values[2]);
+                String time = values[3];
                 Schedule existingSchedule = null;
                 for (Schedule s : scheduleList) {
                     if (s.getDoctorId().equals(doctorId)) {
@@ -43,11 +44,14 @@ public class ScheduleDAO {
                 if (existingSchedule == null) {
                     // Create a new schedule if none exists for this doctor
                     HashMap<LocalDate, Boolean> dateAvailability = new HashMap<>();
+                    HashMap<LocalDate, String> dateTime = new HashMap<>();
                     dateAvailability.put(date, isAvailable);
-                    scheduleList.add(new Schedule(doctorId, dateAvailability));
+                    dateTime.put(date, time);
+                    scheduleList.add(new Schedule(doctorId, dateAvailability, dateTime));
                 } else {
                     // Add date availability to the existing schedule
                     existingSchedule.getDateAvailability().put(date, isAvailable);
+                    existingSchedule.getDateTime().put(date, time);
                 }
             }
         } catch (IOException e) {
@@ -58,11 +62,13 @@ public class ScheduleDAO {
 
     private void writeAll(List<Schedule> scheduleList) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, false))) {  // overwrite mode
-            writer.write("doctorId,date,isAvailable");
+            writer.write("doctorId,date,isAvailable,time");
             writer.newLine();
             for (Schedule schedule : scheduleList) {
-                for (HashMap.Entry<LocalDate, Boolean> dateAvailability : schedule.getDateAvailability().entrySet()) {
-                    writer.write(formatAvailabilityCSVLine(schedule.getDoctorId(),dateAvailability));
+                for (LocalDate date : schedule.getDateAvailability().keySet()) {
+                    Boolean isAvailable = schedule.getDateAvailability().get(date);
+                    String time = schedule.getDateTime().get(date);
+                    writer.write(formatAvailabilityCSVLine(schedule.getDoctorId(), date, isAvailable, time));
                     writer.newLine();
                 }
             }
@@ -71,11 +77,12 @@ public class ScheduleDAO {
         }
     }
 
-    private String formatAvailabilityCSVLine(String doctorId, HashMap.Entry<LocalDate, Boolean> dateAvailability) {
+    private String formatAvailabilityCSVLine(String doctorId, LocalDate date, Boolean isAvailable, String time) {
         return String.join(",",
                 doctorId,
-                dateAvailability.getKey().format(DATE_FORMAT),
-                String.valueOf(dateAvailability.getValue())
+                date.format(DATE_FORMAT),
+                String.valueOf(isAvailable),
+                time
         );
     }
 
@@ -98,11 +105,12 @@ public class ScheduleDAO {
         writeAll(allSchedules);
     }
 
-    public void updateIsAvailable(String doctorId, LocalDate date, Boolean isAvailable) {
+    public void updateIsAvailable(String doctorId, LocalDate date, Boolean isAvailable, String time) {
         List<Schedule> allSchedules = fetch();
         for (Schedule schedule : allSchedules) {
             if (schedule.getDoctorId().equals(doctorId)) {
                 schedule.getDateAvailability().put(date, isAvailable);
+                schedule.getDateTime().put(date, time);
                 System.out.println("Availability Updated Successfully!");
                 break;
             }

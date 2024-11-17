@@ -7,9 +7,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import Model.Shared.Schedule;
 import Model.Shared.Appointment;
 
 public class DoctorScheduleView {
@@ -18,7 +16,8 @@ public class DoctorScheduleView {
 
     public DoctorScheduleView() {}
 
-    public void menu(String doctorId, Map<LocalDate, Boolean> dateAvailability, Map<LocalDate, Appointment> appointments) {
+    public void menu(String doctorId, Map<LocalDate, Boolean> dateAvailability, Map<LocalDate, String> dateTime,Map<LocalDate, Appointment> appointments) {
+        System.out.println("----------------------------------------------");
         System.out.println("Doctor ID: " + doctorId);
         System.out.println("Schedule:");
         System.out.println("----------------------------------------------");
@@ -27,7 +26,7 @@ public class DoctorScheduleView {
         sortedDates.sort(Comparator.naturalOrder());
 
         for(LocalDate date : sortedDates){
-            System.out.println("Date: " + date.format(DATE_FORMAT) +
+            System.out.println("Date: " + date.format(DATE_FORMAT) + " | Time: " + dateTime.get(date) +
                                " | Availability: " + (dateAvailability.get(date) ? "Available" : "Not Available"));
 
             if (!appointments.containsKey(date)) {
