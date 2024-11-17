@@ -21,18 +21,19 @@ public class PatientView implements UserMainView{
         }
     }
 
-    public void menu() {
-        int choice;
+    public void menu(String staffID) {
+    	int choice;
         do {
             System.out.println("\nPatient Menu:");
             System.out.println("1. View Medical Record");
             System.out.println("2. Update Contact Information");
-            System.out.println("3. View Scheduled Appointments");
-            System.out.println("4. Schedule Appointment");
-            System.out.println("5. Reschedule Appointment");
-            System.out.println("6. Cancel Appointment");
-            System.out.println("7. View Past Appointment Outcomes");
-            System.out.println("8. Logout");
+            System.out.println("3. View Available Appointment Slots");
+            System.out.println("4. View Scheduled Appointments");
+            System.out.println("5. Schedule Appointment");
+            System.out.println("6. Reschedule Appointment");
+            System.out.println("7. Cancel Appointment");
+            System.out.println("8. View Past Appointment Outcomes");
+            System.out.println("9. Logout");
 
             choice = Integer.parseInt(prompt("Enter your choice: "));
 
@@ -46,28 +47,31 @@ public class PatientView implements UserMainView{
                     patientController.updateContactInformation(newPhoneNumber, newEmail);
                     break;
                 case 3:
-                    patientController.viewScheduledAppointments();
+                    //view avaiable slots
                     break;
                 case 4:
+                    patientController.viewScheduledAppointments();
+                    break;
+                case 5:
                     String docID = prompt("Enter Doctor ID: ");
                     String date = prompt("Enter Appointment Date (YYYY-MM-DD): ");
                     String time = prompt("Enter Appointment Time (HH:MM): ");
                     patientController.scheduleAppointment(docID, date, time);
                     break;
-                case 5:
+                case 6:
                     String rescheduleID = prompt("Enter Appointment ID to reschedule: ");
                     String newDate = prompt("Enter new date (YYYY-MM-DD): ");
                     String newTime = prompt("Enter new time (HH:MM): ");
                     patientController.rescheduleAppointment(rescheduleID, newDate, newTime);
                     break;
-                case 6:
+                case 7:
                     String cancelID = prompt("Enter Appointment ID to cancel: ");
                     patientController.cancelAppointment(cancelID);
                     break;
-                case 7:
+                case 8:
                     patientController.viewPastAppointments();
                     break;
-                case 8:
+                case 9:
                     System.out.println("Logging out...");
                     break;
                 default:
