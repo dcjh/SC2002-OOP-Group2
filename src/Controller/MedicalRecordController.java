@@ -32,6 +32,7 @@ public class MedicalRecordController {
         this.doctorMedicalRecordView = new DoctorMedicalRecordView(this);
         this.doctorUpdateMedicalRecordView = new DoctorUpdateMedicalRecordView(this);
         this.doctorController = doctorController;
+        this.pastDiagnosesAndTreatmentsController = new PastDiagnosesAndTreatmentsController();
         this.appointmentOutcomeController = new AppointmentOutcomeController();
     }
     public MedicalRecordController() {
@@ -41,6 +42,7 @@ public class MedicalRecordController {
         this.doctorMedicalRecordView = new DoctorMedicalRecordView(this);
         this.doctorUpdateMedicalRecordView = new DoctorUpdateMedicalRecordView(this);
         this.doctorController = null;
+        this.pastDiagnosesAndTreatmentsController = new PastDiagnosesAndTreatmentsController();
         this.appointmentOutcomeController = new AppointmentOutcomeController();
     }
 

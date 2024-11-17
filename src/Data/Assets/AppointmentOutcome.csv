@@ -1,3 +1,2 @@
 AppointmentOutcomeID,DoctorID,PatientID,AppointmentID,Date,Time,TypeOfService,PrescribedMedications,ConsultationNotes
-APO0001,D0002,P1001,AP0001,01-01-2024,13:30,X-Ray,"[panadol:10:pending-cough syrup:14:pending]",Dying
-AO0001,D0002,P1001,-,01-03-2024,14:44,Running,"[steroids:10:pending]",Alive
+

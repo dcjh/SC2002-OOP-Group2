@@ -51,52 +51,33 @@ public class PharmacistController {
             System.out.println("Invalid choice.");
             return;
         }
-
         AppointmentOutcome selectedOutcome = outcomes.get(choice - 1);
 
         System.out.println("Prescribed Medications:");
         for (PrescribedMedication medication : selectedOutcome.getPrescribedMedications()) {
-            System.out.printf("  - %s (Status: %s)%n", medication.getMedicineName(), medication.getStatus());
-        }
+            System.out.printf("  - %s (Qty: %d, Status: %s)%n",
+                    medication.getMedicineName(), medication.getQuantity(), medication.getStatus());
 
-        System.out.print("\nEnter the name of the medication to update: ");
-        String medicationName = scanner.nextLine();
-
-        boolean updated = false;
-        for (PrescribedMedication medication : selectedOutcome.getPrescribedMedications()) {
-            if (medication.getMedicineName().equalsIgnoreCase(medicationName)) {
-                Inventory inventory = inventoryController.findMedicineByName(medicationName);
-                if (inventory == null) {
-                    System.out.println("Medication not found in inventory.");
-                    return;
-                }
-
-                int remainingStock = inventory.getCurrentStock() - medication.getQuantity();
-
-                if (remainingStock < 0) {
-                    System.out.printf("Insufficient stock for %s. Requested: %d, Available: %d. Status remains 'pending'.%n",
-                            medication.getMedicineName(), medication.getQuantity(), inventory.getCurrentStock());
-                    return;
-                }
-
-                if (remainingStock < inventory.getLowStockAlert()) {
-                    System.out.printf("Stock for %s will fall below the low stock level after dispensing. Status remains 'pending'.%n",
-                            medication.getMedicineName());
-                    return;
-                }
-
-                medication.setStatusDispensed();
-                inventory.setCurrentStock(remainingStock);
-                updated = true;
-
-                System.out.printf("Status of %s updated to 'dispensed'. Remaining stock: %d%n",
-                        medication.getMedicineName(), inventory.getCurrentStock());
-                break;
+            Inventory inventory = inventoryController.findMedicineByName(medication.getMedicineName());
+            if (inventory == null) {
+                System.out.printf("Medicine '%s' not found in inventory. Status remains 'pending'.%n", medication.getMedicineName());
+                continue;
             }
-        }
 
-        if (!updated) {
-            System.out.println("Medication not found in the prescription.");
+            int remainingStock = inventory.getCurrentStock() - medication.getQuantity();
+
+            if (remainingStock < 0) {
+                System.out.printf("Insufficient stock for %s. Requested: %d, Available: %d. Status remains 'pending'.%n",
+                        medication.getMedicineName(), medication.getQuantity(), inventory.getCurrentStock());
+                continue;
+            }
+
+            medication.setStatusDispensed();
+            inventory.setCurrentStock(remainingStock);
+            inventoryController.updateDispensestockLevel(); 
+
+            System.out.printf("Status of %s updated to 'dispensed'. Remaining stock: %d%n",
+                    medication.getMedicineName(), inventory.getCurrentStock());
         }
     }
 
@@ -132,6 +113,7 @@ public class PharmacistController {
 	                        med.getQuantity(),
 	                        med.getStatus());
 	            }
+	           	
 	            System.out.println("----------------------------------------------------");
 	        }
 	}  
