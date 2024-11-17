@@ -12,9 +12,11 @@ public class PatientController {
     private Patient patient;
     private MedicalRecordController medicalRecordController;
     private AppointmentController appointmentController;
+    private ScheduleController scheduleController;
 
     public PatientController(Patient patient) {
         this.patient = patient;
+        this.scheduleController = new ScheduleController();
         this.medicalRecordController = new MedicalRecordController();
         this.appointmentController = new AppointmentController();
     }
