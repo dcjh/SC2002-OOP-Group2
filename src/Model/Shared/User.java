@@ -4,7 +4,7 @@ import Model.Roles.UserType;
 import Model.Roles.Gender;
 
 //this is here for temp/ref usage, more time will be spend to make this better
-public abstract class User {
+public class User {
     protected String hosID;
     protected String password;
     protected String role;
