@@ -15,7 +15,7 @@ public class Patient extends User {
         super(hosID, password, role, name, gender, age);
         this.pastDiagnosesAndTreatments=null;
         this.medicalRecord=null;
-        this.appointments=null
+        this.appointments=null;
     }
 
     public patient(String hosID, String password, String role, String name, String gender, int age,

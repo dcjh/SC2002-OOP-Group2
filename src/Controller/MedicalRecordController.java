@@ -4,9 +4,9 @@ import Model.Shared.MedicalRecord;
 import Model.Shared.PrescribedMedication;
 import Model.Shared.AppointmentOutcome;
 import Data.DataAccess.MedicalRecordDAO;
+import View.MedicalRecord.MedicalRecordView;
 import View.Doctor.DoctorMedicalRecordView;
 import View.Doctor.DoctorUpdateMedicalRecordView;
-import View.MedicalRecord.MedicalRecordView;
 
 import java.util.List;
 import java.util.Set;

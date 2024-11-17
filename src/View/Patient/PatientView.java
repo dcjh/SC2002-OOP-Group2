@@ -4,6 +4,7 @@ import Model.Shared.User;
 import View.UserMainView;
 import Model.Roles.Patient;
 import Controller.PatientController;
+import java.util.Scanner; 
 
 import java.util.Scanner;
 
@@ -21,6 +22,7 @@ public class PatientView implements UserMainView{
     }
 
     public void menu() {
+        int choice;
         do {
             System.out.println("\nPatient Menu:");
             System.out.println("1. View Medical Record");
@@ -32,7 +34,7 @@ public class PatientView implements UserMainView{
             System.out.println("7. View Past Appointment Outcomes");
             System.out.println("8. Logout");
 
-            int choice = Integer.parseInt(prompt("Enter your choice: "));
+            choice = Integer.parseInt(prompt("Enter your choice: "));
 
             switch (choice) {
                 case 1:
