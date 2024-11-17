@@ -13,6 +13,10 @@ public class PatientScheduleView {
 
     public PatientScheduleView() {}
 
+    
+    /** 
+     * @param scheduleList
+     */
     public void menu(List<Schedule> scheduleList) {
         String br = "----------------------------------------------";
         if (scheduleList.isEmpty()) {

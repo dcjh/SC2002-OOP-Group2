@@ -16,6 +16,13 @@ public class DoctorScheduleView {
 
     public DoctorScheduleView() {}
 
+    
+    /** 
+     * @param doctorId
+     * @param dateAvailability
+     * @param dateTime
+     * @param appointments
+     */
     public void menu(String doctorId, Map<LocalDate, Boolean> dateAvailability, Map<LocalDate, String> dateTime,Map<LocalDate, Appointment> appointments) {
         System.out.println("----------------------------------------------");
         System.out.println("Doctor ID: " + doctorId);

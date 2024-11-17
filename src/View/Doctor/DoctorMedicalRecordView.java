@@ -18,6 +18,10 @@ public class DoctorMedicalRecordView {
         this.medicalRecordController = medicalRecordController;
     }
 
+    
+    /** 
+     * @param doctorId
+     */
     public void menu(String doctorId) {
         Scanner scanner = new Scanner(System.in);
         String linebr = "----------------------------------------------";
@@ -59,6 +63,10 @@ public class DoctorMedicalRecordView {
         }
     }
 
+    
+    /** 
+     * @param patientsMR
+     */
     protected void printPatientList(List<MedicalRecord> patientsMR) {
         String border = "+------------+----------------------+---------------+--------+-------------------------------------+";
         String header = "| Patient ID |         Name         | Date of Birth | Gender |                Email                |";

@@ -9,6 +9,10 @@ import java.util.Map;
 public class PatientDAO {
     private static final String FILE_PATH = "C:\\Users\\chuaz\\eclipse-workspace\\OOP_project\\src\\Administrator\\Patient_List.csv";
 
+    
+    /** 
+     * @return List<Map<String, String>>
+     */
     public List<Map<String, String>> loadAll() {
         List<Map<String, String>> patientList = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
@@ -42,6 +46,10 @@ public class PatientDAO {
         return patientList;
     }
 
+    
+    /** 
+     * @param patient
+     */
     public void save(Map<String, String> patient) {
         List<Map<String, String>> patientList = loadAll();
         boolean exists = false;

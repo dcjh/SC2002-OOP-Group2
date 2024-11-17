@@ -106,6 +106,11 @@ public class ReplenishmentRestockController {
         }
     }
 
+    
+    /** 
+     * @param title
+     * @param requests
+     */
     private void printReplenishmentRequests(String title, List<ReplenishmentRequest> requests) {
         System.out.println("\n--- " + title + " ---");
         if (requests.isEmpty()) {

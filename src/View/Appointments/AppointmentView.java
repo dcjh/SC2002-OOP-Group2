@@ -1,6 +1,15 @@
 package View.Appointments;
 
 public class AppointmentView {
+    
+    /** 
+     * @param appointmentID
+     * @param docID
+     * @param patientID
+     * @param status
+     * @param time
+     * @param date
+     */
     public void printAppointment(String appointmentID, String docID, String patientID, String status, String time, String date){
         System.out.printf("%-15s : %s%n", "Appointment ID", appointmentID);
         System.out.printf("%-15s : %s%n", "Doctor ID", docID);

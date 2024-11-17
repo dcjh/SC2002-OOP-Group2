@@ -68,6 +68,11 @@ public class InventoryController {
     }
     
     
+    
+    /** 
+     * @param medicineName
+     * @param quantity
+     */
     public void updateDispensestockLevel(String medicineName, int quantity) {
         // Scanner scanner = new Scanner(System.in);
 
@@ -104,6 +109,11 @@ public class InventoryController {
         }
     }
     
+    
+    /** 
+     * @param medicineName
+     * @return Inventory
+     */
     public Inventory findMedicineByName(String medicineName) {
         Inventory medicine = inventoryDAO.find(medicineName, null);
         if (medicine == null) {

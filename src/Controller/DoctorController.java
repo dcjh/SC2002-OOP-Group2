@@ -65,11 +65,21 @@ public class DoctorController {
 
     }
 
+    
+    /** 
+     * @param doctorId
+     * @return List<Appointment>
+     */
     //logic
     public List<Appointment> getAppointmentsById(String doctorId) {
         return appointmentController.getAppointmentsByDoctorID(doctorId);
     }
 
+    
+    /** 
+     * @param doctorId
+     * @return List<Appointment>
+     */
     public List<Appointment> getConfirmedAppointmentsById(String doctorId) {
         return appointmentController.getApprovedAppointmentsByDoctorID(doctorId);
     }

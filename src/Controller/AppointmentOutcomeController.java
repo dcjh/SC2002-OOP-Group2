@@ -22,6 +22,17 @@ public class AppointmentOutcomeController {
         this.view = new AppointmentOutcomeView(this);
     }
 
+    
+    /** 
+     * @param date
+     * @param time
+     * @param typeOfService
+     * @param medications
+     * @param notes
+     * @param doctorID
+     * @param patientID
+     * @param appointmentID
+     */
     // create
 
     public void createAppointmentOutcome(String date, String time, String typeOfService, ArrayList<PrescribedMedication> medications, String notes, String doctorID, String patientID, String appointmentID) {
@@ -32,6 +43,10 @@ public class AppointmentOutcomeController {
         dao.save(outcome);
     }
 
+    
+    /** 
+     * @return String
+     */
     public String createNewAppointmentOutcomeID(){
         List<AppointmentOutcome> outcomes = dao.loadAll();
         int length = outcomes.size();

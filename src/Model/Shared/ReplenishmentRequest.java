@@ -14,11 +14,19 @@ public class ReplenishmentRequest {
         this.status = status;
     }
     
+    
+    /** 
+     * @return String
+     */
     public String getRequestID() 
     { 
     	return requestID; 
     	}
     
+    
+    /** 
+     * @param requestID
+     */
     public void setRequestID(String requestID) 
     { 
     	this.requestID = requestID; 

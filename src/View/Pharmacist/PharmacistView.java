@@ -20,6 +20,10 @@ public class PharmacistView implements UserMainView{
     }
 	
     Scanner scanner = new Scanner(System.in);
+    
+    /** 
+     * @param hosID
+     */
     public void menu(String hosID) {
     	int option = 0;
     	while (option!=6) {

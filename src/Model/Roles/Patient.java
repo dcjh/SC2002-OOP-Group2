@@ -24,10 +24,18 @@ public class Patient extends User {
         this.appointments = new ArrayList<>();
     }
 
+    
+    /** 
+     * @return MedicalRecord
+     */
     public MedicalRecord getMedicalRecord() {
         return medicalRecord;
     }
 
+    
+    /** 
+     * @param medicalRecord
+     */
     public void setMedicalRecord(MedicalRecord medicalRecord) {
         this.medicalRecord = medicalRecord;
     }

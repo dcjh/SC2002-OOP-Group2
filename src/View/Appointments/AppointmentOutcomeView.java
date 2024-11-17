@@ -15,6 +15,18 @@ public class AppointmentOutcomeView {
         this.appointmentOutcomeController = appointmentOutcomeController;
     }
 
+    
+    /** 
+     * @param AppointmentOutcomeID
+     * @param doctorID
+     * @param patientID
+     * @param appointmentID
+     * @param date
+     * @param time
+     * @param typeOfService
+     * @param prescribedMedications
+     * @param consultationNotes
+     */
     public void printAppointmentOutcome(String AppointmentOutcomeID, String doctorID, String patientID, String appointmentID, String date, String time, String typeOfService, ArrayList<PrescribedMedication> prescribedMedications, String consultationNotes) {
     System.out.printf("%-25s : %s%n", "Appointment Outcome ID", AppointmentOutcomeID);
     System.out.printf("%-25s : %s%n", "Doctor ID", doctorID);
@@ -51,6 +63,10 @@ public class AppointmentOutcomeView {
         }
     }
 }
+    
+    /** 
+     * @param doctorId
+     */
     public void menuDoctor(String doctorId){
         Scanner sc = new Scanner(System.in);
         String choice;

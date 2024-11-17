@@ -24,6 +24,13 @@ public class AppointmentController {
         this.appointmentRequestsView = new AppointmentRequestsView(this);
     }
 
+    
+    /** 
+     * @param doctorId
+     * @param patientId
+     * @param time
+     * @param date
+     */
     // create
 
     // Create a new appointment
@@ -33,6 +40,10 @@ public class AppointmentController {
         System.out.println("Appointment created successfully.");
     }
 
+    
+    /** 
+     * @return String
+     */
     public String createNewAppointmentID(){
         List<Appointment> appointments = appointmentDAO.loadAll();
         int length = appointments.size();

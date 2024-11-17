@@ -1,0 +1,14 @@
+App
+Authentication
+Controller
+Data.DataAccess
+Model
+Model.Roles
+Model.Shared
+View
+View.Administrator
+View.Appointments
+View.Doctor
+View.MedicalRecord
+View.Patient
+View.Pharmacist

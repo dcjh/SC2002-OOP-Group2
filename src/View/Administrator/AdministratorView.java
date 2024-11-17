@@ -16,6 +16,10 @@ public class AdministratorView implements UserMainView {
     }
     
     
+    
+    /** 
+     * @param hosID
+     */
     public void menu(String hosID) {
         int option = 0;
      	while (option!=6) {

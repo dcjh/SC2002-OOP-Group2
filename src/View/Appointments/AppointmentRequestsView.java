@@ -14,6 +14,10 @@ public class AppointmentRequestsView {
         this.appointmentController = appointmentController;
     }
 
+    
+    /** 
+     * @param doctorId
+     */
     public void menu(String doctorId) {
         Scanner scanner = new Scanner(System.in);
         String linebr = "----------------------------------------------";
@@ -58,6 +62,10 @@ public class AppointmentRequestsView {
 
     }
 
+    
+    /** 
+     * @param appointments
+     */
     private void printCurrentAppointments(List<Appointment> appointments) {
         String border = "+-------------+-----------+------------+----------+------------+--------+";
         String header = "| Appointment | Doctor ID | Patient ID |  Status  |    Date    |  Time  |";

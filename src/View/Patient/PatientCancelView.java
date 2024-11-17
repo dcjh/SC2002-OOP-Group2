@@ -13,6 +13,11 @@ public class PatientCancelView {
         this.scheduleController = scheduleController;
     }
 
+    
+    /** 
+     * @param aList
+     * @param patientId
+     */
     public void menu(List<Appointment> aList, String patientId) {
         
         String br = "----------------------------------------------";
@@ -61,6 +66,10 @@ public class PatientCancelView {
         }
     }
 
+    
+    /** 
+     * @param aList
+     */
     private void printAppointments(List<Appointment> aList) {
         String border = "+-------------+------------+----------+------------+----------+";
         String header = "| Appointment |    Date    |   Time   |   Doctor   |  Status  |";

@@ -42,6 +42,10 @@ public class ScheduleController{
         this.patientCancelView = new PatientCancelView(this);
     }
     
+    
+    /** 
+     * @param doctorId
+     */
     //navigate to DoctorScheduleView
     public void showDoctorSchedule(String doctorId) {
         Schedule schedule = data.find(doctorId);
@@ -66,6 +70,10 @@ public class ScheduleController{
         doctorScheduleView.menu(doctorId, schedule.getDateAvailability(), schedule.getDateTime(), Appointments);
     }
 
+    
+    /** 
+     * @param doctorId
+     */
     //navigate to setAvailabilityView
     public void showSetAvailabilityView(String doctorId){
         doctorAvailabilityView.menu(doctorId);

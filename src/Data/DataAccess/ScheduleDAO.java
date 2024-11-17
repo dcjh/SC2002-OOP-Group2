@@ -14,6 +14,10 @@ public class ScheduleDAO {
     private static final String FILE_PATH = "src/Data/Assets/Schedule.csv";
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+    
+    /** 
+     * @return List<Schedule>
+     */
     public List<Schedule> fetch() {
         List<Schedule> scheduleList = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
@@ -60,6 +64,10 @@ public class ScheduleDAO {
         return scheduleList;
     }
 
+    
+    /** 
+     * @param scheduleList
+     */
     private void writeAll(List<Schedule> scheduleList) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, false))) {  // overwrite mode
             writer.write("doctorId,date,isAvailable,time");

@@ -26,6 +26,10 @@ public class PharmacistController {
         this.pharmacistView = new PharmacistView(this);
     }
 		
+    
+    /** 
+     * @param patientId
+     */
     public void updatePrescriptionStatus(String patientId) {
         List<AppointmentOutcome> outcomes = appointmentOutcomeController.getAppointmentOutcomeByPatientID(patientId);
 

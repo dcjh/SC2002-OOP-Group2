@@ -7,6 +7,10 @@ public class UserDAO {
     private static final String FILE_PATH = "C:\\Users\\chuaz\\eclipse-workspace\\OOP_project\\src\\Authentication\\userlogin.csv";
 
     
+    
+    /** 
+     * @return List<Map<String, String>>
+     */
     public List<Map<String, String>> loadAll() {
         List<Map<String, String>> userList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
@@ -39,6 +43,10 @@ public class UserDAO {
         return userList;
     }
 
+    
+    /** 
+     * @param user
+     */
     public void save(Map<String, String> user) {
         List<Map<String, String>> userList = loadAll();
         boolean exists = false;

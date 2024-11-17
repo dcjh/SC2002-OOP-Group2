@@ -13,11 +13,20 @@ public class PastDiagnosesAndTreatmentsController {
         this.dao = new PastDiagnosesAndTreatmentsDAO();
         this.view = new PastDiagnosesAndTreatmentsView();
     }
+    
+    /** 
+     * @param patientID
+     * @return List<PastDiagnosesAndTreatments>
+     */
     public List<PastDiagnosesAndTreatments> getPastDiagnosesAndTreatments(String patientID) {
         return dao.getDiagnosesAndTreatmentsByPatientID(patientID);
 
     }
 
+    
+    /** 
+     * @param patientID
+     */
     // view all past diagnoses and treatments  via patientid
     public void viewPastDiagnosesAndTreatments(String patientID) {
         List<PastDiagnosesAndTreatments> records = getPastDiagnosesAndTreatments(patientID);

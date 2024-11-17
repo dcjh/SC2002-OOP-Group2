@@ -32,11 +32,19 @@ public class MedicalRecord {
         this.pastDiagnosesAndTreatments = new ArrayList<>();
     }
 
+    
+    /** 
+     * @return String
+     */
     // String fields
     public String getPatientID() {
         return patientID;
     }
 
+    
+    /** 
+     * @param patientID
+     */
     public void setPatientID(String patientID) {
         this.patientID = patientID;
     }

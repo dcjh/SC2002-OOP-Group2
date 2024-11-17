@@ -25,6 +25,11 @@ public class PatientController {
         this.scheduleController = new ScheduleController(doctorController, this);
     }
 
+    
+    /** 
+     * @param newPhoneNumber
+     * @param newEmail
+     */
     public void updateContactInformation(String newPhoneNumber, String newEmail) {
         medicalRecordController.updateContactInformation(patient.getPatientId(), newPhoneNumber, newEmail);
     }
@@ -50,6 +55,12 @@ public class PatientController {
         medicalRecordController.viewPastAppointments(patient.getPatientId());//need to chnage once the dao have been added for apptoutcomerecord
     }
 
+    
+    /** 
+     * @param docID
+     * @param date
+     * @param time
+     */
     //navigate to viewing all doctor schedules
     public void createAppointment(String docID, String date, String time) {
         appointmentController.createAppointment(docID, patient.getPatientId(), time, date);

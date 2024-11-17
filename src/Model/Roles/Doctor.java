@@ -11,9 +11,17 @@ public class Doctor extends User{
         super(hosID, password, UserType.DOCTOR , name, gender, age);
     }
    
+    
+    /** 
+     * @return String
+     */
     public String getDoctorId() {
         return hosID;
     }
+    
+    /** 
+     * @param hosID
+     */
     public void setDoctorId(String hosID) {
         this.hosID = hosID;
     }
