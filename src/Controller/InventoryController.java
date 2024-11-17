@@ -2,7 +2,6 @@ package Controller;
 import Data.DataAccess.InventoryDAO;
 import Model.Shared.Inventory;
 import View.Pharmacist.InventoryView;
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -69,16 +68,16 @@ public class InventoryController {
     }
     
     
-    public void updateDispensestockLevel() {
-        Scanner scanner = new Scanner(System.in);
+    public void updateDispensestockLevel(String medicineName, int quantity) {
+        // Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter Medicine name to update dispense: ");
-        String medicineName = scanner.nextLine();
+        // System.out.print("Enter Medicine name to update dispense: ");
+        // String medicineName = scanner.nextLine();
         Inventory medicine = inventoryDAO.find(medicineName, null);
 
         if (medicine != null) {
-            System.out.print("Enter quantity to dispense: ");
-            int quantity = scanner.nextInt();
+            // System.out.print("Enter quantity to dispense: ");
+            // int quantity = scanner.nextInt();
             int newStockLevel = medicine.getCurrentStock() - quantity;
             medicine.setCurrentStock(newStockLevel);
             inventoryDAO.save(medicine);

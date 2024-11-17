@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class StaffDAO {
-    private static final String FILE_PATH = "C:\\Users\\chuaz\\eclipse-workspace\\OOP_project\\src\\Administrator\\Staff_List.csv";
+    private static final String FILE_PATH = "src/Data/Assets/Staff_List.csv";
 
     public List<Map<String, String>> loadAll() {
         List<Map<String, String>> staffList = new ArrayList<>();
