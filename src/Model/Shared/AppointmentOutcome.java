@@ -83,7 +83,7 @@ public class AppointmentOutcome {
 
     public void setStatusDispensed(String medicineName){
         for (PrescribedMedication medication : prescribedMedications) {
-            if (medication.getMedicineName()==medicineName){
+            if (medication.getMedicineName().equals(medicineName)){
                 medication.setStatusDispensed();
                 return;
             }
@@ -92,5 +92,9 @@ public class AppointmentOutcome {
 
     public void setConsultationNotes(String newConsultationNotes){
         this.consultationNotes = newConsultationNotes;
+    }
+
+    public void setPrescribedMedication(ArrayList<PrescribedMedication> newPrescribedMedications){
+        this.prescribedMedications = newPrescribedMedications;
     }
 }

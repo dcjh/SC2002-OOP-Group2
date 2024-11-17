@@ -67,6 +67,18 @@ public class AppointmentOutcomeController {
         return dao.getAppointmentOutcomeByDoctorID(docId);
     }
 
+    // Get appointment outcome by appointmentID
+    public AppointmentOutcome getAppointmentOutcomeByAppointmentID(String appointmentId) {
+        List<AppointmentOutcome> outcomes = dao.loadAll();
+        for (AppointmentOutcome o:outcomes){
+            if(o.getAppointmentID().equals(appointmentId)){
+                return o;
+            }
+        }
+        return null;
+    }
+
+
     // Get all appointment outcomes for a particular PatientID
     public List<AppointmentOutcome> getAppointmentOutcomeByPatientID(String patientId) {
         return dao.getAppointmentOutcomeByPatientID(patientId);
@@ -76,11 +88,17 @@ public class AppointmentOutcomeController {
     
     // change the status of the medicine
 
-    public void setStatusDispensed(String appointmentOutcomeId, String medicineName){
-        AppointmentOutcome outcome = dao.find(appointmentOutcomeId);
-        outcome.setStatusDispensed(medicineName);
-        dao.save(outcome);
+    // public void setStatusDispensed(String appointmentOutcomeId, String medicineName){
+    //     AppointmentOutcome outcome = dao.find(appointmentOutcomeId);
+    //     outcome.setStatusDispensed(medicineName);
+    //     dao.save(outcome);
         // System.out.println(medicineName + " is dispensed successfully for Appointment Outcome " + appointmentOutcomeId + "."); remove this to view
+    // }
+
+    public void setPrescribedMedicineUpdatedStatus(String appointmentOutcomeId, ArrayList<PrescribedMedication> newMedications){
+        AppointmentOutcome outcome = dao.find(appointmentOutcomeId);
+        outcome.setPrescribedMedication(newMedications);
+        dao.save(outcome);
     }
 
     // change the consultation notes

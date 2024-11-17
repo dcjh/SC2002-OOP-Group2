@@ -96,6 +96,9 @@ public class AppointmentOutcomeDAO {
             String[] parts = med.split(":");
             if (parts.length == 3) {
                 PrescribedMedication medication = new PrescribedMedication(parts[0], Integer.parseInt(parts[1]));
+                if (parts[2].equals("dispensed")){
+                    medication.setStatusDispensed();
+                }
                 medications.add(medication);
             }
         }

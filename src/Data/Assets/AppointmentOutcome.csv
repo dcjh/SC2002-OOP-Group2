@@ -1,1 +1,2 @@
 AppointmentOutcomeID,DoctorID,PatientID,AppointmentID,Date,Time,TypeOfService,PrescribedMedications,ConsultationNotes
+AO0001,D002,P1003,AP0003,25-11-2024,20:00,x-ray,"[Paracetamol:3:dispensed-Ibuprofen:75:dispensed-Amoxicillin:80:pending]",lung cancer
