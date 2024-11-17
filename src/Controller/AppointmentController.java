@@ -211,10 +211,6 @@ public class AppointmentController {
             updateAppointmentStatus(appointmentId, "cancelled");
         }
     }
-
-    public void appointmentManagementView (String patientId) {
-
-    }
     
 }
 
