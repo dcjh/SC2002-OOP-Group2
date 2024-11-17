@@ -53,7 +53,7 @@ public class AppointmentOutcomeView {
 }
     public void menuDoctor(String doctorId){
         Scanner sc = new Scanner(System.in);
-        int choice;
+        String choice;
 
         while(true){
 
@@ -62,10 +62,10 @@ public class AppointmentOutcomeView {
         System.out.println("2. Add a new Appointment Outcome");
         System.out.println("3. Return back to Menu");
         
-        choice = sc.nextInt();
+        choice = sc.nextLine();
 
             switch (choice) {
-                case 1:
+                case "1":
                     List<AppointmentOutcome> outcomes = appointmentOutcomeController.getAppointmentOutcomeByDoctorID(doctorId);
                     System.out.println(" ");
                     System.out.println("All the appointment outcomes for the Doctor ID " + doctorId + " : ");
@@ -75,10 +75,13 @@ public class AppointmentOutcomeView {
                         System.out.println(" ");
                     }
                     return;
-                case 2:
-                    sc.nextLine();
+                case "2":
                     System.out.println(" ");
                     appointmentOutcomeController.viewAppointmentsByDoctorID(doctorId);
+                    int lengthOfApprovedOutcome = appointmentOutcomeController.getApprovedAppointmentsByDoctorID(doctorId).size();
+                    if(lengthOfApprovedOutcome==0){
+                        return;
+                    }
                     System.out.println("Select which appointment would you like to record? Input the AppointmentID : ");
                     String aptID = sc.nextLine();
                     Appointment appointment = appointmentOutcomeController.getAppointment(aptID);
@@ -121,7 +124,7 @@ public class AppointmentOutcomeView {
                     appointmentOutcomeController.createAppointmentOutcome(date, time, typeOfService, medications, consultationNotes, doctorId, patientID, aptID);
                     System.out.println("Appointment Outcome created successfully.");
                     return;
-                case 3:
+                case "3":
                     return;
                 default:
                     System.out.println("Invalid input.");;

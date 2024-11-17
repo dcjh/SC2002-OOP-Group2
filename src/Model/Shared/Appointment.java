@@ -21,15 +21,12 @@ public class Appointment {
         this.status = status;
     }
 
-    public Appointment(String docID, String patientID, String time, String date) {
-        this(docID, patientID, time, date, generateFormattedId(), "pending");
+    public Appointment(String docID, String patientID, String time, String date, String appointmentID) {
+        this(docID, patientID, time, date, appointmentID, "pending");
             }
-        
-            // Method to generate a formatted ID with prefix and leading zeroes
-            private static String generateFormattedId() {
-        return String.format("AP%04d", idCounter++); // AP + zero-padded 4-digit ID
-    }
     
+    
+        
     // getter functions
 
     public String getAppointmentID(){

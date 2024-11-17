@@ -3,7 +3,6 @@ import Data.DataAccess.AppointmentDAO;
 import Model.Shared.Appointment;
 import View.Appointments.AppointmentRequestsView;
 import View.Appointments.AppointmentView;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -29,9 +28,22 @@ public class AppointmentController {
 
     // Create a new appointment
     public void createAppointment(String doctorId, String patientId, String time, String date) {
-        Appointment appointment = new Appointment(doctorId, patientId, time, date);
+        Appointment appointment = new Appointment(doctorId, patientId, time, date, createNewAppointmentID());
         appointmentDAO.save(appointment);
         System.out.println("Appointment created successfully.");
+    }
+
+    public String createNewAppointmentID(){
+        List<Appointment> appointments = appointmentDAO.loadAll();
+        int length = appointments.size();
+        if(length==0){
+            return "AP0001";
+        }
+        int last_index = length - 1;
+        String largestIdString = appointments.get(last_index).getAppointmentID();
+        int newIdInt = Integer.parseInt(largestIdString.substring(2)) + 1;
+
+        return String.format("AP%04d", newIdInt);
     }
 
     // getter methods

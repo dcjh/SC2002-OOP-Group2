@@ -1,12 +1,4 @@
-/*in main uml and entity uml
-contains
-+ gethosID()
-+ sethosID()
-+ getPassword()
-+ setPassword()
-extends from <<abstract>>user, related to PharmacistRepository 
-used by PharmacistController
-*/
+
 package Model.Roles;
 
 import java.util.ArrayList;
