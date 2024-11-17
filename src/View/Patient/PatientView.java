@@ -78,7 +78,7 @@ public class PatientView implements UserMainView{
                     System.out.println("Invalid choice. Please select a valid option.");
                     break;
             }
-        } while (choice != 8);
+        } while (choice != 9);
     }
     private static String prompt(String message) {
         System.out.print(message);
