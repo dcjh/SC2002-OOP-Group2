@@ -80,7 +80,7 @@ public class ScheduleController{
         } else { 
             Boolean validAppt = false;
             
-            for (Appointment a : doctorController.getAppointmentsById(doctorId)) {
+            for (Appointment a : doctorController.getConfirmedAppointmentsById(doctorId)) {
                 if (a.getDate().equals(date.format(DATE_FORMAT)))  { //if existing appointment
                    validAppt = true;
                 }
@@ -138,9 +138,9 @@ public class ScheduleController{
         return patientController.getConfirmedAppointmentsByPatientId();
     }
 
-    public void rescheduleAppointment(String appointmentId, String doctorId, String oldDate, String newDate, String time) {
-        patientController.rescheduleAppointment(appointmentId, newDate, time);
-        updateDoctorSchedule(doctorId, LocalDate.parse(oldDate, DATE_FORMAT), true, time, false);
+    public void rescheduleAppointment(String appointmentId, String doctorId, String oldDate, String oldTime, String newDate, String newTime) {
+        patientController.rescheduleAppointment(appointmentId, newDate, newTime);
+        updateDoctorSchedule(doctorId, LocalDate.parse(oldDate, DATE_FORMAT), true, oldTime, false);
     }
 
 }
