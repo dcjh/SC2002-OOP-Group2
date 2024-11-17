@@ -25,9 +25,24 @@ public class AppointmentOutcomeController {
     // create
 
     public void createAppointmentOutcome(String date, String time, String typeOfService, ArrayList<PrescribedMedication> medications, String notes, String doctorID, String patientID, String appointmentID) {
-        AppointmentOutcome outcome = new AppointmentOutcome(date, time, typeOfService, medications, notes, doctorID, patientID, appointmentID);
-        if(appointmentID != "-") appointmentController.updateAppointmentStatus(appointmentID, "completed");
+        AppointmentOutcome outcome = new AppointmentOutcome(date, time, typeOfService, medications, notes, doctorID, patientID, appointmentID, createNewAppointmentOutcomeID());
+        if(appointmentID != "-"){
+            appointmentController.updateAppointmentStatus(appointmentID, "completed");
+        }
         dao.save(outcome);
+    }
+
+    public String createNewAppointmentOutcomeID(){
+        List<AppointmentOutcome> outcomes = dao.loadAll();
+        int length = outcomes.size();
+        if(length==0){
+            return "AO0001";
+        }
+        int last_index = length - 1;
+        String largestIdString = outcomes.get(last_index).getAppointmentOutcomeID();
+        int newIdInt = Integer.parseInt(largestIdString.substring(2)) + 1;
+
+        return String.format("AO%04d", newIdInt);
     }
 
     // getter
@@ -40,6 +55,11 @@ public class AppointmentOutcomeController {
     // Get Appointment from AppointmentID
     public Appointment getAppointment(String appointmentId){
         return appointmentController.getAppointment(appointmentId);
+    }
+
+    // Get Appointment List from DoctorID
+    public List<Appointment> getApprovedAppointmentsByDoctorID(String doctorId){
+        return appointmentController.getApprovedAppointmentsByDoctorID(doctorId);
     }
     
     // Get all appointment outcomes for a particular DoctorID
