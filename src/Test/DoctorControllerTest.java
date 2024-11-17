@@ -14,6 +14,7 @@ public class DoctorControllerTest {
         Patient p = new Patient("P1001", "patient1001",null,"HI", null, 1);
         // doctorController.displayDoctorView("D0002");
         patientController = new PatientController(p);
+        patientController.scheduleAppointment();
         // doctorController.
     }
 }

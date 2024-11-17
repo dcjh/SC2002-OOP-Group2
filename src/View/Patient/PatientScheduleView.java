@@ -31,7 +31,6 @@ public class PatientScheduleView {
                 System.out.println("Time: " + s.getDateTime().get(date));
                 System.out.println(br);
             }
-            System.out.println(br);
         }
     }
 

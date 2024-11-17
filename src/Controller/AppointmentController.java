@@ -196,9 +196,9 @@ public class AppointmentController {
     }
 
     //to update doctor's availability
-    public void updateAppointmentSchedule(String appointmentId, String doctorId, String date, Boolean approve) {
+    public void updateAppointmentSchedule(String appointmentId, String doctorId, String date, String time, Boolean approve) {
         if (approve) {
-            doctorController.updateDoctorSchedule(doctorId, LocalDate.parse(date, DATE_FORMAT), false);
+            doctorController.updateDoctorSchedule(doctorId, LocalDate.parse(date, DATE_FORMAT), false, time);
             updateAppointmentStatus(appointmentId, "approved");
             for (Appointment a : getPendingAppointmentsByDoctorIDandDate(doctorId, date)) {
                 updateAppointmentStatus(a.getAppointmentID(), "cancelled");
