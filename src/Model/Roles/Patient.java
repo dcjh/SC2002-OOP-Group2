@@ -40,11 +40,11 @@ public class Patient extends User {
         this.appointments = appointments;
     }
 
-    public List<AppointmentOutcomeRecord> getPastAppointments() {
+    public List<AppointmentOutcome> getPastAppointments() {
         return pastAppointments;
     }
 
-    public void setPastAppointments(List<AppointmentOutcomeRecord> pastAppointments) {
+    public void setPastAppointments(List<AppointmentOutcome> pastAppointments) {
         this.pastAppointments = pastAppointments;
     }
 }
