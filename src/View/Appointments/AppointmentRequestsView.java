@@ -103,7 +103,7 @@ public class AppointmentRequestsView {
             if (selectedAppointment == null) System.out.println("Invalid Appointment ID. Please try again.");
         } while (selectedAppointment == null);
 
-        appointmentController.updateAppointmentSchedule(selectedAppointment.getAppointmentID(), doctorId, selectedAppointment.getDate(), true);
+        appointmentController.updateAppointmentSchedule(selectedAppointment.getAppointmentID(), doctorId, selectedAppointment.getDate(), selectedAppointment.getTime(), true);
         System.out.println("Appointment ID " + selectedAppointment.getAppointmentID() + " has been approved.");
     }
 
@@ -132,7 +132,7 @@ public class AppointmentRequestsView {
             if (selectedAppointment == null) System.out.println("Invalid Appointment ID. Please try again.");
         } while (selectedAppointment == null);
 
-        appointmentController.updateAppointmentSchedule(selectedAppointment.getAppointmentID(), doctorId, selectedAppointment.getDate(), false);
+        appointmentController.updateAppointmentSchedule(selectedAppointment.getAppointmentID(), doctorId, selectedAppointment.getDate(), selectedAppointment.getTime(), false);
         System.out.println("Appointment ID " + selectedAppointment.getAppointmentID() + " has been rejected.");
     }
 

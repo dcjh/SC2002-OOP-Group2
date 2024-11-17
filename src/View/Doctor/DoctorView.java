@@ -35,25 +35,25 @@ public class DoctorView implements UserMainView{
 
             switch (choice) {
                 case 1:
-                    doctorController.viewPatientMR(doctorId);
+                    doctorController.viewPatientMR();
                     break;
                 case 2:
-                    doctorController.updatePatientMR(doctorId);
+                    doctorController.updatePatientMR();
                     break;
                 case 3:
-                    doctorController.viewDoctorSchedule(doctorId);
+                    doctorController.viewDoctorSchedule();
                     break;
                 case 4:
-                    doctorController.setAvailability(doctorId);
+                    doctorController.setAvailability();
                     break;
                 case 5:
-                    doctorController.viewAppointmentRequests(doctorId);
+                    doctorController.viewAppointmentRequests();
                     break;
                 case 6:
-                    doctorController.viewUpcomingAppointments(doctorId);
+                    doctorController.viewUpcomingAppointments();
                     break;
                 case 7:
-                    doctorController.viewRecordAppointmentOutcome(doctorId);
+                    doctorController.viewRecordAppointmentOutcome();
                     break;
                 case 8:
                     System.out.println("Logging out...");

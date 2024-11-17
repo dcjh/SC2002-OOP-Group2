@@ -47,22 +47,16 @@ public class PatientView implements UserMainView{
                     patientController.updateContactInformation(newPhoneNumber, newEmail);
                     break;
                 case 3:
-                    //view avaiable slots
+                    patientController.seeSchedule();
                     break;
                 case 4:
                     patientController.viewScheduledAppointments();
                     break;
                 case 5:
-                    String docID = prompt("Enter Doctor ID: ");
-                    String date = prompt("Enter Appointment Date (DD-MM-YYYY): ");
-                    String time = prompt("Enter Appointment Time (HH:MM): ");
-                    patientController.scheduleAppointment(docID, date, time);
+                    patientController.scheduleAppointment();
                     break;
                 case 6:
-                    String rescheduleID = prompt("Enter Appointment ID to reschedule: ");
-                    String newDate = prompt("Enter new date (DD-MM-YYYY): ");
-                    String newTime = prompt("Enter new time (HH:MM): ");
-                    patientController.rescheduleAppointment(rescheduleID, newDate, newTime);
+                    patientController.rescheduleAppointment();
                     break;
                 case 7:
                     String cancelID = prompt("Enter Appointment ID to cancel: ");
