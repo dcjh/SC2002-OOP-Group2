@@ -145,6 +145,10 @@ public class AppointmentController {
     // View all approved appointments for a particular DoctorID
     public void viewApprovedAppointmentsByDoctorID(String docId) {
         List<Appointment> appointments = appointmentDAO.getApprovedAppointmentsByDocID(docId);
+        if(appointments.isEmpty()){
+            System.out.println("There is no approved appointment for Doctor ID " + docId + ".");
+            return;
+        }
         System.out.println("Displaying all approved appointments for the Doctor ID of " + docId + " : ");
         System.out.println(" ");
         for (Appointment a : appointments) {

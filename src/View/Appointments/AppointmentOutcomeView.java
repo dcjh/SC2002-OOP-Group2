@@ -67,6 +67,10 @@ public class AppointmentOutcomeView {
             switch (choice) {
                 case "1":
                     List<AppointmentOutcome> outcomes = appointmentOutcomeController.getAppointmentOutcomeByDoctorID(doctorId);
+                    if (outcomes.isEmpty()){
+                        System.out.println("You have no appointment outcome records.");
+                        return;
+                    }
                     System.out.println(" ");
                     System.out.println("All the appointment outcomes for the Doctor ID " + doctorId + " : ");
                     System.out.println(" ");

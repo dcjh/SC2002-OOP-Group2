@@ -1,5 +1,9 @@
 package Authentication;
 
+import Model.Roles.Gender;
+import Model.Roles.UserType;
+import Model.Shared.User;
+import Model.UserFactory;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -9,12 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import Model.Shared.User;
-import Model.UserFactory;
-import Model.Roles.UserType;
-
 public class AccountManager {
-	private static final String FILE_PATH = "C:\\Users\\chuaz\\eclipse-workspace\\OOP_project\\src\\Authentication\\userlogin.csv";
+	private static final String FILE_PATH = "src/Data/Assets/userlogin.csv";
 
 	public User login(String hospID, String password) {
 		List<String[]> userDatabase = new ArrayList<>();
@@ -31,6 +31,7 @@ public class AccountManager {
                 UserType userRole = UserType.valueOf(values[2].trim().toUpperCase());
                 String userName = values[3].trim();
                 String userGender = values[4].trim();
+
                 int userAge = Integer.parseInt(values[5].trim());
                 String initialLogin = values[6].trim();
                 
@@ -44,7 +45,7 @@ public class AccountManager {
                     	String newPassword = scanner.nextLine();
                     	changePassword(hospID,newPassword);
                     }
-                    return UserFactory.createUser(userRole, hospID, password, userName, userGender, userAge);
+                    return UserFactory.createUser(userRole, hospID, password, userName, Gender.valueOf(userGender.toUpperCase()), userAge);
                 } 
                 
             }
