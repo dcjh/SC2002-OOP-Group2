@@ -67,7 +67,7 @@ public class DoctorAvailabilityView {
         }
         
         scanner.nextLine(); // Consume newline
-        scheduleController.updateDoctorSchedule(doctorId,date,isAvailable,time);
+        scheduleController.updateDoctorSchedule(doctorId,date,isAvailable,time,true);
     }
 
 }
