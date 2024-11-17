@@ -1,4 +1,4 @@
-package app;
+package App;
 import Authentication.AccountManager;
 import Model.Shared.User;
 import java.util.Scanner; 

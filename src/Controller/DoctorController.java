@@ -38,31 +38,31 @@ public class DoctorController {
     }
 
     //methods to trigger actions
-    public void viewPatientMR(String doctorId) {
-        medicalRecordController.doctorMedicalRecordView(doctorId);
+    public void viewPatientMR() {
+        medicalRecordController.doctorMedicalRecordView(doctor.getDoctorId());
     }
 
-    public void updatePatientMR(String doctorId) {
-        medicalRecordController.updateMedicalRecordView(doctorId);
+    public void updatePatientMR() {
+        medicalRecordController.updateMedicalRecordView(doctor.getDoctorId());
     }
     
-    public void viewDoctorSchedule(String doctorId) {
-        scheduleController.showDoctorSchedule(doctorId); //delegate to schedule view
+    public void viewDoctorSchedule() {
+        scheduleController.showDoctorSchedule(doctor.getDoctorId()); //delegate to schedule view
     }
 
-    public void setAvailability(String doctorId) {
-        scheduleController.showSetAvailabilityView(doctorId); //delegate to ability view
+    public void setAvailability() {
+        scheduleController.showSetAvailabilityView(doctor.getDoctorId()); //delegate to ability view
     }
-    public void viewAppointmentRequests(String doctorId) {
-        appointmentController.appointmentRequestsView(doctorId); //delegate to appointment request view
-    }
-
-    public void viewUpcomingAppointments(String doctorId) {
-        appointmentController.viewApprovedAppointmentsByDoctorID(doctorId);
+    public void viewAppointmentRequests() {
+        appointmentController.appointmentRequestsView(doctor.getDoctorId()); //delegate to appointment request view
     }
 
-    public void viewRecordAppointmentOutcome(String doctorId) {
-        appointmentOutcomeController.viewMenuDoctor(doctorId);
+    public void viewUpcomingAppointments() {
+        appointmentController.viewApprovedAppointmentsByDoctorID(doctor.getDoctorId());
+    }
+
+    public void viewRecordAppointmentOutcome() {
+        appointmentOutcomeController.viewMenuDoctor(doctor.getDoctorId());
     }
 
     public void logout() {

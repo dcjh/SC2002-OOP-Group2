@@ -26,14 +26,17 @@ public class PatientController {
     public void updateContactInformation(String newPhoneNumber, String newEmail) {
         medicalRecordController.updateContactInformation(patient.getPatientId(), newPhoneNumber, newEmail);
     }
-    public void scheduleAppointment() {
+    public void seeSchedule() {
         scheduleController.patientScheduleView();
     }
-    public void rescheduleAppointment(String appointmentID, String newDate, String newTime) {
-        appointmentController.updateAppointmentReschedule(appointmentID, newDate, newTime);
+    public void scheduleAppointment() {
+        scheduleController.patientBookScheduleView(patient.getPatientId());
+    }
+    public void rescheduleAppointment() {
+        scheduleController.patientReScheduleView(patient.getPatientId());
     }
     public void cancelAppointment(String appointmentID) {
-        appointmentController.updateAppointmentStatus(appointmentID, "cancelled");
+        scheduleController.patientCancelView(patient.getPatientId());
     }
     public void viewScheduledAppointments() {
         appointmentController.viewAppointmentsByPatientID(patient.getPatientId());
@@ -48,6 +51,14 @@ public class PatientController {
     //navigate to viewing all doctor schedules
     public void createAppointment(String docID, String date, String time) {
         appointmentController.createAppointment(docID, patient.getPatientId(), time, date);
+    }
+
+    public void updateRescheduleAppointment(String appointmentID, String newDate, String newTime) {
+        appointmentController.updateAppointmentReschedule(appointmentID, newDate, newTime);
+    }
+
+    public void updateCancelledAppointment(String appointmentID) {
+        appointmentController.updateAppointmentStatus(appointmentID, "cancelled");
     }
 
 }

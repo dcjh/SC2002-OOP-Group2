@@ -5,16 +5,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import Controller.ScheduleController;
+
 import Model.Shared.Schedule;
 
 public class PatientScheduleView {
-    private ScheduleController scheduleController;
+    
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    public PatientScheduleView(ScheduleController scheduleController) {
-        this.scheduleController = scheduleController;
-    }
+    public PatientScheduleView() {}
 
     public void menu(List<Schedule> scheduleList) {
         String br = "----------------------------------------------";

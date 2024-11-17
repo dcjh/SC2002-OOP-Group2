@@ -9,6 +9,7 @@ import java.util.List;
 import Data.DataAccess.ScheduleDAO;
 import View.Doctor.DoctorScheduleView;
 import View.Patient.PatientScheduleView;
+import View.Patient.PatientBookScheduleView;
 import View.Doctor.DoctorAvailabilityView;
 import Model.Shared.Appointment;
 import Model.Shared.Schedule;
@@ -23,6 +24,7 @@ public class ScheduleController{
     private PatientScheduleView patientScheduleView;
     private DoctorScheduleView doctorScheduleView;
     private ScheduleDAO data;
+    private PatientBookScheduleView patientBookScheduleView;
 
     public ScheduleController(DoctorController doctorController, PatientController patientController) {
         this.data = new ScheduleDAO();
@@ -30,7 +32,8 @@ public class ScheduleController{
         this.patientController = patientController;
         this.doctorScheduleView = new DoctorScheduleView();
         this.doctorAvailabilityView = new DoctorAvailabilityView(this);
-        this.patientScheduleView = new PatientScheduleView(this);
+        this.patientScheduleView = new PatientScheduleView();
+        this.patientBookScheduleView = new PatientBookScheduleView(this);
     }
     
     //navigate to DoctorScheduleView
@@ -91,8 +94,16 @@ public class ScheduleController{
         patientScheduleView.menu(findAllAvailableDoctors());
     }
 
+    public void patientBookScheduleView(String patientId) {
+        patientBookScheduleView.menu(findAllAvailableDoctors(), patientId);
+    }
+
     public void patientReScheduleView() {
-        
+        patientReScheduleView.menu();
+    }
+
+    public void patientCancelView() {
+        patientCancelView.menu();
     }
 
     public List<Schedule> findAllAvailableDoctors() {
@@ -103,6 +114,10 @@ public class ScheduleController{
             }
         }
         return scheduleList;
+    }
+
+    public void createAppointmentRequest(String doctorId, String date, String time) {
+        patientController.createAppointment(doctorId, date, time);
     }
 
 }
