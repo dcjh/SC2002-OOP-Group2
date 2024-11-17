@@ -34,6 +34,15 @@ public class MedicalRecordController {
         this.doctorController = doctorController;
         this.appointmentOutcomeController = new AppointmentOutcomeController();
     }
+    public MedicalRecordController() {
+        this.medicalRecordDAO = new MedicalRecordDAO();
+        this.medicalRecordView = new MedicalRecordView();
+        this.pastAppointmentView = new PastAppointmentView();
+        this.doctorMedicalRecordView = new DoctorMedicalRecordView(this);
+        this.doctorUpdateMedicalRecordView = new DoctorUpdateMedicalRecordView(this);
+        this.doctorController = null;
+        this.appointmentOutcomeController = new AppointmentOutcomeController();
+    }
 
     //navigate to medical record View
     public void doctorMedicalRecordView(String doctorId) {
