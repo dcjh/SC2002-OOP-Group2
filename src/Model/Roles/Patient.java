@@ -11,15 +11,15 @@ public class Patient extends User {
     private MedicalRecord medicalRecord;
     private List<Appointment> appointments;
 
-    public Patient(String hosID, String password, UserType userType, String name, Gender gender, int age) {
-        super(hosID, password, role, name, gender, age);
+    public Patient(String hosID, String password,UserType userType, String name, String gender, int age) {
+        super(hosID, password,  UserType.PATIENT, name, gender, age);
         this.medicalRecord=null;
         this.appointments=null;
     }
 
-    public patient(String hosID, String password, String role, String name, String gender, int age,
+    public Patient(String hosID, String password, UserType userType, String name, String gender, int age,
                    String dob, String phoneNumber, String email, String bloodType, String allergies) {
-        super(hosID, password, role, name, gender, age);
+        super(hosID, password, UserType.PATIENT, name, gender, age);
         this.medicalRecord = new MedicalRecord(hosID, name, dob, gender, phoneNumber, email, bloodType, allergies);
         this.appointments = new ArrayList<>();
     }
