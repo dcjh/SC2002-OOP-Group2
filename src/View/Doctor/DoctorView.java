@@ -2,13 +2,14 @@ package View.Doctor;
 
 import Controller.DoctorController;
 import View.UserMainView;
+import Model.Roles.Doctor;
 
 import java.util.Scanner;
 
 public class DoctorView implements UserMainView{
     private DoctorController doctorController;
 
-    public DoctorView(DoctorController doctorController) {
+    public DoctorView(DoctorController doctorController, Doctor doctor) {
         this.doctorController = doctorController;
     }
 
