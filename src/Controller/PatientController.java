@@ -15,12 +15,15 @@ public class PatientController {
     private MedicalRecordController medicalRecordController;
     private AppointmentController appointmentController;
     private ScheduleController scheduleController;
+    private DoctorController doctorController;
 
     public PatientController(Patient patient) {
         this.patient = patient;
         this.medicalRecordController = new MedicalRecordController();
         this.appointmentController = new AppointmentController();
-        this.scheduleController = new ScheduleController(null, this);
+        this.doctorController = new DoctorController(null);
+        this.scheduleController = new ScheduleController(doctorController, this);
+
     }
 
     public void updateContactInformation(String newPhoneNumber, String newEmail) {
@@ -35,7 +38,7 @@ public class PatientController {
     public void rescheduleAppointment() {
         scheduleController.patientReScheduleView(patient.getPatientId());
     }
-    public void cancelAppointment(String appointmentID) {
+    public void cancelAppointment() {
         scheduleController.patientCancelView(patient.getPatientId());
     }
     public void viewScheduledAppointments() {
@@ -59,6 +62,15 @@ public class PatientController {
 
     public void updateCancelledAppointment(String appointmentID) {
         appointmentController.updateAppointmentStatus(appointmentID, "cancelled");
+    }
+
+    //logic
+    public List<Appointment> getConfirmedAppointmentsByPatientId() {
+        return appointmentController.getApprovedAppointmentsByPatientID(patient.getPatientId());
+    }
+
+    public void cancelAppointmentHandler(String appointmentId) {
+        appointmentController.updateAppointmentStatus(appointmentId, "cancelled");
     }
 
 }

@@ -10,6 +10,8 @@ import Data.DataAccess.ScheduleDAO;
 import View.Doctor.DoctorScheduleView;
 import View.Patient.PatientScheduleView;
 import View.Patient.PatientBookScheduleView;
+import View.Patient.PatientCancelView;
+import View.Patient.PatientReScheduleView;
 import View.Doctor.DoctorAvailabilityView;
 import Model.Shared.Appointment;
 import Model.Shared.Schedule;
@@ -22,6 +24,8 @@ public class ScheduleController{
     private PatientController patientController;
     private DoctorAvailabilityView doctorAvailabilityView;
     private PatientScheduleView patientScheduleView;
+    private PatientReScheduleView patientReScheduleView;
+    private PatientCancelView patientCancelView;
     private DoctorScheduleView doctorScheduleView;
     private ScheduleDAO data;
     private PatientBookScheduleView patientBookScheduleView;
@@ -34,6 +38,8 @@ public class ScheduleController{
         this.doctorAvailabilityView = new DoctorAvailabilityView(this);
         this.patientScheduleView = new PatientScheduleView();
         this.patientBookScheduleView = new PatientBookScheduleView(this);
+        // this.patientReScheduleView = new PatientReScheduleView(this);
+        this.patientCancelView = new PatientCancelView(this);
     }
     
     //navigate to DoctorScheduleView
@@ -65,7 +71,7 @@ public class ScheduleController{
         doctorAvailabilityView.menu(doctorId);
     }
 
-    public void updateDoctorSchedule(String doctorId, LocalDate date, Boolean isAvailable, String time) {
+    public void updateDoctorSchedule(String doctorId, LocalDate date, Boolean isAvailable, String time, Boolean doctorUse) {
         if (data.find(doctorId) == null ) {
             Schedule newSchedule = new Schedule(doctorId);
             newSchedule.getDateAvailability().put(date, isAvailable);
@@ -80,6 +86,8 @@ public class ScheduleController{
                 }
             }
             
+            if(doctorUse == false) validAppt = false;
+
             if(validAppt) {
                 System.out.println("You have an appointment on that date! Unable to set availability");
             } else {
@@ -99,11 +107,11 @@ public class ScheduleController{
     }
 
     public void patientReScheduleView() {
-        patientReScheduleView.menu();
+        // patientReScheduleView.menu();
     }
 
-    public void patientCancelView() {
-        patientCancelView.menu();
+    public void patientCancelView(String patientId) {
+        patientCancelView.menu(patientController.getConfirmedAppointmentsByPatientId(), patientId);
     }
 
     public List<Schedule> findAllAvailableDoctors() {
@@ -118,6 +126,11 @@ public class ScheduleController{
 
     public void createAppointmentRequest(String doctorId, String date, String time) {
         patientController.createAppointment(doctorId, date, time);
+    }
+
+    public void cancelAppointment(String appointmentId, String doctorId, LocalDate date, String time){
+        patientController.cancelAppointmentHandler(appointmentId);
+        updateDoctorSchedule(doctorId, date, true, time, false);
     }
 
 }

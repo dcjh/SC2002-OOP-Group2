@@ -59,8 +59,7 @@ public class PatientView implements UserMainView{
                     patientController.rescheduleAppointment();
                     break;
                 case 7:
-                    String cancelID = prompt("Enter Appointment ID to cancel: ");
-                    patientController.cancelAppointment(cancelID);
+                    patientController.cancelAppointment();
                     break;
                 case 8:
                     patientController.viewPastAppointments();

@@ -75,7 +75,7 @@ public class DoctorController {
     }
 
     public void updateDoctorSchedule(String doctorId, LocalDate date, Boolean isAvailable, String time) {
-        scheduleController.updateDoctorSchedule(doctorId, date, isAvailable, time);
+        scheduleController.updateDoctorSchedule(doctorId, date, isAvailable, time, true);
     }
     public List<AppointmentOutcome> getAppointmentOutcomeByDoctorId (String doctorId) {
         return appointmentOutcomeController.getAppointmentOutcomeByDoctorID(doctorId);

@@ -14,10 +14,10 @@ public class DoctorControllerTest {
         Doctor d = new Doctor("D0002","hehe",null,"Dog",null,1);
         doctorController = new DoctorController(d);
         Patient p = new Patient("P1001", "patient1001",null,"HI", null, 1);
-        doctorController.displayDoctorView();
-        // patientController = new PatientController(p);
+        // doctorController.displayDoctorView();
+        patientController = new PatientController(p);
         // patientController.seeSchedule();
-        // patientController.scheduleAppointment();
+        patientController.rescheduleAppointment();
         // doctorController.
     }
 }

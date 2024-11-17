@@ -34,7 +34,6 @@ public class PatientBookScheduleView extends PatientScheduleView{
                 default:
                     System.out.println("Invalid choice. Proceeding...");
             }
-            // if (proceed.equals("n")) break;
         }
 
     }
