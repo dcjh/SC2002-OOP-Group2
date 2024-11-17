@@ -54,13 +54,13 @@ public class PatientView implements UserMainView{
                     break;
                 case 5:
                     String docID = prompt("Enter Doctor ID: ");
-                    String date = prompt("Enter Appointment Date (YYYY-MM-DD): ");
+                    String date = prompt("Enter Appointment Date (DD-MM-YYYY): ");
                     String time = prompt("Enter Appointment Time (HH:MM): ");
                     patientController.scheduleAppointment(docID, date, time);
                     break;
                 case 6:
                     String rescheduleID = prompt("Enter Appointment ID to reschedule: ");
-                    String newDate = prompt("Enter new date (YYYY-MM-DD): ");
+                    String newDate = prompt("Enter new date (DD-MM-YYYY): ");
                     String newTime = prompt("Enter new time (HH:MM): ");
                     patientController.rescheduleAppointment(rescheduleID, newDate, newTime);
                     break;
