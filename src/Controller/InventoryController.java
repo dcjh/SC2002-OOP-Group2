@@ -105,6 +105,14 @@ public class InventoryController {
         }
     }
     
+    public Inventory findMedicineByName(String medicineName) {
+        Inventory medicine = inventoryDAO.find(medicineName, null);
+        if (medicine == null) {
+            System.out.println("Medicine with name \"" + medicineName + "\" not found.");
+        }
+        return medicine;
+    }
+    
     public void printInventory(Inventory inv) {
         this.view.printInventory(inv.getName(), inv.getInitialStock(), inv.getCurrentStock(), inv.getLowStockAlert());
     }
