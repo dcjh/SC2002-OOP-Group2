@@ -1,8 +1,8 @@
 package Controller;
 import Data.DataAccess.InventoryDAO;
 import Data.DataAccess.ReplenishmentDAO;
-import Model.Inventory;
-import Model.ReplenishmentRequest;
+import Model.Shared.Inventory;
+import Model.Shared.ReplenishmentRequest;
 import java.util.List;
 import java.util.Scanner;
 

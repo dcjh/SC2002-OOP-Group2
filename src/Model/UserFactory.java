@@ -1,7 +1,10 @@
 package Model;
 
+import Model.Roles.*;
+import Model.Shared.*;
+
 public class UserFactory {
-    public static User createUser(UserType userType, String hosID, String password, String name, String gender, int age) {
+    public static User createUser(UserType userType, String hosID, String password, String name, Gender gender, int age) {
         switch (userType) {
             case ADMINISTRATOR:
                 return new Administrator(hosID, password, userType, name, gender, age);

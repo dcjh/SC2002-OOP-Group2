@@ -3,7 +3,7 @@ package Controller;
 import java.util.List;
 import Data.DataAccess.PastDiagnosesAndTreatmentsDAO;
 import Model.Shared.PastDiagnosesAndTreatments;
-import View.PastDiagnosesAndTreatmentsView;
+import View.MedicalRecord.PastDiagnosesAndTreatmentsView;
 
 public class PastDiagnosesAndTreatmentsController {
     private PastDiagnosesAndTreatmentsDAO dao;

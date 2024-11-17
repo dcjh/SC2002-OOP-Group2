@@ -1,7 +1,7 @@
 package Controller;
 import Data.DataAccess.InventoryDAO;
-import Model.Inventory;
-import View.InventoryView;
+import Model.Shared.Inventory;
+import View.Pharmacist.InventoryView;
 
 import java.util.List;
 import java.util.Scanner;

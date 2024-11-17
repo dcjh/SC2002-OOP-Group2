@@ -1,6 +1,6 @@
-package View;
+package View.Pharmacist;
 
-import Model.ReplenishmentRequest;
+import Model.Shared.ReplenishmentRequest;
 import java.util.List;
 
 public class ReplenishmentRestockView {

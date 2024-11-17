@@ -3,20 +3,12 @@ package Model.Roles;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.Shared.Appointment;
-import Model.Shared.MedicalRecord;
-import Model.Shared.Schedule;
 import Model.Shared.User;
 
 public class Doctor extends User{
-    
-    private static UserType userType;
-    private String name;
-    private Gender gender;
-    private int age;
 
     public Doctor(String hosID, String password,UserType userType, String name, Gender gender, int age) {
-        super(hosID, password,UserType.DOCTOR , name, Gender.MALE, age);
+        super(hosID, password, UserType.DOCTOR , name, gender, age);
     }
    
     public String getDoctorId() {
@@ -55,6 +47,5 @@ public class Doctor extends User{
     public void setAge(int age) {
         this.age = age;
     }
-
 
 }

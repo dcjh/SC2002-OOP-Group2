@@ -1,9 +1,11 @@
 package View.Doctor;
 
 import Controller.DoctorController;
+import View.UserMainView;
+
 import java.util.Scanner;
 
-public class DoctorView {
+public class DoctorView implements UserMainView{
     private DoctorController doctorController;
 
     public DoctorView(DoctorController doctorController) {

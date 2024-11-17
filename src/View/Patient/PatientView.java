@@ -1,6 +1,7 @@
-package View;
+package View.Patient;
 
 import Model.Shared.User;
+import View.UserMainView;
 import Model.Roles.Patient;
 import Controller.PatientController;
 import java.util.Scanner; 
@@ -20,7 +21,7 @@ public class PatientView implements UserMainView{
         }
     }
 
-    public void displayMenu() {
+    public void menu() {
         int choice;
         do {
             System.out.println("\nPatient Menu:");

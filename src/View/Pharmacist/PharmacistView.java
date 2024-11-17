@@ -1,14 +1,10 @@
 package View.Pharmacist;
 
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
-import Controller.AdministratorController;
-import Controller.AppointmentOutcomeController;
-import Controller.InventoryController;
 import Controller.PharmacistController;
-import Model.User;
+import Model.Shared.User;
+import View.UserMainView;
 
 public class PharmacistView implements UserMainView{
     private User user;

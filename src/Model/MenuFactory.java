@@ -1,9 +1,10 @@
 package Model;
-import View.AdministratorView;
-import View.PatientView;
-import View.PharmacistView;
+import View.Administrator.AdministratorView;
+import View.Pharmacist.PharmacistView;
 import View.UserMainView;
 import View.Doctor.DoctorView;
+import View.Patient.PatientView;
+import Model.Roles.UserType;
 
 
 public class MenuFactory {
