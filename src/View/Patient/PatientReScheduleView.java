@@ -83,7 +83,7 @@ public class PatientReScheduleView {
         System.out.print("Do you want to proceed with rescheduling? (yes/no): ");
         String confirmation = scanner.nextLine().trim().toLowerCase();
         if (confirmation.equals("yes")) {
-            scheduleController.rescheduleAppointment(selectedAppointment.getAppointmentID(), selectedAppointment.getDocID(), selectedAppointment.getDate(), newDate, newTime);
+            scheduleController.rescheduleAppointment(selectedAppointment.getAppointmentID(), selectedAppointment.getDocID(), selectedAppointment.getDate(), selectedAppointment.getTime(), newDate, newTime);
             System.out.println("Appointment has been rescheduled successfully!");
         } else {
             System.out.println("Rescheduling canceled.");

@@ -70,6 +70,10 @@ public class DoctorController {
         return appointmentController.getAppointmentsByDoctorID(doctorId);
     }
 
+    public List<Appointment> getConfirmedAppointmentsById(String doctorId) {
+        return appointmentController.getApprovedAppointmentsByDoctorID(doctorId);
+    }
+
     public void updateDoctorSchedule(String doctorId, LocalDate date, Boolean isAvailable, String time) {
         scheduleController.updateDoctorSchedule(doctorId, date, isAvailable, time, true);
     }
