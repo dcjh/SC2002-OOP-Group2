@@ -2,6 +2,8 @@ package View;
 
 import Model.Shared.MedicalRecord;
 import Model.Shared.AppointmentOutcome;
+import Model.Shared.PastDiagnosesAndTreatments;
+import java.util.List;
 
 public class MedicalRecordView {
 
