@@ -2,7 +2,6 @@ package View.Patient;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,9 +24,11 @@ public class PatientScheduleView {
             System.out.println("Doctor ID: " + s.getDoctorId());
             System.out.println(br);
             for (LocalDate date : s.getDateAvailability().keySet()) {
-                System.out.println("Date: " + date.format(DATE_FORMAT));
-                System.out.println("Time: " + s.getDateTime().get(date));
-                System.out.println(br);
+                if(s.getDateAvailability().get(date)){
+                    System.out.println("Date: " + date.format(DATE_FORMAT));
+                    System.out.println("Time: " + s.getDateTime().get(date));
+                    System.out.println(br);
+                }
             }
         }
     }

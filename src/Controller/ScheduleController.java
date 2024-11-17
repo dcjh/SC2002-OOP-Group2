@@ -38,7 +38,7 @@ public class ScheduleController{
         this.doctorAvailabilityView = new DoctorAvailabilityView(this);
         this.patientScheduleView = new PatientScheduleView();
         this.patientBookScheduleView = new PatientBookScheduleView(this);
-        // this.patientReScheduleView = new PatientReScheduleView(this);
+        this.patientReScheduleView = new PatientReScheduleView(this);
         this.patientCancelView = new PatientCancelView(this);
     }
     
@@ -106,14 +106,15 @@ public class ScheduleController{
         patientBookScheduleView.menu(findAllAvailableDoctors(), patientId);
     }
 
-    public void patientReScheduleView() {
-        // patientReScheduleView.menu();
+    public void patientReScheduleView(String patientId) {
+        patientReScheduleView.menu(getAllConfirmedAppointments(), patientId);
     }
 
     public void patientCancelView(String patientId) {
         patientCancelView.menu(patientController.getConfirmedAppointmentsByPatientId(), patientId);
     }
 
+    //helper logic
     public List<Schedule> findAllAvailableDoctors() {
         List<Schedule> scheduleList = new ArrayList<>();
         for (Schedule s : data.fetch()) {
@@ -128,9 +129,18 @@ public class ScheduleController{
         patientController.createAppointment(doctorId, date, time);
     }
 
-    public void cancelAppointment(String appointmentId, String doctorId, LocalDate date, String time){
+    public void cancelAppointment(String appointmentId, String doctorId, String date, String time){
         patientController.cancelAppointmentHandler(appointmentId);
-        updateDoctorSchedule(doctorId, date, true, time, false);
+        updateDoctorSchedule(doctorId, LocalDate.parse(date, DATE_FORMAT), true, time, false);
+    }
+
+    public List<Appointment> getAllConfirmedAppointments() {
+        return patientController.getConfirmedAppointmentsByPatientId();
+    }
+
+    public void rescheduleAppointment(String appointmentId, String doctorId, String oldDate, String newDate, String time) {
+        patientController.rescheduleAppointment(appointmentId, newDate, time);
+        updateDoctorSchedule(doctorId, LocalDate.parse(oldDate, DATE_FORMAT), true, time, false);
     }
 
 }
