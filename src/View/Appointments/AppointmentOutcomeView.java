@@ -58,7 +58,6 @@ public class AppointmentOutcomeView {
         System.out.println("Choose your option:");
         System.out.println("1. View all your Appointment Outcome");
         System.out.println("2. Add a new Appointment Outcome");
-        System.out.println("3. Update the consultation note of an existing Appointment Outcome");
         
         choice = sc.nextInt();
 
@@ -103,25 +102,6 @@ public class AppointmentOutcomeView {
                 String consultationNotes = sc.nextLine();
                 appointmentOutcomeController.createAppointmentOutcome(date, time, typeOfService, medications, consultationNotes, doctorId, patientID, aptID);
                 System.out.println("Appointment Outcome created successfully.");
-                break;
-            case 3:
-                sc.nextLine();
-                List<AppointmentOutcome> outcomesPast = appointmentOutcomeController.getAppointmentOutcomeByDoctorID(doctorId);
-                System.out.println(" ");
-                System.out.println("All the appointment outcomes for the Doctor ID " + doctorId + " : ");
-                System.out.println(" ");
-            for (AppointmentOutcome o : outcomesPast){
-                appointmentOutcomeController.printAppointmentOutcome(o);
-                System.out.println(" ");
-            }
-
-            System.out.println("Select which appointment outcome would you like to update? Input the Appointment Outcome ID : ");
-            String aptOutcomeID = sc.nextLine();
-
-            System.out.println("Input your new consultation notes : ");
-            String newConsultationNotes = sc.nextLine();
-            appointmentOutcomeController.setConsultationNotes(aptOutcomeID, newConsultationNotes);
-            System.out.println("Consultation Notes is updated successfully for Appointment Outcome " + aptOutcomeID + ".");
                 break;
             default:
                 System.out.println("Invalid input.");;

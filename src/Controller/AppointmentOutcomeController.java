@@ -4,7 +4,6 @@ import Model.Shared.Appointment;
 import Model.Shared.AppointmentOutcome;
 import Model.Shared.PrescribedMedication;
 import View.Appointments.AppointmentOutcomeView;
-
 import java.util.ArrayList;
 import java.util.List;
 
