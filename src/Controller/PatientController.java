@@ -6,6 +6,7 @@ import java.util.List;
 /*import Controller.AppointmentController;
 import Controller.MedicalRecordController;*/
 import Model.Roles.Patient;
+import Model.Shared.Appointment;
 
 public class PatientController {
     private Patient patient;
