@@ -6,15 +6,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-
 import Model.Shared.MedicalRecord;
 
 public class MedicalRecordDAO {
 
-    private static final String FILE_PATH = "src/Data/Assets/MedicalRecords.csv";
+    private static final String FILE_PATH = "src/Data/Assets/MedicalRecord.csv";
 
     // Load a single MedicalRecord by patientID
     public MedicalRecord loadSingleRecord(String patientID) {
@@ -28,14 +24,15 @@ public class MedicalRecordDAO {
                 }
                 String[] values = line.split(",");
                 if (values[0].equals(patientID)) { // Find the matching patient ID
-                    String dob = values[1];
-                    String gender = values[2];
-                    String phoneNumber = values[3];
-                    String email = values[4];
-                    String bloodType = values[5];
-                    String allergies = values[6];
+                    String name = values.length > 1 ? values[1] : "";
+                    String dob = values.length > 2 ? values[2] : "";
+                    String gender = values.length > 3 ? values[3] : "";
+                    String phoneNumber = values.length > 4 ? values[4] : "";
+                    String email = values.length > 5 ? values[5] : "";
+                    String bloodType = values.length > 6 ? values[6] : "";
+                    String allergies = values.length > 7 ? values[7] : "";
 
-                    return new MedicalRecord(patientID, dob, gender, phoneNumber, email, bloodType, allergies);
+                    return new MedicalRecord(patientID, name, dob, gender, phoneNumber, email, bloodType, allergies);
                 }
             }
         } catch (IOException e) {
@@ -48,8 +45,11 @@ public class MedicalRecordDAO {
     public void addMedicalRecord(MedicalRecord newRecord) {
         String newRecordLine = formatMedicalRecordCSVLine(newRecord); // Format the new record
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) { // Append mode
-            writer.newLine(); // Add a newline before appending the new record
+       try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) { // Open in append mode
+            File file = new File(FILE_PATH);
+            if (file.length() > 0) {
+                writer.newLine(); // Add a newline only if the file already has content
+            }
             writer.write(newRecordLine); // Write the new record to the file
         } catch (IOException e) {
             System.err.println("Error adding new medical record: " + e.getMessage());
@@ -97,12 +97,13 @@ public class MedicalRecordDAO {
     private String formatMedicalRecordCSVLine(MedicalRecord medicalRecord) {
         return String.join(",",
                 medicalRecord.getPatientID(),
+                medicalRecord.getName(),
                 medicalRecord.getDob(),
                 medicalRecord.getGender(),
-                medicalRecord.getPhoneNumber(),
-                medicalRecord.getEmail(),
                 medicalRecord.getBloodType(),
-                medicalRecord.getAllergies()
+                medicalRecord.getAllergies(),
+                medicalRecord.getPhoneNumber(),
+                medicalRecord.getEmail()
         );
     }
 }

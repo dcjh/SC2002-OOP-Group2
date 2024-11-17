@@ -77,7 +77,7 @@ public class AppointmentOutcomeView {
                 sc.nextLine();
                 System.out.println(" ");
                 appointmentOutcomeController.viewAppointmentsByDoctorID(doctorId);
-                System.out.println("Select which appoinment would you like to record? Input the AppointmentID : ");
+                System.out.println("Select which appointment would you like to record? Input the AppointmentID : ");
                 String aptID = sc.nextLine();
                 Appointment appointment = appointmentOutcomeController.getAppointment(aptID);
                 String patientID = appointment.getPatientID();
@@ -86,7 +86,7 @@ public class AppointmentOutcomeView {
                 System.out.println("Input the type of service : ");
                 String typeOfService = sc.nextLine();
                 ArrayList<PrescribedMedication> medications = new ArrayList<>();
-                System.out.println("Input the prescribed medication and its quntity ");
+                System.out.println("Input the prescribed medication and its quantity ");
                 System.out.println("------------------------------------------------");
                 while (true) {
                     System.out.println("Enter medicine name (type 'n' to stop):");
@@ -94,7 +94,7 @@ public class AppointmentOutcomeView {
                     if (medicineName.equalsIgnoreCase("n")) { // Check if the input is "n" (case-insensitive)
                         break; // Exit the loop
                     }
-                    System.out.println("Enter quanity of "+ medicineName + " : ");
+                    System.out.println("Enter quantity of "+ medicineName + " : ");
                     int quantity = sc.nextInt();
                     sc.nextLine();
                     medications.add(new PrescribedMedication(medicineName, quantity));
@@ -115,7 +115,7 @@ public class AppointmentOutcomeView {
                 System.out.println(" ");
             }
 
-            System.out.println("Select which appoinment outcome would you like to update? Input the Appointment Outcome ID : ");
+            System.out.println("Select which appointment outcome would you like to update? Input the Appointment Outcome ID : ");
             String aptOutcomeID = sc.nextLine();
 
             System.out.println("Input your new consultation notes : ");

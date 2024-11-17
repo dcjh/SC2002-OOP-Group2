@@ -1,17 +1,18 @@
 package View.Doctor;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
-import Controller.DoctorController;
 import Controller.MedicalRecordController;
 import Model.Shared.MedicalRecord;
+import Model.Shared.AppointmentOutcome;
 
 public class DoctorMedicalRecordView {
  
-        private MedicalRecordController medicalRecordController;
+    private MedicalRecordController medicalRecordController;
+
+    public DoctorMedicalRecordView() {}
 
     public DoctorMedicalRecordView (MedicalRecordController medicalRecordController) {
         this.medicalRecordController = medicalRecordController;
@@ -21,8 +22,10 @@ public class DoctorMedicalRecordView {
         Scanner scanner = new Scanner(System.in);
         String linebr = "----------------------------------------------";
 
-        if (medicalRecordController.getPendingAppointmentsByDoctorID(doctorId).isEmpty()) {
-            System.out.println("No pending appointments to approve.");
+        List<MedicalRecord> patientsMR = medicalRecordController.getMedicalRecordsUnderDoctor(doctorId);
+
+        if (patientsMR.isEmpty()) {
+            System.out.println("No past patients :(");
             return;
         }
 
@@ -45,7 +48,7 @@ public class DoctorMedicalRecordView {
 
             switch (proceed) {
                 case 1:
-                    viewPatient(patients);
+                    viewPatientMR(patientsMR,scanner);
                     break;
                 case 2:
                     System.out.println("Returning to Main Menu...");
@@ -54,79 +57,80 @@ public class DoctorMedicalRecordView {
                     System.out.println("Invalid choice. Try again...");
             }
         }
-
     }
 
-    private void printAllPatients(List<M> appointments) {
-        String border = "+-------------+-----------+------------+----------+------------+--------+";
-        String header = "| Appointment | Doctor ID | Patient ID |  Status  |    Date    |  Time  |";
+    protected void printPatientList(List<MedicalRecord> patientsMR) {
+        String border = "+------------+----------------------+---------------+--------+-------------------------------------+";
+        String header = "| Patient ID |         Name         | Date of Birth | Gender |                Email                |";
     
         System.out.println(border);
         System.out.println(header);
         System.out.println(border);
     
-        for (Appointment a : appointments) {
-            System.out.printf("| %-11s | %-9s | %-10s | %-8s | %-10s | %-6s |%n",
-                    a.getAppointmentID(),
-                    a.getDocID(),
+        for (MedicalRecord a : patientsMR) {
+            System.out.printf("| %-10s | %-20s | %-13s | %-6s | %-35s |%n",
                     a.getPatientID(),
-                    a.getStatus(),
-                    a.getDate(),
-                    a.getTime());
+                    a.getName(),
+                    a.getDob(),
+                    a.getGender(),
+                    a.getEmail());
             System.out.println(border);
         }
     }
 
-    public void approve(Scanner scanner, String doctorId) {
-        List<Appointment> pendingAppointments = appointmentController.getPendingAppointmentsByDoctorID(doctorId);
+    private void viewPatientMR(List<MedicalRecord> patientsMR, Scanner scanner) {
         String linebr = "----------------------------------------------";
-        Appointment selectedAppointment = null;
+        MedicalRecord selectedPatient = null;
+        String patientId;
 
-        printCurrentAppointments(pendingAppointments);
-        System.out.println("Please choose an appointment to approve (Enter Appointment ID):");
+        printPatientList(patientsMR);
         System.out.println(linebr);
+        System.out.println("Input patient's medical record to view");
+        while(selectedPatient == null){
+            System.out.print("Enter Patient Id:");
+            patientId = scanner.nextLine();
 
-        do {
-            String appointmentID = scanner.nextLine();
-
-            for (Appointment a : pendingAppointments) {
-                if (a.getAppointmentID().equals(appointmentID)) {
-                    selectedAppointment = a;
+            for (MedicalRecord mr : patientsMR) {
+                if (mr.getPatientID().equals(patientId)) {
+                    selectedPatient = mr;
                     break;
                 }
             }
-            System.out.println("Invalid Appointment ID. Please try again.");
-        } while (selectedAppointment == null);
-
-        appointmentController.updateAppointmentStatus(selectedAppointment.getAppointmentID(), "approved");
-        appointmentController.updateAppointmentSchedule(selectedAppointment.getAppointmentID(), doctorId, selectedAppointment.getDate(), true);
-        System.out.println("Appointment ID " + selectedAppointment.getAppointmentID() + " has been approved.");
+            if (selectedPatient == null) System.out.println("Invalid Patient ID. Please try again.");
+        }
+        printPatientMedicalReport(selectedPatient);
     }
 
-    public void reject(Scanner scanner, String doctorId) {
-        List<Appointment> pendingAppointments = appointmentController.getPendingAppointmentsByDoctorID(doctorId);
-        String linebr = "----------------------------------------------";
-        Appointment selectedAppointment = null;
+    protected void printPatientMedicalReport(MedicalRecord medicalRecord) {
+        String border = "+---------------+-------------------------------------------------+";
+        System.err.println(border);
+        System.out.printf("| Patient ID    |" + " %-45s   |%n",medicalRecord.getPatientID());
+        System.out.printf("| Date of Birth |" + " %-45s   |%n",medicalRecord.getDob());
+        System.out.printf("| Gender        |" + " %-45s   |%n",medicalRecord.getGender());
+        System.out.printf("| Phone Number  |" + " %-45s   |%n",medicalRecord.getPhoneNumber());
+        System.out.printf("| Email         |" + " %-45s   |%n",medicalRecord.getEmail());
+        System.out.printf("| Blood Type    |" + " %-45s   |%n",medicalRecord.getBloodType());
+        System.out.printf("| Allergies     |" + " %-45s   |%n",medicalRecord.getAllergies());
+        System.err.println(border);
+        System.out.println("|                         Date of Record                          |");
 
-        printCurrentAppointments(pendingAppointments);
-        System.out.println("Please choose an appointment to reject (Enter Appointment ID):");
-        System.out.println(linebr);
-
-        do {
-            String appointmentID = scanner.nextLine();
-
-            for (Appointment a : pendingAppointments) {
-                if (a.getAppointmentID().equals(appointmentID)) {
-                    selectedAppointment = a;
-                    break;
+        List<AppointmentOutcome> aoList = medicalRecordController.getAppointmentOutcomeByPatientId(medicalRecord.getPatientID());
+        for (AppointmentOutcome a : aoList) {
+            System.err.println(border);
+            System.out.printf("| Date          |" + " %-45s   |%n",a.getDate());
+            System.err.println(border);
+            System.out.printf("| Diagnosis     |" + " %-45s   |%n",a.getConsultationNotes());
+            System.out.printf("| Treatment     |" + " %-45s   |%n",a.getTypeOfService());
+            for (int i=0; i<a.getPrescribedMedications().size(); i++) {
+                if(i==0) {
+                    System.out.printf("| Medication    |" + " %-45s   |%n",a.getPrescribedMedications().get(i));
+                } else {
+                    System.out.printf("|               |" + " %-45s   |%n",a.getPrescribedMedications().get(i));
                 }
             }
-            System.out.println("Invalid Appointment ID. Please try again.");
-        } while (selectedAppointment == null);
+            System.err.println(border);
+        }
 
-        appointmentController.updateAppointmentStatus(selectedAppointment.getAppointmentID(), "cancelled");
-        appointmentController.updateAppointmentSchedule(selectedAppointment.getAppointmentID(), doctorId, selectedAppointment.getDate(), false);
-        System.out.println("Appointment ID " + selectedAppointment.getAppointmentID() + " has been rejected.");
     }
 
 }

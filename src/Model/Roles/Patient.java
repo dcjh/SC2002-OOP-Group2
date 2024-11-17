@@ -10,19 +10,18 @@ import Model.Shared.User;
 public class Patient extends User {
     private MedicalRecord medicalRecord;
     private List<Appointment> appointments;
-    private List<String> pastDiagnoses;
-    private List<String> pastTreatments;
 
-    public Patient(String hosID, String password, UserType userType, String name, String gender, int age) {
+    public Patient(String hosID, String password, String role, String name, String gender, int age) {
         super(hosID, password, role, name, gender, age);
+        this.pastDiagnosesAndTreatments=null;
         this.medicalRecord=null;
         this.appointments=null
     }
 
     public patient(String hosID, String password, String role, String name, String gender, int age,
-                   String dob, String gender, String phoneNumber, String email, String bloodType, String allergies) {
+                   String dob, String phoneNumber, String email, String bloodType, String allergies) {
         super(hosID, password, role, name, gender, age);
-        this.medicalRecord = new MedicalRecord(hosID, dob, gender, phoneNumber, email, bloodType, allergies);
+        this.medicalRecord = new MedicalRecord(hosID, name, dob, gender, phoneNumber, email, bloodType, allergies);
         this.appointments = new ArrayList<>();
     }
 

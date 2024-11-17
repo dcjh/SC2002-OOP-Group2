@@ -18,7 +18,7 @@ import Model.Shared.User;
 
 
 public class Pharmacist extends User{
-    public Pharmacist(String staffID, String password, String role, String name, String gender, int age){
-        super(staffID, password, role, name, gender, age);
+	public Pharmacist(String hosID, String password,UserType userType, String name, String gender, int age) {
+        super(hosID, password,UserType.PHARMACIST, name, gender, age);
     }
 }
