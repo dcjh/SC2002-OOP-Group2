@@ -1,10 +1,11 @@
-package View;
+package App;
 import Authentication.AccountManager;
-import Model.User;
+import Model.Shared.User;
 import java.util.Scanner; 
 import Model.MenuFactory;
+import View.UserMainView;
 
-public class app {
+public class App {
 	   public static void main(String args[]){
 
 		   
