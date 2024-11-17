@@ -23,7 +23,6 @@ public class PatientController {
         this.appointmentController = new AppointmentController();
         this.doctorController = new DoctorController(null);
         this.scheduleController = new ScheduleController(doctorController, this);
-
     }
 
     public void updateContactInformation(String newPhoneNumber, String newEmail) {
@@ -71,6 +70,10 @@ public class PatientController {
 
     public void cancelAppointmentHandler(String appointmentId) {
         appointmentController.updateAppointmentStatus(appointmentId, "cancelled");
+    }
+    
+    public void rescheduleAppointment(String appointmentId, String date, String time) {
+        appointmentController.updateAppointmentReschedule(appointmentId, date, time);
     }
 
 }

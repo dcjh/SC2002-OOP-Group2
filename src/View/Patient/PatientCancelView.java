@@ -1,7 +1,5 @@
 package View.Patient;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,7 +7,6 @@ import Model.Shared.Appointment;
 import Controller.ScheduleController;
 
 public class PatientCancelView {
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private ScheduleController scheduleController;
 
     public PatientCancelView(ScheduleController scheduleController) {
@@ -49,7 +46,7 @@ public class PatientCancelView {
             for (Appointment appointment : aList) {
                 if (appointment.getAppointmentID().equals(input)) {
                     // Cancel the appointment using the ScheduleController
-                    scheduleController.cancelAppointment(appointment.getAppointmentID(), appointment.getDocID(), LocalDate.parse(appointment.getDate(), DATE_FORMAT), appointment.getTime());
+                    scheduleController.cancelAppointment(appointment.getAppointmentID(), appointment.getDocID(), appointment.getDate(), appointment.getTime());
                     System.out.println("Appointment ID " + appointment.getAppointmentID() + " has been canceled.");
                     appointmentFound = true;
                     break;
