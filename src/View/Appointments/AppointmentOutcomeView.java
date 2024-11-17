@@ -58,6 +58,7 @@ public class AppointmentOutcomeView {
         System.out.println("Choose your option:");
         System.out.println("1. View all your Appointment Outcome");
         System.out.println("2. Add a new Appointment Outcome");
+        System.out.println("3. Return back to Menu");
         
         choice = sc.nextInt();
 
@@ -102,6 +103,8 @@ public class AppointmentOutcomeView {
                 String consultationNotes = sc.nextLine();
                 appointmentOutcomeController.createAppointmentOutcome(date, time, typeOfService, medications, consultationNotes, doctorId, patientID, aptID);
                 System.out.println("Appointment Outcome created successfully.");
+                break;
+            case 3:
                 break;
             default:
                 System.out.println("Invalid input.");;
