@@ -27,10 +27,10 @@ public class MedicalRecordDAO {
                     String name = values.length > 1 ? values[1] : "";
                     String dob = values.length > 2 ? values[2] : "";
                     String gender = values.length > 3 ? values[3] : "";
-                    String phoneNumber = values.length > 4 ? values[4] : "";
-                    String email = values.length > 5 ? values[5] : "";
-                    String bloodType = values.length > 6 ? values[6] : "";
-                    String allergies = values.length > 7 ? values[7] : "";
+                    String bloodType = values.length > 4 ? values[4] : "";
+                    String allergies = values.length > 5 ? values[5] : "";
+                    String phoneNumber = values.length > 6 ? values[6] : "";
+                    String email = values.length > 7 ? values[7] : "";
 
                     return new MedicalRecord(patientID, name, dob, gender, phoneNumber, email, bloodType, allergies);
                 }
