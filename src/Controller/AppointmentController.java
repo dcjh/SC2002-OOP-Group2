@@ -61,6 +61,9 @@ public class AppointmentController {
     public List<Appointment> getPendingAppointmentsByDoctorID(String docId) {
         return appointmentDAO.getPendingAppointmentsByDocID(docId);
     }
+    public List<Appointment> getPendingAppointmentsByDoctorIDandDate(String docId, String date) {
+        return appointmentDAO.getPendingAppointmentsByDocIDandDate(docId, date);
+    }
 
     // Get all appointments for a particular PatientID (completed and cancelled included)
     public List<Appointment> getAppointmentsByPatientID(String patientId) {
@@ -184,7 +187,8 @@ public class AppointmentController {
     public void updateAppointmentSchedule(String appointmentId, String doctorId, String date, Boolean approve) {
         if (approve) {
             doctorController.updateDoctorSchedule(doctorId, LocalDate.parse(date, DATE_FORMAT), false);
-            for (Appointment a : getPendingAppointmentsByDoctorID(doctorId)) {
+            updateAppointmentStatus(appointmentId, "approved");
+            for (Appointment a : getPendingAppointmentsByDoctorIDandDate(doctorId, date)) {
                 updateAppointmentStatus(a.getAppointmentID(), "cancelled");
             }
         } else {

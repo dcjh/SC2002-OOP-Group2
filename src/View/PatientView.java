@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class PatientView implements UserMainView{
     private PatientController patientController;
 
-    public patientView(User user) {
+    public PatientView(User user) {
         if (user instanceof Patient) {
             Patient patient = (Patient) user;
             this.patientController = new PatientController(patient);
@@ -62,7 +62,7 @@ public class PatientView implements UserMainView{
                     patientController.cancelAppointment(cancelID);
                     break;
                 case 7:
-                    patientController.viewPastAppointment();
+                    patientController.viewPastAppointments();
                     break;
                 case 8:
                     System.out.println("Logging out...");

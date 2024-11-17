@@ -1,3 +1,4 @@
+package Model.Shared;
 
 public class PastDiagnosesAndTreatments {
     private String patientID;

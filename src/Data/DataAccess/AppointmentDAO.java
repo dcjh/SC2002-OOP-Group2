@@ -141,6 +141,17 @@ public class AppointmentDAO {
         return result; // Return the filtered list
     }
 
+    public List<Appointment> getPendingAppointmentsByDocIDandDate(String doctorId, String date) {
+        List<Appointment> appointments = loadAll();
+        List<Appointment> result = new ArrayList<>();
+        for (Appointment appointment : appointments) {
+            if (appointment.getDocID().equals(doctorId) && appointment.getStatus().equals("pending") &&appointment.getDate().equals(date)) {
+                result.add(appointment);
+            }
+        }
+        return result; // Return the filtered list
+    }
+
     // Find appointments by patientId
     public List<Appointment> getAppointmentsByPatientID(String patientId) {
         List<Appointment> appointments = loadAll();

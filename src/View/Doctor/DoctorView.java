@@ -60,10 +60,4 @@ public class DoctorView {
             }
         }
     }
-
-    public void displaySchedule(){
-        
-    }
-
-
 }

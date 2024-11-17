@@ -1,7 +1,5 @@
 package View.Appointments;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -84,6 +82,10 @@ public class AppointmentRequestsView {
         List<Appointment> pendingAppointments = appointmentController.getPendingAppointmentsByDoctorID(doctorId);
         String linebr = "----------------------------------------------";
         Appointment selectedAppointment = null;
+        if (pendingAppointments.isEmpty())  {
+            System.out.println("No pending appointments to approve.");
+            return;
+        }
 
         printCurrentAppointments(pendingAppointments);
         System.out.println("Please choose an appointment to approve (Enter Appointment ID):");
@@ -98,10 +100,9 @@ public class AppointmentRequestsView {
                     break;
                 }
             }
-            System.out.println("Invalid Appointment ID. Please try again.");
+            if (selectedAppointment == null) System.out.println("Invalid Appointment ID. Please try again.");
         } while (selectedAppointment == null);
 
-        appointmentController.updateAppointmentStatus(selectedAppointment.getAppointmentID(), "approved");
         appointmentController.updateAppointmentSchedule(selectedAppointment.getAppointmentID(), doctorId, selectedAppointment.getDate(), true);
         System.out.println("Appointment ID " + selectedAppointment.getAppointmentID() + " has been approved.");
     }
@@ -110,6 +111,10 @@ public class AppointmentRequestsView {
         List<Appointment> pendingAppointments = appointmentController.getPendingAppointmentsByDoctorID(doctorId);
         String linebr = "----------------------------------------------";
         Appointment selectedAppointment = null;
+        if (pendingAppointments.isEmpty()) {
+            System.out.println("No pending appointments to approve.");
+            return;
+        }
 
         printCurrentAppointments(pendingAppointments);
         System.out.println("Please choose an appointment to reject (Enter Appointment ID):");
@@ -124,10 +129,9 @@ public class AppointmentRequestsView {
                     break;
                 }
             }
-            System.out.println("Invalid Appointment ID. Please try again.");
+            if (selectedAppointment == null) System.out.println("Invalid Appointment ID. Please try again.");
         } while (selectedAppointment == null);
 
-        appointmentController.updateAppointmentStatus(selectedAppointment.getAppointmentID(), "cancelled");
         appointmentController.updateAppointmentSchedule(selectedAppointment.getAppointmentID(), doctorId, selectedAppointment.getDate(), false);
         System.out.println("Appointment ID " + selectedAppointment.getAppointmentID() + " has been rejected.");
     }

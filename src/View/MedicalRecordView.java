@@ -1,11 +1,11 @@
 package View;
 
 import Model.Shared.MedicalRecord;
-import Model.Shared.AppointmentOutcomeRecord;
+import Model.Shared.AppointmentOutcome;
 
 public class MedicalRecordView {
 
-    public void menu(MedicalRecord medicalRecord) {
+    public void fullDisplay(MedicalRecord medicalRecord) {
         System.out.println("Medical Record:");
         System.out.println("Patient ID: " + medicalRecord.getPatientID());
         System.out.println("Name: " + medicalRecord.getName());
@@ -16,10 +16,15 @@ public class MedicalRecordView {
         System.out.println("Blood Type: " + medicalRecord.getBloodType());
         System.out.println("Allergies: " + medicalRecord.getAllergies());
         System.out.println("\nPast Diagnoses and Treatments:");
-        for (AppointmentOutcomeRecord outcome : medicalRecord.getAppointmentOutcome()) {
-            System.out.println("Diagnoses: " + outcome.getDiagnoses());
-            System.out.println("Treatments: " + outcome.getTreatments());
-            System.out.println();
+        List<PastDiagnosesAndTreatments> diagnoses = medicalRecord.getPastDiagnosesAndTreatments();
+        if (diagnoses != null) {
+            for (PastDiagnosesAndTreatments past : diagnoses) {
+                System.out.println("Diagnosis: " + past.getDiagnosis());
+                System.out.println("Treatment: " + past.getTreatment());
+                System.out.println();
+            }
+        } else {
+            System.out.println("No past diagnoses and treatments available.");
         }
     }
 }
