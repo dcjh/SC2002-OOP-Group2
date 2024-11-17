@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PatientDAO implements DataAccessObject<Map<String, String>, String> {
+public class PatientDAO {
     private static final String FILE_PATH = "C:\\Users\\chuaz\\eclipse-workspace\\OOP_project\\src\\Administrator\\Patient_List.csv";
 
     public List<Map<String, String>> loadAll() {

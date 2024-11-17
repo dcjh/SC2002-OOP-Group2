@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ReplenishmentDAO implements DataAccessObject<ReplenishmentRequest, String>{
+public class ReplenishmentDAO {
 	private static final String FILE_PATH = "src\Data\Assets\Replenishment_Restock.csv";
     public List<ReplenishmentRequest> loadAll() {
         List<ReplenishmentRequest> requestList = new ArrayList<>();

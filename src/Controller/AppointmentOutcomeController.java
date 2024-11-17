@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentOutcomeController {
-    private DoctorController doctorController;
+    // private DoctorController doctorController;
     private AppointmentController appointmentController;
     private AppointmentOutcomeDAO dao = new AppointmentOutcomeDAO();
     private AppointmentOutcomeView view;
@@ -16,8 +16,8 @@ public class AppointmentOutcomeController {
     public AppointmentOutcomeController() {
     }
 
-    public AppointmentOutcomeController(DoctorController doctorController, AppointmentController appointmentController) {
-        this.doctorController = doctorController;
+    public AppointmentOutcomeController(/*DoctorController doctorController,*/ AppointmentController appointmentController) {
+        // this.doctorController = doctorController;
         this.appointmentController = appointmentController;
         this.view = new AppointmentOutcomeView(this);
     }

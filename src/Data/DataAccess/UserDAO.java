@@ -3,7 +3,7 @@ package Data.DataAccess;
 import java.io.*;
 import java.util.*;
 
-public class UserDAO implements DataAccessObject<Map<String, String>, String> {
+public class UserDAO {
     private static final String FILE_PATH = "C:\\Users\\chuaz\\eclipse-workspace\\OOP_project\\src\\Authentication\\userlogin.csv";
 
     
