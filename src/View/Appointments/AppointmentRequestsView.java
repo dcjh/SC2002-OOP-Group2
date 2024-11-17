@@ -10,13 +10,19 @@ public class AppointmentRequestsView {
     
     private AppointmentController appointmentController;
 
-    public AppointmentRequestsView (AppointmentController appointmentController) {
+    /**
+     * Constructor for AppointmentRequestsView.
+     * 
+     * @param appointmentController The controller for managing appointment requests.
+     */
+    public AppointmentRequestsView(AppointmentController appointmentController) {
         this.appointmentController = appointmentController;
     }
 
-    
-    /** 
-     * @param doctorId
+    /**
+     * Displays the menu for the doctor to approve or reject appointment requests.
+     * 
+     * @param doctorId The ID of the doctor.
      */
     public void menu(String doctorId) {
         Scanner scanner = new Scanner(System.in);
@@ -27,13 +33,13 @@ public class AppointmentRequestsView {
             return;
         }
 
-        while(true){
+        while (true) {
             System.out.println(linebr);
             System.out.println("1. Approve Appointment");
             System.out.println("2. Reject Appointment");
-            System.out.println("3. Return to main menu");
+            System.out.println("3. Return to Main Menu");
             System.out.println(linebr);
-            System.out.print("Enter Choice:");
+            System.out.print("Enter Choice: ");
             int proceed;
 
             try {
@@ -47,10 +53,10 @@ public class AppointmentRequestsView {
 
             switch (proceed) {
                 case 1:
-                    approve(scanner,doctorId);
+                    approve(scanner, doctorId);
                     break;
                 case 2:
-                    reject(scanner,doctorId);
+                    reject(scanner, doctorId);
                     break;
                 case 3:
                     System.out.println("Returning to Main Menu...");
@@ -59,12 +65,12 @@ public class AppointmentRequestsView {
                     System.out.println("Invalid choice. Try again...");
             }
         }
-
     }
 
-    
-    /** 
-     * @param appointments
+    /**
+     * Prints the list of current appointments.
+     * 
+     * @param appointments The list of appointments to print.
      */
     private void printCurrentAppointments(List<Appointment> appointments) {
         String border = "+-------------+-----------+------------+----------+------------+--------+";
@@ -86,11 +92,17 @@ public class AppointmentRequestsView {
         }
     }
 
+    /**
+     * Approves an appointment selected by the doctor.
+     * 
+     * @param scanner The scanner object for user input.
+     * @param doctorId The ID of the doctor.
+     */
     public void approve(Scanner scanner, String doctorId) {
         List<Appointment> pendingAppointments = appointmentController.getPendingAppointmentsByDoctorID(doctorId);
         String linebr = "----------------------------------------------";
         Appointment selectedAppointment = null;
-        if (pendingAppointments.isEmpty())  {
+        if (pendingAppointments.isEmpty()) {
             System.out.println("No pending appointments to approve.");
             return;
         }
@@ -115,6 +127,12 @@ public class AppointmentRequestsView {
         System.out.println("Appointment ID " + selectedAppointment.getAppointmentID() + " has been approved.");
     }
 
+    /**
+     * Rejects an appointment selected by the doctor.
+     * 
+     * @param scanner The scanner object for user input.
+     * @param doctorId The ID of the doctor.
+     */
     public void reject(Scanner scanner, String doctorId) {
         List<Appointment> pendingAppointments = appointmentController.getPendingAppointmentsByDoctorID(doctorId);
         String linebr = "----------------------------------------------";
@@ -143,5 +161,4 @@ public class AppointmentRequestsView {
         appointmentController.updateAppointmentSchedule(selectedAppointment.getAppointmentID(), doctorId, selectedAppointment.getDate(), selectedAppointment.getTime(), false);
         System.out.println("Appointment ID " + selectedAppointment.getAppointmentID() + " has been rejected.");
     }
-
 }

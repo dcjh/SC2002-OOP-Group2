@@ -6,18 +6,28 @@ import Model.Shared.User;
 import View.UserMainView;
 import java.util.Scanner;
 
-public class DoctorView implements UserMainView{
+/**
+ * Represents the view for the Doctor user, providing a menu for various doctor-related actions.
+ */
+public class DoctorView implements UserMainView {
+
     private DoctorController doctorController;
     private Doctor doctor;
 
+    /**
+     * Constructor for DoctorView.
+     * 
+     * @param user The doctor user.
+     */
     public DoctorView(User user) {
         this.doctor = (Doctor) user;
         this.doctorController = new DoctorController(doctor);
     }
 
-    
-    /** 
-     * @param doctorId
+    /**
+     * Displays the doctor menu and allows the doctor to perform various actions.
+     * 
+     * @param doctorId The ID of the doctor.
      */
     public void menu(String doctorId) {
         Scanner scanner = new Scanner(System.in);

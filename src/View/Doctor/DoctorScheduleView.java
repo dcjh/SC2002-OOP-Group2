@@ -10,20 +10,27 @@ import java.util.Map;
 
 import Model.Shared.Appointment;
 
+/**
+ * The DoctorScheduleView class provides an interface for doctors to view their schedule.
+ */
 public class DoctorScheduleView {
 
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+    /**
+     * Default constructor for DoctorScheduleView.
+     */
     public DoctorScheduleView() {}
 
-    
-    /** 
-     * @param doctorId
-     * @param dateAvailability
-     * @param dateTime
-     * @param appointments
+    /**
+     * Displays the doctor's schedule including availability and appointments.
+     * 
+     * @param doctorId The ID of the doctor.
+     * @param dateAvailability A map representing the doctor's availability on specific dates.
+     * @param dateTime A map representing the times associated with specific dates.
+     * @param appointments A map representing the appointments scheduled on specific dates.
      */
-    public void menu(String doctorId, Map<LocalDate, Boolean> dateAvailability, Map<LocalDate, String> dateTime,Map<LocalDate, Appointment> appointments) {
+    public void menu(String doctorId, Map<LocalDate, Boolean> dateAvailability, Map<LocalDate, String> dateTime, Map<LocalDate, Appointment> appointments) {
         System.out.println("----------------------------------------------");
         System.out.println("Doctor ID: " + doctorId);
         System.out.println("Schedule:");
@@ -32,7 +39,7 @@ public class DoctorScheduleView {
         List<LocalDate> sortedDates = new ArrayList<>(dateAvailability.keySet());
         sortedDates.sort(Comparator.naturalOrder());
 
-        for(LocalDate date : sortedDates){
+        for (LocalDate date : sortedDates) {
             System.out.println("Date: " + date.format(DATE_FORMAT) + " | Time: " + dateTime.get(date) +
                                " | Availability: " + (dateAvailability.get(date) ? "Available" : "Not Available"));
 
@@ -46,4 +53,3 @@ public class DoctorScheduleView {
         }
     }
 }
-

@@ -1,5 +1,8 @@
 package Model.Shared;
 
+/**
+ * Represents an appointment between a doctor and a patient in the hospital system.
+ */
 public class Appointment {
     private static int idCounter = 1; 
     private String appointmentID;  
@@ -9,9 +12,16 @@ public class Appointment {
     private String date;
     private String status;
 
-
-    // when we initialise appointment, need to input docID, patientID, time, and date as argument
-    // when it is initialised, appointment status is initially pending, it will only change to cancelled / approved after it is set by Doctor
+    /**
+     * Creates an appointment with the specified doctor ID, patient ID, time, date, appointment ID, and status.
+     * 
+     * @param docID the ID of the doctor.
+     * @param patientID the ID of the patient.
+     * @param time the time of the appointment.
+     * @param date the date of the appointment.
+     * @param appointmentID the unique ID for the appointment.
+     * @param status the status of the appointment.
+     */
     public Appointment(String docID, String patientID, String time, String date, String appointmentID, String status) {
         this.appointmentID = appointmentID;
         this.docID = docID;
@@ -21,63 +31,105 @@ public class Appointment {
         this.status = status;
     }
 
+    /**
+     * Creates an appointment with the specified doctor ID, patient ID, time, date, and appointment ID.
+     * The status of the appointment is set to "pending" by default.
+     * 
+     * @param docID the ID of the doctor.
+     * @param patientID the ID of the patient.
+     * @param time the time of the appointment.
+     * @param date the date of the appointment.
+     * @param appointmentID the unique ID for the appointment.
+     */
     public Appointment(String docID, String patientID, String time, String date, String appointmentID) {
         this(docID, patientID, time, date, appointmentID, "pending");
-            }
-    
-    
-        
-    
-    /** 
-     * @return String
-     */
-    // getter functions
+    }
 
-    public String getAppointmentID(){
+    // Getter methods
+
+    /**
+     * Gets the appointment ID.
+     * 
+     * @return the appointment ID.
+     */
+    public String getAppointmentID() {
         return this.appointmentID;
     }
 
-    
-    /** 
-     * @return String
+    /**
+     * Gets the patient ID.
+     * 
+     * @return the patient ID.
      */
-    public String getPatientID(){
+    public String getPatientID() {
         return this.patientID;
     }
 
-    public String getDocID(){
+    /**
+     * Gets the doctor ID.
+     * 
+     * @return the doctor ID.
+     */
+    public String getDocID() {
         return this.docID;
     }
 
-    public String getStatus(){
+    /**
+     * Gets the status of the appointment.
+     * 
+     * @return the appointment status.
+     */
+    public String getStatus() {
         return this.status;
     }
 
-    public String getDate(){
+    /**
+     * Gets the date of the appointment.
+     * 
+     * @return the appointment date.
+     */
+    public String getDate() {
         return this.date;
     }
 
-    public String getTime(){
+    /**
+     * Gets the time of the appointment.
+     * 
+     * @return the appointment time.
+     */
+    public String getTime() {
         return this.time;
     }
 
-    // setter functions
-    // for status (there are 4 status [pending, cancelled, approved, completed])
+    // Setter methods
 
-    public void setStatus(String newStatus){
+    /**
+     * Sets the status of the appointment.
+     * Possible statuses are: "pending", "cancelled", "approved", "completed".
+     * 
+     * @param newStatus the new status of the appointment.
+     */
+    public void setStatus(String newStatus) {
         this.status = newStatus;
     }
 
-    // for date
-    public void setDate(String newDate){
+    /**
+     * Sets the date of the appointment.
+     * 
+     * @param newDate the new date for the appointment.
+     */
+    public void setDate(String newDate) {
         this.date = newDate;
     }
 
-    // for time
-    public void setTime(String newTime){
+    /**
+     * Sets the time of the appointment.
+     * 
+     * @param newTime the new time for the appointment.
+     */
+    public void setTime(String newTime) {
         this.time = newTime;
     }
 
-    // no setter method for patientID and doctorID because no one can not modify the patientID or doctorID
-
+    // Note: There are no setter methods for patientID and doctorID because they cannot be modified after creation.
 }

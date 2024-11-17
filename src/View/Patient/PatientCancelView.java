@@ -6,20 +6,28 @@ import java.util.Scanner;
 import Model.Shared.Appointment;
 import Controller.ScheduleController;
 
+/**
+ * View class for allowing patients to cancel their scheduled appointments.
+ */
 public class PatientCancelView {
     private ScheduleController scheduleController;
 
+    /**
+     * Constructor for PatientCancelView.
+     * 
+     * @param scheduleController The controller for managing appointment schedules.
+     */
     public PatientCancelView(ScheduleController scheduleController) {
         this.scheduleController = scheduleController;
     }
 
-    
-    /** 
-     * @param aList
-     * @param patientId
+    /**
+     * Displays the menu for canceling appointments.
+     * 
+     * @param aList A list of appointments available to the patient.
+     * @param patientId The ID of the patient requesting cancellation.
      */
     public void menu(List<Appointment> aList, String patientId) {
-        
         String br = "----------------------------------------------";
         Scanner scanner = new Scanner(System.in);
 
@@ -66,9 +74,10 @@ public class PatientCancelView {
         }
     }
 
-    
-    /** 
-     * @param aList
+    /**
+     * Prints the list of current appointments.
+     * 
+     * @param aList A list of appointments available to the patient.
      */
     private void printAppointments(List<Appointment> aList) {
         String border = "+-------------+------------+----------+------------+----------+";
