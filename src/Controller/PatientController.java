@@ -31,7 +31,7 @@ public class PatientController {
     public void cancelAppointment(String appointmentID) {
         appointmentController.updateAppointmentStatus(appointmentID, "cancelled");
     }
-    public void viewScheduledAppointments(List<Appointment> appointments) {
+    public void viewScheduledAppointments() {
         appointmentController.viewAppointmentsByPatientID(patient.getHosID());
     }
     public void viewMedicalRecord() {
