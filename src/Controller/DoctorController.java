@@ -5,29 +5,36 @@ import Model.Shared.Appointment;
 import Model.Shared.AppointmentOutcome;
 import Model.Shared.PrescribedMedication;
 import View.Doctor.DoctorView;
+import View.UserMainView;
+import Model.Shared.User;
+import Model.Roles.Doctor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DoctorController {
 
+    private Doctor doctor;
     private DoctorView doctorView;
     private ScheduleController scheduleController;
     private AppointmentController appointmentController;
     private MedicalRecordController medicalRecordController;
     private AppointmentOutcomeController appointmentOutcomeController;
 
-    public DoctorController() {
+
+    public DoctorController(User user) {
+        this.doctor = (Doctor) user;
         this.scheduleController =  new ScheduleController(this);
         this.appointmentController = new AppointmentController(this);
         this.medicalRecordController = new MedicalRecordController(this);
         this.appointmentOutcomeController = new AppointmentOutcomeController(appointmentController);
-        this.doctorView = new DoctorView(this);
+        this.doctorView = new DoctorView(this, doctor);
     }
 
     //navigate to DoctorView
-    public void displayDoctorView(String doctorId) {
-        doctorView.menu(doctorId);
+    public UserMainView displayDoctorView() {
+        doctorView.menu(doctor.getDoctorId());
+        return doctorView;
     }
 
     //methods to trigger actions
