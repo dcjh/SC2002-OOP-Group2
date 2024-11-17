@@ -1,6 +1,7 @@
-package View;
+package View.Patient;
 
 import Model.Shared.User;
+import View.UserMainView;
 import Model.Roles.Patient;
 import Controller.PatientController;
 
@@ -19,7 +20,7 @@ public class PatientView implements UserMainView{
         }
     }
 
-    public void displayMenu() {
+    public void menu() {
         do {
             System.out.println("\nPatient Menu:");
             System.out.println("1. View Medical Record");

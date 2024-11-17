@@ -7,13 +7,13 @@ import Data.DataAccess.AppointmentOutcomeDAO;
 import Data.DataAccess.PatientDAO;
 import Data.DataAccess.StaffDAO;
 import Data.DataAccess.UserDAO;
-import Model.Appointment;
-import Model.AppointmentOutcome;
-import Model.Inventory;
-import Model.PrescribedMedication;
-import Model.Gender;
-import Model.UserType;
-import View.AdministratorView;
+import Model.Shared.Appointment;
+import Model.Shared.AppointmentOutcome;
+import Model.Shared.Inventory;
+import Model.Shared.PrescribedMedication;
+import Model.Roles.Gender;
+import Model.Roles.UserType;
+import View.Administrator.AdministratorView;
 
 public class AdministratorController {
 
@@ -28,7 +28,7 @@ public class AdministratorController {
     private AdministratorView administratorView;
 
     public AdministratorController(AdministratorView administratorView) {
-        this.appointmentController = new AppointmentController(this);
+        this.appointmentController = new AppointmentController();
         this.inventoryController = new InventoryController(this);
         this.replenishmentRestockcontroller = new ReplenishmentRestockController(this);
         this.administratorView = administratorView;

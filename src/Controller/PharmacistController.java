@@ -3,10 +3,10 @@ package Controller;
 import java.util.List;
 import java.util.Scanner;
 import Data.DataAccess.InventoryDAO;
-import Model.AppointmentOutcome;
-import Model.Inventory;
-import Model.PrescribedMedication;
-import View.PharmacistView;
+import Model.Shared.AppointmentOutcome;
+import Model.Shared.Inventory;
+import Model.Shared.PrescribedMedication;
+import View.Pharmacist.PharmacistView;
 import Data.DataAccess.AppointmentOutcomeDAO;
 
 public class PharmacistController {
@@ -20,7 +20,7 @@ public class PharmacistController {
 
     
     public PharmacistController() {
-        this.appointmentOutcomeController = new AppointmentOutcomeController(this);
+        this.appointmentOutcomeController = new AppointmentOutcomeController();
         this.inventoryController = new InventoryController(this);
         this.replenishmentRestockcontroller = new ReplenishmentRestockController(this);
         this.pharmacistView = new PharmacistView(this);

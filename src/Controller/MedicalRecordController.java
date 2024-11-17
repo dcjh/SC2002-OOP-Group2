@@ -4,10 +4,9 @@ import Model.Shared.MedicalRecord;
 import Model.Shared.PrescribedMedication;
 import Model.Shared.AppointmentOutcome;
 import Data.DataAccess.MedicalRecordDAO;
-import View.MedicalRecordView;
-import View.Appointments.PastAppointmentView;
 import View.Doctor.DoctorMedicalRecordView;
 import View.Doctor.DoctorUpdateMedicalRecordView;
+import View.MedicalRecord.MedicalRecordView;
 
 import java.util.List;
 import java.util.Set;
@@ -17,7 +16,6 @@ import java.util.HashSet;
 public class MedicalRecordController {
     private MedicalRecordDAO medicalRecordDAO;
     private MedicalRecordView medicalRecordView;
-    private PastAppointmentView pastAppointmentView;
     private DoctorMedicalRecordView doctorMedicalRecordView;
     private DoctorUpdateMedicalRecordView doctorUpdateMedicalRecordView;
     private DoctorController doctorController;
@@ -28,7 +26,6 @@ public class MedicalRecordController {
     public MedicalRecordController(DoctorController doctorController) {
         this.medicalRecordDAO = new MedicalRecordDAO();
         this.medicalRecordView = new MedicalRecordView();
-        this.pastAppointmentView = new PastAppointmentView();
         this.doctorMedicalRecordView = new DoctorMedicalRecordView(this);
         this.doctorUpdateMedicalRecordView = new DoctorUpdateMedicalRecordView(this);
         this.doctorController = doctorController;
@@ -39,7 +36,6 @@ public class MedicalRecordController {
     public MedicalRecordController() {
         this.medicalRecordDAO = new MedicalRecordDAO();
         this.medicalRecordView = new MedicalRecordView();
-        this.pastAppointmentView = new PastAppointmentView();
         this.doctorMedicalRecordView = new DoctorMedicalRecordView(this);
         this.doctorUpdateMedicalRecordView = new DoctorUpdateMedicalRecordView(this);
         this.doctorController = null;

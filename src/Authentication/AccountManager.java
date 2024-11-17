@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import Model.User;
+import Model.Shared.User;
 import Model.UserFactory;
-import Model.UserType;
+import Model.Roles.UserType;
 
 public class AccountManager {
 	private static final String FILE_PATH = "C:\\Users\\chuaz\\eclipse-workspace\\OOP_project\\src\\Authentication\\userlogin.csv";

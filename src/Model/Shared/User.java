@@ -1,23 +1,29 @@
 package Model.Shared;
+
+import Model.Roles.UserType;
+import Model.Roles.Gender;
+
 //this is here for temp/ref usage, more time will be spend to make this better
 public abstract class User {
     protected String hosID;
     protected String password;
-    private String role;
-    private String name;
-    private String gender;
-    private int age;
-    private UserType userType;
+    protected String role;
+    protected String name;
+    protected Gender gender;
+    protected int age;
+    protected UserType userType;
 
+    
     // Constructor
-    public User(String hosID, String password, UserType userType, String name, String gender, int age) {
+    public User(String hosID, String password, UserType userType, String name, Gender gender, int age) {
         this.hosID = hosID;
         this.password = password;
+        this.userType = userType;
         this.name = name;
         this.gender = gender;
         this.age = age;
-        this.userType = userType;
-        
+
+    }
     // Getters and Setters
     public String getName() {
         return name;
@@ -27,11 +33,11 @@ public abstract class User {
         this.name = newName;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String newGender) {
+    public void setGender(Gender newGender) {
         this.gender = newGender;
     }
 
