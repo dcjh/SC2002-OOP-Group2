@@ -1,16 +1,18 @@
 package View.Doctor;
 
 import Controller.DoctorController;
-import View.UserMainView;
 import Model.Roles.Doctor;
-
+import Model.Shared.User;
+import View.UserMainView;
 import java.util.Scanner;
 
 public class DoctorView implements UserMainView{
     private DoctorController doctorController;
+    private Doctor doctor;
 
-    public DoctorView(DoctorController doctorController, Doctor doctor) {
-        this.doctorController = doctorController;
+    public DoctorView(User user) {
+        this.doctor = (Doctor) user;
+        this.doctorController = new DoctorController(doctor);
     }
 
     public void menu(String doctorId) {

@@ -1,14 +1,11 @@
 package Controller;
 
-import java.time.LocalDate;
+import Model.Roles.Doctor;
 import Model.Shared.Appointment;
 import Model.Shared.AppointmentOutcome;
 import Model.Shared.PrescribedMedication;
 import View.Doctor.DoctorView;
-import View.UserMainView;
-import Model.Shared.User;
-import Model.Roles.Doctor;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,20 +19,19 @@ public class DoctorController {
     private AppointmentOutcomeController appointmentOutcomeController;
 
 
-    public DoctorController(User user) {
-        this.doctor = (Doctor) user;
+    public DoctorController(Doctor doctor) {
+        this.doctor = doctor;
         this.scheduleController =  new ScheduleController(this, null);
         this.appointmentController = new AppointmentController(this);
         this.medicalRecordController = new MedicalRecordController(this);
         this.appointmentOutcomeController = new AppointmentOutcomeController(appointmentController);
-        this.doctorView = new DoctorView(this, doctor);
     }
 
     //navigate to DoctorView
-    public UserMainView displayDoctorView() {
-        doctorView.menu(doctor.getDoctorId());
-        return doctorView;
-    }
+    // public UserMainView displayDoctorView() {
+    //     doctorView.menu(doctor.getDoctorId());
+    //     return doctorView;
+    // }
 
     //methods to trigger actions
     public void viewPatientMR() {
