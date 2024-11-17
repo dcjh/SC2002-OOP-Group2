@@ -1,3 +1,5 @@
+package Controller;
+
 import java.util.List;
 import Data.DataAccess.PastDiagnosesAndTreatmentsDAO;
 import Model.Shared.PastDiagnosesAndTreatments;

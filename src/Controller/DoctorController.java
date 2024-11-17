@@ -21,7 +21,7 @@ public class DoctorController {
         this.scheduleController =  new ScheduleController(this);
         this.appointmentController = new AppointmentController(this);
         this.medicalRecordController = new MedicalRecordController(this);
-        this.appointmentOutcomeController = new AppointmentOutcomeController(this, appointmentController);
+        this.appointmentOutcomeController = new AppointmentOutcomeController(appointmentController);
         this.doctorView = new DoctorView(this);
     }
 

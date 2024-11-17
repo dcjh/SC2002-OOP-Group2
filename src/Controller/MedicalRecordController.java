@@ -33,6 +33,7 @@ public class MedicalRecordController {
         this.doctorUpdateMedicalRecordView = new DoctorUpdateMedicalRecordView(this);
         this.doctorController = doctorController;
         this.appointmentOutcomeController = new AppointmentOutcomeController();
+        this.pastDiagnosesAndTreatmentsController = new PastDiagnosesAndTreatmentsController();
     }
     public MedicalRecordController() {
         this.medicalRecordDAO = new MedicalRecordDAO();
@@ -42,6 +43,7 @@ public class MedicalRecordController {
         this.doctorUpdateMedicalRecordView = new DoctorUpdateMedicalRecordView(this);
         this.doctorController = null;
         this.appointmentOutcomeController = new AppointmentOutcomeController();
+        this.pastDiagnosesAndTreatmentsController = new PastDiagnosesAndTreatmentsController();
     }
 
     //navigate to medical record View
@@ -124,5 +126,6 @@ public class MedicalRecordController {
 
     public void createAppointmentOutcome(String date ,String time,String typeOfService,ArrayList<PrescribedMedication> medications, String notes, String doctorId, String patientId, String appointmentId) {
         doctorController.createAppointmentOutcome(date, time, typeOfService, medications, notes, doctorId, patientId, appointmentId);
+        pastDiagnosesAndTreatmentsController.addPastDiagnosisAndTreatment(patientId, notes, typeOfService);
     }
 }

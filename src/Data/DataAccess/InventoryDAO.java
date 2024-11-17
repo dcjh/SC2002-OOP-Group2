@@ -3,9 +3,9 @@ package Data.DataAccess;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import Model.Inventory;
+import Model.Shared.Inventory;
 
-public class InventoryDAO implements DataAccessObject<Inventory, String> {
+public class InventoryDAO {
     private static final String FILE_PATH = "C:\\Users\\chuaz\\eclipse-workspace\\OOP_project\\src\\Administrator\\Medicine_List.csv";
 
     public List<Inventory> loadAll() {

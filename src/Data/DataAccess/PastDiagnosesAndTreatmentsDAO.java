@@ -1,8 +1,10 @@
-import Model.Shared.PastDiagnosesAndTreatments;
+package Data.DataAccess;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import Model.Shared.PastDiagnosesAndTreatments;
 
 public class PastDiagnosesAndTreatmentsDAO {
     private final String filePath = "src/Data/Assets/PastDiagnosesAndTreatments.csv";
