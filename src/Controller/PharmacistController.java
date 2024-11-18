@@ -5,6 +5,7 @@ import Model.Shared.AppointmentOutcome;
 import Model.Shared.Inventory;
 import Model.Shared.PrescribedMedication;
 import View.Pharmacist.PharmacistView;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -63,14 +64,25 @@ public class PharmacistController {
         }
         AppointmentOutcome selectedOutcome = outcomes.get(choice - 1);
 
+        // to store new prescribed medication that has updated status
+        ArrayList<PrescribedMedication> newPrescribedMedications = new ArrayList<>();
+        PrescribedMedication newMedication;
+
         System.out.println("Prescribed Medications:");
+
         for (PrescribedMedication medication : selectedOutcome.getPrescribedMedications()) {
             System.out.printf("  - %s (Qty: %d, Status: %s)%n",
                     medication.getMedicineName(), medication.getQuantity(), medication.getStatus());
 
+            if(medication.getStatus().equals("dispensed")){
+                newPrescribedMedications.add(medication);
+                continue;
+            }
+
             Inventory inventory = inventoryController.findMedicineByName(medication.getMedicineName());
             if (inventory == null) {
                 System.out.printf("Medicine '%s' not found in inventory. Status remains 'pending'.%n", medication.getMedicineName());
+                newPrescribedMedications.add(medication);
                 continue;
             }
 
@@ -79,16 +91,25 @@ public class PharmacistController {
             if (remainingStock < 0) {
                 System.out.printf("Insufficient stock for %s. Requested: %d, Available: %d. Status remains 'pending'.%n",
                         medication.getMedicineName(), medication.getQuantity(), inventory.getCurrentStock());
+                newPrescribedMedications.add(medication);
                 continue;
             }
 
-            appointmentOutcomeController.setStatusDispensed(selectedOutcome.getAppointmentOutcomeID(), medication.getMedicineName());
+            // to store new prescribed medication that has dispensed as status
+
+            newMedication = new PrescribedMedication(medication.getMedicineName(), medication.getQuantity());
+            newMedication.setStatusDispensed();
+            newPrescribedMedications.add(newMedication);
+
+            // decrease inventory
             inventory.setCurrentStock(remainingStock);
             inventoryController.updateDispensestockLevel(medication.getMedicineName(), medication.getQuantity());
 
             System.out.printf("Status of %s updated to 'dispensed'. Remaining stock: %d%n",
                     medication.getMedicineName(), inventory.getCurrentStock());
         }
+        // set new prescribed medication new appointment outcome
+            appointmentOutcomeController.setPrescribedMedicineUpdatedStatus(selectedOutcome.getAppointmentOutcomeID(), newPrescribedMedications);
     }
 
     /**

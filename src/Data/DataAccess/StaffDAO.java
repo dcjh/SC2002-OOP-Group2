@@ -86,6 +86,30 @@ public class StaffDAO {
         return null;
     }
 
+
+    /**
+     * Finds and returns a list of staff members based on their role.
+     *
+     * @param role      The role of the staff members to be searched (e.g., "Doctor", "Nurse").
+     * @param searchKey An additional search key to be used in the future (currently unused).
+     * @return A list of staff members who match the specified role.
+     *         Each staff member is represented as a map of key-value pairs.
+     *
+     * This method filters the list of all staff members to return only those whose role matches
+     * the specified role (case-insensitive).
+     */
+    public List<Map<String, String>> findByRole(String role, String searchKey) {
+        List<Map<String, String>> staffList = loadAll();
+        List<Map<String, String>> roleList = new ArrayList<>();
+        for (Map<String, String> staff : staffList) {
+            if (staff.get("role").equalsIgnoreCase(role)) {
+                roleList.add(staff);
+            }
+        }
+        return roleList;
+    }
+
+
     /**
      * Deletes a staff record by its ID.
      * 

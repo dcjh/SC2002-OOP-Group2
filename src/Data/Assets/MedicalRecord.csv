@@ -1,6 +1,6 @@
 ﻿Patient ID,Name,Date of Birth,Gender,Blood Type,Allergies,Phone Number,Contact Information
-P1001,Alice Brown,14/5/1980,Female,A+,No Allergies,81234567,alice.brown@example.com
+P1001,Alice Brown,14/5/1980,Female,A+,No Allergies,12345678,alice@gmail.com
 P1002,Bob Stone,22/11/1975,Male,B+,Seafood,82345678,bob.stone@example.com
-P1003,Charlie White,8/7/1990,Male,O-,Bed bug,83456789,charlie.white@example.com
+P1003,Charlie White,8/7/1990,Male,O-,Bed bug,12345678,brown@gmail.com
 P1004,David brown,1998-04-26,FEMALE,O+,No Allergies,87892300,davidbrown@email.com
 P1005,Elizabeth cony,1998-12-31,FEMALE,B+,No Allergies,81673123,elizabeth@email.com

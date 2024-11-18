@@ -1,17 +1,17 @@
 package Controller;
 
-import java.util.*;
-
 import Data.DataAccess.AppointmentDAO;
 import Data.DataAccess.AppointmentOutcomeDAO;
 import Data.DataAccess.PatientDAO;
 import Data.DataAccess.StaffDAO;
 import Data.DataAccess.UserDAO;
-import Model.Shared.Appointment;
-import Model.Shared.AppointmentOutcome;
 import Model.Roles.Gender;
 import Model.Roles.UserType;
+import Model.Shared.Appointment;
+import Model.Shared.AppointmentOutcome;
+import Model.Shared.PrescribedMedication;
 import View.Administrator.AdministratorView;
+import java.util.*;
 
 /**
  * The AdministratorController class manages administrative tasks within the
@@ -26,6 +26,7 @@ public class AdministratorController {
     private static final AppointmentDAO appointmentDAO = new AppointmentDAO();
     private static final AppointmentOutcomeDAO appointmentoutcomeDAO = new AppointmentOutcomeDAO();
     private AppointmentController appointmentController;
+    private AppointmentOutcomeController appointmentOutcomeController;
     private InventoryController inventoryController;
     private ReplenishmentRestockController replenishmentRestockcontroller;
     private AdministratorView administratorView;
@@ -37,6 +38,7 @@ public class AdministratorController {
      */
     public AdministratorController(AdministratorView administratorView) {
         this.appointmentController = new AppointmentController();
+        this.appointmentOutcomeController = new AppointmentOutcomeController();
         this.inventoryController = new InventoryController(this);
         this.replenishmentRestockcontroller = new ReplenishmentRestockController(this);
         this.administratorView = administratorView;
@@ -475,9 +477,22 @@ public class AdministratorController {
             if ("completed".equalsIgnoreCase(appointment.getStatus())) {
                 AppointmentOutcome outcome = appointmentoutcomeDAO.find(appointment.getAppointmentID());
                 if (outcome != null) {
-                    System.out.println("  Appointment Outcome:");
-                    System.out.printf("    Outcome ID: %s%n", outcome.getAppointmentOutcomeID());
-                    System.out.printf("    Consultation Notes: %s%n", outcome.getConsultationNotes());
+                    System.out.println("Appointment Outcomes:");
+	                  System.out.printf("Outcome ID: %s%n", outcome.getAppointmentOutcomeID());
+	                  System.out.printf("Doctor ID: %s%n", outcome.getDoctorID());
+	                  System.out.printf("Patient ID: %s%n", outcome.getPatientID());
+	                  System.out.printf("Appointment ID: %s%n", outcome.getAppointmentID());
+	                  System.out.printf("Date: %s%n", outcome.getDate());
+	                  System.out.printf("Time: %s%n", outcome.getTime());
+	                  System.out.printf("Type of Service: %s%n", outcome.getTypeOfService());
+	                  System.out.printf("Consultation Notes: %s%n", outcome.getConsultationNotes());
+	                  System.out.println("Prescribed Medications:");
+                  	for (PrescribedMedication med : outcome.getPrescribedMedications()) {
+	                  System.out.printf("  - %s (Qty: %d, Status: %s)%n",
+	                        med.getMedicineName(),
+	                        med.getQuantity(),
+	                        med.getStatus());
+	                  }
                 } else {
                     System.out.println("  No outcome available for this appointment.");
                 }

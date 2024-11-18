@@ -17,7 +17,7 @@ public class AppointmentOutcomeController {
     // private DoctorController doctorController; // Unused DoctorController instance (commented out)
     private AppointmentController appointmentController;
     private AppointmentOutcomeDAO dao = new AppointmentOutcomeDAO();
-    private AppointmentOutcomeView view;
+    private AppointmentOutcomeView view = new AppointmentOutcomeView(this);
 
     /**
      * Default constructor for AppointmentOutcomeController.
@@ -33,7 +33,6 @@ public class AppointmentOutcomeController {
     public AppointmentOutcomeController(/*DoctorController doctorController,*/ AppointmentController appointmentController) {
         // this.doctorController = doctorController; // Currently not used
         this.appointmentController = appointmentController;
-        this.view = new AppointmentOutcomeView(this);
     }
 
     /**
@@ -115,6 +114,24 @@ public class AppointmentOutcomeController {
     }
 
     /**
+     * Retrieves the appointment outcome based on the appointment ID.
+     *
+     * @param appointmentId The ID of the appointment to retrieve the outcome for.
+     * @return The appointment outcome corresponding to the given appointment ID, or null if no match is found.
+     *
+     * This method iterates through all appointment outcomes and returns the one that matches the specified appointment ID.
+     */
+    public AppointmentOutcome getAppointmentOutcomeByAppointmentID(String appointmentId) {
+        List<AppointmentOutcome> outcomes = dao.loadAll();
+        for (AppointmentOutcome o : outcomes) {
+            if (o.getAppointmentID().equals(appointmentId)) {
+                return o;
+            }
+        }
+        return null;
+    }
+  
+    /**
      * Retrieves all appointment outcomes for a specific patient.
      *
      * @param patientId the patient's ID
@@ -124,15 +141,19 @@ public class AppointmentOutcomeController {
         return dao.getAppointmentOutcomeByPatientID(patientId);
     }
 
+
     /**
-     * Sets the status of a prescribed medication to "dispensed" for a specific appointment outcome.
+     * Updates the prescribed medications for a specific appointment outcome.
      *
-     * @param appointmentOutcomeId the ID of the appointment outcome
-     * @param medicineName         the name of the medication to update
+     * @param appointmentOutcomeId The ID of the appointment outcome to update.
+     * @param newMedications       A list of new prescribed medications to set for the appointment outcome.
+     *
+     * This method retrieves the appointment outcome using the specified ID, updates the prescribed medications,
+     * and saves the updated outcome back to the data source.
      */
-    public void setStatusDispensed(String appointmentOutcomeId, String medicineName) {
+    public void setPrescribedMedicineUpdatedStatus(String appointmentOutcomeId, ArrayList<PrescribedMedication> newMedications) {
         AppointmentOutcome outcome = dao.find(appointmentOutcomeId);
-        outcome.setStatusDispensed(medicineName);
+        outcome.setPrescribedMedication(newMedications);
         dao.save(outcome);
     }
 

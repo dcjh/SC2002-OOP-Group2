@@ -1,16 +1,16 @@
 package Data.DataAccess;
 
+import Model.Shared.Inventory;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import Model.Shared.Inventory;
 
 /**
  * The InventoryDAO class handles the data access operations for the inventory.
  * This includes loading, saving, finding, and deleting inventory records from the CSV file.
  */
 public class InventoryDAO {
-    private static final String FILE_PATH = "C:\\Users\\chuaz\\eclipse-workspace\\OOP_project\\src\\Administrator\\Medicine_List.csv";
+    private static final String FILE_PATH = "src/Data/Assets/Medicine_List.csv";
 
     /**
      * Loads all inventory items from the CSV file.

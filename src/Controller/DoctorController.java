@@ -35,6 +35,7 @@ public class DoctorController {
         this.appointmentOutcomeController = new AppointmentOutcomeController(appointmentController);
     }
 
+
     /**
      * Navigates to the view for viewing patient medical records.
      */

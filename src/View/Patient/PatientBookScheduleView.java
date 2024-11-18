@@ -1,19 +1,21 @@
 package View.Patient;
 
+import Controller.ScheduleController;
+import Data.DataAccess.StaffDAO;
+import Model.Shared.Schedule;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
-import Controller.ScheduleController;
-import Model.Shared.Schedule;
-
 /**
  * Represents the view for booking a schedule for a patient.
  */
 public class PatientBookScheduleView extends PatientScheduleView {
+
     
     private ScheduleController scheduleController;
+    private StaffDAO staffDAO = new StaffDAO();
 
     /**
      * Constructor for PatientBookScheduleView.
@@ -61,7 +63,7 @@ public class PatientBookScheduleView extends PatientScheduleView {
         String br = "----------------------------------------------";
         boolean validInput = false;
 
-        super.menu(scheduleList);
+        super.menu(scheduleList, staffDAO.findByRole("Doctor", null));
         System.out.println(br);
 
         while (!validInput) {

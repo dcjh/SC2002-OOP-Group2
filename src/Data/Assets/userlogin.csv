@@ -1,4 +1,5 @@
 hosID,password,role,name,gender,age,initialLogin
+D001,docpass123,Doctor,John Smith,Male,45,FALSE
 D002,docpass246,Doctor,Emily Clarke,Female,38,FALSE
 P001,pharmpass123,Pharmacist,Mark Lee,Male,29,FALSE
 A001,adminpass123,Administrator,Sarah Lee,Female,40,FALSE
@@ -6,3 +7,4 @@ P1001,patient123,Patient,Alice Brown,Female,42,FALSE
 P1002,patient246,Patient,Bob Stone,Male,60,FALSE
 P1003,patient,Patient,Charlie White,Male,30,FALSE
 A002,admin246,Administrator,Adria,Female,60,FALSE
+A003,admin468,ADMINISTRATOR,Sandra,FEMALE,45,FALSE

@@ -185,4 +185,8 @@ public class AppointmentOutcome {
     public void setConsultationNotes(String newConsultationNotes){
         this.consultationNotes = newConsultationNotes;
     }
+
+    public void setPrescribedMedication(ArrayList<PrescribedMedication> newPrescribedMedications){
+        this.prescribedMedications = newPrescribedMedications;
+    }
 }

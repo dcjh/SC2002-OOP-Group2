@@ -1,2 +1,4 @@
-Request ID,Inventory ID,Inventory Name,Requested Quantity,Status
-R01,M03,Amoxicillin,40,Approved
+Request ID,Inventory Name,Requested Quantity,Status
+R01,Ibuprofen,50,Approved
+R02,Panadol,10,Approved
+R03,Panadol,5,Pending
