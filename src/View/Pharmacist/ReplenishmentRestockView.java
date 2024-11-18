@@ -5,9 +5,11 @@ import java.util.List;
 
 public class ReplenishmentRestockView {
     
-    /** 
-     * @param title
-     * @param requests
+    /**
+     * Displays a list of replenishment requests with a specified title.
+     * 
+     * @param title    The title for the list of replenishment requests.
+     * @param requests The list of replenishment requests to be displayed.
      */
     public void printReplenishmentRequests(String title, List<ReplenishmentRequest> requests) {
         System.out.println("\n--- " + title + " ---");

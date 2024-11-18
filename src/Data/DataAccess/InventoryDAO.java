@@ -5,12 +5,17 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The InventoryDAO class handles the data access operations for the inventory.
+ * This includes loading, saving, finding, and deleting inventory records from the CSV file.
+ */
 public class InventoryDAO {
     private static final String FILE_PATH = "src/Data/Assets/Medicine_List.csv";
 
-    
-    /** 
-     * @return List<Inventory>
+    /**
+     * Loads all inventory items from the CSV file.
+     *
+     * @return a list of all inventory items
      */
     public List<Inventory> loadAll() {
         List<Inventory> inventoryList = new ArrayList<>();
@@ -45,30 +50,41 @@ public class InventoryDAO {
         return inventoryList;
     }
 
-    
-    /** 
-     * @param item
+    /**
+     * Saves an inventory item to the CSV file, either by appending or updating an existing record.
+     *
+     * @param item the inventory item to save
      */
     public void save(Inventory item) {
         List<Inventory> inventoryList = loadAll();
         boolean exists = false;
 
+        // Check if the inventory item already exists
         for (int i = 0; i < inventoryList.size(); i++) {
             if (inventoryList.get(i).getName().equalsIgnoreCase(item.getName())) {
-                inventoryList.set(i, item); 
+                inventoryList.set(i, item); // Update existing inventory item
                 exists = true;
                 break;
             }
         }
 
+        // If the inventory item doesn't exist, add it to the list
         if (!exists) {
-            inventoryList.add(item); 
+            inventoryList.add(item);
         }
 
+        // Save the updated inventory list back to the CSV file
         saveAll(inventoryList);
     }
 
-    public Inventory find(String name,String searchKey) {
+    /**
+     * Finds an inventory item by its name.
+     *
+     * @param name      the name of the inventory item to find
+     * @param searchKey the search key (optional, not used in this implementation)
+     * @return the inventory item if found, otherwise null
+     */
+    public Inventory find(String name, String searchKey) {
         List<Inventory> inventoryList = loadAll();
         for (Inventory inventory : inventoryList) {
             if (inventory.getName().equalsIgnoreCase(name)) {
@@ -78,12 +94,23 @@ public class InventoryDAO {
         return null;
     }
 
+    /**
+     * Deletes an inventory item by its name.
+     *
+     * @param name      the name of the inventory item to delete
+     * @param searchKey the search key (optional, not used in this implementation)
+     */
     public void delete(String name, String searchKey) {
         List<Inventory> inventoryList = loadAll();
         inventoryList.removeIf(inventory -> inventory.getName().equalsIgnoreCase(name));
         saveAll(inventoryList);
     }
 
+    /**
+     * Saves the entire inventory list to the CSV file.
+     *
+     * @param inventoryList the list of inventory items to save
+     */
     private void saveAll(List<Inventory> inventoryList) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, false))) {
             writer.write("Medicine Name,Initial Stock,Current Stock,Low Stock Level Alert");
@@ -97,6 +124,12 @@ public class InventoryDAO {
         }
     }
 
+    /**
+     * Formats an inventory item as a CSV line.
+     *
+     * @param inventory the inventory item to format
+     * @return the formatted CSV line representing the inventory item
+     */
     private String formatInventoryCSVLine(Inventory inventory) {
         return String.join(",",
                 inventory.getName(),
@@ -105,5 +138,4 @@ public class InventoryDAO {
                 String.valueOf(inventory.getLowStockAlert())
         );
     }
-
 }

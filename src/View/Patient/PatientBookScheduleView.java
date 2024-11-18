@@ -8,23 +8,32 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
-public class PatientBookScheduleView extends PatientScheduleView{
+/**
+ * Represents the view for booking a schedule for a patient.
+ */
+public class PatientBookScheduleView extends PatientScheduleView {
+
     
     private ScheduleController scheduleController;
     private StaffDAO staffDAO = new StaffDAO();
 
+    /**
+     * Constructor for PatientBookScheduleView.
+     * 
+     * @param scheduleController The controller for managing doctor schedules.
+     */
     public PatientBookScheduleView(ScheduleController scheduleController) {
         super();
         this.scheduleController = scheduleController;
     }
 
-    
-    /** 
-     * @param scheduleList
-     * @param patientId
+    /**
+     * Displays the menu for booking an appointment.
+     * 
+     * @param scheduleList A list of available schedules.
+     * @param patientId The ID of the patient booking the appointment.
      */
     public void menu(List<Schedule> scheduleList, String patientId) {
-
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("----------------------------------------------");
@@ -32,7 +41,7 @@ public class PatientBookScheduleView extends PatientScheduleView{
             String proceed = scanner.nextLine();
             switch (proceed) {
                 case "y":
-                    bookAppointment(scanner,patientId,scheduleList);
+                    bookAppointment(scanner, patientId, scheduleList);
                     break;
                 case "n":
                     System.out.println("Returning to Main Menu...");
@@ -41,14 +50,14 @@ public class PatientBookScheduleView extends PatientScheduleView{
                     System.out.println("Invalid choice. Proceeding...");
             }
         }
-
     }
 
-    
-    /** 
-     * @param scanner
-     * @param patientId
-     * @param scheduleList
+    /**
+     * Handles the appointment booking process.
+     * 
+     * @param scanner The scanner object for user input.
+     * @param patientId The ID of the patient booking the appointment.
+     * @param scheduleList A list of available schedules.
      */
     public void bookAppointment(Scanner scanner, String patientId, List<Schedule> scheduleList) {
         String br = "----------------------------------------------";
@@ -58,7 +67,7 @@ public class PatientBookScheduleView extends PatientScheduleView{
         System.out.println(br);
 
         while (!validInput) {
-            System.out.println("Choose a doctor to Book: ");
+            System.out.println("Choose a doctor to book:");
             System.out.print("Enter Doctor ID: ");
             String doctorId = scanner.nextLine();
     
@@ -98,9 +107,8 @@ public class PatientBookScheduleView extends PatientScheduleView{
     
             // If all checks pass, book the appointment
             validInput = true;
-        scheduleController.createAppointmentRequest(doctorId, date, time);
-        System.out.println("Appointment booked successfully for Doctor ID: " + doctorId + " on " + date + " at " + time);
+            scheduleController.createAppointmentRequest(doctorId, date, time);
+            System.out.println("Appointment booked successfully for Doctor ID: " + doctorId + " on " + date + " at " + time);
         }
     }
-
 }

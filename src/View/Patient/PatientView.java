@@ -4,13 +4,16 @@ import Model.Shared.User;
 import View.UserMainView;
 import Model.Roles.Patient;
 import Controller.PatientController;
-import java.util.Scanner; 
-
 import java.util.Scanner;
 
-public class PatientView implements UserMainView{
+public class PatientView implements UserMainView {
     private PatientController patientController;
 
+    /**
+     * Constructor for PatientView. Initializes the patient controller if the user is a valid patient.
+     *
+     * @param user The user to be represented in this view.
+     */
     public PatientView(User user) {
         if (user instanceof Patient) {
             Patient patient = (Patient) user;
@@ -21,12 +24,13 @@ public class PatientView implements UserMainView{
         }
     }
 
-    
-    /** 
-     * @param staffID
+    /**
+     * Displays the patient menu and handles user actions based on input.
+     *
+     * @param staffID The staff ID of the patient.
      */
     public void menu(String staffID) {
-    	int choice;
+        int choice;
         do {
             System.out.println("\nPatient Menu:");
             System.out.println("1. View Medical Record");
@@ -77,15 +81,16 @@ public class PatientView implements UserMainView{
             }
         } while (choice != 9);
     }
-    
-    /** 
-     * @param message
-     * @return String
+
+    /**
+     * Helper method to prompt user input.
+     *
+     * @param message The message to display when prompting the user.
+     * @return The user's input as a string.
      */
     private static String prompt(String message) {
         System.out.print(message);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
-
 }

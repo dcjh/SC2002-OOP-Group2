@@ -9,18 +9,27 @@ import Model.Shared.MedicalRecord;
 import Model.Shared.PrescribedMedication;
 import Model.Shared.AppointmentOutcome;
 
-public class DoctorUpdateMedicalRecordView extends DoctorMedicalRecordView{
-    
+/**
+ * This class provides the view for doctors to update medical records of their patients.
+ */
+public class DoctorUpdateMedicalRecordView extends DoctorMedicalRecordView {
+
     private MedicalRecordController medicalRecordController;
 
+    /**
+     * Constructor for DoctorUpdateMedicalRecordView.
+     * 
+     * @param medicalRecordController The controller for managing medical records.
+     */
     public DoctorUpdateMedicalRecordView(MedicalRecordController medicalRecordController) {
         super(medicalRecordController);
         this.medicalRecordController = medicalRecordController;
     }
 
-    
-    /** 
-     * @param doctorId
+    /**
+     * Displays the menu for updating patient medical records.
+     * 
+     * @param doctorId The ID of the doctor.
      */
     public void menu(String doctorId) {
         Scanner scanner = new Scanner(System.in);
@@ -33,12 +42,12 @@ public class DoctorUpdateMedicalRecordView extends DoctorMedicalRecordView{
             return;
         }
 
-        while(true){
+        while (true) {
             System.out.println(linebr);
             System.out.println("1. Update Patient Medical Records");
-            System.out.println("2. Return to main menu");
+            System.out.println("2. Return to Main Menu");
             System.out.println(linebr);
-            System.out.print("Enter Choice:");
+            System.out.print("Enter Choice: ");
             int proceed;
 
             try {
@@ -52,7 +61,7 @@ public class DoctorUpdateMedicalRecordView extends DoctorMedicalRecordView{
 
             switch (proceed) {
                 case 1:
-                    updatePatientMR(patientsMR,scanner,doctorId);
+                    updatePatientMR(patientsMR, scanner, doctorId);
                     break;
                 case 2:
                     System.out.println("Returning to Main Menu...");
@@ -63,11 +72,12 @@ public class DoctorUpdateMedicalRecordView extends DoctorMedicalRecordView{
         }
     }
 
-    
-    /** 
-     * @param patientsMR
-     * @param scanner
-     * @param doctorId
+    /**
+     * Updates the patient's medical record based on the doctor's input.
+     * 
+     * @param patientsMR The list of medical records under the doctor's supervision.
+     * @param scanner    The scanner object for user input.
+     * @param doctorId   The ID of the doctor.
      */
     protected void updatePatientMR(List<MedicalRecord> patientsMR, Scanner scanner, String doctorId) {
         String linebr = "----------------------------------------------";
@@ -77,8 +87,9 @@ public class DoctorUpdateMedicalRecordView extends DoctorMedicalRecordView{
         super.printPatientList(patientsMR);
         System.out.println(linebr);
         System.out.println("Input patient's medical record to update");
-        while(selectedPatient == null){
-            System.out.print("Enter Patient Id:");
+
+        while (selectedPatient == null) {
+            System.out.print("Enter Patient ID: ");
             patientId = scanner.nextLine();
 
             for (MedicalRecord mr : patientsMR) {
@@ -92,25 +103,30 @@ public class DoctorUpdateMedicalRecordView extends DoctorMedicalRecordView{
         choosePatient(selectedPatient, scanner, doctorId);
     }
 
+    /**
+     * Allows the doctor to select and update a specific patient's medical record.
+     * 
+     * @param selectedPatientMR The selected patient's medical record.
+     * @param scanner           The scanner object for user input.
+     * @param doctorId          The ID of the doctor.
+     */
     protected void choosePatient(MedicalRecord selectedPatientMR, Scanner scanner, String doctorId) {
         String linebr = "----------------------------------------------";
-        AppointmentOutcome selectedAO = null;
-        String appointment;
-
         System.out.println(linebr);
         super.printPatientMedicalReport(selectedPatientMR);
         System.out.println(linebr);
-    
+
+        // Capture and validate new date
         String newDate;
         while (true) {
-            System.out.print("Enter new date (dd-mm-yyyy): ");
+            System.out.print("Enter new date (dd-MM-yyyy): ");
             newDate = scanner.nextLine().trim();
             if (newDate.matches("\\d{2}-\\d{2}-\\d{4}")) {
                 break;
             }
             System.out.println("Invalid date format. Please try again.");
         }
-        
+
         // Capture and validate new time
         String newTime;
         while (true) {
@@ -132,7 +148,7 @@ public class DoctorUpdateMedicalRecordView extends DoctorMedicalRecordView{
             }
             System.out.println("Diagnosis cannot be empty. Please try again.");
         }
-    
+
         // Capture and validate new treatment plan
         String newTreatment;
         while (true) {
@@ -144,23 +160,23 @@ public class DoctorUpdateMedicalRecordView extends DoctorMedicalRecordView{
             System.out.println("Treatment plan cannot be empty. Please try again.");
         }
 
-        // Add in new medications
+        // Add new medications
         ArrayList<PrescribedMedication> medications = new ArrayList<>();
         System.out.println("Input the prescribed medication and its quantity ");
         System.out.println(linebr);
         while (true) {
-            System.out.println("Enter medicine name (type 'n' to stop):");
-            String medicineName = scanner.nextLine(); // Read the input
-            if (medicineName.equalsIgnoreCase("n")) { // Check if the input is "n" (case-insensitive)
-                break; // Exit the loop
+            System.out.print("Enter medicine name (type 'n' to stop): ");
+            String medicineName = scanner.nextLine();
+            if (medicineName.equalsIgnoreCase("n")) {
+                break;
             }
-            System.out.println("Enter quantity of "+ medicineName + " : ");
+            System.out.print("Enter quantity of " + medicineName + " : ");
             int quantity = scanner.nextInt();
             scanner.nextLine();
             medications.add(new PrescribedMedication(medicineName, quantity));
         }
-    
-        // Print the new appointment outcome for confirmation
+
+        // Print the updated appointment outcome for confirmation
         System.out.println(linebr);
         System.out.println("Updated Appointment Outcome Preview:");
         System.out.println(linebr);
@@ -171,22 +187,22 @@ public class DoctorUpdateMedicalRecordView extends DoctorMedicalRecordView{
         System.out.printf("Diagnosis    : %s%n", newDiagnosis);
         System.out.printf("Treatment    : %s%n", newTreatment);
 
-        for (int i=0; i<medications.size(); i++) {
-            if(i==0) {
-                System.out.printf("Medication   : %s%n",medications.get(i));
+        for (int i = 0; i < medications.size(); i++) {
+            if (i == 0) {
+                System.out.printf("Medication   : %s%n", medications.get(i));
             } else {
-                System.out.printf("               %s%n",medications.get(i));
+                System.out.printf("               %s%n", medications.get(i));
             }
         }
 
         System.out.println(linebr);
-    
+
         // Confirmation loop
         while (true) {
             System.out.print("Do you want to save these changes? (yes/no): ");
             String confirmation = scanner.nextLine().trim().toLowerCase();
             if (confirmation.equals("yes")) {
-                break; // Proceed with saving
+                break;
             } else if (confirmation.equals("no")) {
                 System.out.println("Update canceled. No changes were made.");
                 return;
@@ -194,7 +210,7 @@ public class DoctorUpdateMedicalRecordView extends DoctorMedicalRecordView{
                 System.out.println("Invalid input. Please enter 'yes' or 'no'.");
             }
         }
-    
+
         // Update the record in the MedicalRecordController
         medicalRecordController.createAppointmentOutcome(newDate,
                                                         newTime,
@@ -210,5 +226,4 @@ public class DoctorUpdateMedicalRecordView extends DoctorMedicalRecordView{
         System.out.println(linebr);
         super.printPatientMedicalReport(selectedPatientMR);
     }
-
 }

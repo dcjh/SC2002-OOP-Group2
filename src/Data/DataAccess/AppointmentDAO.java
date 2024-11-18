@@ -5,14 +5,18 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The AppointmentDAO class is responsible for managing the data access operations for appointments.
+ * This includes loading, saving, finding, and deleting appointment records from the CSV file.
+ */
 public class AppointmentDAO {
     private final String filePath = "src/Data/Assets/Appointment.csv";
 
-    
-    /** 
-     * @return List<Appointment>
+    /**
+     * Loads all appointments from the CSV file.
+     *
+     * @return a list of all appointments
      */
-    // Load all appointments from the CSV file
     public List<Appointment> loadAll() {
         List<Appointment> appointments = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -38,15 +42,15 @@ public class AppointmentDAO {
         return appointments;
     }
 
-    
-    /** 
-     * @param appointment
+    /**
+     * Saves an appointment to the CSV file, either by appending or updating an existing record.
+     *
+     * @param appointment the appointment to save
      */
-    // Save an appointment to the CSV file (append or update)
     public void save(Appointment appointment) {
         // First, load all appointments
         List<Appointment> appointments = loadAll();
-        
+
         // Check if the appointment already exists
         boolean exists = false;
         for (int i = 0; i < appointments.size(); i++) {
@@ -56,12 +60,12 @@ public class AppointmentDAO {
                 break;
             }
         }
-        
+
         // If the appointment doesn't exist, add it to the list
         if (!exists) {
             appointments.add(appointment);
         }
-        
+
         // Write the updated list back to the CSV file
         try (PrintWriter pw = new PrintWriter(new FileWriter(filePath))) {
             pw.println("Appointment ID,Doctor ID,Patient ID,Status,Date,Time"); // CSV header
@@ -79,19 +83,30 @@ public class AppointmentDAO {
         }
     }
 
-    // Find a specific appointment by ID and a search key
+    /**
+     * Finds a specific appointment by ID and optionally a search key (status).
+     *
+     * @param appointmentId the ID of the appointment to find
+     * @param searchKey     the status of the appointment to filter by (optional)
+     * @return the appointment if found, otherwise null
+     */
     public Appointment find(String appointmentId, String searchKey) {
         List<Appointment> appointments = loadAll();
         for (Appointment appointment : appointments) {
-            if (appointment.getAppointmentID().equals(appointmentId) && 
-                (searchKey == null || appointment.getStatus().equals(searchKey))) {
+            if (appointment.getAppointmentID().equals(appointmentId) &&
+                    (searchKey == null || appointment.getStatus().equals(searchKey))) {
                 return appointment;
             }
         }
         return null; // Return null if not found
     }
 
-    // Find appointments by doctorId
+    /**
+     * Finds all appointments for a specific doctor by doctor ID.
+     *
+     * @param doctorId the ID of the doctor
+     * @return a list of appointments for the specified doctor
+     */
     public List<Appointment> getAppointmentsByDocID(String doctorId) {
         List<Appointment> appointments = loadAll();
         List<Appointment> result = new ArrayList<>();
@@ -100,10 +115,15 @@ public class AppointmentDAO {
                 result.add(appointment);
             }
         }
-        return result; // Return the filtered list
+        return result;
     }
 
-    // Find approved appointments by doctorId
+    /**
+     * Finds all approved appointments for a specific doctor by doctor ID.
+     *
+     * @param doctorId the ID of the doctor
+     * @return a list of approved appointments for the specified doctor
+     */
     public List<Appointment> getApprovedAppointmentsByDocID(String doctorId) {
         List<Appointment> appointments = loadAll();
         List<Appointment> result = new ArrayList<>();
@@ -112,32 +132,15 @@ public class AppointmentDAO {
                 result.add(appointment);
             }
         }
-        return result; // Return the filtered list
+        return result;
     }
 
-    // // Find patientId by appoinmentId
-    // public String getPatientID(String appointmentId) {
-    //     List<Appointment> appointments = loadAll();
-    //     for (Appointment appointment : appointments) {
-    //         if (appointment.getAppointmentID().equals(appointmentId)) {
-    //             return appointment.getPatientID();
-    //         }
-    //     }
-    //     return null; // Return null if not found
-    // }
-
-    // // Find doctorId by appoinmentId
-    // public String getDoctorID(String appointmentId) {
-    //     List<Appointment> appointments = loadAll();
-    //     for (Appointment appointment : appointments) {
-    //         if (appointment.getAppointmentID().equals(appointmentId)) {
-    //             return appointment.getDocID();
-    //         }
-    //     }
-    //     return null; // Return null if not found
-    // }
-
-    // Find pending appointments by doctorId as doctor need to quickly filter these to see which they can accept
+    /**
+     * Finds all pending appointments for a specific doctor by doctor ID.
+     *
+     * @param doctorId the ID of the doctor
+     * @return a list of pending appointments for the specified doctor
+     */
     public List<Appointment> getPendingAppointmentsByDocID(String doctorId) {
         List<Appointment> appointments = loadAll();
         List<Appointment> result = new ArrayList<>();
@@ -146,21 +149,34 @@ public class AppointmentDAO {
                 result.add(appointment);
             }
         }
-        return result; // Return the filtered list
+        return result;
     }
 
+    /**
+     * Finds all pending appointments for a specific doctor on a specific date.
+     *
+     * @param doctorId the ID of the doctor
+     * @param date     the date of the appointment
+     * @return a list of pending appointments for the specified doctor and date
+     */
     public List<Appointment> getPendingAppointmentsByDocIDandDate(String doctorId, String date) {
         List<Appointment> appointments = loadAll();
         List<Appointment> result = new ArrayList<>();
         for (Appointment appointment : appointments) {
-            if (appointment.getDocID().equals(doctorId) && appointment.getStatus().equals("pending") &&appointment.getDate().equals(date)) {
+            if (appointment.getDocID().equals(doctorId) && appointment.getStatus().equals("pending") &&
+                    appointment.getDate().equals(date)) {
                 result.add(appointment);
             }
         }
-        return result; // Return the filtered list
+        return result;
     }
 
-    // Find appointments by patientId
+    /**
+     * Finds all appointments for a specific patient by patient ID.
+     *
+     * @param patientId the ID of the patient
+     * @return a list of appointments for the specified patient
+     */
     public List<Appointment> getAppointmentsByPatientID(String patientId) {
         List<Appointment> appointments = loadAll();
         List<Appointment> result = new ArrayList<>();
@@ -169,10 +185,15 @@ public class AppointmentDAO {
                 result.add(appointment);
             }
         }
-        return result; // Return the filtered list
+        return result;
     }
 
-    // Find approved appointments by patientId
+    /**
+     * Finds all approved appointments for a specific patient by patient ID.
+     *
+     * @param patientId the ID of the patient
+     * @return a list of approved appointments for the specified patient
+     */
     public List<Appointment> getApprovedAppointmentsByPatientID(String patientId) {
         List<Appointment> appointments = loadAll();
         List<Appointment> result = new ArrayList<>();
@@ -181,17 +202,21 @@ public class AppointmentDAO {
                 result.add(appointment);
             }
         }
-        return result; // Return the filtered list
+        return result;
     }
 
-
-    // Delete an appointment by ID and a search key
+    /**
+     * Deletes an appointment by ID and optionally a search key (status).
+     *
+     * @param appointmentId the ID of the appointment to delete
+     * @param searchKey     the status of the appointment to filter by (optional)
+     */
     public void delete(String appointmentId, String searchKey) {
         List<Appointment> appointments = loadAll();
-        appointments.removeIf(appointment -> 
-            appointment.getAppointmentID().equals(appointmentId) && 
-            (searchKey == null || appointment.getStatus().equals(searchKey)));
-        
+        appointments.removeIf(appointment ->
+                appointment.getAppointmentID().equals(appointmentId) &&
+                        (searchKey == null || appointment.getStatus().equals(searchKey)));
+
         // Write the updated list back to the CSV file
         try (PrintWriter pw = new PrintWriter(new FileWriter(filePath))) {
             pw.println("Appointment ID,Doctor ID,Patient ID,Status,Date,Time"); // CSV header
@@ -209,4 +234,3 @@ public class AppointmentDAO {
         }
     }
 }
-

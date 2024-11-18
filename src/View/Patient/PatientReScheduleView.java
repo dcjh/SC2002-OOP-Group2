@@ -7,23 +7,31 @@ import java.util.Scanner;
 
 import Model.Shared.Appointment;
 
+/**
+ * This view class allows patients to reschedule their confirmed appointments.
+ */
 public class PatientReScheduleView {
 
     private ScheduleController scheduleController;
 
+    /**
+     * Constructor for PatientReScheduleView.
+     *
+     * @param scheduleController The controller used to manage and reschedule appointments.
+     */
     public PatientReScheduleView(ScheduleController scheduleController) {
         this.scheduleController = scheduleController;
     }
 
-    
-    /** 
-     * @param confirmedAppointments
-     * @param patientId
+    /**
+     * Displays the menu for rescheduling confirmed appointments.
+     *
+     * @param confirmedAppointments A list of confirmed appointments for the patient.
+     * @param patientId             The ID of the patient requesting the reschedule.
      */
     public void menu(List<Appointment> confirmedAppointments, String patientId) {
         Scanner scanner = new Scanner(System.in);
         String linebr = "----------------------------------------------";
-
 
         if (confirmedAppointments.isEmpty()) {
             System.out.println(linebr);
@@ -52,7 +60,7 @@ public class PatientReScheduleView {
             }
         }
 
-        //print doctor availability
+        // Print doctor availability
         System.out.println(linebr);
         System.out.println("Current Doctor Availability.");
         scheduleController.patientScheduleView();
@@ -95,9 +103,10 @@ public class PatientReScheduleView {
         }
     }
 
-    
-    /** 
-     * @param appointments
+    /**
+     * Prints the list of current appointments.
+     *
+     * @param appointments A list of appointments to be displayed.
      */
     private void printAppointments(List<Appointment> appointments) {
         String border = "+-------------+-----------+------------+----------+------------+--------+";
@@ -119,6 +128,12 @@ public class PatientReScheduleView {
         }
     }
 
+    /**
+     * Validates the format of the given date.
+     *
+     * @param date The date string to be validated.
+     * @return true if the date format is valid, false otherwise.
+     */
     private boolean isValidDate(String date) {
         try {
             java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -129,6 +144,12 @@ public class PatientReScheduleView {
         }
     }
 
+    /**
+     * Validates the format of the given time.
+     *
+     * @param time The time string to be validated.
+     * @return true if the time format is valid, false otherwise.
+     */
     private boolean isValidTime(String time) {
         try {
             java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("HH:mm");

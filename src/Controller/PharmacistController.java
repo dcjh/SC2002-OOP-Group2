@@ -9,26 +9,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The PharmacistController class is responsible for managing pharmacist-related operations,
+ * such as updating prescription statuses, viewing inventory, and submitting replenishment requests.
+ */
 public class PharmacistController {
-	
+
     private AppointmentOutcomeController appointmentOutcomeController;
     private InventoryController inventoryController;
     private ReplenishmentRestockController replenishmentRestockcontroller;
     private PharmacistView pharmacistView;
     private AppointmentOutcomeDAO appointmentOutcomeDAO;
-    
 
-    
+    /**
+     * Constructs a PharmacistController instance.
+     * Initializes the controllers and views used by the pharmacist.
+     */
     public PharmacistController() {
         this.appointmentOutcomeController = new AppointmentOutcomeController();
         this.inventoryController = new InventoryController(this);
         this.replenishmentRestockcontroller = new ReplenishmentRestockController(this);
         this.pharmacistView = new PharmacistView(this);
     }
-		
-    
-    /** 
-     * @param patientId
+
+    /**
+     * Updates the prescription status for a specific patient.
+     *
+     * @param patientId the ID of the patient whose prescription status is to be updated
      */
     public void updatePrescriptionStatus(String patientId) {
         List<AppointmentOutcome> outcomes = appointmentOutcomeController.getAppointmentOutcomeByPatientID(patientId);
@@ -49,7 +56,7 @@ public class PharmacistController {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Select the appointment outcome to update (enter number): ");
         int choice = scanner.nextInt();
-        scanner.nextLine(); 
+        scanner.nextLine();
 
         if (choice < 1 || choice > outcomes.size()) {
             System.out.println("Invalid choice.");
@@ -96,7 +103,7 @@ public class PharmacistController {
 
             // decrease inventory
             inventory.setCurrentStock(remainingStock);
-            inventoryController.updateDispensestockLevel(medication.getMedicineName(), medication.getQuantity()); 
+            inventoryController.updateDispensestockLevel(medication.getMedicineName(), medication.getQuantity());
 
             System.out.printf("Status of %s updated to 'dispensed'. Remaining stock: %d%n",
                     medication.getMedicineName(), inventory.getCurrentStock());
@@ -105,51 +112,59 @@ public class PharmacistController {
             appointmentOutcomeController.setPrescribedMedicineUpdatedStatus(selectedOutcome.getAppointmentOutcomeID(), newPrescribedMedications);
     }
 
-
-    
-	public void displayInventory() {
-		inventoryController.viewAllInventory();
+    /**
+     * Displays the entire inventory for the pharmacist.
+     */
+    public void displayInventory() {
+        inventoryController.viewAllInventory();
     }
-	
-	public void displayAppointmentOutcome() {
-		List<AppointmentOutcome> outcomes = appointmentOutcomeController.getAppointmentOutcomes();
-		if (outcomes.isEmpty()) {
-	            System.out.println("No appointment outcomes available.");
-	            return;
-	        }
-		System.out.println("Appointment Outcomes:");
-		System.out.println("----------------------------------------------------");
 
-	    for (AppointmentOutcome outcome : outcomes) {
-	        System.out.printf("Outcome ID: %s%n", outcome.getAppointmentOutcomeID());
-	        System.out.printf("Doctor ID: %s%n", outcome.getDoctorID());
-	        System.out.printf("Patient ID: %s%n", outcome.getPatientID());
-	        System.out.printf("Appointment ID: %s%n", outcome.getAppointmentID());
-	        System.out.printf("Date: %s%n", outcome.getDate());
-	        System.out.printf("Time: %s%n", outcome.getTime());
-	        System.out.printf("Type of Service: %s%n", outcome.getTypeOfService());
-	        System.out.printf("Consultation Notes: %s%n", outcome.getConsultationNotes());
+    /**
+     * Displays all appointment outcomes available.
+     */
+    public void displayAppointmentOutcome() {
+        List<AppointmentOutcome> outcomes = appointmentOutcomeController.getAppointmentOutcomes();
+        if (outcomes.isEmpty()) {
+            System.out.println("No appointment outcomes available.");
+            return;
+        }
+        System.out.println("Appointment Outcomes:");
+        System.out.println("----------------------------------------------------");
 
-	        System.out.println("Prescribed Medications:");
-	           	for (PrescribedMedication med : outcome.getPrescribedMedications()) {
-	                System.out.printf("  - %s (Qty: %d, Status: %s)%n",
-	                        med.getMedicineName(),
-	                        med.getQuantity(),
-	                        med.getStatus());
-	            }
-	           	
-	            System.out.println("----------------------------------------------------");
-	        }
-	}  
-    
-	public void submitReplenishmentRequests() {
-	    System.out.println("\n--- Pharmacist: Process Replenishment Requests ---");
-	    replenishmentRestockcontroller.submitReplenishmentRequest();
-	}
-	
-	public void viewAllReplenishmentRequests() {
-	    replenishmentRestockcontroller.viewAllReplenishmentRequests();
-	}
-    
-    
+        for (AppointmentOutcome outcome : outcomes) {
+            System.out.printf("Outcome ID: %s%n", outcome.getAppointmentOutcomeID());
+            System.out.printf("Doctor ID: %s%n", outcome.getDoctorID());
+            System.out.printf("Patient ID: %s%n", outcome.getPatientID());
+            System.out.printf("Appointment ID: %s%n", outcome.getAppointmentID());
+            System.out.printf("Date: %s%n", outcome.getDate());
+            System.out.printf("Time: %s%n", outcome.getTime());
+            System.out.printf("Type of Service: %s%n", outcome.getTypeOfService());
+            System.out.printf("Consultation Notes: %s%n", outcome.getConsultationNotes());
+
+            System.out.println("Prescribed Medications:");
+            for (PrescribedMedication med : outcome.getPrescribedMedications()) {
+                System.out.printf("  - %s (Qty: %d, Status: %s)%n",
+                        med.getMedicineName(),
+                        med.getQuantity(),
+                        med.getStatus());
+            }
+
+            System.out.println("----------------------------------------------------");
+        }
+    }
+
+    /**
+     * Submits replenishment requests for inventory items.
+     */
+    public void submitReplenishmentRequests() {
+        System.out.println("\n--- Pharmacist: Process Replenishment Requests ---");
+        replenishmentRestockcontroller.submitReplenishmentRequest();
+    }
+
+    /**
+     * Views all replenishment requests made by the pharmacist.
+     */
+    public void viewAllReplenishmentRequests() {
+        replenishmentRestockcontroller.viewAllReplenishmentRequests();
+    }
 }

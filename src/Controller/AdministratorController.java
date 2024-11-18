@@ -13,6 +13,11 @@ import Model.Shared.PrescribedMedication;
 import View.Administrator.AdministratorView;
 import java.util.*;
 
+/**
+ * The AdministratorController class manages administrative tasks within the
+ * Hospital Management System. It provides functionalities to manage staff, 
+ * appointments, inventory, and replenishment requests.
+ */
 public class AdministratorController {
 
     private static final StaffDAO staffDAO = new StaffDAO();
@@ -26,6 +31,11 @@ public class AdministratorController {
     private ReplenishmentRestockController replenishmentRestockcontroller;
     private AdministratorView administratorView;
 
+    /**
+     * Constructs an AdministratorController instance.
+     *
+     * @param administratorView the view interface for administrator operations
+     */
     public AdministratorController(AdministratorView administratorView) {
         this.appointmentController = new AppointmentController();
         this.appointmentOutcomeController = new AppointmentOutcomeController();
@@ -33,7 +43,12 @@ public class AdministratorController {
         this.replenishmentRestockcontroller = new ReplenishmentRestockController(this);
         this.administratorView = administratorView;
     }
-    
+
+    /**
+     * Adds a new staff or patient member to the system.
+     * Prompts the administrator for details like ID, name, role, gender,
+     * and additional patient-specific details when applicable.
+     */
     public void addStaffMember() {
         Scanner scanner = new Scanner(System.in);
 
@@ -134,6 +149,10 @@ public class AdministratorController {
         System.out.println("Staff/User member added successfully.");
     }
 
+    /**
+     * Updates details of an existing staff member.
+     * Allows administrators to modify fields such as name, role, gender, and age.
+     */
     public void updateStaffMember() {
         Scanner scanner = new Scanner(System.in);
         List<Map<String, String>> staffList = staffDAO.loadAll();
@@ -210,6 +229,9 @@ public class AdministratorController {
         System.out.println("Staff member updated successfully.");
     }
 
+    /**
+     * Removes a staff, patient, or user record from the system based on the provided ID.
+     */
     public void removeStaffMember() {
         Scanner scanner = new Scanner(System.in);
 
@@ -239,8 +261,11 @@ public class AdministratorController {
         if (!found) {
             System.out.println("No record with ID " + staffID + " found in any system.");
         }
-
     }
+
+    /**
+     * Displays a filtered list of staff members based on criteria such as role, gender, or age range.
+     */
     public void displayStaff() {
         StaffDAO staffDAO = new StaffDAO();
         List<Map<String, String>> staffDatabase = staffDAO.loadAll();
@@ -281,10 +306,11 @@ public class AdministratorController {
         }
     }
 
-    
-    /** 
-     * @param staffList
-     * @param scanner
+    /**
+     * Filters the staff list by role.
+     *
+     * @param staffList the list of staff to filter
+     * @param scanner   a scanner object for user input
      */
     private void filterByRole(List<Map<String, String>> staffList, Scanner scanner) {
         System.out.println("\nSelect Role:");
@@ -310,10 +336,11 @@ public class AdministratorController {
         System.out.println("Filtered by role: " + selectedRole);
     }
 
-    
-    /** 
-     * @param staffList
-     * @param scanner
+    /**
+     * Filters the staff list by gender.
+     *
+     * @param staffList the list of staff to filter
+     * @param scanner   a scanner object for user input
      */
     private static void filterByGender(List<Map<String, String>> staffList, Scanner scanner) {
         System.out.println("\nSelect Gender:");
@@ -339,7 +366,13 @@ public class AdministratorController {
         System.out.println("Filtered by gender: " + selectedGender);
     }
 
-    private  void filterByAgeRange(List<Map<String, String>> staffList, Scanner scanner) {
+    /**
+     * Filters the staff list by an age range specified by the user.
+     *
+     * @param staffList the list of staff to filter
+     * @param scanner   a scanner object for user input
+     */
+    private void filterByAgeRange(List<Map<String, String>> staffList, Scanner scanner) {
         System.out.print("\nEnter Minimum Age: ");
         int minAge;
         try {
@@ -374,7 +407,12 @@ public class AdministratorController {
         System.out.println("Filtered by age range: " + minAge + " to " + maxAge);
     }
 
-    private  void displayFilteredResults(List<Map<String, String>> staffList) {
+    /**
+     * Displays the filtered list of staff members.
+     *
+     * @param staffList the list of staff members to display
+     */
+    private void displayFilteredResults(List<Map<String, String>> staffList) {
         if (staffList.isEmpty()) {
             System.out.println("No staff members match the current filter criteria.");
         } else {
@@ -391,90 +429,98 @@ public class AdministratorController {
             }
         }
     }
-    
+
+    /**
+     * Delegates the task of adding a new medicine to the inventory to the InventoryController.
+     */
     public void addMed() {
-    	inventoryController.addMedicine();
+        inventoryController.addMedicine();
     }
-    
+
+    /**
+     * Delegates the task of updating medicine restock levels to the InventoryController.
+     */
     public void updateMed() {
-    	inventoryController.updateRestockLevel();
+        inventoryController.updateRestockLevel();
     }
-    
+
+    /**
+     * Delegates the task of removing a medicine from the inventory to the InventoryController.
+     */
     public void removeMed() {
-    	inventoryController.removeMedicine();
+        inventoryController.removeMedicine();
     }
- 
-  
-	public void displayscheduledAppointmentdetails() {
-	    List<Appointment> appointments = appointmentDAO.loadAll();
 
-	    if (appointments.isEmpty()) {
-	        System.out.println("No appointments found.");
-	        return;
-	    }
+    /**
+     * Displays the details of scheduled appointments, including outcomes for completed appointments.
+     */
+    public void displayscheduledAppointmentdetails() {
+        appointmentController.viewAllAppointment();
+        List<Appointment> appointments = appointmentDAO.loadAll();
 
-	    System.out.println("Appointments:");
-	    System.out.println("----------------------------------------------------");
+        if (appointments.isEmpty()) {
+            System.out.println("No appointments found.");
+            return;
+        }
 
-	    // Iterate through all appointments
-	    for (Appointment appointment : appointments) {
-	        System.out.printf("Appointment ID: %s%n", appointment.getAppointmentID());
-	        System.out.printf("Patient ID: %s%n", appointment.getPatientID());
-	        System.out.printf("Doctor ID: %s%n", appointment.getDocID());
-	        System.out.printf("Date: %s%n", appointment.getDate());
-	        System.out.printf("Time: %s%n", appointment.getTime());
-	        System.out.printf("Status: %s%n", appointment.getStatus());
-            System.out.println(" ");
+        System.out.println("Appointments:");
+        System.out.println("----------------------------------------------------");
 
-	        // Check for completed appointments and fetch the outcome
-	        if (appointment.getStatus().equals("completed")) {
-	            AppointmentOutcome outcome = appointmentOutcomeController.getAppointmentOutcomeByAppointmentID(appointment.getAppointmentID());
-	            if (outcome != null) {
-		System.out.println("Appointment Outcomes:");
+        for (Appointment appointment : appointments) {
+            System.out.printf("Appointment ID: %s%n", appointment.getAppointmentID());
+            System.out.printf("Patient ID: %s%n", appointment.getPatientID());
+            System.out.printf("Doctor ID: %s%n", appointment.getDocID());
+            System.out.printf("Date: %s%n", appointment.getDate());
+            System.out.printf("Time: %s%n", appointment.getTime());
+            System.out.printf("Status: %s%n", appointment.getStatus());
 
-	        System.out.printf("Outcome ID: %s%n", outcome.getAppointmentOutcomeID());
-	        System.out.printf("Doctor ID: %s%n", outcome.getDoctorID());
-	        System.out.printf("Patient ID: %s%n", outcome.getPatientID());
-	        System.out.printf("Appointment ID: %s%n", outcome.getAppointmentID());
-	        System.out.printf("Date: %s%n", outcome.getDate());
-	        System.out.printf("Time: %s%n", outcome.getTime());
-	        System.out.printf("Type of Service: %s%n", outcome.getTypeOfService());
-	        System.out.printf("Consultation Notes: %s%n", outcome.getConsultationNotes());
-
-	        System.out.println("Prescribed Medications:");
-	           	for (PrescribedMedication med : outcome.getPrescribedMedications()) {
-	                System.out.printf("  - %s (Qty: %d, Status: %s)%n",
+            if ("completed".equalsIgnoreCase(appointment.getStatus())) {
+                AppointmentOutcome outcome = appointmentoutcomeDAO.find(appointment.getAppointmentID());
+                if (outcome != null) {
+                    System.out.println("Appointment Outcomes:");
+	                  System.out.printf("Outcome ID: %s%n", outcome.getAppointmentOutcomeID());
+	                  System.out.printf("Doctor ID: %s%n", outcome.getDoctorID());
+	                  System.out.printf("Patient ID: %s%n", outcome.getPatientID());
+	                  System.out.printf("Appointment ID: %s%n", outcome.getAppointmentID());
+	                  System.out.printf("Date: %s%n", outcome.getDate());
+	                  System.out.printf("Time: %s%n", outcome.getTime());
+	                  System.out.printf("Type of Service: %s%n", outcome.getTypeOfService());
+	                  System.out.printf("Consultation Notes: %s%n", outcome.getConsultationNotes());
+	                  System.out.println("Prescribed Medications:");
+                  	for (PrescribedMedication med : outcome.getPrescribedMedications()) {
+	                  System.out.printf("  - %s (Qty: %d, Status: %s)%n",
 	                        med.getMedicineName(),
 	                        med.getQuantity(),
 	                        med.getStatus());
-	            }
+	                  }
+                } else {
+                    System.out.println("  No outcome available for this appointment.");
+                }
+            }
 
-	            } else {
-	                System.out.println("  No outcome available for this appointment.");
-	            }
-	        }
+            System.out.println("----------------------------------------------------");
+        }
+    }
 
-	        System.out.println("----------------------------------------------------");
-	    }
-		
-		
-		
-		
+    /**
+     * Delegates the task of viewing all inventory details to the InventoryController.
+     */
+    public void displayInventory() {
+        inventoryController.viewAllInventory();
     }
-	
-	public void displayInventory() {
-		inventoryController.viewAllInventory();
-    }
-	
+
+    /**
+     * Approves replenishment requests using the ReplenishmentRestockController.
+     */
     public void approveReplenishmentRequest() {
         System.out.println("\n--- Administrator: Approve Replenishment Request ---");
         replenishmentRestockcontroller.processReplenishmentRequests();
     }
-    
+
+    /**
+     * Views all replenishment requests using the ReplenishmentRestockController.
+     */
     public void viewAllReplenishmentRequests() {
-    	replenishmentRestockcontroller.viewAllReplenishmentRequests();
+        replenishmentRestockcontroller.viewAllReplenishmentRequests();
     }
-	
-	
-    
 }

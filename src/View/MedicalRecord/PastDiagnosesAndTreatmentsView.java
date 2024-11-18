@@ -3,16 +3,20 @@ package View.MedicalRecord;
 import java.util.List;
 import Model.Shared.PastDiagnosesAndTreatments;
 
+/**
+ * Represents the view for displaying past diagnoses and treatments of a patient.
+ */
 public class PastDiagnosesAndTreatmentsView {
 
-    
-    /** 
-     * @param patientID
-     * @param records
+    /**
+     * Displays all past diagnoses and treatments for a specific patient.
+     * 
+     * @param patientID The ID of the patient whose past records are to be displayed.
+     * @param records A list of past diagnoses and treatments for the specified patient.
      */
-    // Display all past diagnoses and treatments for a specific patient
     public void displayPastDiagnosesAndTreatments(String patientID, List<PastDiagnosesAndTreatments> records) {
         System.out.println("Past Diagnoses and Treatments for Patient ID: " + patientID);
+        
         if (records.isEmpty()) {
             System.out.println("No records found.");
             return;

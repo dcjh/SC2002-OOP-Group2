@@ -1,4 +1,5 @@
 package Controller;
+
 import Data.DataAccess.InventoryDAO;
 import Data.DataAccess.ReplenishmentDAO;
 import Model.Shared.Inventory;
@@ -6,46 +7,75 @@ import Model.Shared.ReplenishmentRequest;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The ReplenishmentRestockController class is responsible for managing replenishment requests
+ * for inventory items. This includes viewing all requests, submitting new requests, and processing pending requests.
+ */
 public class ReplenishmentRestockController {
     private final ReplenishmentDAO replenishmentDAO = new ReplenishmentDAO();
     private final InventoryDAO inventoryDAO = new InventoryDAO();
     private AdministratorController administratorController;
     private PharmacistController phamarcistController;
-    
+
+    /**
+     * Constructs a ReplenishmentRestockController instance for an administrator.
+     *
+     * @param administratorController the AdministratorController instance
+     */
     public ReplenishmentRestockController(AdministratorController administratorController) {
-    	this.administratorController = administratorController;
+        this.administratorController = administratorController;
     }
-    
+
+    /**
+     * Constructs a ReplenishmentRestockController instance for a pharmacist.
+     *
+     * @param phamarcistController the PharmacistController instance
+     */
     public ReplenishmentRestockController(PharmacistController phamarcistController) {
-    	this.phamarcistController = phamarcistController;
+        this.phamarcistController = phamarcistController;
     }
-    
+
+    /**
+     * Displays all replenishment requests.
+     */
     public void viewAllReplenishmentRequests() {
         List<ReplenishmentRequest> allRequests = replenishmentDAO.loadAll();
         printReplenishmentRequests("All Replenishment Requests", allRequests);
     }
-    
+
+    /**
+     * Displays all pending replenishment requests.
+     */
     public void viewPendingRequests() {
         List<ReplenishmentRequest> pendingRequests = replenishmentDAO.loadAll().stream()
                 .filter(req -> req.getStatus().equalsIgnoreCase("Pending"))
                 .toList();
         printReplenishmentRequests("Pending Replenishment Requests", pendingRequests);
     }
-    
+
+    /**
+     * Displays all approved replenishment requests.
+     */
     public void viewApprovedRequests() {
         List<ReplenishmentRequest> approvedRequests = replenishmentDAO.loadAll().stream()
                 .filter(req -> req.getStatus().equalsIgnoreCase("Approved"))
                 .toList();
         printReplenishmentRequests("Approved Replenishment Requests", approvedRequests);
     }
-    
+
+    /**
+     * Displays all rejected replenishment requests.
+     */
     public void viewRejectedRequests() {
         List<ReplenishmentRequest> rejectedRequests = replenishmentDAO.loadAll().stream()
-                .filter(req -> req.getStatus().equalsIgnoreCase("Denied") || req.getStatus().equalsIgnoreCase("Denied"))
+                .filter(req -> req.getStatus().equalsIgnoreCase("Denied"))
                 .toList();
         printReplenishmentRequests("Rejected Replenishment Requests", rejectedRequests);
     }
-	
+
+    /**
+     * Submits a new replenishment request for a specific inventory item.
+     */
     public void submitReplenishmentRequest() {
         Scanner scanner = new Scanner(System.in);
 
@@ -70,7 +100,10 @@ public class ReplenishmentRestockController {
         replenishmentDAO.save(request);
         System.out.println("Replenishment request submitted successfully with Request ID: " + requestID);
     }
-    
+
+    /**
+     * Processes a pending replenishment request by either approving or denying it.
+     */
     public void processReplenishmentRequests() {
         Scanner scanner = new Scanner(System.in);
 
@@ -106,10 +139,11 @@ public class ReplenishmentRestockController {
         }
     }
 
-    
-    /** 
-     * @param title
-     * @param requests
+    /**
+     * Prints the list of replenishment requests with the specified title.
+     *
+     * @param title    the title of the replenishment requests list
+     * @param requests the list of replenishment requests to be printed
      */
     private void printReplenishmentRequests(String title, List<ReplenishmentRequest> requests) {
         System.out.println("\n--- " + title + " ---");
@@ -127,5 +161,4 @@ public class ReplenishmentRestockController {
             }
         }
     }
-    
 }

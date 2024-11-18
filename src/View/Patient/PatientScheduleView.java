@@ -5,16 +5,25 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import Model.Shared.Schedule;
 
+
+/**
+ * This view class displays the available schedule of doctors to the patient.
+ */
 public class PatientScheduleView {
     
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+    /**
+     * Default constructor for PatientScheduleView.
+     */
     public PatientScheduleView() {}
 
-    
-    /** 
-     * @param scheduleList
+    /**
+     * Displays the availability of doctors for appointment booking.
+     *
+     * @param scheduleList A list of schedules representing the availability of doctors.
      */
     public void menu(List<Schedule> scheduleList, List<Map<String, String>> listDoctors) {
         String br = "----------------------------------------------";
@@ -46,5 +55,4 @@ public class PatientScheduleView {
             }
         }
     }
-
 }
