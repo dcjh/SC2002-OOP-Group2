@@ -1,20 +1,20 @@
 package Controller;
 
+import Data.DataAccess.ScheduleDAO;
+import Data.DataAccess.StaffDAO;
+import Model.Shared.Appointment;
+import Model.Shared.Schedule;
+import View.Doctor.DoctorAvailabilityView;
+import View.Doctor.DoctorScheduleView;
+import View.Patient.PatientBookScheduleView;
+import View.Patient.PatientCancelView;
+import View.Patient.PatientReScheduleView;
+import View.Patient.PatientScheduleView;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import Data.DataAccess.ScheduleDAO;
-import View.Doctor.DoctorScheduleView;
-import View.Patient.PatientScheduleView;
-import View.Patient.PatientBookScheduleView;
-import View.Patient.PatientCancelView;
-import View.Patient.PatientReScheduleView;
-import View.Doctor.DoctorAvailabilityView;
-import Model.Shared.Appointment;
-import Model.Shared.Schedule;
 
 public class ScheduleController{
 
@@ -28,10 +28,12 @@ public class ScheduleController{
     private PatientCancelView patientCancelView;
     private DoctorScheduleView doctorScheduleView;
     private ScheduleDAO data;
+    private StaffDAO staffDAO;
     private PatientBookScheduleView patientBookScheduleView;
 
     public ScheduleController(DoctorController doctorController, PatientController patientController) {
         this.data = new ScheduleDAO();
+        this.staffDAO = new StaffDAO();
         this.doctorController = doctorController;
         this.patientController = patientController;
         this.doctorScheduleView = new DoctorScheduleView();
@@ -107,7 +109,7 @@ public class ScheduleController{
 
     //navigate to PatientScheduleView
     public void patientScheduleView() {
-        patientScheduleView.menu(findAllAvailableDoctors());
+        patientScheduleView.menu(findAllAvailableDoctors(), staffDAO.findByRole("Doctor", null));
     }
 
     public void patientBookScheduleView(String patientId) {

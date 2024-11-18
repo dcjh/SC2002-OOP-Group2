@@ -73,6 +73,17 @@ public class StaffDAO {
         return null;
     }
 
+    public List<Map<String, String>> findByRole(String role, String searchKey) {
+        List<Map<String, String>> staffList = loadAll();
+        List<Map<String, String>> roleList = new ArrayList<>();
+        for (Map<String, String> staff : staffList) {
+            if (staff.get("role").equalsIgnoreCase(role)) {
+                roleList.add(staff);
+            }
+        }
+        return roleList;
+    }
+
     public void delete(String staffId, String searchKey) {
         List<Map<String, String>> staffList = loadAll();
         staffList.removeIf(staff -> staff.get("staffID").equals(staffId));

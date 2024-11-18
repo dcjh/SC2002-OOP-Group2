@@ -11,7 +11,7 @@ public class AppointmentOutcomeController {
     // private DoctorController doctorController;
     private AppointmentController appointmentController;
     private AppointmentOutcomeDAO dao = new AppointmentOutcomeDAO();
-    private AppointmentOutcomeView view;
+    private AppointmentOutcomeView view = new AppointmentOutcomeView(this);
 
     public AppointmentOutcomeController() {
     }
@@ -19,7 +19,6 @@ public class AppointmentOutcomeController {
     public AppointmentOutcomeController(/*DoctorController doctorController,*/ AppointmentController appointmentController) {
         // this.doctorController = doctorController;
         this.appointmentController = appointmentController;
-        this.view = new AppointmentOutcomeView(this);
     }
 
     

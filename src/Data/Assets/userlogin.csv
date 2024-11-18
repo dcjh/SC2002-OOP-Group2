@@ -7,3 +7,4 @@ P1001,patient123,Patient,Alice Brown,Female,42,FALSE
 P1002,patient246,Patient,Bob Stone,Male,60,FALSE
 P1003,patient,Patient,Charlie White,Male,30,FALSE
 A002,admin246,Administrator,Adria,Female,60,FALSE
+A003,admin468,ADMINISTRATOR,Sandra,FEMALE,45,FALSE

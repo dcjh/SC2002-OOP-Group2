@@ -67,6 +67,11 @@ public class PharmacistController {
             System.out.printf("  - %s (Qty: %d, Status: %s)%n",
                     medication.getMedicineName(), medication.getQuantity(), medication.getStatus());
 
+            if(medication.getStatus().equals("dispensed")){
+                newPrescribedMedications.add(medication);
+                continue;
+            }
+
             Inventory inventory = inventoryController.findMedicineByName(medication.getMedicineName());
             if (inventory == null) {
                 System.out.printf("Medicine '%s' not found in inventory. Status remains 'pending'.%n", medication.getMedicineName());

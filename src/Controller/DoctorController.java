@@ -34,6 +34,7 @@ public class DoctorController {
     // }
 
     //methods to trigger actions
+
     public void viewPatientMR() {
         medicalRecordController.doctorMedicalRecordView(doctor.getDoctorId());
     }

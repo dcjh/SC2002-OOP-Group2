@@ -1,2 +1,4 @@
 AppointmentOutcomeID,DoctorID,PatientID,AppointmentID,Date,Time,TypeOfService,PrescribedMedications,ConsultationNotes
 AO0001,D002,P1003,AP0003,25-11-2024,20:00,x-ray,"[Paracetamol:3:dispensed-Ibuprofen:75:dispensed-Amoxicillin:80:pending]",lung cancer
+AO0002,D002,P1003,-,26-11-2024,09:00,pneumonia treatment,"[antibiotics:20:pending]",pneumonia
+AO0003,D002,P1005,AP0003,27-11-2024,14:00,consultation,"[panadol:20:pending]",common flu

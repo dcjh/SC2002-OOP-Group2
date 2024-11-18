@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PatientDAO {
-    private static final String FILE_PATH = "C:\\Users\\chuaz\\eclipse-workspace\\OOP_project\\src\\Administrator\\Patient_List.csv";
+    private static final String FILE_PATH = "src/Data/Assets/Patient_List.csv";
 
     
     /** 
