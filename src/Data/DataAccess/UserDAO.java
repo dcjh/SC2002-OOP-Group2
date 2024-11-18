@@ -8,7 +8,7 @@ import java.util.*;
  * This class manages reading, writing, and updating user records in a CSV file.
  */
 public class UserDAO {
-    private static final String FILE_PATH = "C:\\Users\\chuaz\\eclipse-workspace\\OOP_project\\src\\Authentication\\userlogin.csv";
+    private static final String FILE_PATH = "src/Data/Assets/userlogin.csv";
 
     /**
      * Loads all user records from the CSV file.

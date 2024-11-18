@@ -12,7 +12,7 @@ import java.util.Map;
  * finding specific patients, and deleting patient records from the CSV file.
  */
 public class PatientDAO {
-    private static final String FILE_PATH = "C:\\Users\\chuaz\\eclipse-workspace\\OOP_project\\src\\Administrator\\Patient_List.csv";
+    private static final String FILE_PATH = "src/Data/Assets/Patient_List.csv";
 
     /**
      * Loads all patient records from the CSV file.
